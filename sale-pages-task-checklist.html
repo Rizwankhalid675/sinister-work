@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sale Pages Task Checklist</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#f5f7fb;
+  color:#0a1628;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  line-height:1.55;
+}
+.page{
+  max-width:900px;
+  margin:0 auto;
+  padding:48px;
+  background:#fff;
+}
+.kicker{
+  color:#0057b8;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+h1{
+  margin:0 0 8px;
+  font-size:38px;
+  line-height:1.05;
+  letter-spacing:-1.5px;
+}
+.sub{
+  margin:0 0 28px;
+  color:#5f6b7a;
+  font-size:15px;
+}
+.status{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:28px 0 34px;
+}
+.status-card{
+  border:1px solid #e6ebf2;
+  border-radius:14px;
+  padding:18px;
+  background:#f9fbff;
+}
+.status-num{
+  font-size:26px;
+  font-weight:900;
+  color:#0057b8;
+}
+.status-label{
+  font-size:12px;
+  color:#5f6b7a;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+h2{
+  margin:30px 0 12px;
+  font-size:22px;
+  letter-spacing:-.5px;
+}
+ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+li{
+  display:flex;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid #edf1f6;
+}
+li:last-child{border-bottom:0}
+.box{
+  width:18px;
+  height:18px;
+  border:2px solid #0057b8;
+  border-radius:5px;
+  flex:0 0 auto;
+  margin-top:3px;
+}
+.done .box{
+  background:#16a34a;
+  border-color:#16a34a;
+  position:relative;
+}
+.done .box::after{
+  content:"";
+  position:absolute;
+  left:4px;
+  top:1px;
+  width:5px;
+  height:9px;
+  border:solid #fff;
+  border-width:0 2px 2px 0;
+  transform:rotate(45deg);
+}
+.task-title{
+  font-weight:800;
+}
+.task-note{
+  color:#5f6b7a;
+  font-size:13px;
+  margin-top:2px;
+}
+.priority{
+  display:inline-block;
+  margin-left:8px;
+  padding:2px 7px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+.high{background:#fee2e2;color:#b91c1c}
+.med{background:#fef3c7;color:#92400e}
+.low{background:#e0f2fe;color:#075985}
+.footer{
+  margin-top:36px;
+  padding-top:18px;
+  border-top:2px solid #edf1f6;
+  color:#7b8794;
+  font-size:12px;
+}
+@media print{
+  body{background:#fff}
+  .page{padding:32px;max-width:none}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="kicker">Sinister Diesel Campaign Pages</div>
+  <h1>Sale Pages Task Checklist</h1>
+  <p class="sub">For <strong>Prime Days</strong> and <strong>July 4th Sale</strong> landing pages. Layout work is mostly complete; remaining items are QA, accuracy, accessibility, and launch polish.</p>
+
+  <section class="status" aria-label="Project status">
+    <div class="status-card">
+      <div class="status-num">90%</div>
+      <div class="status-label">Layout Done</div>
+    </div>
+    <div class="status-card">
+      <div class="status-num">2</div>
+      <div class="status-label">Pages</div>
+    </div>
+    <div class="status-card">
+      <div class="status-num">8</div>
+      <div class="status-label">Launch Tasks</div>
+    </div>
+  </section>
+
+  <h2>Completed</h2>
+  <ul>
+    <li class="done">
+      <span class="box"></span>
+      <div><div class="task-title">Centered and balanced main sections</div><div class="task-note">Prime Days uses clean retail sizing; July 4th keeps its cinematic full-screen feel.</div></div>
+    </li>
+    <li class="done">
+      <span class="box"></span>
+      <div><div class="task-title">Matched OEM grid sizing across both pages</div><div class="task-note">Desktop grid width, image ratios, spacing, and card density now align.</div></div>
+    </li>
+    <li class="done">
+      <span class="box"></span>
+      <div><div class="task-title">Improved tablet section height</div><div class="task-note">Prime tablet height relaxed; July tablet sections avoid awkward internal scrolling.</div></div>
+    </li>
+    <li class="done">
+      <span class="box"></span>
+      <div><div class="task-title">Added dynamic July 4th section dots</div><div class="task-note">Dots are generated from actual page sections and scroll to the correct areas.</div></div>
+    </li>
+  </ul>
+
+  <h2>Remaining / Recommended Before Launch</h2>
+  <ul>
+    <li>
+      <span class="box"></span>
+      <div><div class="task-title">Validate product data <span class="priority high">High</span></div><div class="task-note">Check prices, SKUs, discounts, stock notes, CARB notes, and links against the spreadsheet/export.</div></div>
+    </li>
+    <li>
+      <span class="box"></span>
+      <div><div class="task-title">Run responsive screenshot QA <span class="priority high">High</span></div><div class="task-note">Review mobile, tablet, laptop, and desktop screenshots for clipping, cramped grids, and nav overlap.</div></div>
+    </li>
+    <li>
+      <span class="box"></span>
+      <div><div class="task-title">Add reduced-motion support to July 4th page <span class="priority med">Medium</span></div><div class="task-note">Limit fireworks, canvas effects, and looping animations for accessibility and performance.</div></div>
+    </li>
+    <li>
+      <span class="box"></span>
+      <div><div class="task-title">Add SEO / social metadata <span class="priority med">Medium</span></div><div class="task-note">Add Open Graph title, description, preview image, Twitter card, and theme color where missing.</div></div>
+    </li>
+    <li>
+      <span class="box"></span>
+      <div><div class="task-title">Standardize link behavior <span class="priority med">Medium</span></div><div class="task-note">Decide whether campaign links should open same-tab or new-tab and make both pages consistent.</div></div>
+    </li>
+    <li>
+      <span class="box"></span>
+      <div><div class="task-title">Confirm legal disclaimers <span class="priority high">High</span></div><div class="task-note">Verify sale dates, coupon exclusions, rewards restrictions, emissions/CARB language, and California privacy copy.</div></div>
+    </li>
+    <li>
+      <span class="box"></span>
+      <div><div class="task-title">Add click/copy tracking hooks <span class="priority low">Low</span></div><div class="task-note">Track code copies, product clicks, section navigation, and primary CTA clicks.</div></div>
+    </li>
+    <li>
+      <span class="box"></span>
+      <div><div class="task-title">Performance polish <span class="priority low">Low</span></div><div class="task-note">Pause July fireworks when hidden, reduce particle count on mobile, and audit image loading.</div></div>
+    </li>
+  </ul>
+
+  <h2>Suggested Next Order</h2>
+  <ul>
+    <li><span class="box"></span><div><div class="task-title">1. Product/pricing validation</div><div class="task-note">This is the highest-risk launch item.</div></div></li>
+    <li><span class="box"></span><div><div class="task-title">2. Responsive screenshot QA</div><div class="task-note">Catch visual issues before copy/metadata polish.</div></div></li>
+    <li><span class="box"></span><div><div class="task-title">3. Accessibility and reduced motion</div><div class="task-note">Especially important for the animated July 4th page.</div></div></li>
+    <li><span class="box"></span><div><div class="task-title">4. SEO, tracking, and final legal review</div><div class="task-note">Last-mile launch polish.</div></div></li>
+  </ul>
+
+  <div class="footer">Generated for June 22th sale page work — Prime Days and July 4th campaign pages.</div>
+</main>
+</body>
+</html>

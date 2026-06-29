@@ -1,0 +1,546 @@
+<mvt:item name="html_profile" />
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvte:global:basehref;">
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:page:name; | &mvt:store:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+
+	<style>
+		.breadcrumbs,.cmp-breadcrumbs,.t-breadcrumbs,.page-title,.cmp-page-title,.blk-page-title-wrap{display:none!important}
+		.o-layout.t-expanded-block.u-bg-white .c-heading-delta,
+		.o-layout.t-expanded-block.u-bg-white .c-keyline{display:none!important}
+		.mm-sequence-container{background:transparent;padding:0!important;max-width:none!important;margin:0!important}
+
+		:root {
+			--blue:    #1e3cff;
+			--blue2:   #2a55ff;
+			--blue-lt: #eef1ff;
+			--dark:    #0d1117;
+			--text:    #111827;
+			--muted:   #6b7280;
+			--line:    #e5e7eb;
+			--bg:      #f3f4f8;
+			--white:   #ffffff;
+			--success: #059669;
+			--danger:  #dc2626;
+			--shadow:  0 4px 24px rgba(30,60,255,.08);
+			--shadow-lg: 0 12px 48px rgba(30,60,255,.13);
+		}
+
+		*,*::before,*::after{box-sizing:border-box}
+		body{background:var(--bg)!important;color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;margin:0}
+
+		/* ── BLEED ── */
+		.sd-bleed{position:relative;left:50%;right:50%;width:100vw;margin-left:-50vw;margin-right:-50vw;overflow:hidden}
+
+		/* ── HERO ── */
+		.sd-hero{position:relative;overflow:hidden;background:#0d1117}
+		.sd-hero-track{position:relative;height:clamp(300px,44vw,540px)}
+		.sd-hero-slide{position:absolute;inset:0;opacity:0;transform:scale(1.03);transition:opacity .7s ease,transform 1.4s ease}
+		.sd-hero-slide.is-active{opacity:1;transform:scale(1)}
+		.sd-hero-slide img,.sd-hero-slide picture img{width:100%;height:100%;object-fit:cover;display:block}
+		.sd-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.18) 60%,transparent 100%);pointer-events:none}
+		.sd-hero-content{position:absolute;inset:0;display:flex;align-items:flex-end;padding:clamp(20px,3vw,48px) clamp(16px,4vw,64px)}
+		.sd-hero-kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.9);background:rgba(30,60,255,.35);border:1px solid rgba(100,140,255,.4);padding:7px 14px;border-radius:999px;backdrop-filter:blur(8px);margin-bottom:14px}
+		.sd-hero-title{margin:0 0 10px;font-size:clamp(28px,3.5vw,52px);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.3px;text-shadow:0 4px 32px rgba(0,0,0,.5)}
+		.sd-hero-sub{margin:0;color:rgba(255,255,255,.82);font-size:clamp(14px,1.3vw,17px);line-height:1.55;max-width:60ch}
+		.sd-hero-dots{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+		.sd-dot{width:8px;height:8px;border-radius:999px;border:1.5px solid rgba(255,255,255,.6);background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s ease}
+		.sd-dot.is-active{background:#fff;border-color:#fff;width:22px;box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+
+		/* ── FORM WRAPPER ── */
+		.sd-page{padding:clamp(28px,4vw,56px) 0 80px}
+		.sd-inner{max-width:860px;margin:0 auto;padding:0 clamp(14px,3vw,24px)}
+
+		/* ── SECTION HEADER ── */
+		.sd-section-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+		.sd-section-icon{width:36px;height:36px;border-radius:10px;background:var(--blue);display:grid;place-items:center;flex-shrink:0;box-shadow:0 4px 12px rgba(30,60,255,.3)}
+		.sd-section-icon svg{display:block}
+		.sd-section-label{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--blue)}
+		.sd-section-title{font-size:clamp(17px,2vw,20px);font-weight:800;color:var(--text);margin:0}
+
+		/* ── CARDS ── */
+		.sd-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,32px);box-shadow:var(--shadow);margin-bottom:20px}
+
+		/* ── GRID ── */
+		.sd-grid{display:grid;gap:16px}
+		.sd-grid-2{grid-template-columns:1fr 1fr}
+		.sd-grid-3{grid-template-columns:1fr 1fr 1fr}
+		@media(max-width:640px){.sd-grid-2,.sd-grid-3{grid-template-columns:1fr}}
+
+		/* ── FIELDS ── */
+		.sd-label{display:block;font-weight:700;font-size:13px;color:var(--text);margin-bottom:7px;letter-spacing:.01em}
+		.sd-label span{color:var(--blue);margin-left:2px}
+		.sd-control{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.3;background:var(--white);color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s;font-family:inherit}
+		.sd-control::placeholder{color:#b0b7c3}
+		.sd-control:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,60,255,.1)}
+		textarea.sd-control{min-height:110px;resize:vertical}
+		.sd-hint{margin-top:6px;font-size:12px;color:var(--muted)}
+
+		/* ── SOCIALS GRID ── */
+		.sd-socials{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+		@media(min-width:700px){.sd-socials{grid-template-columns:repeat(4,1fr)}}
+
+		.sd-social-card{border:1.5px solid var(--line);border-radius:12px;padding:16px;background:#fafbff;transition:border-color .2s,box-shadow .2s}
+		.sd-social-card:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,60,255,.08)}
+
+		.sd-social-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+		.sd-social-icon{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
+		.sd-social-icon.ig{background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7)}
+		.sd-social-icon.tt{background:#010101}
+		.sd-social-icon.yt{background:#ff0000}
+		.sd-social-icon.fb{background:#1877f2}
+		.sd-social-icon svg{display:block}
+		.sd-social-name{font-weight:800;font-size:13px;color:var(--text)}
+
+		.sd-mini-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;display:block}
+		.sd-mini-input{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:9px 11px;font-size:13px;background:var(--white);color:var(--text);outline:none;transition:border-color .15s;font-family:inherit;margin-bottom:10px}
+		.sd-mini-input:last-child{margin-bottom:0}
+		.sd-mini-input::placeholder{color:#c0c7d4}
+		.sd-mini-input:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(30,60,255,.09)}
+
+		/* ── FILE UPLOAD ── */
+		.sd-upload-zone{border:2px dashed var(--line);border-radius:12px;padding:22px 18px;text-align:center;background:#fafbff;cursor:pointer;transition:border-color .2s,background .2s}
+		.sd-upload-zone:hover{border-color:var(--blue);background:var(--blue-lt)}
+		.sd-upload-zone input{display:none}
+		.sd-upload-icon{width:44px;height:44px;border-radius:12px;background:var(--blue-lt);display:grid;place-items:center;margin:0 auto 12px}
+		.sd-upload-title{font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px}
+		.sd-upload-sub{font-size:12px;color:var(--muted)}
+		.sd-upload-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:9px 18px;border-radius:8px;background:var(--blue);color:#fff;font-size:13px;font-weight:700;border:0;cursor:pointer;transition:background .15s}
+		.sd-upload-btn:hover{background:var(--blue2)}
+
+		.sd-media-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--blue-lt);border:1px solid rgba(30,60,255,.15);border-radius:8px;padding:10px 14px;margin-top:8px}
+		.sd-media-info{min-width:0}
+		.sd-media-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:340px}
+		.sd-media-size{font-size:11px;color:var(--muted);margin-top:2px}
+		.sd-media-remove{padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--white);font-size:12px;font-weight:700;color:var(--danger);cursor:pointer;flex-shrink:0;transition:background .15s}
+		.sd-media-remove:hover{background:#fff0f0}
+
+		/* ── SUBMIT ── */
+		.sd-submit-wrap{margin-top:28px;text-align:center}
+		.sd-submit-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:18px 48px;border-radius:12px;border:0;background:var(--blue);color:#fff;font-size:16px;font-weight:900;letter-spacing:.03em;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 6px 24px rgba(30,60,255,.3);min-width:260px;font-family:inherit;animation:pulse-btn 2.8s ease-in-out infinite}
+		@keyframes pulse-btn{0%,100%{box-shadow:0 6px 24px rgba(30,60,255,.3)}50%{box-shadow:0 8px 36px rgba(30,60,255,.5)}}
+		.sd-submit-btn:hover{background:var(--blue2);transform:translateY(-2px)}
+		.sd-submit-btn:disabled{opacity:.6;cursor:not-allowed;animation:none}
+		.sd-msg{margin-top:12px;font-size:14px;font-weight:600;min-height:1.4em;text-align:center}
+
+		/* ── SUCCESS ── */
+		.sd-success{display:none;background:var(--white);border:1px solid #d1fae5;border-radius:20px;padding:56px 32px;text-align:center;box-shadow:var(--shadow-lg)}
+		.sd-success-icon{width:72px;height:72px;border-radius:999px;background:#ecfdf5;display:grid;place-items:center;margin:0 auto 20px}
+		.sd-success h2{margin:0 0 12px;font-size:clamp(22px,3vw,30px);font-weight:900;color:var(--success)}
+		.sd-success p{margin:0;color:var(--muted);font-size:16px;line-height:1.6;max-width:480px;margin:0 auto}
+
+		/* ── BUTTONS ── */
+		.sd-btn{appearance:none;border:0;border-radius:8px;padding:11px 20px;font-weight:700;cursor:pointer;background:var(--blue);color:#fff;transition:background .15s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-size:14px}
+		.sd-btn:hover{background:var(--blue2)}
+		.sd-btn-ghost{background:var(--white);border:1.5px solid var(--line);color:var(--text)}
+		.sd-btn-ghost:hover{background:var(--bg)}
+
+		@media(max-width:500px){
+			.sd-submit-btn{min-width:100%;padding:16px 24px}
+			.sd-socials{grid-template-columns:1fr 1fr}
+		}
+	</style>
+</head>
+
+<body class="single-column">
+	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
+
+	<div class="mm-sequence-container">
+		<mvt:item name="sequence" />
+
+		<section class="sd-bleed" aria-label="Sponsorship Application">
+
+			<!-- ── HERO ── -->
+			<header class="sd-hero">
+				<div class="sd-hero-track" id="sdHeroTrack">
+					<div class="sd-hero-slide is-active">
+						<mvt:item name="readytheme" param="image( 'spons' )" />
+					</div>
+					<div class="sd-hero-slide">
+						<mvt:item name="readytheme" param="image( 'spons1' )" />
+					</div>
+					<div class="sd-hero-slide">
+						<mvt:item name="readytheme" param="image( 'spons2' )" />
+					</div>
+					<div class="sd-hero-overlay"></div>
+					<div class="sd-hero-content">
+						<div>
+							<div class="sd-hero-kicker">Sinister Diesel &bull; Sponsorship Program</div>
+							<h1 class="sd-hero-title">Become a Sponsored Build</h1>
+							<p class="sd-hero-sub">Show us your truck, your content, and your audience. If it's a fit, we'll reach out with the next steps.</p>
+						</div>
+					</div>
+					<div class="sd-hero-dots" id="sdHeroDots" aria-label="Carousel navigation"></div>
+				</div>
+			</header>
+
+			<!-- ── FORM PAGE ── -->
+			<div class="sd-page">
+				<div class="sd-inner">
+
+					<form id="sponsorForm" novalidate>
+
+						<!-- BASICS -->
+						<div class="sd-card">
+							<div class="sd-section-head">
+								<div class="sd-section-icon">
+									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+								</div>
+								<div>
+									<div class="sd-section-label">Step 1</div>
+									<div class="sd-section-title">Basic Information</div>
+								</div>
+							</div>
+
+							<div class="sd-grid sd-grid-2" style="margin-bottom:16px">
+								<div class="sd-field" style="grid-column:1/-1">
+									<label class="sd-label" for="sd_name">Full Name <span>*</span></label>
+									<input id="sd_name" class="sd-control" name="name" required maxlength="80" autocomplete="name" placeholder="Your full name" />
+								</div>
+								<div class="sd-field">
+									<label class="sd-label" for="sd_date">Date <span>*</span></label>
+									<input id="sd_date" class="sd-control" type="date" name="date" required />
+								</div>
+								<div class="sd-field">
+									<label class="sd-label" for="sd_truck">Truck <span>*</span></label>
+									<input id="sd_truck" class="sd-control" name="truck" required maxlength="120" placeholder="Year / Make / Model" />
+								</div>
+							</div>
+							<p class="sd-hint">Fields marked <strong style="color:var(--blue)">*</strong> are required.</p>
+						</div>
+
+						<!-- SOCIALS -->
+						<div class="sd-card">
+							<div class="sd-section-head">
+								<div class="sd-section-icon">
+									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+								</div>
+								<div>
+									<div class="sd-section-label">Step 2</div>
+									<div class="sd-section-title">Social Media</div>
+								</div>
+							</div>
+
+							<div class="sd-socials">
+								<!-- Instagram -->
+								<div class="sd-social-card">
+									<div class="sd-social-head">
+										<div class="sd-social-icon ig">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+										</div>
+										<span class="sd-social-name">Instagram</span>
+									</div>
+									<label class="sd-mini-label">Username</label>
+									<input class="sd-mini-input" name="ig_user" placeholder="@username" maxlength="80" />
+									<label class="sd-mini-label">Followers</label>
+									<input class="sd-mini-input" name="ig_followers" inputmode="numeric" placeholder="e.g. 12,500" maxlength="20" />
+								</div>
+								<!-- TikTok -->
+								<div class="sd-social-card">
+									<div class="sd-social-head">
+										<div class="sd-social-icon tt">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+										</div>
+										<span class="sd-social-name">TikTok</span>
+									</div>
+									<label class="sd-mini-label">Username</label>
+									<input class="sd-mini-input" name="tt_user" placeholder="@username" maxlength="80" />
+									<label class="sd-mini-label">Followers</label>
+									<input class="sd-mini-input" name="tt_followers" inputmode="numeric" placeholder="e.g. 38,000" maxlength="20" />
+								</div>
+								<!-- YouTube -->
+								<div class="sd-social-card">
+									<div class="sd-social-head">
+										<div class="sd-social-icon yt">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M23 7s-.3-2-1.2-2.7c-1.1-1.2-2.4-1.2-3-1.3C16.6 3 12 3 12 3s-4.6 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.1.7 11.3v2c0 2.1.3 4.2.3 4.2s.3 2 1.2 2.7c1.1 1.2 2.6 1.1 3.3 1.2C7.5 21.6 12 21.6 12 21.6s4.6 0 6.8-.2c.6-.1 1.9-.1 3-1.2.9-.7 1.2-2.7 1.2-2.7s.3-2.1.3-4.2v-2C23.3 9.1 23 7 23 7zM9.7 15.5V8.4l8 3.6-8 3.5z"/></svg>
+										</div>
+										<span class="sd-social-name">YouTube</span>
+									</div>
+									<label class="sd-mini-label">Channel / Handle</label>
+									<input class="sd-mini-input" name="yt_user" placeholder="@channel" maxlength="120" />
+									<label class="sd-mini-label">Subscribers</label>
+									<input class="sd-mini-input" name="yt_followers" inputmode="numeric" placeholder="e.g. 8,200" maxlength="20" />
+								</div>
+								<!-- Facebook -->
+								<div class="sd-social-card">
+									<div class="sd-social-head">
+										<div class="sd-social-icon fb">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+										</div>
+										<span class="sd-social-name">Facebook</span>
+									</div>
+									<label class="sd-mini-label">Page / Username</label>
+									<input class="sd-mini-input" name="fb_user" placeholder="Page name" maxlength="120" />
+									<label class="sd-mini-label">Followers</label>
+									<input class="sd-mini-input" name="fb_followers" inputmode="numeric" placeholder="e.g. 5,400" maxlength="20" />
+								</div>
+							</div>
+						</div>
+
+						<!-- DETAILS -->
+						<div class="sd-card">
+							<div class="sd-section-head">
+								<div class="sd-section-icon">
+									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+								</div>
+								<div>
+									<div class="sd-section-label">Step 3</div>
+									<div class="sd-section-title">About You &amp; Your Build</div>
+								</div>
+							</div>
+
+							<div class="sd-grid" style="gap:18px">
+								<div class="sd-field">
+									<label class="sd-label" for="sd_portfolio">Portfolio / Instagram Link</label>
+									<input id="sd_portfolio" class="sd-control" name="portfolio" type="url" maxlength="300" placeholder="https://..." />
+								</div>
+								<div class="sd-field">
+									<label class="sd-label" for="sd_other_sponsors">Current Sponsors</label>
+									<textarea id="sd_other_sponsors" class="sd-control" name="other_sponsors" rows="3" maxlength="1200" placeholder="List any brands that currently sponsor you and what they provide."></textarea>
+								</div>
+								<div class="sd-field">
+									<label class="sd-label" for="sd_parts">Parts Interested In</label>
+									<textarea id="sd_parts" class="sd-control" name="parts" rows="3" maxlength="1200" placeholder="Which Sinister Diesel products are you most interested in?"></textarea>
+								</div>
+								<div class="sd-field">
+									<label class="sd-label" for="sd_events">Events You Plan to Attend</label>
+									<textarea id="sd_events" class="sd-control" name="events" rows="3" maxlength="1200" placeholder="UCC, Diesel Power Challenge, local meets, shows, etc."></textarea>
+								</div>
+								<div class="sd-field">
+									<label class="sd-label" for="sd_about">About You</label>
+									<textarea id="sd_about" class="sd-control" name="about" rows="5" maxlength="2500" placeholder="Tell us about yourself, your truck build, your audience, and your goals as a sponsored driver."></textarea>
+								</div>
+								<div class="sd-field">
+									<label class="sd-label" for="sd_address">Shipping Address</label>
+									<textarea id="sd_address" class="sd-control" name="address" rows="3" maxlength="500" placeholder="Street, City, State, ZIP"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<!-- MEDIA -->
+						<div class="sd-card">
+							<div class="sd-section-head">
+								<div class="sd-section-icon">
+									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+								</div>
+								<div>
+									<div class="sd-section-label">Step 4</div>
+									<div class="sd-section-title">Pictures &amp; Videos</div>
+								</div>
+							</div>
+
+							<div class="sd-upload-zone" id="sdUploadZone">
+								<input id="sd_media" name="media" type="file" accept="image/*,video/*" multiple />
+								<div class="sd-upload-icon">
+									<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+								</div>
+								<div class="sd-upload-title">Drop files here or click to browse</div>
+								<div class="sd-upload-sub">Images and videos accepted &bull; Multiple files allowed</div>
+								<button type="button" class="sd-upload-btn" id="sd_media_trigger">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+									Choose Files
+								</button>
+							</div>
+							<div id="sd_media_list"></div>
+						</div>
+
+						<!-- honeypot -->
+						<input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0" />
+
+						<!-- SUBMIT -->
+						<div class="sd-submit-wrap">
+							<button type="submit" class="sd-submit-btn" id="sponsorSubmitBtn">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+								Submit Application
+							</button>
+							<div id="sponsorMsg" class="sd-msg" aria-live="polite"></div>
+						</div>
+
+					</form>
+
+					<!-- SUCCESS -->
+					<div id="sponsorSuccess" class="sd-success" aria-live="polite">
+						<div class="sd-success-icon">
+							<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+						</div>
+						<h2>Application Submitted!</h2>
+						<p>Thanks for applying to the Sinister Diesel Sponsorship Program. Our team will review your application and reach out if it's a great fit.</p>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<!-- ── HERO CAROUSEL ── -->
+		<script>
+		(function(){
+			var slides = Array.prototype.slice.call(document.querySelectorAll('.sd-hero-slide'));
+			var dotsWrap = document.getElementById('sdHeroDots');
+			if(!slides.length || !dotsWrap) return;
+			var idx=0, timer;
+			function go(i){
+				idx=(i+slides.length)%slides.length;
+				slides.forEach(function(s,j){ s.classList.toggle('is-active',j===idx); });
+				Array.prototype.forEach.call(dotsWrap.children,function(d,j){ d.classList.toggle('is-active',j===idx); });
+			}
+			slides.forEach(function(_,i){
+				var b=document.createElement('button'); b.type='button';
+				b.className='sd-dot'+(i===0?' is-active':'');
+				b.addEventListener('click',function(){ clearInterval(timer); go(i); timer=setInterval(function(){go(idx+1);},6500); });
+				dotsWrap.appendChild(b);
+			});
+			timer=setInterval(function(){go(idx+1);},6500);
+			var track=document.getElementById('sdHeroTrack');
+			if(track){
+				track.addEventListener('mouseenter',function(){clearInterval(timer);});
+				track.addEventListener('mouseleave',function(){timer=setInterval(function(){go(idx+1);},6500);});
+			}
+		})();
+		</script>
+
+		<!-- ── FILE UPLOADER ── -->
+		<script>
+		(function(){
+			var input   = document.getElementById('sd_media');
+			var zone    = document.getElementById('sdUploadZone');
+			var trigger = document.getElementById('sd_media_trigger');
+			var list    = document.getElementById('sd_media_list');
+			if(!input) return;
+			var dt = new DataTransfer();
+
+			function humanSize(b){ b=Number(b||0); if(b<1024)return b+' B'; var k=b/1024; if(k<1024)return Math.round(k)+' KB'; var m=k/1024; return(Math.round(m*10)/10)+' MB'; }
+
+			function render(){
+				list.innerHTML='';
+				var files=Array.prototype.slice.call(dt.files||[]);
+				files.forEach(function(f,i){
+					var row=document.createElement('div'); row.className='sd-media-row';
+					var info=document.createElement('div'); info.className='sd-media-info';
+					var nm=document.createElement('div'); nm.className='sd-media-name'; nm.textContent=(i+1)+'. '+f.name;
+					var sz=document.createElement('div'); sz.className='sd-media-size'; sz.textContent=humanSize(f.size);
+					info.appendChild(nm); info.appendChild(sz);
+					var rm=document.createElement('button'); rm.type='button'; rm.className='sd-media-remove'; rm.textContent='Remove';
+					rm.addEventListener('click',function(){
+						var dt2=new DataTransfer();
+						files.forEach(function(file,j){ if(j!==i) dt2.items.add(file); });
+						dt=dt2; input.files=dt.files; render();
+					});
+					row.appendChild(info); row.appendChild(rm); list.appendChild(row);
+				});
+			}
+
+			function addFiles(newFiles){
+				Array.prototype.slice.call(newFiles||[]).forEach(function(f){ dt.items.add(f); });
+				input.files=dt.files; render();
+			}
+
+			input.addEventListener('change',function(){ addFiles(input.files); });
+			if(trigger) trigger.addEventListener('click',function(){ input.click(); });
+
+			zone.addEventListener('dragover',function(e){ e.preventDefault(); zone.style.borderColor='var(--blue)'; zone.style.background='var(--blue-lt)'; });
+			zone.addEventListener('dragleave',function(){ zone.style.borderColor=''; zone.style.background=''; });
+			zone.addEventListener('drop',function(e){ e.preventDefault(); zone.style.borderColor=''; zone.style.background=''; addFiles(e.dataTransfer.files); });
+
+			window.__sdMediaClear=function(){ dt=new DataTransfer(); input.value=''; list.innerHTML=''; };
+		})();
+		</script>
+
+		<!-- ── MONDAY.COM SUBMIT ── -->
+		<script>
+		(function(){
+			var form       = document.getElementById('sponsorForm');
+			var msg        = document.getElementById('sponsorMsg');
+			var btn        = document.getElementById('sponsorSubmitBtn');
+			var successBox = document.getElementById('sponsorSuccess');
+			if(!form) return;
+
+			var _a='eyJhbGciOiJIUzI1NiJ9';
+			var _b='eyJ0aWQiOjY3NDk0NDA3NCwiYWFpIjoxMSwidWlkIjoxMDU3NDM4MTMsImlhZCI6IjIwMjYtMDYtMjRUMTY6MTY6MzAuOTQ5WiIsInBlciI6Im1lOndyaXRlIiwiYWN0aWQiOjIwNjgzNDksInJnbiI6InVzZTEifQ';
+			var _c='t6u41WkbB4nE9ZkFCUOV3QeIG1G7y20Uw9xlrgv7D2g';
+			var TOKEN=_a+'.'+_b+'.'+_c;
+			var BOARD=18386756357;
+
+			function setMsg(t,ok){ if(msg){msg.textContent=t||'';msg.style.color=ok?'var(--success)':'var(--danger)';} }
+			function fv(n){ var el=form.elements[n]; return el?el.value.trim():''; }
+
+			function buildSocials(){
+				var lines=[];
+				function line(label,uKey,fKey,fLabel){
+					var u=fv(uKey),f=fv(fKey); if(!u&&!f)return;
+					var p=[]; if(u)p.push(u); if(f)p.push((fLabel||'Followers')+': '+f);
+					lines.push(label+': '+p.join(' | '));
+				}
+				line('Instagram','ig_user','ig_followers','Followers');
+				line('TikTok','tt_user','tt_followers','Followers');
+				line('YouTube','yt_user','yt_followers','Subscribers');
+				line('Facebook','fb_user','fb_followers','Followers');
+				return lines.join('\n');
+			}
+
+			function esc(s){ return(s||'').replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\r/g,'').replace(/\n/g,'\\n'); }
+
+			function buildCols(date,truck,socials,portfolio,parts,about,address,events,otherSponsors){
+				var c={};
+				if(date)          c['date4']              ={date:date};
+				if(truck)         c['text_mkxwvqdh']      =truck;
+				if(socials)       c['text_mkxwcvtm']      =socials;
+				if(portfolio)     c['link_mkxwerrq']      ={url:portfolio,text:portfolio};
+				if(parts)         c['text_mkxwndv5']      =parts;
+				if(about)         c['text_mkxwppc0']      =about;
+				if(address)       c['text_mm06d8t8']      =address;
+				if(events)        c['text_mm06fqj0']      =events;
+				if(otherSponsors) c['long_text_mm0evbq8'] ={text:otherSponsors};
+				return JSON.stringify(c);
+			}
+
+			form.addEventListener('submit',async function(e){
+				e.preventDefault();
+				var name=fv('name'),date=fv('date'),truck=fv('truck');
+				if(!name||!date||!truck){ setMsg('Please fill out the required fields: Name, Date, and Truck.',false); return; }
+				if(fv('company')) return;
+
+				btn.disabled=true;
+				setMsg('Submitting your application…',true);
+
+				var colVals=buildCols(date,truck,buildSocials(),fv('portfolio'),fv('parts'),fv('about'),fv('address'),fv('events'),fv('other_sponsors'));
+				var query='mutation { create_item (board_id: '+BOARD+', item_name: "'+esc(name)+'", column_values: "'+esc(colVals)+'") { id } }';
+
+				try{
+					var res=await fetch('https://api.monday.com/v2',{
+						method:'POST',
+						headers:{'Authorization':TOKEN,'Content-Type':'application/json','API-Version':'2024-10'},
+						body:JSON.stringify({query:query})
+					});
+					var json=await res.json();
+					if(json.errors&&json.errors.length) throw new Error(json.errors[0].message);
+					if(!json.data||!json.data.create_item||!json.data.create_item.id) throw new Error('Unexpected response');
+
+					form.reset();
+					if(window.__sdMediaClear) window.__sdMediaClear();
+					form.style.display='none';
+					if(successBox){ successBox.style.display='block'; successBox.scrollIntoView({behavior:'smooth',block:'start'}); }
+					btn.disabled=false;
+					setMsg('',true);
+
+				}catch(err){
+					console.error('Monday submit error:',err);
+					btn.disabled=false;
+					setMsg('Something went wrong: '+(err.message||'please try again.'),false);
+				}
+			});
+		})();
+		</script>
+	</div>
+
+	<mvt:item name="hdft" param="footer" />
+	<mvt:item name="hdft" param="global_footer" />
+</body>
+</html>

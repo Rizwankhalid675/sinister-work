@@ -1,0 +1,82 @@
+{
+  "_id": "659ee9a4c89f91203020e707",
+  "name": "Add Customer Deposit",
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "distributed": true,
+  "apiIdentifier": "if4fbb3b3d",
+  "hooks": {
+    "preMap": {
+      "function": "preMap",
+      "_scriptId": "659ee9a3c89f91203020e702"
+    }
+  },
+  "ignoreExisting": true,
+  "ignoreMissing": false,
+  "oneToMany": false,
+  "lookups": [],
+  "aiDescription": {
+    "summary": "The \"Add Customer Deposit\" import is a distributed import that will be processed in multiple batches for faster execution. It is configured to ignore existing data in the destination application to avoid creating duplicates. The import inserts data into the \"customerdeposit\" record type in NetSuite. It uses a lookup based on the \"externalid\" field to determine if a record already exists in NetSuite. The import includes field mappings for various fields such as salesOrderID, customerID, paymentAmount, accountID, Date, and MIVA_CD_{{[HB | Miva Order ID]}}. There are no preMap hooks or filters applied to this import.",
+    "detailed": "This import is named \"Add Customer Deposit\" and it is a distributed import, which means it will be processed in multiple batches for faster execution. \n\nThe import is configured to ignore existing data in the destination application, which means it will not create duplicates. \n\nThe import is set to insert data into the \"customerdeposit\" record type in NetSuite. \n\nTo determine if a record already exists in NetSuite, the import uses a lookup based on the \"externalid\" field, which is compared to the value \"MIVA_CD_{{[HB | Miva Order ID]}}\". \n\nThe import includes several field mappings. It maps the \"salesOrderID\" field to the \"salesorder\" field in NetSuite, the \"customerID\" field to the \"customer\" field, the \"paymentAmount\" field to the \"payment\" field, the \"accountID\" field to the \"account\" field, the \"Date\" field to the \"trandate\" field, and the \"MIVA_CD_{{[HB | Miva Order ID]}}\" field to the \"externalid\" field. \n\nThe import does not have any preMap hooks or filters applied. \n\nOverall, this import is designed to insert customer deposit data into NetSuite, using specific field mappings and a lookup to avoid duplicates.",
+    "generatedOn": null
+  },
+  "netsuite_da": {
+    "useSS2Restlets": false,
+    "restletVersion": "suitebundle",
+    "operation": "add",
+    "recordType": "customerdeposit",
+    "internalIdLookup": {
+      "expression": "[\"externalid\",\"is\",\"MIVA_CD_{{[HB | Miva Order ID]}}\"]"
+    },
+    "lookups": [],
+    "mapping": {
+      "fields": [
+        {
+          "extract": "salesOrderID",
+          "generate": "salesorder",
+          "internalId": true
+        },
+        {
+          "extract": "customerID",
+          "generate": "customer",
+          "internalId": true
+        },
+        {
+          "extract": "paymentAmount",
+          "generate": "payment",
+          "immutable": false,
+          "dataType": "number",
+          "internalId": false,
+          "discardIfEmpty": false
+        },
+        {
+          "extract": "Date",
+          "generate": "trandate",
+          "internalId": false
+        },
+        {
+          "extract": "MIVA_CD_{{[HB | Miva Order ID]}}",
+          "generate": "externalid",
+          "internalId": false
+        },
+        {
+          "generate": "undepfunds",
+          "hardCodedValue": "true",
+          "immutable": false,
+          "internalId": false,
+          "discardIfEmpty": false
+        }
+      ],
+      "lists": []
+    }
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "rules": [],
+      "version": "1"
+    },
+    "rules": [],
+    "version": "1"
+  },
+  "adaptorType": "NetSuiteDistributedImport"
+}

@@ -1,0 +1,89 @@
+{
+  "_id": "65aee564ffba326d31a0bd97",
+  "name": "Retrieve an order",
+  "_connectionId": "659c281ec89f9120301fb0ce",
+  "apiIdentifier": "e7ae593afb",
+  "asynchronous": true,
+  "assistant": "miva",
+  "oneToMany": false,
+  "assistantMetadata": {
+    "resource": "orders",
+    "version": "v1",
+    "operation": "orderlist_load_query"
+  },
+  "aiDescription": {
+    "summary": "This export is named \"Retrieve an order\" and it uses the Miva assistant. It retrieves data from the \"orders\" resource in the Miva application using the \"orderlist_load_query\" operation in version \"v1\" of the Miva API. The export is configured with a POST method and a relative URI of \"/json.mvc\". It includes a request body with parameters and filters to specify the data to be retrieved. The response is expected to be in JSON format, with the actual data located in the \"data.data\" path. The export also includes a paging configuration for retrieving subsequent pages of data. Additionally, it is configured as a REST export with similar configurations.",
+    "detailed": "This export is named \"Retrieve an order\" and it is using the Miva assistant. It is not a one-to-many export and it is not using the sandbox environment.\n\nThe export is configured to retrieve data from the \"orders\" resource in the Miva application using the \"orderlist_load_query\" operation in version \"v1\" of the Miva API. The export is using a POST method and the relative URI is \"/json.mvc\". The export includes a request body that contains various parameters and filters to specify the data to be retrieved.\n\nThe export expects a JSON response with a \"success\" field indicating the success of the request. The actual data is located in the \"data.data\" path of the response.\n\nThe export also includes a paging configuration, where subsequent pages of data can be retrieved using a POST method with a different request body. The paging method is set to \"body\" and the last-page status code is set to 404.\n\nIn addition to the Miva assistant, the export is also configured as a REST export. The REST configuration is similar to the HTTP configuration, with a relative URI, request body, and response resource path specified.\n\nOverall, this export is retrieving an order from the Miva application using the Miva API. It is using a combination of HTTP and REST configurations to make the request and handle the response. The export includes parameters, filters, and paging configuration to specify the data to be retrieved and how it should be retrieved."
+  },
+  "http": {
+    "relativeURI": "/json.mvc",
+    "method": "POST",
+    "body": "{\"Store_Code\":\"{{connection.http.unencrypted.Store_Code}}\",\"Function\":\"OrderList_Load_Query\",\"Count\":1,\"Miva_Request_Timestamp\":\"{{dateFormat 'X'}}\",\"Filter\":[{\"name\":\"ondemandcolumns\",\"value\":[\"payment_module\",\"cust_pw_email\",\"cust_login\",\"ship_method\",\"customer\",\"items\",\"charges\",\"coupons\",\"discounts\",\"payments\",\"payment_data\",\"notes\",\"CustomField_Values:customfields:*\",\"parts\",\"business_title\"]},{\"name\":\"search\",\"value\":[{\"field\":\"id\",\"operator\":\"EQ\",\"value\":\"2654393\"}]}]}",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "isRest": true,
+    "sendAuthForFileDownloads": false,
+    "formType": "assistant",
+    "paging": {
+      "method": "body",
+      "lastPageStatusCode": 404,
+      "body": "{\"offset\":\"{{add pageIndex 0}}\",\"Store_Code\":\"{{connection.http.unencrypted.Store_Code}}\",\"Function\":\"OrderList_Load_Query\",\"Count\":1,\"Miva_Request_Timestamp\":\"{{dateFormat 'X'}}\",\"Filter\":[{\"name\":\"ondemandcolumns\",\"value\":[\"payment_module\",\"cust_pw_email\",\"cust_login\",\"ship_method\",\"customer\",\"items\",\"charges\",\"coupons\",\"discounts\",\"payments\",\"payment_data\",\"notes\",\"CustomField_Values:customfields:*\",\"parts\",\"business_title\"]},{\"name\":\"search\",\"value\":[{\"field\":\"id\",\"operator\":\"EQ\",\"value\":\"2654393\"}]}]}"
+    },
+    "response": {
+      "resourcePath": "data.data",
+      "successPath": "success",
+      "allowArrayforSuccessPath": true,
+      "twoDArray": {
+        "doNotNormalize": true
+      }
+    }
+  },
+  "rest": {
+    "relativeURI": "/json.mvc",
+    "method": "POST",
+    "resourcePath": "data.data",
+    "postBody": {
+      "Store_Code": "{{connection.rest.unencrypted.Store_Code}}",
+      "Function": "OrderList_Load_Query",
+      "Count": 1,
+      "Miva_Request_Timestamp": "{{dateFormat 'X'}}",
+      "Filter": [
+        {
+          "name": "ondemandcolumns",
+          "value": [
+            "payment_module",
+            "cust_pw_email",
+            "cust_login",
+            "ship_method",
+            "customer",
+            "items",
+            "charges",
+            "coupons",
+            "discounts",
+            "payments",
+            "payment_data",
+            "notes",
+            "CustomField_Values:customfields:*",
+            "parts",
+            "business_title"
+          ]
+        },
+        {
+          "name": "search",
+          "value": [
+            {
+              "field": "id",
+              "operator": "EQ",
+              "value": "2654393"
+            }
+          ]
+        }
+      ]
+    },
+    "pagingMethod": "postbody",
+    "pagingPostBody": "{\"offset\":\"{{add pageIndex 0}}\",\"Store_Code\":\"{{connection.rest.unencrypted.Store_Code}}\",\"Function\":\"OrderList_Load_Query\",\"Count\":1,\"Miva_Request_Timestamp\":\"{{dateFormat 'X'}}\",\"Filter\":[{\"name\":\"ondemandcolumns\",\"value\":[\"payment_module\",\"cust_pw_email\",\"cust_login\",\"ship_method\",\"customer\",\"items\",\"charges\",\"coupons\",\"discounts\",\"payments\",\"payment_data\",\"notes\",\"CustomField_Values:customfields:*\",\"parts\",\"business_title\"]},{\"name\":\"search\",\"value\":[{\"field\":\"id\",\"operator\":\"EQ\",\"value\":\"2654393\"}]}]}",
+    "successPath": "success",
+    "lastPageStatusCode": 404
+  },
+  "adaptorType": "RESTExport"
+}

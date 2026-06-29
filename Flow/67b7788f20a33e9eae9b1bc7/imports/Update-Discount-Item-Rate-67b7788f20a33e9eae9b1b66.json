@@ -1,0 +1,79 @@
+{
+  "_id": "67b7788f20a33e9eae9b1b66",
+  "name": "Update Discount Item & Rate",
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "distributed": true,
+  "apiIdentifier": "ic0bf838a7",
+  "hooks": {
+    "preMap": {
+      "function": "preMap",
+      "_scriptId": "67b7788e20a33e9eae9b1b39"
+    }
+  },
+  "ignoreExisting": false,
+  "ignoreMissing": false,
+  "oneToMany": false,
+  "lookups": [],
+  "aiDescription": {
+    "summary": "The \"Update Discount Item & Rate\" import is a distributed import that updates records in NetSuite. It specifically updates the \"salesorder\" record type using the \"update\" operation. The import uses an internalIdLookup to check if a record already exists in NetSuite, based on the value of the \"custbody_hb_miva_order_id\" field. This helps avoid creating duplicate records. The import maps the \"discount_item\" field to the \"discountitem\" field and the \"discount_total\" field to the \"discountrate\" field in NetSuite. It also includes a filter to skip processing records that do not meet the specified condition. There are no preMap hooks or lookups defined for this import.",
+    "detailed": "This import is named \"Update Discount Item & Rate\" and it is a distributed import, which means it will be processed in multiple batches for faster import performance. \n\nThe import is configured to update records in NetSuite, specifically the \"salesorder\" record type. It uses the \"update\" operation to update existing records in NetSuite. \n\nTo determine if a record already exists in NetSuite, the import uses an internalIdLookup with an expression that checks if the \"custbody_hb_miva_order_id\" field is equal to the value of \"{{{id}}}\". This lookup is used to avoid creating duplicate records in NetSuite. \n\nThe import includes two fields to be mapped: \"discount_item\" and \"discount_total\". The \"discount_item\" field is mapped to the \"discountitem\" field in NetSuite, and the \"discount_total\" field is mapped to the \"discountrate\" field in NetSuite. \n\nThe import also includes a filter that checks if the \"orderdate\" field is greater than the value \"1703736761\". This filter allows the import to skip processing records that do not meet the specified condition. \n\nThere are no preMap hooks or lookups defined for this import. \n\nOverall, this import is designed to update the \"discount_item\" and \"discount_total\" fields in existing sales order records in NetSuite, based on the provided filter condition."
+  },
+  "netsuite_da": {
+    "restletVersion": "suiteapp2.0",
+    "operation": "update",
+    "recordType": "salesorder",
+    "internalIdLookup": {
+      "expression": "[\"custbody_hb_miva_order_id\",\"is\",\"{{{id}}}\"]"
+    },
+    "lookups": [],
+    "mapping": {
+      "fields": [
+        {
+          "extract": "discount_item",
+          "generate": "discountitem",
+          "immutable": false,
+          "internalId": true,
+          "discardIfEmpty": true
+        },
+        {
+          "extract": "discount_total",
+          "generate": "discountrate",
+          "immutable": false,
+          "internalId": false,
+          "discardIfEmpty": true
+        }
+      ],
+      "lists": []
+    }
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "version": "1",
+      "rules": [
+        "greaterthan",
+        [
+          "string",
+          [
+            "extract",
+            "orderdate"
+          ]
+        ],
+        "1703736761"
+      ]
+    },
+    "rules": [
+      "greaterthan",
+      [
+        "string",
+        [
+          "extract",
+          "orderdate"
+        ]
+      ],
+      "1703736761"
+    ],
+    "version": "1"
+  },
+  "adaptorType": "NetSuiteDistributedImport"
+}

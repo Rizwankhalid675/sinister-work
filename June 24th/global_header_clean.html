@@ -1,0 +1,882 @@
+<style>
+.x-product-list__button .c-button{
+	background-color: #ff061b;
+}
+
+.zinrelo-tab{
+	display:none!important;
+}
+#header_vehicles_section{
+	margin-bottom: -3px !important;
+}
+.t-site-header__masthead-customer-block {
+	margin-bottom: -5px !important;
+}
+.main_menu_items{
+	align-items: center;
+	display: flex;
+}
+/* Hide help center bar and fasten overlay everywhere — desktop nav has it inline */
+.help_center_top{
+	display: none !important;
+}
+.help_center_fasten{
+	display: none !important;
+}
+.help_center_container{
+	width: 70%;
+	margin-top: 30px;
+}
+.header img{
+	height: 40px !important;
+}
+.t-site-header__masthead {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.sd-help-link,
+.x-fasten-header .sd-help-link,
+.x-fasten-header--is-active .sd-help-link {
+	color: #fff !important;
+	font-weight: 700;
+	text-decoration: none;
+	background: transparent !important;
+	border: none !important;
+}
+@media only screen and (max-width: 556px){
+	.help_center_container{
+		width: 100%;
+	}
+	.x-collapsing-breadcrumbs__group, .x-collapsing-breadcrumbs__list {
+		padding-top: .5rem;
+	}
+}
+/* Show help center bar only on mobile/tablet where desktop nav is hidden */
+@media only screen and (max-width: 959px){
+	.help_center_top{
+		display: flex !important;
+		position: relative;
+		width: 100%;
+		height: 40px;
+	}
+	.help_center_top a{
+		width: 100%;
+	}
+	.help_center_top #help_center_button{
+		background-color: white;
+		color: #1833B8 !important;
+		border: 0;
+		width: 100%;
+		padding: 10px 20px;
+		font-weight: bold;
+		cursor: pointer;
+		height: 100%;
+	}
+}
+</style>
+
+<section class="o-wrapper o-wrapper--full t-global-search" itemscope itemtype="http://schema.org/WebSite">
+	<meta itemprop="url" content="//&mvt:global:domain:name;/"/>
+	<mvt:if expr="g.ss_enable EQ 'true'">
+		<form class="t-global-search__form" method="get" action="/&mvt:global:ss_search_url;" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+			<fieldset>
+			<legend>Product Search</legend>
+			<ul class="c-form-list">
+				<li class="c-form-list__item c-form-list__item--full c-control-group u-flex o-layout--align-center o-layout--justify-between">
+					<label class="u-color-gray-50 u-font-tiny" for="global-search"><span class="u-icon-search"></span> search</label>
+					<button class="c-button c-control-group__button u-bg-gray-10 u-border-none u-color-gray-50 u-font-tiny u-text-uppercase" data-hook="close-search" type="button"><span class="u-font-tiny u-icon-cross"></span> Close</button>
+				</li>
+				<li class="c-form-list__item c-form-list__item--full c-control-group u-flex">
+					<meta itemprop="target" content="&mvte:urls:SRCH:auto;?q={Search}"/>
+					<input id="global-search" class="c-form-input c-control-group__field u-bg-transparent u-border-none u-font-huge u-text-bold" data-hook="global-search" data-mm_searchfield="Yes" data-mm_searchfield_id="x-search-preview" type="search" name="Search" value="" placeholder="" autocomplete="off" required itemprop="query-input">
+					<button class="c-button c-button--large c-control-group__button u-bg-transparent u-border-none u-color-gray-40 u-font-tiny o-layout--no-wrap u-text-uppercase" type="submit"><span class="u-font-tiny u-icon-arrow-left"></span> Press Enter</button>
+				</li>
+			</ul>
+		</fieldset>
+	</form>
+	<mvt:else>
+	<form class="t-global-search__form" method="post" action="&mvte:urls:SRCH:rr;" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+		<fieldset>
+			<legend>Product Search</legend>
+			<ul class="c-form-list">
+				<li class="c-form-list__item c-form-list__item--full c-control-group u-flex o-layout--align-center o-layout--justify-between">
+					<label class="u-color-gray-50 u-font-tiny" for="global-search"><span class="u-icon-search"></span> search</label>
+					<button class="c-button c-control-group__button u-bg-gray-10 u-border-none u-color-gray-50 u-font-tiny u-text-uppercase" data-hook="close-search" type="button"><span class="u-font-tiny u-icon-cross"></span> Close</button>
+				</li>
+				<li class="c-form-list__item c-form-list__item--full c-control-group u-flex">
+					<meta itemprop="target" content="&mvte:urls:SRCH:auto;?q={Search}"/>
+					<input id="global-search" class="c-form-input c-control-group__field u-bg-transparent u-border-none u-font-huge u-text-bold" data-hook="global-search" data-mm_searchfield="Yes" data-mm_searchfield_id="x-search-preview" type="search" name="Search" value="" placeholder="" autocomplete="off" required itemprop="query-input">
+					<button class="c-button c-button--large c-control-group__button u-bg-transparent u-border-none u-color-gray-40 u-font-tiny o-layout--no-wrap u-text-uppercase" type="submit"><span class="u-font-tiny u-icon-arrow-left"></span> Press Enter</button>
+				</li>
+			</ul>
+		</fieldset>
+
+		<span class="x-search-preview t-search-preview" data-hook="search-preview" data-mm_searchfield_menu="Yes" data-mm_searchfield_id="x-search-preview"></span>
+	</form>
+	</mvt:if>
+</section>
+
+<mvt:item name="readytheme" param="contentsection( 'refinery_annex' )" />
+<mvt:item name="readytheme" param="banner( 'header_message' )" />
+<div class="help_center_top u-flex u-hidden--l">           
+	<a href="/help-center.html">
+	<button id="help_center_button" type="button"><span class="u-icon-question"></span> HELP CENTER</button>
+	</a>
+</div>
+
+<header class="o-wrapper o-wrapper--full o-wrapper--flush t-site-header" data-hook="site-header">
+	<mvt:item name="readytheme" param="contentsection( 'fasten_header' )" />
+	
+	<section class="o-wrapper t-site-header__masthead">
+		<div class="o-layout o-layout--align-center">
+			<div class="o-layout__item u-flex u-grids-2 u-hidden--l u-width-3 &mvte:global:checkout_hidden;">
+				<button class="c-button c-button--flush c-button--full c-button--hollow u-bg-transparent u-border-none u-color-gray-50 u-icon-menu" data-hook="open-main-menu " type="button" aria-label="Open Main Menu"></button>
+				<button class="c-button c-button--flush c-button--full c-button--hollow u-bg-transparent u-border-none u-color-gray-50 u-icon-search" data-hook="open-search" type="button" aria-label="Open Search Box"></button>
+			</div>
+
+			<mvt:if expr="s.remote_addr  CIN l.settings:store:mnt_ips">			
+				<mvt:comment> MJB 2023/10/25 overlay for mobile logo showing pricegroup </mvt:comment>
+				<mvt:if expr="g.Basket:cust_id GT 0">
+					<mvt:comment> 16 => Wholesale-1, 51 => Wholesale-2, 52 => Wholesale-3, 53 => Distributor, 54 => Distributor+</mvt:comment>
+					<mvt:assign name="l.settings:pricegroup_array[1]" value="16"/>
+					<mvt:assign name="l.settings:pricegroup_array[2]" value="51"/>
+					<mvt:assign name="l.settings:pricegroup_array[3]" value="52"/>
+					<mvt:assign name="l.settings:pricegroup_array[4]" value="53"/>
+					<mvt:assign name="l.settings:pricegroup_array[5]" value="54"/>
+
+					<mvt:foreach iterator="this_pricegroup" array="pricegroup_array">
+
+						<mvt:do name="l.wholesale" file="g.Module_Feature_PGR_DB" value="PriceGroupXCustomer_Load( l.settings:this_pricegroup, g.Basket:cust_id, l.null )" />
+						<mvt:if expr="l.wholesale">
+							<mvt:assign name="l.settings:price_group_overlay" value="'Wholesale'" />
+							<mvt:foreachstop/>
+						</mvt:if>
+					</mvt:foreach>
+						
+					<mvt:if expr="NOT l.wholesale">
+						<mvt:do name="l.return" file="g.Module_Feature_PGR_DB" value="PriceGroup_Load_Name( 'VIP Customer', l.vip_pricegroup )" />
+						<mvt:if expr="l.return EQ 1">
+							<mvt:do name="l.vip" file="g.Module_Feature_PGR_DB" value="PriceGroupXCustomer_Load( l.vip_pricegroup:id, g.Basket:cust_id, l.null )" />
+							<mvt:if expr="l.vip">
+								<mvt:assign name="l.settings:price_group_overlay" value="'VIP'" />
+							</mvt:if>
+						</mvt:if>
+					</mvt:if>
+					<style>
+						.wholesale_overlay_div{
+							display:none;
+						}
+						@media screen and (max-width:959px) {
+							.t-site-header__logo {
+							position: relative;
+							text-align: center;
+							color: white;
+							}
+							.wholesale_overlay_div {
+							display:block;
+							position: absolute;
+							bottom: -30px;
+							right: 35%;
+							z-index:100;
+							}
+							.wholesale_overlay{
+								background-color:white;
+								font-size: 18px;
+								color:black!important;
+								border-radius:5px;
+								border:0px;
+								padding:4px;
+							}
+						}
+						@media screen and (max-width:480px) {
+							.wholesale_overlay_div {
+							right: 0;
+							}
+						}
+					</style>
+				</mvt:if>
+			</mvt:if>           
+			<div class="o-layout__item u-width-6 u-width-7--m u-width-3--l u-text-left t-site-header__logo">
+				<a href="&mvte:urls:SFNT:auto;" title="&mvt:global:store:name;" rel="nofollow">
+					<mvt:if expr="l.settings:readytheme:logo_type EQ 'text'">
+						<div class="t-site-header__store-name">&mvt:readytheme:logo_name;</div>
+						<small class="t-site-header__store-tagline">&mvt:readytheme:logo_tagline;</small>
+					<mvt:elseif expr="l.settings:readytheme:logo_type EQ 'image'">
+						<img src="&mvte:readytheme:logo_image;" alt="&mvt:readytheme:logo_alt;">
+					</mvt:if>
+				</a>
+
+<mvt:if expr="s.remote_addr  CIN l.settings:store:mnt_ips">			
+				<mvt:if expr="l.vip OR l.wholesale">
+					<div class="wholesale_overlay_div"><button class="wholesale_overlay" style="color:black!important;" type="button">&mvt:price_group_overlay;</button></div>
+				</mvt:if>                
+</mvt:if>
+			</div>
+			
+			<div class="o-layout__item u-flex u-grids-2 u-hidden--l u-width-3 u-width-2--m &mvte:global:checkout_hidden; mobile-cart">
+				<button class="c-button c-button--flush c-button--full u-bg-primary u-border-none u-color-black t-site-header__basket-link-quantity--mobile mobile-hook">
+					<div class="hook" data-hook="open-mini-basket mini-basket-count"></div>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="t-prevent-events">
+						<path d="M15.55 13C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C21.25 4.82 20.77 4 20.01 4H5.21L4.27 2H1V4H3L6.6 11.59L5.25 14.03C4.52 15.37 5.48 17 7 17H19V15H7L8.1 13H15.55ZM6.16 6H18.31L15.55 11H8.53L6.16 6ZM7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z" fill="white"/>
+					</svg>
+					<span class="u-bg-red u-color-white t-site-header__basket-link-quantity t-prevent-events" data-hook="mini-basket-count">&mvte:global_minibasket:basket_count;</span>
+				</button>
+			</div>
+
+	<mvt:comment>
+	<div class="o-layout__item u-hidden u-block--l u-width-8 u-text-center &mvte:global:checkout_hidden;">
+	<mvt:item name="readytheme" param="navigationset( 'header_links' )" />
+	</div>
+	</mvt:comment>
+
+			<div id="header_vehicles_section" class="o-layout__item u-hidden u-block--l u-width-7 u-text-center &mvte:global:checkout_hidden;">
+				<div class="o-layout o-layout--justify-between">
+				<a class="main_menu_items o-layout__item  c-button u-bg-transparent x-omega-navigation__trigger t-primary-link nav-dropdown-trigger" data-hook="activate-omega" sub-menu="1" href="/954746_ford_powerstroke">Powerstroke</a>
+				<a class="main_menu_items o-layout__item  c-button u-bg-transparent x-omega-navigation__trigger t-primary-link nav-dropdown-trigger" data-hook="activate-omega" sub-menu="2" href="/954952_gm_duramax">Duramax</a>
+				<a class="main_menu_items o-layout__item  c-button u-bg-transparent x-omega-navigation__trigger t-primary-link nav-dropdown-trigger" data-hook="activate-omega" sub-menu="3" href="/954540_dodge_cummins">Cummins</a>
+
+				<a class="main_menu_items o-layout__item  c-button u-bg-transparent x-omega-navigation__trigger t-primary-link" sub-menu="4" href="https://sinisterdiesel.com/merchandise-apparel-5534.html">Apparel</a>
+					<a class="main_menu_items o-layout__item sd-help-link" href="/help-center.html"><span class="u-icon-question" style="margin-right:4px;"></span> HELP CENTER</a>
+				</div>
+			</div>
+	
+			
+	<mvt:comment>
+			<div class="o-layout__item u-hidden u-block--l u-width-3--l u-width-4--w u-text-center &mvte:global:checkout_hidden;">
+				<button class="c-button c-button--full c-button--large u-bg-transparent u-border-gray-30 u-color-gray-50 u-font-small t-open-search" data-hook="open-search" type="button"><span class="u-icon-search"></span> search</button>
+			</div>
+	</mvt:comment>
+			
+			<ul class="o-layout__item o-list-bare u-hidden u-flex--l u-grids-3 u-text-center  u-width-2--w t-site-header__masthead-customer-block &mvte:global:checkout_hidden;">
+
+				<li class="o-layout__item">
+					<a class="t-open-search" data-hook="open-search">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M9.54227 15.8719C10.691 16.587 12.0473 17 13.5 17C17.6421 17 21 13.6421 21 9.5C21 5.35786 17.6421 2 13.5 2C9.35786 2 6 5.35786 6 9.5C6 11.4657 6.75622 13.2548 7.99361 14.5922L2.29289 20.2929C1.90237 20.6834 1.90237 21.3166 2.29289 21.7071C2.68342 22.0976 3.31658 22.0976 3.70711 21.7071L9.54227 15.8719ZM8 9.5C8 12.5376 10.4624 15 13.5 15C16.5376 15 19 12.5376 19 9.5C19 6.46243 16.5376 4 13.5 4C10.4624 4 8 6.46243 8 9.5Z" fill="white"/>
+						</svg>
+					</a>
+				</li>
+		<mvt:comment>
+		<li class="o-layout__item u-block--m">
+					<a class="t-primary-link" href="&mvte:urls:WLST:auto;">Wish List</a>
+				</li>
+		</mvt:comment>
+		
+				<li class="o-layout__item" style="display:flex; justify-content: center;">
+					<mvt:comment>Code is here so we can unassign the customerlink item for less overhead</mvt:comment>
+					<mvt:item name="readytheme" param="contentsection( 'inc-customer_link' )" />
+				</li>
+				<li class="o-layout__item">
+					<a class="t-primary-link t-site-header__basket-link" data-hook="open-mini-basket" href="&mvte:urls:BASK:auto;">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="t-prevent-events">
+							<path d="M15.55 13C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C21.25 4.82 20.77 4 20.01 4H5.21L4.27 2H1V4H3L6.6 11.59L5.25 14.03C4.52 15.37 5.48 17 7 17H19V15H7L8.1 13H15.55ZM6.16 6H18.31L15.55 11H8.53L6.16 6ZM7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z" fill="white"/>
+						</svg>
+						<span class="u-bg-red u-color-white t-site-header__basket-link-quantity t-prevent-events" data-hook="mini-basket-count">&mvte:global_minibasket:basket_count;</span>
+					</a>
+				</li>
+			</ul>
+<mvt:comment> MJB 2022/10/21 removed since login link now goes directly to LOGN page
+			<mvt:item name="readytheme" param="contentsection( 'global_account' )" />
+</mvt:comment>
+			<mvt:item name="readytheme" param="contentsection( 'mini_basket' )" />
+
+			<div class="secure-checkout o-layout__item u-width-12 u-width-10--l u-hidden &mvte:global:checkout_shown;">
+				<br class="u-hidden--m">
+				<span class="u-block u-text-bold u-text-center u-text-right--l u-text-uppercase u-color-white"><span class="u-icon-secure"></span> Secure Checkout</span>
+			</div>
+			
+		</div>
+	</section>
+	<mvt:item name="readytheme" param="navigationset( 'global-header_navigation' )" />
+</header>
+<!-- end t-site-header -->
+
+<mvt:if expr="l.settings:page:code EQ 'SFNT'">
+	<main class="o-wrapper o-wrapper--full o-wrapper--flush" data-hook="close-search">
+<mvt:else>
+	<main class="o-wrapper t-wrapper">
+</mvt:if>
+
+<mvt:if expr="(l.settings:page:code NE 'SFNT' AND l.settings:page:code NE 'BASK' AND l.settings:page:code NE 'ORDL' AND l.settings:page:code NE 'OCST' AND l.settings:page:code NE 'OUS1' AND l.settings:page:code NE 'OUSM' AND l.settings:page:code NE 'UATM' AND l.settings:page:code NE 'UATR' AND l.settings:page:code NE 'OSEL' AND l.settings:page:code NE 'OPAY') AND (ISNULL g.Customer_Temporary_Password) AND NOT (l.settings:page:code CIN 'ABAL,ACRT,ACLN,CABK,CADA,CADE,CEML.CPCA,CPCD,CPCE,CPRO,CPWD,CSBE,CSTR,CSUB,FPWD,ORDH,ORDS,RGFT,WISH,WLAD,WLED,WLST,WPCK')">
+	<mvt:item name="breadcrumbs" />
+</mvt:if>
+
+<mvt:if expr="l.settings:page:code NE 'SFNT' AND l.settings:page:code NE 'BASK'">
+	<mvt:if expr="l.settings:page:code EQ 'ORDL' OR l.settings:page:code EQ 'OCST' OR l.settings:page:code EQ 'OUS1' OR l.settings:page:code EQ 'OUSM' OR l.settings:page:code EQ 'UATM' OR l.settings:page:code EQ 'UATR' OR l.settings:page:code EQ 'OSEL' OR l.settings:page:code EQ 'OPAY'">
+	<mvt:elseif expr="l.settings:page:code EQ 'INVC'">
+		<section class="o-layout t-expanded-block u-bg-black u-color-white">
+			<div class="o-layout__item t-expanded-block__item">
+				<header class="t-account-page-header u-bg-black u-color-white">
+					<span class="c-heading-delta">
+						Thank you for your order, &mvte:order:ship_fname;!
+						<span class="c-heading--subheading t-account-page-header__link">Confirmation #&mvt:order:id;</span>
+					</span>
+					<button class="c-button c-button--hollow c-button--huge u-bg-black u-color-white u-text-uppercase u-font-small" data-hook="print-invoice">Print Receipt</button>
+				</header>
+			</div>
+		</section>
+	<mvt:elseif expr="l.settings:page:code CIN 'ACRW,ABAL,ACRT,ACLN,CABK,CADA,CADE,CEML.CPCA,CPCD,CPCE,CPRO,CPWD,CSBE,CSTR,CSUB,ORDH,ORDS,RGFT,WISH,WLAD,WLED,WLST,WPCK'">
+		<mvt:if expr="g.Basket:cust_id AND g.Customer_Session_Verified">
+			<section class="o-layout t-expanded-block u-bg-black u-color-white">
+				<div class="o-layout__item t-expanded-block__item">
+					<header class="t-account-page-header u-bg-black u-color-white">
+						<span class="c-heading-delta">
+							Welcome Back, &mvt:global:customer:ship_fname;!
+							<a class="c-heading--subheading t-account-page-header__link" href="&mvte:urls:ORDH:secure;">View Orders <span class="u-icon-chevron-right u-font-small"></span></a>
+						</span>
+						<a class="c-button c-button--hollow u-bg-black u-color-white u-text-uppercase u-font-small" href="&mvte:urls:SFNT:secure_sep;Action=LOGO" title="Log Me Out">Logout</a>
+					</header>
+				</div>
+			</section>
+			<section class="o-layout">
+				<div class="o-layout__item">
+					<mvt:item name="readytheme" param="navigationset( 'account_navigation' )" />
+				</div>
+			</section>
+		<mvt:else>
+			<section class="o-layout t-expanded-block u-bg-white">
+				<div class="o-layout__item t-expanded-block__item">
+					<header class="t-account-page-header">
+						<div class="u-width-12">
+							<h1 class="c-heading-delta u-text-bold u-color-primary">&mvt:page:name;</h1>
+							<hr class="c-keyline">
+						</div>
+					</header>
+				</div>
+			</section>
+		</mvt:if>
+	<mvt:elseif expr="g.Customer_Temporary_Password">
+	<mvt:elseif expr="'CTGY' CIN l.settings:page:code">
+		<section class="o-layout t-expanded-block u-bg-white u-over-content">
+			<div class="o-layout__item t-expanded-block__item">
+				<div class="t-category-title-sort">
+					<h1 class="c-heading-delta u-text-bold t-page-title u-color-primary">&mvte:category:name;</h1>
+					<mvt:if expr="l.settings:category_listing:products_on_page_count GT 0">
+						<mvt:assign name="g.facet_listings" value="''"/>
+						<mvt:foreach iterator="facet" array="facets:facets">
+							<mvt:foreach iterator="facet_value" array="facet:values">
+								<mvt:if expr="l.settings:facet_value:selected">
+									<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;"/>
+									<mvt:assign name="g.facet_listings" value="'&' $ l.settings::facet:code $ '=' $ l.settings::facet_value:value"/>
+								</mvt:if>
+							</mvt:foreach>
+						</mvt:foreach>
+						<section class="x-display-list-filtering t-display-list-filtering">
+							<button class="t-filters-trigger" data-hook="open-refinery-annex" type="button">
+								<span>Filters</span>
+								<strong>(&mvte:facets:applied_facet_count;)</strong>
+							</button>
+							
+							<form class="x-display-list-filtering__sort-by" method="get" action="&mvte:urls:_self:auto_noparams;">
+								<fieldset>
+									<legend>Sort Products By</legend>
+									<mvt:if expr="tolower( l.settings:category_listing:mode ) EQ 'ctgy' AND toupper( g.Screen ) NE 'CTGY'">
+										<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;">
+									<mvt:elseif expr="tolower( l.settings:category_listing:mode ) EQ 'relp' AND toupper( g.Screen ) NE 'PROD'">
+										<input type="hidden" name="Product_Code" value="&mvte:global:Product_Code;">
+									</mvt:if>
+									<mvt:item name="urls" param="hidden_params:_self:auto"/>
+									<input type="hidden" name="Search" value="&mvte:global:Search;"/>
+									<input type="hidden" name="Per_Page" value="&mvte:global:Per_Page;"/>
+									<mvt:foreach iterator="facet" array="facets:facets">
+										<mvt:foreach iterator="facet_value" array="facet:values">
+											<mvt:if expr="l.settings:facet_value:selected">
+												<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;">
+											</mvt:if>
+										</mvt:foreach>
+									</mvt:foreach>
+									<ul class="c-form-list">
+										<li class="c-form-list__item c-form-list__item--full">
+											<label class="c-form-label u-font-tiny u-text-uppercase u-text-normal u-hidden" for="l-sort_by">Sort</label>
+											<div class="c-form-select">
+												<select id="l-sort_by" class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold" data-hook="custom-select" data-label="Sort By" name="Sort_By" onchange="MMProdList_UpdateQuery( this ); return true;">
+													<mvt:if expr="ISNULL g.Sort_By">
+														<option value="disp_order" selected>Featured</option>
+													<mvt:else>
+														<option value="disp_order">Featured</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'bestsellers'">
+														<option value="bestsellers" selected>Best Selling</option>
+													<mvt:else>
+														<option value="bestsellers">Best Selling</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'price_asc'">
+														<option value="price_asc" selected>Price (Low to High)</option>
+													<mvt:else>
+														<option value="price_asc">Price (Low to High)</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'price_desc'">
+														<option value="price_desc" selected>Price (High to Low)</option>
+													<mvt:else>
+														<option value="price_desc">Price (High to Low)</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'newest'">
+														<option value="newest" selected>Newest Items</option>
+													<mvt:else>
+														<option value="newest">Newest Items</option>
+													</mvt:if>
+												</select>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
+							</form>
+							<!-- end .x-display-list-filtering__sort-by -->
+							<form class="x-display-list-filtering__per-page u-hidden u-block--l" method="get" action="&mvte:urls:_self:auto_noparams;">
+								<fieldset>
+									<legend>Number of Products to Show</legend>
+									<mvt:if expr="tolower( l.settings:category_listing:mode ) EQ 'ctgy' AND toupper( g.Screen ) NE 'CTGY'">
+										<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;" />
+									<mvt:elseif expr="tolower( l.settings:category_listing:mode ) EQ 'relp' AND toupper( g.Screen ) NE 'PROD'">
+										<input type="hidden" name="Product_Code" value="&mvte:global:Product_Code;" />
+									</mvt:if>
+									<mvt:item name="urls" param="hidden_params:_self:auto" />
+									<input type="hidden" name="Search" value="&mvte:global:Search;" />
+									<input type="hidden" name="Sort_By" value="&mvte:global:Sort_By;" />
+									<mvt:foreach iterator="facet" array="facets:facets">
+										<mvt:foreach iterator="facet_value" array="facet:values">
+											<mvt:if expr="l.settings:facet_value:selected">
+												<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;" />
+											</mvt:if>
+										</mvt:foreach>
+									</mvt:foreach>
+									<ul class="c-form-list">
+										<li class="c-form-list__item c-form-list__item--full">
+											<label class="c-form-label u-font-tiny u-text-uppercase u-text-normal u-hidden" for="l-per_page">View</label>
+											<div class="c-form-select">
+												<select id="l-per_page" class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold" data-hook="custom-select" data-label="Per Page" data-append name="Per_Page" onchange="MMProdList_UpdateQuery( this ); return true;">
+													<mvt:if expr="g.Per_Page EQ 12">
+														<option value="12" selected="selected">12</option>
+													<mvt:else>
+														<option value="12">12</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ 24">
+														<option value="24" selected="selected">24</option>
+													<mvt:else>
+														<option value="24">24</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ 48">
+														<option value="48" selected="selected">48</option>
+													<mvt:else>
+														<option value="48">48</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ -1">
+														<option value="-1" selected="selected">View All</option>
+													<mvt:else>
+														<option value="-1">View All</option>
+													</mvt:if>
+												</select>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
+							</form>
+							<!-- end .x-display-list-filtering__per-page -->
+						</section>
+						<!-- end .x-display-list-filtering -->
+					</mvt:if>
+				</div>
+			</div>
+		</section>
+	<mvt:elseif expr="l.settings:page:code EQ 'FPWD'">
+	<mvt:elseif expr="l.settings:page:code EQ 'LOGN'">
+	<mvt:elseif expr="l.settings:page:code EQ 'PLST'">
+		<section class="o-layout t-expanded-block u-bg-white u-over-content">
+			<div class="o-layout__item t-expanded-block__item">
+				<div class="t-category-title-sort">
+					<mvt:if expr="l.settings:category:code EQ g.ss_search_url">
+						<h1 class="c-heading-delta u-text-bold t-page-title u-color-primary"></h1>
+					<mvt:else>
+						<h1 class="c-heading-delta u-text-bold t-page-title u-color-primary">&mvte:category:name;</h1>
+					</mvt:if>
+					<mvt:if expr="l.settings:page:code EQ 'CTGY'">
+						<mvt:assign name="g.facet_listings" value="''"/>
+						<mvt:foreach iterator="facet" array="facets:facets">
+							<mvt:foreach iterator="facet_value" array="facet:values">
+								<mvt:if expr="l.settings:facet_value:selected">
+									<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;"/>
+									<mvt:assign name="g.facet_listings" value="'&' $ l.settings::facet:code $ '=' $ l.settings::facet_value:value"/>
+								</mvt:if>
+							</mvt:foreach>
+						</mvt:foreach>
+						<section class="x-display-list-filtering t-display-list-filtering">
+							<button class="t-filters-trigger" data-hook="open-refinery-annex" type="button">
+								<span>Filters</span>
+								<strong>(&mvte:facets:applied_facet_count;)</strong>
+							</button>
+							<mvt:if expr="l.settings:page:code EQ 'CTGY'">
+								<form class="x-display-list-filtering__sort-by" method="get" action="&mvte:urls:_self:auto_noparams;"></form>
+							<mvt:else>
+							<form class="x-display-list-filtering__sort-by" method="get" action="&mvte:urls:_self:auto_noparams;">
+								<fieldset>
+									<legend>Sort Products By</legend>
+									<mvt:if expr="tolower( l.settings:all_products:mode ) EQ 'ctgy' AND toupper( g.Screen ) NE 'CTGY'">
+										<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;">
+									<mvt:elseif expr="tolower( l.settings:all_products:mode ) EQ 'relp' AND toupper( g.Screen ) NE 'PROD'">
+										<input type="hidden" name="Product_Code" value="&mvte:global:Product_Code;">
+									</mvt:if>
+									<mvt:item name="urls" param="hidden_params:_self:auto"/>
+									<input type="hidden" name="Search" value="&mvte:global:Search;"/>
+									<input type="hidden" name="Per_Page" value="&mvte:global:Per_Page;"/>
+									<mvt:foreach iterator="facet" array="facets:facets">
+										<mvt:foreach iterator="facet_value" array="facet:values">
+											<mvt:if expr="l.settings:facet_value:selected">
+												<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;">
+											</mvt:if>
+										</mvt:foreach>
+									</mvt:foreach>
+									<ul class="c-form-list">
+										<li class="c-form-list__item c-form-list__item--full">
+											<label class="c-form-label u-font-tiny u-text-uppercase u-text-normal u-hidden" for="l-sort_by">Sort</label>
+											<div class="c-form-select">
+												<select id="l-sort_by" class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold" data-hook="custom-select" data-label="Sort By" name="Sort_By" onchange="MMProdList_UpdateQuery( this ); return true;">
+													<mvt:if expr="ISNULL g.Sort_By">
+														<option value="disp_order" selected>Featured</option>
+													<mvt:else>
+														<option value="disp_order">Featured</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'bestsellers'">
+														<option value="bestsellers" selected>Best Selling</option>
+													<mvt:else>
+														<option value="bestsellers">Best Selling</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'price_asc'">
+														<option value="price_asc" selected>Price (Low to High)</option>
+													<mvt:else>
+														<option value="price_asc">Price (Low to High)</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'price_desc'">
+														<option value="price_desc" selected>Price (High to Low)</option>
+													<mvt:else>
+														<option value="price_desc">Price (High to Low)</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'newest'">
+														<option value="newest" selected>Newest Items</option>
+													<mvt:else>
+														<option value="newest">Newest Items</option>
+													</mvt:if>
+												</select>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
+							</form>
+							<!-- end .x-display-list-filtering__sort-by -->
+							</mvt:if>
+							<mvt:if expr="l.settings:page:code EQ 'CTGY'">
+								<form class="x-display-list-filtering__per-page u-hidden u-block--l" method="get" action="&mvte:urls:_self:auto_noparams;"></form>
+							<mvt:else>
+							<form class="x-display-list-filtering__per-page u-hidden u-block--l" method="get" action="&mvte:urls:_self:auto_noparams;">
+								<fieldset>
+									<legend>Number of Products to Show</legend>
+									<mvt:if expr="tolower( l.settings:all_products:mode ) EQ 'ctgy' AND toupper( g.Screen ) NE 'CTGY'">
+										<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;" />
+									<mvt:elseif expr="tolower( l.settings:all_products:mode ) EQ 'relp' AND toupper( g.Screen ) NE 'PROD'">
+										<input type="hidden" name="Product_Code" value="&mvte:global:Product_Code;" />
+									</mvt:if>
+									<mvt:item name="urls" param="hidden_params:_self:auto" />
+									<input type="hidden" name="Search" value="&mvte:global:Search;" />
+									<input type="hidden" name="Sort_By" value="&mvte:global:Sort_By;" />
+									<mvt:foreach iterator="facet" array="facets:facets">
+										<mvt:foreach iterator="facet_value" array="facet:values">
+											<mvt:if expr="l.settings:facet_value:selected">
+												<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;" />
+											</mvt:if>
+										</mvt:foreach>
+									</mvt:foreach>
+									<ul class="c-form-list">
+										<li class="c-form-list__item c-form-list__item--full">
+											<label class="c-form-label u-font-tiny u-text-uppercase u-text-normal u-hidden" for="l-per_page">View</label>
+											<div class="c-form-select">
+												<select id="l-per_page" class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold" data-hook="custom-select" data-label="Per Page" data-append name="Per_Page" onchange="MMProdList_UpdateQuery( this ); return true;">
+													<mvt:if expr="g.Per_Page EQ 20">
+														<option value="20" selected="selected">20</option>
+													<mvt:else>
+														<option value="20">20</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ 40">
+														<option value="40" selected="selected">40</option>
+													<mvt:else>
+														<option value="40">40</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ 60">
+														<option value="60" selected="selected">60</option>
+													<mvt:else>
+														<option value="60">60</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ -1">
+														<option value="-1" selected="selected">View All</option>
+													<mvt:else>
+														<option value="-1">View All</option>
+													</mvt:if>
+												</select>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
+							</form>
+							<!-- end .x-display-list-filtering__per-page -->
+							</mvt:if>
+						</section>
+						<!-- end .x-display-list-filtering -->
+					</mvt:if>
+				</div>
+			</div>
+		</section>
+	<mvt:elseif expr="l.settings:page:code EQ 'SRCH'">
+		<section class="o-layout t-expanded-block u-bg-white u-over-content">
+			<div class="o-layout__item t-expanded-block__item">
+				<div class="t-category-title-sort">
+					<h1 class="c-heading-delta u-text-bold t-page-title u-color-primary">Search &mvte:global:search;</h1>
+					<mvt:if expr="l.settings:search_results:products_on_page_count GT 0">
+						<mvt:assign name="g.facet_listings" value="''"/>
+						<mvt:foreach iterator="facet" array="facets:facets">
+							<mvt:foreach iterator="facet_value" array="facet:values">
+								<mvt:if expr="l.settings:facet_value:selected">
+									<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;"/>
+									<mvt:assign name="g.facet_listings" value="'&' $ l.settings::facet:code $ '=' $ l.settings::facet_value:value"/>
+								</mvt:if>
+							</mvt:foreach>
+						</mvt:foreach>
+						<section class="x-display-list-filtering t-display-list-filtering">
+							<button class="t-filters-trigger" data-hook="open-refinery-annex" type="button">
+								<span>Filters</span>
+								<strong>(&mvte:facets:applied_facet_count;)</strong>
+							</button>
+							
+							<form class="x-display-list-filtering__sort-by" method="get" action="&mvte:urls:_self:auto_noparams;">
+								<fieldset>
+									<legend>Sort Products By</legend>
+									<mvt:if expr="tolower( l.settings:search_results:mode ) EQ 'ctgy' AND toupper( g.Screen ) NE 'CTGY'">
+										<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;">
+									<mvt:elseif expr="tolower( l.settings:search_results:mode ) EQ 'relp' AND toupper( g.Screen ) NE 'PROD'">
+										<input type="hidden" name="Product_Code" value="&mvte:global:Product_Code;">
+									</mvt:if>
+									<mvt:item name="urls" param="hidden_params:_self:auto"/>
+									<input type="hidden" name="Search" value="&mvte:global:Search;"/>
+									<input type="hidden" name="Per_Page" value="&mvte:global:Per_Page;"/>
+									<mvt:foreach iterator="facet" array="facets:facets">
+										<mvt:foreach iterator="facet_value" array="facet:values">
+											<mvt:if expr="l.settings:facet_value:selected">
+												<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;">
+											</mvt:if>
+										</mvt:foreach>
+									</mvt:foreach>
+									<ul class="c-form-list">
+										<li class="c-form-list__item c-form-list__item--full">
+											<label class="c-form-label u-font-tiny u-text-uppercase u-text-normal u-hidden" for="l-sort_by">Sort</label>
+											<div class="c-form-select">
+												<select id="l-sort_by" class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold" data-hook="custom-select" data-label="Sort By" name="Sort_By" onchange="MMProdList_UpdateQuery( this ); return true;">
+													<mvt:if expr="ISNULL g.Sort_By">
+														<option value="disp_order" selected>Featured</option>
+													<mvt:else>
+														<option value="disp_order">Featured</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'bestsellers'">
+														<option value="bestsellers" selected>Best Selling</option>
+													<mvt:else>
+														<option value="bestsellers">Best Selling</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'price_asc'">
+														<option value="price_asc" selected>Price (Low to High)</option>
+													<mvt:else>
+														<option value="price_asc">Price (Low to High)</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'price_desc'">
+														<option value="price_desc" selected>Price (High to Low)</option>
+													<mvt:else>
+														<option value="price_desc">Price (High to Low)</option>
+													</mvt:if>
+													<mvt:if expr="g.Sort_By EQ 'newest'">
+														<option value="newest" selected>Newest Items</option>
+													<mvt:else>
+														<option value="newest">Newest Items</option>
+													</mvt:if>
+												</select>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
+							</form>
+							<!-- end .x-display-list-filtering__sort-by -->
+							<form class="x-display-list-filtering__per-page u-hidden u-block--l" method="get" action="&mvte:urls:_self:auto_noparams;">
+								<fieldset>
+									<legend>Number of Products to Show</legend>
+									<mvt:if expr="tolower( l.settings:search_results:mode ) EQ 'ctgy' AND toupper( g.Screen ) NE 'CTGY'">
+										<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;" />
+									<mvt:elseif expr="tolower( l.settings:search_results:mode ) EQ 'relp' AND toupper( g.Screen ) NE 'PROD'">
+										<input type="hidden" name="Product_Code" value="&mvte:global:Product_Code;" />
+									</mvt:if>
+									<mvt:item name="urls" param="hidden_params:_self:auto" />
+									<input type="hidden" name="Search" value="&mvte:global:Search;" />
+									<input type="hidden" name="Sort_By" value="&mvte:global:Sort_By;" />
+									<mvt:foreach iterator="facet" array="facets:facets">
+										<mvt:foreach iterator="facet_value" array="facet:values">
+											<mvt:if expr="l.settings:facet_value:selected">
+												<input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value:value;" />
+											</mvt:if>
+										</mvt:foreach>
+									</mvt:foreach>
+									<ul class="c-form-list">
+										<li class="c-form-list__item c-form-list__item--full">
+											<label class="c-form-label u-font-tiny u-text-uppercase u-text-normal u-hidden" for="l-per_page">View</label>
+											<div class="c-form-select">
+												<select id="l-per_page" class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold" data-hook="custom-select" data-label="Per Page" data-append name="Per_Page" onchange="MMProdList_UpdateQuery( this ); return true;">
+													<mvt:if expr="g.Per_Page EQ 20">
+														<option value="20" selected="selected">20</option>
+													<mvt:else>
+														<option value="20">20</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ 40">
+														<option value="40" selected="selected">40</option>
+													<mvt:else>
+														<option value="40">40</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ 60">
+														<option value="60" selected="selected">60</option>
+													<mvt:else>
+														<option value="60">60</option>
+													</mvt:if>
+													<mvt:if expr="g.Per_Page EQ -1">
+														<option value="-1" selected="selected">View All</option>
+													<mvt:else>
+														<option value="-1">View All</option>
+													</mvt:if>
+												</select>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
+							</form>
+							<!-- end .x-display-list-filtering__per-page -->
+						</section>
+						<!-- end .x-display-list-filtering -->
+					</mvt:if>
+				</div>
+			</div>
+		</section>
+	<mvt:elseif expr="l.settings:page:code EQ 'FPWD'">
+	<mvt:elseif expr="l.settings:page:code EQ 'CLTG'">
+	<mvt:elseif expr="l.settings:page:code EQ 'PROD'">
+	<mvt:elseif expr="l.settings:page:code EQ 'WARR'">
+	<mvt:elseif expr="l.settings:page:code EQ 'RMRQ'">
+	<mvt:elseif expr="l.settings:page:code EQ 'genuine-sinister-parts'">
+	<mvt:elseif expr="l.settings:page:code EQ 'not-suing-over-blue'">
+	<mvt:elseif expr="l.settings:page:code EQ 'core-returns'">
+	<mvt:elseif expr="l.settings:page:code EQ 'policies-terms-conditions'">
+	<mvt:elseif expr="l.settings:page:code EQ 'sale-policies'">
+		<mvt:elseif expr="l.settings:page:code EQ 'mobile-tos'">
+	<mvt:elseif expr="l.settings:page:code EQ 'shipping-policies'">
+	<mvt:elseif expr="l.settings:page:code EQ 'purchase-terms'">
+	<mvt:elseif expr="l.settings:page:code EQ 'website-terms'">
+	<mvt:elseif expr="l.settings:page:code EQ 'SARP'">
+	<mvt:elseif expr="l.settings:page:code EQ 'vip-club'">
+	<mvt:elseif expr="l.settings:page:code EQ 'videos'">
+	<mvt:elseif expr="l.settings:page:code EQ 'videos-manufacturing'">
+	<mvt:elseif expr="l.settings:page:code EQ 'videos-community'">
+	<mvt:elseif expr="l.settings:page:code EQ 'videos-installation'">
+	<mvt:elseif expr="l.settings:page:code EQ 'race-parts-notice'">
+	<mvt:elseif expr="l.settings:page:code EQ 'sinister-notice'">
+	<mvt:elseif expr="l.settings:page:code EQ 'customer-reviews'">
+	<mvt:elseif expr="l.settings:page:code EQ 'install-instructions'">
+	<mvt:elseif expr="l.settings:page:code EQ 'set-email-preferences'">
+	<mvt:elseif expr="l.settings:page:code EQ 'DLRQ'">
+	<mvt:elseif expr="l.settings:page:code EQ 'RSRQ'">
+	<mvt:elseif expr="l.settings:page:code EQ 'CTLG'">
+	<mvt:elseif expr="l.settings:page:code EQ 'SMAP'">
+	<mvt:elseif expr="l.settings:page:code NE 'ABUS' AND l.settings:page:code NE 'CTUS' AND l.settings:page:code NE 'FAQS' AND l.settings:page:code NE 'PRPO' AND l.settings:page:code NE 'SARP'">
+		<section class="o-layout t-expanded-block u-bg-white">
+			<div class="o-layout__item t-expanded-block__item">
+				<h1 class="c-heading-delta u-text-bold u-color-primary">&mvt:page:name;</h1>
+				<hr class="c-keyline">
+			</div>
+		</section>
+	</mvt:if>
+</mvt:if>
+
+<mvt:if expr="g.Maintenance_Warning_Message">
+	<section class="o-layout">
+		<div class="o-layout__item">
+			<div class="x-messages x-messages--info">
+				<span class="u-icon-info"> </span>
+				&mvt:global:Maintenance_Warning_Message;
+			</div>
+		</div>
+	</section>
+	<!-- end g.Maintenance_Warning_Message -->
+</mvt:if>
+
+<script>
+	let layout = document.querySelectorAll('.nav-dropdown-trigger');
+	let submen = document.querySelector('.sub-menu-to-open');
+	let menuitems = document.querySelectorAll('[menu-sub]');
+	let hovers = document.querySelector('.hoverer');
+	let head = document.querySelectorAll('.t-site-header__logo, .t-phonenum');
+	let htm = document.querySelector('html');
+	let bod = document.querySelector('body');
+	
+	for(let i = 0; i < layout.length; i++){
+		layout[i].addEventListener('mouseenter', function(event){
+			//Loop through all 1st level menus & images
+			//Turn off visibility
+			//, check it attributes are the same
+
+			for(let inc = 0; inc < menuitems.length; inc++) {
+				menuitems[inc].classList.remove('opened');
+				
+				if(menuitems[inc].getAttribute('menu-sub') == layout[i].getAttribute('sub-menu')){
+					menuitems[inc].classList.add('opened');
+					submen.classList.add('is-open');
+					document.documentElement.classList.add('has-active-navigation');
+					if(bod.classList.contains('x-fasten-header--is-active')){
+						submen.style.top = document.querySelector('#fasten_header').offsetHeight+'px';
+					}else {
+						submen.style.top = 111.42+'px';
+					}
+				}
+			}
+		});
+		
+	}
+	for(let i = 0; i < head.length; i++){
+		head[i].addEventListener('mouseover', function(event) {
+				submen.classList.remove('is-open');
+			document.documentElement.classList.remove('has-active-navigation');
+		});
+	} 
+	hovers.addEventListener('mouseover', function(event) {
+			submen.classList.remove('is-open');
+		document.documentElement.classList.remove('has-active-navigation');
+	});
+	
+</script>
+<style>
+	@media (min-width: 991px){
+		.has-active-navigation {
+			overflow: hidden;
+			-webkit-margin-right: 15px;
+			margin-right: 0px;
+		}
+	}
+</style>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '931240495220948');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src=https://www.facebook.com/tr?id=931240495220948&ev=PageView&noscript=1
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
+<mvt:item name="readytheme" param="contentsection( 'fb_pixel_events' )" />

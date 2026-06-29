@@ -1,0 +1,29 @@
+# Credentials
+.env
+**/.env
+
+# Node
+node_modules/
+**/node_modules/
+
+# Logs
+**/logs/sync.log
+**/logs/pm2-*.log
+
+# Chrome test folders
+.chrome-july-test/
+.chrome-pdf-online-tasks/
+.chrome-pdf-prime/
+.chrome-pdf-tasks/
+.chrome-prime-test/
+
+# Claude internal
+.agents/
+.claude/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Mac
+.DS_Store

@@ -1,0 +1,55 @@
+{
+  "_id": "65944566bf5925554818e21e",
+  "name": "Lookup Item Record Type",
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "apiIdentifier": "eec7d9cddc",
+  "asynchronous": true,
+  "isLookup": true,
+  "oneToMany": false,
+  "mockOutput": {
+    "page_of_records": [
+      {
+        "record": {
+          "id": "33",
+          "recordType": "assemblyitem",
+          "item_name": "SD-COOLFIL-6.0-W",
+          "record_type": "Assembly",
+          "ns_item_id": "33",
+          "dataURI": "https://4284657.app.netsuite.com/app/common/item/item.nl?id=33&compid=4284657"
+        }
+      }
+    ]
+  },
+  "netsuite": {
+    "type": "restlet",
+    "skipGrouping": true,
+    "statsOnly": false,
+    "restlet": {
+      "recordType": "item",
+      "searchId": "1543",
+      "criteria": [
+        {
+          "field": "itemid",
+          "operator": "is",
+          "searchValue": "{{sku}}"
+        }
+      ],
+      "columns": [],
+      "restletVersion": "suiteapp2.0"
+    },
+    "distributed": {
+      "executionContext": [],
+      "executionType": []
+    }
+  },
+  "inputFilter": {
+    "type": "expression",
+    "expression": {
+      "rules": [],
+      "version": "1"
+    },
+    "rules": [],
+    "version": "1"
+  },
+  "adaptorType": "NetSuiteExport"
+}

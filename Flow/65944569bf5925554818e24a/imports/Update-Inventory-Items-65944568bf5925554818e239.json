@@ -1,0 +1,57 @@
+{
+  "_id": "65944568bf5925554818e239",
+  "name": "Update Inventory Items",
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "distributed": true,
+  "apiIdentifier": "i2f96cfed8",
+  "ignoreExisting": false,
+  "ignoreMissing": false,
+  "oneToMany": false,
+  "lookups": [],
+  "aiDescription": {
+    "summary": "The \"Update Inventory Items\" import is a distributed import that updates existing records in NetSuite. It uses the \"update\" operation and looks up records based on the \"nameinternal\" field compared to the \"sku\" field in the source data. The import maps fields from the source data to corresponding fields in NetSuite, such as generating values for the \"custitem_hb_miva_product_id\" and \"custitem_hb_miva_product_code\" fields. It also generates a field called \"celigo_ignore_mandatory_fields\" with a value of \"true\". The import has no specific filtering rules and uses the \"NetSuiteDistributedImport\" adaptor type.",
+    "detailed": "This import is named \"Update Inventory Items\" and is a distributed import, meaning it will be processed in multiple batches for faster import performance. \n\nThe import is configured to update existing records in NetSuite using the \"update\" operation. The records being updated are of the \"inventoryitem\" record type in NetSuite. \n\nTo determine if a record already exists in NetSuite, the import uses a lookup based on the \"nameinternal\" field, comparing it to the value of the \"sku\" field in the source data. \n\nThe import also has a mapping configuration that specifies how the fields from the source data should be mapped to the corresponding fields in NetSuite. In this case, the import is extracting the \"id\" field from the source data and generating the value for the \"custitem_hb_miva_product_id\" field in NetSuite. Similarly, it is extracting the \"code\" field and generating the value for the \"custitem_hb_miva_product_code\" field. Additionally, there is a field called \"celigo_ignore_mandatory_fields\" that is being generated with a hard-coded value of \"true\". \n\nThe import has a filter configuration, but it is empty in this case, indicating that there are no specific filtering rules applied to the import. \n\nThe import is using the \"NetSuiteDistributedImport\" adaptor type, which is specific to the NetSuite application. \n\nOverall, this import is designed to update existing inventory item records in NetSuite based on the \"sku\" field value from the source data. It uses a distributed import approach for faster processing and has a mapping configuration to specify how the fields should be mapped between the source and destination applications.",
+    "generatedOn": null
+  },
+  "netsuite_da": {
+    "restletVersion": "suiteapp2.0",
+    "operation": "update",
+    "recordType": "inventoryitem",
+    "internalIdLookup": {
+      "expression": "[\"nameinternal\",\"is\",\"{{{sku}}}\"]"
+    },
+    "lookups": [],
+    "mapping": {
+      "fields": [
+        {
+          "extract": "id",
+          "generate": "custitem_hb_miva_product_id",
+          "internalId": false
+        },
+        {
+          "extract": "code",
+          "generate": "custitem_hb_miva_product_code",
+          "internalId": false
+        },
+        {
+          "generate": "celigo_ignore_mandatory_fields",
+          "hardCodedValue": "true",
+          "immutable": false,
+          "internalId": false,
+          "discardIfEmpty": false
+        }
+      ],
+      "lists": []
+    }
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "rules": [],
+      "version": "1"
+    },
+    "rules": [],
+    "version": "1"
+  },
+  "adaptorType": "NetSuiteDistributedImport"
+}

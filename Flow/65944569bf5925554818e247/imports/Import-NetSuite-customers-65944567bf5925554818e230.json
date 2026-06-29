@@ -1,0 +1,281 @@
+{
+  "_id": "65944567bf5925554818e230",
+  "name": "Import NetSuite customers",
+  "description": "Add or update customers in NetSuite using the email as the lookup identifier.",
+  "responseTransform": {
+    "type": "expression",
+    "expression": {
+      "version": "1"
+    }
+  },
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "distributed": true,
+  "apiIdentifier": "ie486ac507",
+  "hooks": {
+    "preMap": {
+      "function": "preMapFunction",
+      "_scriptId": "65944566bf5925554818e215"
+    }
+  },
+  "ignoreExisting": false,
+  "ignoreMissing": false,
+  "oneToMany": false,
+  "lookups": [],
+  "aiDescription": {
+    "summary": "The \"Import NetSuite customers\" import is designed to add or update customers in NetSuite using the email as the lookup identifier. It is distributed, meaning it will be processed in multiple batches for faster import. Before the mapping process, a preMap hook function splits the \"cust_login\" field into first name and last name. The import is configured to not ignore existing or missing data and uses the \"addupdate\" operation to create or update customer records. The import uses the \"email\" field as the internal ID lookup and has mappings for various fields including \"isperson\", \"email\", \"firstname\", \"lastname\", and more. It also has mappings for billing and shipping address fields and a filter to check for non-empty email fields. The import uses the NetSuite Distributed Import adaptor type.",
+    "detailed": "This import is named \"Import NetSuite customers\" and its purpose is to add or update customers in NetSuite using the email as the lookup identifier. \n\nThe import is distributed, which means it will be processed in multiple batches for faster import. \n\nBefore the mapping process, there is a preMap hook function defined in the \"hooks\" field. This function splits the \"cust_login\" field into first name and last name by splitting the value at spaces. If the full name has only one part, it sets the first name as the full name and the last name as \".\". Otherwise, it sets the first name as all parts except the last one and the last name as the last part. \n\nThe import is configured to not ignore existing data and not ignore missing data. \n\nThe import is set to create or update records in NetSuite using the \"addupdate\" operation. The record type being imported is \"customer\". \n\nThe import uses the \"email\" field as the internal ID lookup to determine if a record already exists in NetSuite. \n\nThe import has a mapping defined for various fields such as \"isperson\", \"email\", \"firstname\", \"lastname\", \"custentity_celigoat_miva_customerid\", \"subsidiary\", \"custentity_hb_miva_customer_id\", \"isinactive\", and \"phone\". \n\nThere are also two lists defined for the \"_billing_addressbook\" and \"_shipping_addressbook\" fields, which have their own set of fields for mapping. \n\nThe import has a filter defined that checks if the \"bill_email\" and \"ship_email\" fields are not empty before processing the record. \n\nThe import uses the NetSuite Distributed Import adaptor type.",
+    "generatedOn": null
+  },
+  "netsuite_da": {
+    "useSS2Restlets": false,
+    "restletVersion": "suitebundle",
+    "operation": "addupdate",
+    "recordType": "customer",
+    "internalIdLookup": {
+      "expression": "[\"email\",\"is\",\"{{{bill_email}}}\"]"
+    },
+    "lookups": [],
+    "mapping": {
+      "fields": [
+        {
+          "generate": "isperson",
+          "hardCodedValue": "true",
+          "immutable": false,
+          "internalId": false,
+          "discardIfEmpty": false
+        },
+        {
+          "extract": "bill_email",
+          "generate": "email",
+          "immutable": false,
+          "internalId": false,
+          "discardIfEmpty": false
+        },
+        {
+          "extract": "bill_fname",
+          "generate": "firstname",
+          "immutable": false,
+          "internalId": false,
+          "discardIfEmpty": false
+        },
+        {
+          "extract": "bill_lname",
+          "generate": "lastname",
+          "immutable": false,
+          "internalId": false,
+          "discardIfEmpty": false
+        },
+        {
+          "extract": "cust_id",
+          "generate": "custentity_celigoat_miva_customerid",
+          "immutable": false,
+          "dataType": "string",
+          "internalId": false,
+          "discardIfEmpty": false
+        },
+        {
+          "generate": "subsidiary",
+          "hardCodedValue": "1",
+          "immutable": false,
+          "internalId": true,
+          "discardIfEmpty": false
+        },
+        {
+          "extract": "cust_id",
+          "generate": "custentity_hb_miva_customer_id",
+          "internalId": false
+        },
+        {
+          "generate": "isinactive",
+          "hardCodedValue": "false",
+          "immutable": false,
+          "internalId": false,
+          "discardIfEmpty": false
+        },
+        {
+          "extract": "bill_phone",
+          "generate": "phone",
+          "internalId": false
+        }
+      ],
+      "lists": [
+        {
+          "generate": "_billing_addressbook",
+          "fields": [
+            {
+              "extract": "bill_addr1",
+              "generate": "addr1",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "bill_addr2",
+              "generate": "addr2",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "bill_city",
+              "generate": "city",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "bill_phone",
+              "generate": "addrphone",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "bill_cntry",
+              "generate": "country",
+              "immutable": false,
+              "internalId": true,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "bill_state",
+              "generate": "state",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "bill_zip",
+              "generate": "zip",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "{{join ' ' bill_fname bill_lname}}",
+              "generate": "addressee",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            }
+          ]
+        },
+        {
+          "generate": "_shipping_addressbook",
+          "fields": [
+            {
+              "extract": "ship_addr1",
+              "generate": "addr1",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "ship_addr2",
+              "generate": "addr2",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "ship_city",
+              "generate": "city",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "ship_phone",
+              "generate": "addrphone",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "ship_cntry",
+              "generate": "country",
+              "immutable": false,
+              "internalId": true,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "ship_state",
+              "generate": "state",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "ship_zip",
+              "generate": "zip",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            },
+            {
+              "extract": "{{join ' ' ship_fname ship_lname}}",
+              "generate": "addressee",
+              "immutable": false,
+              "internalId": false,
+              "discardIfEmpty": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "rules": [
+        "and",
+        [
+          "notempty",
+          [
+            "string",
+            [
+              "extract",
+              "bill_email"
+            ]
+          ]
+        ],
+        [
+          "notempty",
+          [
+            "string",
+            [
+              "extract",
+              "ship_email"
+            ]
+          ]
+        ]
+      ],
+      "version": "1"
+    },
+    "rules": [
+      "and",
+      [
+        "notempty",
+        [
+          "string",
+          [
+            "extract",
+            "bill_email"
+          ]
+        ]
+      ],
+      [
+        "notempty",
+        [
+          "string",
+          [
+            "extract",
+            "ship_email"
+          ]
+        ]
+      ]
+    ],
+    "version": "1"
+  },
+  "adaptorType": "NetSuiteDistributedImport"
+}

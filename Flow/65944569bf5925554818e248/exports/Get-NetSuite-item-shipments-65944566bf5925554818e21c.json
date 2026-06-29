@@ -1,0 +1,368 @@
+{
+  "_id": "65944566bf5925554818e21c",
+  "name": "Get NetSuite item shipments",
+  "description": "Get all item shipments from NetSuite that have been created since this flow last ran.",
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "apiIdentifier": "e8f0144665",
+  "asynchronous": true,
+  "oneToMany": false,
+  "mockOutput": {
+    "page_of_records": [
+      {
+        "rows": [
+          {
+            "id": "92464",
+            "recordType": "itemfulfillment",
+            "Name": "327107 Gerald .",
+            "Document Number": "IF3551",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "237603",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80399689086",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92464",
+            "HB | Miva Order ID": "2644040",
+            "HB | Miva Order Line ID": "1052064",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92464&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92465",
+            "recordType": "itemfulfillment",
+            "Name": "326945 Dennis J .",
+            "Document Number": "IF3552",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "211-4277",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "8",
+            "Tracking Numbers": "1Z7V84F80391075762",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92465",
+            "HB | Miva Order ID": "2643775",
+            "HB | Miva Order Line ID": "1048943",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92465&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92466",
+            "recordType": "itemfulfillment",
+            "Name": "327073 Kirt .",
+            "Document Number": "IF3553",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "JV5066",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80395002298",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92466",
+            "HB | Miva Order ID": "2643958",
+            "HB | Miva Order Line ID": "1051111",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92466&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92467",
+            "recordType": "itemfulfillment",
+            "Name": "327123 Carley .",
+            "Document Number": "IF3554",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "T5126",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80392292776",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92467",
+            "HB | Miva Order ID": "2644064",
+            "HB | Miva Order Line ID": "1052377",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92467&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92468",
+            "recordType": "itemfulfillment",
+            "Name": "327054 Austin .",
+            "Document Number": "IF3555",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "VA1.375K",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80394272589",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92468",
+            "HB | Miva Order ID": "2643926",
+            "HB | Miva Order Line ID": "1050853",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92468&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92469",
+            "recordType": "itemfulfillment",
+            "Name": "327052 Erin .",
+            "Document Number": "IF3556",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "NMU70119",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80397261308",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92469",
+            "HB | Miva Order ID": "2643916",
+            "HB | Miva Order Line ID": "1050676",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92469&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92470",
+            "recordType": "itemfulfillment",
+            "Name": "327040 Creed .",
+            "Document Number": "IF3557",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "C5201",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80398350111",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92470",
+            "HB | Miva Order ID": "2643919",
+            "HB | Miva Order Line ID": "1050723",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92470&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92471",
+            "recordType": "itemfulfillment",
+            "Name": "326834 Hayden .",
+            "Document Number": "IF3558",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "264146WHCL",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80390599190",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92471",
+            "HB | Miva Order ID": "2643569",
+            "HB | Miva Order Line ID": "1046634",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92471&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92472",
+            "recordType": "itemfulfillment",
+            "Name": "327101 Joshua .",
+            "Document Number": "IF3559",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "T5125",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80396472725",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92472",
+            "HB | Miva Order ID": "2644030",
+            "HB | Miva Order Line ID": "1051973",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92472&compid=4284657"
+          }
+        ]
+      },
+      {
+        "rows": [
+          {
+            "id": "92473",
+            "recordType": "itemfulfillment",
+            "Name": "327038 Elliott .",
+            "Document Number": "IF3560",
+            "Amount": ".00",
+            "Date": "2/2/2024",
+            "Ship Date": "",
+            "Status": "Shipped",
+            "Item": "264146BK",
+            "RecordType": "Item Fulfillment",
+            "Quantity": "1",
+            "Tracking Numbers": "1Z7V84F80393376602",
+            "Shipping Carrier": "UPS",
+            "Internal ID": "92473",
+            "HB | Miva Order ID": "2643915",
+            "HB | Miva Order Line ID": "1050674",
+            "HB | Miva Shipment ID": "",
+            "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/itemship.nl?id=92473&compid=4284657"
+          }
+        ]
+      }
+    ]
+  },
+  "aiDescription": {
+    "summary": "The \"Get NetSuite item shipments\" export retrieves item shipments from NetSuite using a RESTlet integration. It uses a saved search with the search ID \"1731\" to retrieve item fulfillments. The export is configured to skip grouping, meaning each search row is exported as an individual record. A transformation step is defined to extract specific fields from the source data and generate new fields in the transformed data. The export also has a filter, but its details are not provided. The transformed data is exported for use in subsequent flow steps.",
+    "detailed": "This export is named \"Get NetSuite item shipments\" and its purpose is to retrieve all item shipments from NetSuite that have been created since the last time the flow ran. \n\nThe export is using the NetSuite application as the source and it is configured to use a RESTlet integration type. The specific RESTlet being used is a SuiteBundle version. \n\nThe export is set to retrieve item fulfillments from NetSuite using a saved search with the search ID \"1731\". It is also configured to skip grouping, meaning that each search row will be exported as an individual record. \n\nThe export has a transformation step defined using an expression type. The transformation rules specify which fields to extract from the source data and how to generate new fields in the transformed data. The rules include extracting fields like \"id\", \"Order_Id\", \"[Internal ID]\", \"line_ids.*\", \"Miva Shipment ID\", \"TrackingNum\", \"ShipCarrier\", and \"RecordType\". \n\nThere is also a filter defined for the export, but the details of the filter are not provided in the JSON representation. \n\nOverall, this export retrieves item shipments from NetSuite using a RESTlet integration, applies a transformation to the data, and exports the transformed data to be used in subsequent flow steps.",
+    "generatedOn": null
+  },
+  "netsuite": {
+    "type": "restlet",
+    "skipGrouping": false,
+    "statsOnly": false,
+    "restlet": {
+      "recordType": "itemfulfillment",
+      "searchId": "1731",
+      "useSS2Restlets": false,
+      "restletVersion": "suitebundle",
+      "markExportedBatchSize": 100,
+      "columns": [],
+      "criteria": []
+    },
+    "distributed": {
+      "executionContext": [],
+      "executionType": []
+    }
+  },
+  "transform": {
+    "type": "expression",
+    "expression": {
+      "rules": [
+        [
+          {
+            "extract": "*.id",
+            "generate": "id"
+          },
+          {
+            "extract": "*.[HB | Miva Order ID]",
+            "generate": "Order_Id"
+          },
+          {
+            "extract": "*.[Internal ID]",
+            "generate": "[Internal ID]"
+          },
+          {
+            "extract": "*.[HB | Miva Order Line ID]",
+            "generate": "line_ids.*"
+          },
+          {
+            "extract": "*.[HB | Miva Shipment ID]",
+            "generate": "Miva Shipment ID"
+          },
+          {
+            "extract": "*.[Tracking Numbers]",
+            "generate": "TrackingNum"
+          },
+          {
+            "extract": "*.[Shipping Carrier]",
+            "generate": "ShipCarrier"
+          },
+          {
+            "extract": "*.RecordType",
+            "generate": "RecordType"
+          }
+        ]
+      ],
+      "version": "1"
+    },
+    "rules": [
+      [
+        {
+          "extract": "*.id",
+          "generate": "id"
+        },
+        {
+          "extract": "*.[HB | Miva Order ID]",
+          "generate": "Order_Id"
+        },
+        {
+          "extract": "*.[Internal ID]",
+          "generate": "[Internal ID]"
+        },
+        {
+          "extract": "*.[HB | Miva Order Line ID]",
+          "generate": "line_ids.*"
+        },
+        {
+          "extract": "*.[HB | Miva Shipment ID]",
+          "generate": "Miva Shipment ID"
+        },
+        {
+          "extract": "*.[Tracking Numbers]",
+          "generate": "TrackingNum"
+        },
+        {
+          "extract": "*.[Shipping Carrier]",
+          "generate": "ShipCarrier"
+        },
+        {
+          "extract": "*.RecordType",
+          "generate": "RecordType"
+        }
+      ]
+    ],
+    "version": "1"
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "version": "1"
+    }
+  },
+  "inputFilter": {
+    "type": "expression",
+    "expression": {
+      "version": "1"
+    }
+  },
+  "adaptorType": "NetSuiteExport"
+}

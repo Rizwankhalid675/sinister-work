@@ -1,0 +1,197 @@
+{
+  "_id": "65944567bf5925554818e22b",
+  "name": "Import Miva products(Add)",
+  "description": "Add products to Miva.",
+  "sampleResponseData": "{\"success\":1}",
+  "responseTransform": {
+    "type": "expression",
+    "expression": {
+      "rules": [
+        [
+          {
+            "extract": "data.id",
+            "generate": "created"
+          }
+        ]
+      ],
+      "version": "1"
+    },
+    "rules": [
+      [
+        {
+          "extract": "data.id",
+          "generate": "created"
+        }
+      ]
+    ],
+    "version": "1"
+  },
+  "_connectionId": "659c281ec89f9120301fb0ce",
+  "distributed": false,
+  "apiIdentifier": "ie24c08235",
+  "ignoreExisting": false,
+  "ignoreMissing": false,
+  "oneToMany": false,
+  "assistant": "miva",
+  "assistantMetadata": {
+    "resource": "products",
+    "version": "v1",
+    "operation": "product_insert"
+  },
+  "mapping": {
+    "fields": [
+      {
+        "generate": "Function",
+        "hardCodedValue": "Product_Insert"
+      },
+      {
+        "extract": "miva_product_code",
+        "generate": "Product_Code"
+      },
+      {
+        "extract": "[Display Name]",
+        "generate": "Product_Name"
+      },
+      {
+        "generate": "Store_Code",
+        "hardCodedValue": "SD"
+      },
+      {
+        "extract": "Name",
+        "generate": "Product_SKU"
+      },
+      {
+        "extract": "[Base Price]",
+        "generate": "Product_Price"
+      },
+      {
+        "extract": "Weight",
+        "generate": "Product_Weight"
+      },
+      {
+        "extract": "true",
+        "generate": "Product_Taxable",
+        "hardCodedValue": "true",
+        "dataType": "boolean"
+      },
+      {
+        "extract": "true",
+        "generate": "Product_Active",
+        "hardCodedValue": "true",
+        "dataType": "boolean"
+      },
+      {
+        "extract": "[Item Defined Cost]",
+        "generate": "Product_Cost",
+        "dataType": "number"
+      }
+    ]
+  },
+  "http": {
+    "relativeURI": [
+      "/json.mvc"
+    ],
+    "method": [
+      "POST"
+    ],
+    "body": [
+      "{ \"Store_Code\":\"{{connection.http.unencrypted.Store_Code}}\",\"Function\": \"Product_Insert\",\"Miva_Request_Timestamp\": \"{{dateFormat 'X'}}\", {{#each data.[0]}}{{#if @index}},{{/if}}\"{{@key}}\": {{{jsonSerialize this}}} {{/each}} }"
+    ],
+    "batchSize": 1,
+    "requestMediaType": "json",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "strictHandlebarEvaluation": true,
+    "isRest": true,
+    "formType": "assistant",
+    "response": {
+      "resourceIdPath": [
+        null
+      ],
+      "successPath": [
+        "success"
+      ],
+      "successValues": [
+        [
+          "1"
+        ]
+      ]
+    }
+  },
+  "rest": {
+    "relativeURI": [
+      "/json.mvc"
+    ],
+    "method": [
+      "POST"
+    ],
+    "body": [
+      "{ \"Store_Code\":\"{{connection.rest.unencrypted.Store_Code}}\",\"Function\": \"Product_Insert\",\"Miva_Request_Timestamp\": \"{{dateFormat 'X'}}\", {{#each data}}{{#if @index}},{{/if}}\"{{@key}}\": {{{jsonSerialize this}}} {{/each}} }"
+    ],
+    "responseIdPath": [
+      null
+    ],
+    "successPath": [
+      "success"
+    ],
+    "successValues": [
+      "1"
+    ]
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "rules": [
+        "and",
+        [
+          "empty",
+          [
+            "string",
+            [
+              "extract",
+              "miva_product_id"
+            ]
+          ]
+        ],
+        [
+          "startswith",
+          [
+            "string",
+            [
+              "extract",
+              "recordType"
+            ]
+          ],
+          "1234"
+        ]
+      ],
+      "version": "1"
+    },
+    "rules": [
+      "and",
+      [
+        "empty",
+        [
+          "string",
+          [
+            "extract",
+            "miva_product_id"
+          ]
+        ]
+      ],
+      [
+        "startswith",
+        [
+          "string",
+          [
+            "extract",
+            "recordType"
+          ]
+        ],
+        "1234"
+      ]
+    ],
+    "version": "1"
+  },
+  "adaptorType": "RESTImport"
+}

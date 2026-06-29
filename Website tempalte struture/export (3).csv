@@ -1,0 +1,119 @@
+Code,Module Code,Module Name
+addressbook,cmp-cssui-addressbook,Customer Address Book
+addressfields,cmp-cssui-addressfields,Customer Address Fields
+admin_order,cmp-mv-adminorderfields,Administrative Order Fields
+affiliate,cmp-cssui-afae,CSSUI Affiliate Add/Edit
+affiliatelink,cmp-cssui-afflink,CSSUI Affiliate Sign-in Link
+all_products,cmp-cssui-prodlist,CSSUI Product List
+amazonpay,amazonpay,Amazon Pay (Discontinued)
+amazonpay_address,amazonpay,Amazon Pay (Discontinued)
+amazonpay_button,amazonpay,Amazon Pay (Discontinued)
+amazonpay_wallet,amazonpay,Amazon Pay (Discontinued)
+applepay,applepay,Apple Pay
+attributemachine,cmp-mv-attributemachine,Attribute Machine
+backorder,cmp-mv-stdorderitemfields,Standard Order Item Fields
+basket,cmp-cssui-basket,CSSUI Basket Contents
+braintree,braintree,Braintree
+breadcrumbs,cmp-cssui-breadcrumbs,CSSUI Smart Breadcrumbs
+buttons,cmp-cssui-buttons,CSSUI Buttons
+california_restricted,cmp-mv-content,Content
+category,cmp-mv-stdcatfields,Standard Category Fields
+category_listing,cmp-cssui-prodlist,CSSUI Product List
+category_title,cmp-cssui-cattitle,CSSUI Category Title
+category_tree,cmp-cssui-cattree,CSSUI Category Tree
+combination_facets,combofacets,Combination Facets
+content,cmp-mv-content,Content
+countries,cmp-cssui-countryselect,Country Selector
+cssui_links,cmp-cssui-links,CSSUI Links
+customer,cmp-cssui-custfields,CSSUI Customer Fields
+customercredithistory,cmp-cssui-customercredithistory,CSSUI Customer Credit History
+customerlink,cmp-cssui-custlink,CSSUI Customer Sign-in Link
+customerwishlists,cmp-mv-customerwishlists,CSSUI Customer Wish Lists
+customfields,customfields,Custom Fields
+datepicker,cmp-cssui-datepicker,Date Picker
+digitaldownload,cmp-mv-stddigitaldownloadfields,Standard Digital Download Fields
+discount_volume,discount_volume,Volume Pricing
+extend,ecs_extend,Extend Warranty SD
+facets,cmp-cssui-prodlist,CSSUI Product List
+feed_data_order,mw_feed_data,Feed Data
+feed_data_product,mw_feed_data,Feed Data
+flex,cmp-mv-flex,Flex Component
+form_note,cmp-mv-content,Content
+form_note_bottom,cmp-mv-content,Content
+ga_jsencode,mvga,Google Analytics (Deprecated)
+ga_tracking,mvga,Google Analytics (Deprecated)
+ga_transaction,mvga,Google Analytics (Deprecated)
+giftcertificate,cmp-mv-stdgiftcertificatefields,Standard Gift Certificate Fields
+global_minibasket,cmp-mv-minibask,Mini-Basket
+hdft,cmp-cssui-hdft,CSSUI Headers & Footers
+head,cmp-cssui-head,CSSUI HEAD Tag Content
+help_links,cmp-mv-content,Content
+html_profile,cmp-cssui-html,CSSUI HTML Profile
+http_headers,cmp-mv-http-headers,HTTP Headers
+inline_css,cmp-mv-content,Content
+kount,kount,Kount Integration
+messages,cmp-cssui-messages,Standard Validation/Error/Informational Messages
+mivapay,cmp-cssui-mivapay,CSSUI MivaPay Vault
+mm_theme,cmp-mv-theme,Theme Component
+mvaffirm_analytics,mvaffirm,Affirm
+mvaffirm_analytics_head,mvaffirm,Affirm
+mvaffirm_aslowas,mvaffirm,Affirm
+mvaffirm_aslowas_head,mvaffirm,Affirm
+mw_miscellaenous_recaptcha,mw_miscellaneous,Miscellaneous Features
+navbar,cmp-cssui-navbar,CSSUI Navigation Bar
+order,cmp-mv-stdorderfields,Standard Order Fields
+orderhistory_list,cmp-cssui-orderlist,CSSUI Order History List
+order_contents,cmp-cssui-invc-order,CSSUI Invoice Order Contents
+order_customer,cmp-cssui-invc-custfields,CSSUI Invoice Customer Information
+payment,cmp-mv-paymentfields,Payment Module Fields
+paymentcards,cmp-cssui-paymentcards,Customer Payment Cards
+paymentmethod,cmp-mv-paymentmethod,Payment Method Load and Validate
+paymentmethods,cmp-mv-payselect,Standard Payment Selection Drop-down List
+paymentsettings,cmp-mv-paymentsettings,Payment Settings
+paypalcp_buttons,paypalcp,PayPal Complete Payments
+paypalcp_buttons_head,paypalcp,PayPal Complete Payments
+paypalcp_credit,paypalcp,PayPal Complete Payments
+printer_friendly_content,cmp-mv-content,Content
+prodctgy_meta,cmp-mv-prodctgy-meta,Product/Category META-Tag Settings
+product,cmp-mv-stdprodfields,Standard Product Fields
+product_attributes,cmp-cssui-attributes,CSSUI Product Attributes
+product_display,cmp-cssui-prodlayo,CSSUI Product Display Layout
+product_display_imagemachine,cmp-mv-imagemachine,Image Machine
+prod_ctgy_hdft,cmp-cssui-pchdft,CSSUI Product/Category Header & Footer
+readytheme,readytheme,ReadyTheme
+related_products,cmp-cssui-prodlist,CSSUI Product List
+return,cmp-mv-stdreturnfields,Standard Return Fields
+searchfield,cmp-cssui-searchfield,CSSUI Search Field
+search_results,cmp-cssui-prodlist,CSSUI Product List
+sequence,cmp-mv-sequence,Sequence
+shipestimate,cmp-mv-shipestimate,Shipping Estimate
+shipestimate_rates,cmp-mv-shipestimate,Shipping Estimate
+shipment,cmp-mv-stdshipmentfields,Standard Shipment Fields
+shippingmethods,cmp-mv-shipselect,Standard Shipping Selection Drop-down List
+sitemap,cmp-cssui-sitemap,CSSUI Sitemap
+sitemap_exclude,sitemap,Standard Sitemap Protocol
+splitpayment,cmp-mv-splitpayment,Split Payment Fields
+states,cmp-cssui-stateselect,State Selector
+store,cmp-mv-stdstorefields,Standard Store Fields
+subscriptionfields,cmp-cssui-subscriptionfields,CSSUI Subscription Fields
+subscriptions,cmp-cssui-subscriptions,CSSUI Subscriptions
+tax,cmp-mv-taxfields,Tax Module Fields
+tbr_order_contents,templatebatchreports,Template Based Batch Reports
+templatefeed,templatefeed,Template Based Feed
+toe_basket_contents,templateorderemails,Template Based Emails
+toe_digitaldownloads,templateorderemails,Template Based Emails
+toe_giftcertificates,templateorderemails,Template Based Emails
+toe_order_contents,templateorderemails,Template Based Emails
+toe_subscriptions,templateorderemails,Template Based Emails
+toe_subscription_fields,templateorderemails,Template Based Emails
+tokenlist,tokenlist,Token List
+ups,upsxml,Legacy UPS Developer Kit (Discontinued)
+upsale,cmp-mv-uslprodfields,Upsold Product Fields
+upsell_attr_mult,cmp-cssui-uslmltplattr,CSSUI Upsell Multiple Product Attributes
+urls,cmp-cssui-urls,CSSUI URLs
+view_order,cmp-cssui-vieworder,CSSUI View Order
+wishlist,cmp-cssui-wishlistfields,CSSUI Wish List Fields
+wishlistitems,cmp-cssui-wishlistitems,CSSUI Wish List Items
+wishlists,cmp-cssui-wishlists,CSSUI Wish Lists
+zinrelo,zinrelo,Zinrelo
+zinrelo_transaction,zinrelo,Zinrelo

@@ -1,0 +1,30 @@
+<service>
+	<id>sinisterdieselsync.exe</id>
+	<name>Sinister Diesel Sync</name>
+	<description>Miva to NetSuite sync service</description>
+	<executable>C:\Program Files\nodejs\node.exe</executable>
+	<argument>C:\Users\admin\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js</argument>
+	<argument>--file</argument>
+	<argument>C:\Users\admin\OneDrive\Desktop\Work\sinister-netsuite-sync\index.js</argument>
+	<argument>--scriptoptions=</argument>
+	<argument>--log</argument>
+	<argument>Sinister Diesel Sync wrapper</argument>
+	<argument>--grow</argument>
+	<argument>0.5</argument>
+	<argument>--wait</argument>
+	<argument>2</argument>
+	<argument>--maxrestarts</argument>
+	<argument>3</argument>
+	<argument>--abortonerror</argument>
+	<argument>n</argument>
+	<argument>--stopparentfirst</argument>
+	<argument>undefined</argument>
+	<logmode>rotate</logmode>
+	<stoptimeout>30sec</stoptimeout>
+	<serviceaccount>
+		<domain>DESKTOP-TR5LV30</domain>
+		<user>LocalSystem</user>
+		<password></password>
+	</serviceaccount>
+	<workingdirectory>C:\Users\admin\OneDrive\Desktop\Work\sinister-netsuite-sync</workingdirectory>
+</service>

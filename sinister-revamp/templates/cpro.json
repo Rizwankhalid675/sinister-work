@@ -1,0 +1,10 @@
+{
+    "hdft": {
+        "footer": {
+            "template_filename": "cpro-footer.mvc"
+        },
+        "header": {
+            "template_filename": "cpro-header.mvc"
+        }
+    }
+}

@@ -1,0 +1,83 @@
+<mvt:item name="html_profile" />
+<head itemscope itemtype="http://schema.org/WebSite">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;" />
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title itemprop="name">&mvt:page:title;</title>
+	<mvt:else>
+		<title itemprop="name">&mvt:store:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+	<style>
+
+		.slick-dots { bottom: 9px;}
+	.slick-dots li button:before {
+		    opacity: 1;
+    			color: white;
+	}
+	.slick-dots li.slick-active button:before{
+		opacity: 1;
+    		color: #1833B8;
+	}
+	.slick-dotted.slick-slider {
+    		margin-bottom: 0;
+	}
+	</style>
+<meta name="google-site-verification" content="EDn6vBahEKF-GMI9GdCwt-Vp1N7T9YPKmilAq81Xuuo" />
+</head>
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass; u-bg-gray-10">
+	<mvt:item name="hdft" param="global_header" />
+	<section class="o-layout">
+		<div class="o-layout__item">
+			<mvt:item name="hdft" param="header" />
+		</div>
+	</section>
+
+<main class="o-wrapper t-wrapper">
+
+
+	<mvt:item name="readytheme" param="navigationset( 'Merch' )" />
+	
+	<section class="o-layout" style="justify-content:center;">
+		<div class="o-layout__item" style="max-width: 1035px;">
+			<!-- woxo -->
+</div>
+<style>
+	.t-featured-categories__heading {
+		color: #1833B8;
+		font-weight: bold;
+		border-bottom: 3px solid #1833B8;
+		width: fit-content;
+		text-transform: uppercase;
+		font-size: 16px;
+		text-align: center;
+		margin-left: 12px;
+		padding-left: 0px;
+}
+</style>
+	</section>
+
+	<mvt:comment><mvt:item name="readytheme" param="contentsection( 'sfnt-shop-by-brand' )" /></mvt:comment>
+
+	<mvt:comment><mvt:item name="readytheme" param="contentsection( 'sfnt_promos' )" /></mvt:comment>
+
+	<mvt:comment><mvt:item name="readytheme" param="productlisting( 'featured_products' )" /></mvt:comment>
+
+	<mvt:comment><mvt:item name="readytheme" param="contentsection( 'spotlight' )" /></mvt:comment>
+
+	<mvt:comment><mvt:item name="readytheme" param="contentsection( 'instagram_feed' )" /></mvt:comment>
+	
+	<section class="o-layout">
+		<div class="o-layout__item">
+			<mvt:item name="hdft" param="footer" />
+		</div>
+	</section>
+	</main>
+	<mvt:item name="hdft" param="global_footer" />
+
+	
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+    "code": "core_scripts",
+    "type": "L",
+    "branchless_filepath": "themes/colossus/core/js/scripts.js",
+    "is_global": true,
+    "active": true,
+    "attributes": [
+        {
+            "name": "integrity",
+            "value": "sha256-SyI3BMUt2Qy2IP87jRBeXPwPfZnH8NDKfL5r9LlI0zA= sha384-8zH66t/yBQY5C6NHAWy6Et/2buVaj/g0yIUd3cI7+CSWBgCOHIA4LqiNtWDf8mln sha512-nnpu02W4xxIWtvczJJugrB+AtVc3v7LGVnfHCVQnIXInM2pfG8GREXd433uhg8SeAEP8PWLU8PxeJyOKCFCQzw=="
+        },
+        {
+            "name": "crossorigin",
+            "value": "anonymous"
+        }
+    ]
+}

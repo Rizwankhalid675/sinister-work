@@ -1,0 +1,10 @@
+{
+    "hdft": {
+        "footer": {
+            "template_filename": "authorized-resellers-footer.mvc"
+        },
+        "header": {
+            "template_filename": "authorized-resellers-header.mvc"
+        }
+    }
+}

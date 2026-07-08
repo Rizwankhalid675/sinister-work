@@ -1,0 +1,198 @@
+<mvt:comment>
+	Mega Menu Experience V2 — additive, inactive. Nav category hrefs are the
+	same production-verified canonical URLs the live header resolves by
+	category ID (Code-based paths 404 in prod). Featured products/buying
+	guides/popular builds use placeholder copy pending real Miva product/
+	content lookups in a later milestone — do not treat placeholder image
+	paths as final assets.
+</mvt:comment>
+
+<div class="sd2-v2-mega" data-v2-mega>
+
+	<!-- Powerstroke -->
+	<div class="sd2-v2-mega__panel" data-v2-panel="1">
+		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Ford Powerstroke build in the shop">
+			<span class="sd2-v2-mega__hero-cap">
+				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
+				<span class="sd2-v2-mega__hero-title">Powerstroke</span>
+				<span class="sd2-v2-mega__hero-link">Shop All Powerstroke</span>
+			</span>
+		</a>
+		<div class="sd2-v2-mega__body">
+			<div class="sd2-v2-mega__head">
+				<div>
+					<p class="sd2-v2-mega__eyebrow">Ford Diesel Performance</p>
+					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
+				</div>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+			</div>
+			<div class="sd2-v2-mega__cats">
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Air &amp; Fuel</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Fuel System</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Turbos</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Engine &amp; EGR</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Coolant &amp; Oil Filtration</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Braking System</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Accessories</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">50 State Legal Products</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="sd2-v2-mega__side">
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
+				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
+					<span><span class="sd2-v2-mega__guide-title">6.7 Powerstroke Intercooler Guide</span><span class="sd2-v2-mega__guide-meta">8 min read</span></span>
+				</a>
+			</div>
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2017 F-250 Build Spotlight</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Duramax -->
+	<div class="sd2-v2-mega__panel" data-v2-panel="2">
+		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="GM Duramax build in the shop">
+			<span class="sd2-v2-mega__hero-cap">
+				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
+				<span class="sd2-v2-mega__hero-title">Duramax</span>
+				<span class="sd2-v2-mega__hero-link">Shop All Duramax</span>
+			</span>
+		</a>
+		<div class="sd2-v2-mega__body">
+			<div class="sd2-v2-mega__head">
+				<div>
+					<p class="sd2-v2-mega__eyebrow">GM Diesel Performance</p>
+					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
+				</div>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+			</div>
+			<div class="sd2-v2-mega__cats">
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Air &amp; Cooling</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Coolant &amp; Oil Filtration</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Engine</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts &amp; Performance</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers &amp; Components</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Lift Pumps &amp; Fuel System</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Support Parts</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="sd2-v2-mega__side">
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
+				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="">
+					<span><span class="sd2-v2-mega__guide-title">Duramax EGR Delete: What to Know</span><span class="sd2-v2-mega__guide-meta">6 min read</span></span>
+				</a>
+			</div>
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2015 Duramax Tow Rig</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Cummins -->
+	<div class="sd2-v2-mega__panel" data-v2-panel="3">
+		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Dodge Cummins build in the shop">
+			<span class="sd2-v2-mega__hero-cap">
+				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
+				<span class="sd2-v2-mega__hero-title">Cummins</span>
+				<span class="sd2-v2-mega__hero-link">Shop All Cummins</span>
+			</span>
+		</a>
+		<div class="sd2-v2-mega__body">
+			<div class="sd2-v2-mega__head">
+				<div>
+					<p class="sd2-v2-mega__eyebrow">Ram Diesel Performance</p>
+					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
+				</div>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+			</div>
+			<div class="sd2-v2-mega__cats">
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Air &amp; Fuel</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Lift Pumps &amp; Fuel System</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Turbos</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Engine &amp; Cooling</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers &amp; Components</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Accessories</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">50 State Legal Products</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="sd2-v2-mega__side">
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
+				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="">
+					<span><span class="sd2-v2-mega__guide-title">Cummins Turbo Upgrade Basics</span><span class="sd2-v2-mega__guide-meta">7 min read</span></span>
+				</a>
+			</div>
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2019 Ram Cummins Pull Truck</a>
+			</div>
+		</div>
+	</div>
+</div>

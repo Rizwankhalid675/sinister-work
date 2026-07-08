@@ -1,0 +1,12 @@
+{
+    "code": "footer_js",
+    "linked_js_resources": [
+        "settings",
+        "site-scripts",
+        "contact",
+        "searchfield",
+        "gd-filmstrip-gallery",
+        "sd2-v2-components"
+    ],
+    "linked_css_resources": []
+}

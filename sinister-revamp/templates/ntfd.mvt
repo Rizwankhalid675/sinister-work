@@ -1,0 +1,211 @@
+<mvt:item name="html_profile" />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;">
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:store:name;: &mvt:page:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
+
+	<style>
+	/* sd2 NTFD — premium restyle, matches homepage-v3-premium.html tokens */
+	:root {
+		--sd2-blue:        #1833B8;
+		--sd2-gold:        #D4A017;
+		--sd2-bg:          #f5f6fa;
+		--sd2-bg-white:    #ffffff;
+		--sd2-text:        #0d0f1a;
+		--sd2-text-mid:    #3a3f5c;
+		--sd2-border:      rgba(24,51,184,0.10);
+		--sd2-shadow-sm:   0 2px 12px rgba(24,51,184,0.07);
+		--sd2-shadow-md:   0 8px 32px rgba(24,51,184,0.12);
+		--sd2-r:           16px;
+	}
+	body#js-NTFD { background: var(--sd2-bg); }
+	body#js-NTFD .t-account-landing-section {
+		background: var(--sd2-bg-white) !important;
+		border: 1px solid var(--sd2-border);
+		border-radius: var(--sd2-r);
+		box-shadow: var(--sd2-shadow-sm);
+		max-width: 720px;
+		margin: 40px auto;
+		padding: 48px 32px !important;
+		position: relative;
+	}
+	body#js-NTFD .t-account-landing-section::before {
+		content: '';
+		position: absolute;
+		top: 20px; bottom: 20px; left: 0;
+		width: 4px;
+		background: var(--sd2-gold);
+		border-radius: 0 4px 4px 0;
+	}
+	body#js-NTFD .x-messages--warning {
+		background: transparent !important;
+		border: none !important;
+		color: var(--sd2-text) !important;
+		font-family: 'Oswald', sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+	body#js-NTFD .u-text-base {
+		color: var(--sd2-text-mid);
+		font-family: 'Inter', sans-serif;
+	}
+	body#js-NTFD .btn-primary {
+		background: var(--sd2-blue) !important;
+		font-family: 'Oswald', sans-serif;
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+		border-radius: 100px;
+		padding: 14px 32px;
+		box-shadow: var(--sd2-shadow-sm);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+	body#js-NTFD .btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--sd2-shadow-md);
+	}
+	body#js-NTFD .t-featured-categories__heading {
+		font-family: 'Oswald', sans-serif;
+	}
+	</style>
+</head>
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+	<mvt:item name="hdft" param="global_header" />
+
+	<section class="o-layout">
+		<div class="o-layout__item">
+			<mvt:item name="hdft" param="header" />
+		</div>
+	</section>
+
+<!-- Product Unavailable Section -->
+<section class="o-layout">
+    <div class="o-layout__item u-width-12">
+        <section class="t-expanded-block t-account-landing-section u-bg-white u-text-center u-padding-3">
+            <div class="o-layout__item t-expanded-block__item t-account-landing-section__content">
+                <div class="o-layout o-layout--justify-center">
+                    <div class="o-layout__item u-width-12 u-width-6--m">
+                        <mvt:if expr="l.settings:messages:error_message_count EQ 0">
+                            <p class="x-messages x-messages--warning u-text-lg u-font-bold">
+                                Oops! This product is no longer available.
+                            </p>
+                            <p class="u-text-base u-mt-1">
+                                But don't worry, we have plenty of other great options for you!
+                            </p>
+                        <mvt:else>
+                            <p class="x-messages x-messages--warning">
+                                <mvt:foreach iterator="error" array="messages:error_messages">
+                                    &mvte:error;<br />
+                                </mvt:foreach>
+                            </p>
+                        </mvt:if>
+
+                        <!-- CTA Button -->
+                        <p class="u-mt-3">
+                            <a href="&mvte:urls:SFNT:rr;" class="btn-primary">Browse Our Store</a>
+                        </p>
+
+                        <!-- New Line: Check Out Categories -->
+                        <p class="u-text-base u-mt-2 u-font-semibold">
+                            Or check out our categories below:
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Featured Categories Section (Same as Home Page) -->
+<main class="o-wrapper t-wrapper">
+    <mvt:item name="readytheme" param="navigationset( 'top_categories' )" />
+
+    <section class="o-layout" style="justify-content:center;">
+        <div class="o-layout__item" style="max-width: 1035px;">
+            <!-- woxo -->
+        </div>
+        <style>
+            .t-featured-categories__heading {
+                color: #1833B8;
+                font-weight: bold;
+                border-bottom: 3px solid #1833B8;
+                width: fit-content;
+                text-transform: uppercase;
+                font-size: 16px;
+                text-align: left;
+                margin-left: 12px;
+                padding-left: 0px;
+            }
+        </style>
+    </section>
+</main>
+
+<style>
+    .u-text-center {
+        text-align: center;
+    }
+
+    .u-text-lg {
+        font-size: 1.25rem;
+    }
+
+    .u-text-base {
+        font-size: 1rem;
+    }
+
+    .u-font-bold {
+        font-weight: bold;
+    }
+
+    .u-font-semibold {
+        font-weight: 600;
+    }
+
+    .u-mt-1 {
+        margin-top: 0.5rem;
+    }
+
+    .u-mt-2 {
+        margin-top: 1rem;
+    }
+
+    .u-mt-3 {
+        margin-top: 1.5rem;
+    }
+
+    .u-padding-3 {
+        padding: 1.5rem;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        background-color: #0073e6;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>
+
+	
+	<section class="o-layout">
+		<div class="o-layout__item">
+			<mvt:item name="hdft" param="footer" />
+		</div>
+	</section>
+
+	<mvt:item name="hdft" param="global_footer" />
+</body>
+</html>

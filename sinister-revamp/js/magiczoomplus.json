@@ -1,0 +1,14 @@
+{
+    "code": "magiczoomplus",
+    "type": "E",
+    "filepath": "scripts/00000001/magiczoomplus.js",
+    "is_global": false,
+    "active": false,
+    "attributes": [
+        {
+            "name": "type",
+            "value": "text/javascript"
+        }
+    ],
+    "linked_pages": []
+}

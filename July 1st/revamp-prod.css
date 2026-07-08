@@ -1,0 +1,528 @@
+/* ==========================================================================
+   REVAMP — PRODUCT DETAIL PAGE (PROD)
+   Scope: sinisterdiesel.com ReVamp branch — product page only
+   Load via: CSS Resource "revamp-prod" assigned to PROD page only
+   ========================================================================== */
+
+/* ── CSS Variables — synced to homepage/CTGY revamp system ── */
+:root {
+  --blue:        #1833B8;
+  --blue-mid:    #2244d4;
+  --blue-light:  #e8edff;
+  --blue-glow:   rgba(24,51,184,0.18);
+  --gold:        #D4A017;
+  --gold-light:  #fff8e6;
+
+  --bg:          #f5f6fa;
+  --bg-white:    #ffffff;
+  --bg-subtle:   #eef0f8;
+  --bg-card:     rgba(255,255,255,0.75);
+
+  --text:        #0d0f1a;
+  --text-mid:    #3a3f5c;
+  --text-muted:  #7a80a0;
+  --sd-ink:      #0d0f1a;
+  --sd-muted:    #7a80a0;
+  --sd-line:     #e5e8f2;
+  --sd-soft:     #f7f8fc;
+
+  --border:      rgba(24,51,184,0.10);
+  --border-mid:  rgba(24,51,184,0.20);
+
+  --shadow-sm:   0 2px 12px rgba(24,51,184,0.07);
+  --shadow-md:   0 8px 32px rgba(24,51,184,0.12);
+  --shadow-lg:   0 20px 60px rgba(24,51,184,0.16);
+  --shadow-xl:   0 32px 80px rgba(24,51,184,0.20);
+
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --max:         1280px;
+  --r:           16px;
+  --r-sm:        10px;
+}
+
+/* ── Page base ── */
+body#js-PROD {
+  background: #f0f2fb !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Canvas particle layer — matches homepage/CTGY */
+#sd-particles {
+  position: fixed !important;
+  top: 0 !important; left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: 0.45 !important;
+  background: transparent !important;
+}
+body#js-PROD > *:not(#sd-particles) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Scroll reveal (JS adds .reveal then .in on scroll-into-view) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s var(--ease-out);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── Shell ── */
+.sd-prod-shell {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 32px 28px 80px;
+  box-sizing: border-box;
+}
+
+/* =========================================================================
+   PRODUCT LAYOUT — gallery left, purchase box right
+   Real DOM (verified via live inspection):
+   section.x-product-layout
+     > div.o-layout__item.sidebar > div.sidebar__inner > div.x-product-layout-images
+     > form#apdr.x-product-layout-purchase   (SIBLING of .sidebar, not nested in it)
+   .sidebar__inner only wraps the gallery — the actual shared parent of the
+   gallery column and the purchase form is section.x-product-layout itself.
+   ========================================================================= */
+#js-PROD section.x-product-layout,
+body#js-PROD section.o-layout.x-product-layout {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  flex-wrap: nowrap !important;
+  gap: 28px !important;
+  width: 100% !important;
+  max-width: var(--max) !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+#js-PROD section.x-product-layout > div.o-layout__item.sidebar,
+body#js-PROD section.o-layout.x-product-layout > div.o-layout__item.sidebar {
+  flex: 1 1 55% !important;
+  min-width: 0 !important;
+  width: auto !important;
+}
+#js-PROD section.x-product-layout > form#apdr.x-product-layout-purchase,
+body#js-PROD section.o-layout.x-product-layout > form#apdr.x-product-layout-purchase {
+  flex: 1 1 45% !important;
+  min-width: 0 !important;
+  width: auto !important;
+}
+
+.sidebar__inner {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.o-layout__item.x-product-layout-images,
+.x-product-layout-images {
+  background: rgba(255,255,255,0.72) !important;
+  backdrop-filter: blur(16px) saturate(1.6) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.6) !important;
+  border: 1px solid rgba(255,255,255,0.85) !important;
+  border-radius: var(--r) !important;
+  box-shadow:
+    0 4px 24px rgba(24,51,184,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.95) !important;
+  padding: 20px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 14px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Filmstrip thumbnails render before the main image in DOM order (vertical
+   Splide on the left), main image fills the remaining space on the right */
+.x-product-layout-images .x-filmstrip-wrapper,
+.x-product-layout-images section.splide.x-filmstrip-wrapper {
+  flex: 0 0 90px !important;
+  order: 1 !important;
+  margin-top: 0 !important;
+}
+.x-product-layout-images .x-filmstrip-wrapper .splide__track,
+.x-product-layout-images .x-filmstrip-wrapper .splide__list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+.x-product-layout-images #main_image,
+.x-product-layout-images .x-product-layout-images__main-image {
+  flex: 1 1 auto !important;
+  order: 2 !important;
+  min-width: 0 !important;
+  min-height: 420px !important;
+}
+
+/* Main showcase image */
+#main_image,
+.x-product-layout-images__main-image {
+  background: #f8f9fd !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+}
+#main_image img,
+.x-product-layout-images__main-image img {
+  object-fit: contain !important;
+  transition: transform 0.4s var(--ease-out) !important;
+}
+
+/* Splide filmstrip / thumbnails */
+.x-filmstrip-wrapper,
+section.splide.x-filmstrip-wrapper {
+  margin-top: 14px !important;
+}
+.x-filmstrip-wrapper .splide__slide {
+  border: 1.5px solid rgba(24,51,184,0.14) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+  background: #f8f9fd !important;
+}
+.x-filmstrip-wrapper .splide__slide:hover {
+  border-color: rgba(24,51,184,0.40) !important;
+}
+.x-filmstrip-wrapper .splide__slide.is-active,
+.x-filmstrip-wrapper .splide__slide.is-active-thumbnail {
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 2px rgba(24,51,184,0.18) !important;
+}
+.x-filmstrip-wrapper .splide__arrow {
+  background: rgba(255,255,255,0.90) !important;
+  border: 1px solid rgba(24,51,184,0.18) !important;
+  box-shadow: 0 2px 8px rgba(24,51,184,0.10) !important;
+}
+.x-filmstrip-wrapper .splide__arrow svg { fill: var(--blue) !important; }
+
+/* ── Purchase box — premium glass card ── */
+.x-product-layout-purchase,
+form#apdr.x-product-layout-purchase {
+  background: rgba(255,255,255,0.75) !important;
+  backdrop-filter: blur(16px) saturate(1.6) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.6) !important;
+  border: 1px solid rgba(255,255,255,0.85) !important;
+  border-radius: var(--r) !important;
+  padding: 24px !important;
+  box-shadow:
+    0 4px 24px rgba(24,51,184,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.95) !important;
+  flex: 1 1 45% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+.x-product-layout-purchase ul.c-form-list {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.x-product-layout-purchase ul.c-form-list li.c-form-list__item {
+  list-style: none !important;
+}
+
+/* Product title */
+h1#js-product-name,
+h1.x-product-layout-purchase__name {
+  color: var(--text) !important;
+  font-family: 'Oswald', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(20px, 2.2vw, 30px) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.25 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Star reviews (Shopper Approved) */
+.star_container,
+#js-PROD .star_container {
+  margin-bottom: 14px !important;
+}
+
+/* Price */
+#js-PROD .ss__price,
+#js-PROD .x-product-layout-purchase .ss__price {
+  color: var(--blue) !important;
+  font-family: 'Oswald', system-ui, sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.3px !important;
+  margin-bottom: 18px !important;
+  display: block !important;
+}
+
+/* Quantity field */
+#js-PROD input[name="Quantity"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 72px !important;
+  height: 46px !important;
+  background: rgba(255,255,255,0.90) !important;
+  border: 1.5px solid rgba(24,51,184,0.20) !important;
+  border-radius: 10px !important;
+  text-align: center !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+  box-shadow: 0 2px 8px rgba(24,51,184,0.06) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+input[name="Quantity"]:focus {
+  outline: none !important;
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 3px rgba(24,51,184,0.12) !important;
+}
+
+/* Add to Cart button */
+input.related_adpr,
+.x-product-layout-purchase input[type="submit"],
+.x-product-layout-purchase .c-button {
+  width: 100% !important;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  min-height: 50px !important;
+  font-family: 'Oswald', system-ui, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  box-shadow:
+    0 4px 16px rgba(24,51,184,0.35),
+    0 1px 0 rgba(255,255,255,0.15) inset !important;
+  transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease !important;
+  margin-top: 16px !important;
+}
+input.related_adpr:hover,
+.x-product-layout-purchase input[type="submit"]:hover,
+.x-product-layout-purchase .c-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(24,51,184,0.45), 0 1px 0 rgba(255,255,255,0.15) inset !important;
+}
+input.related_adpr:active,
+.x-product-layout-purchase input[type="submit"]:active {
+  transform: scale(0.97) !important;
+  box-shadow: 0 2px 8px rgba(24,51,184,0.25) !important;
+}
+
+/* =========================================================================
+   FITMENT WIDGET — "YOUR VEHICLE" (same treatment as CTGY, if present)
+   ========================================================================= */
+#searchspring-finder-hierarchy,
+.mm_combination_facet_fields {
+  background: rgba(255,255,255,0.82) !important;
+  backdrop-filter: blur(14px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4) !important;
+  border: 1px solid rgba(255,255,255,0.92) !important;
+  border-radius: var(--r) !important;
+  padding: 18px !important;
+  box-shadow: 0 4px 20px rgba(24,51,184,0.08), inset 0 1px 0 rgba(255,255,255,0.95) !important;
+  margin-top: 20px !important;
+}
+#searchspring-finder-hierarchy select,
+.mm_combination_facet_fields select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 100% !important;
+  background: rgba(255,255,255,0.90) !important;
+  border: 1.5px solid rgba(24,51,184,0.18) !important;
+  border-radius: 10px !important;
+  padding: 10px 36px 10px 14px !important;
+  font-size: 13px !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-weight: 500 !important;
+  color: var(--text) !important;
+  cursor: pointer !important;
+  min-height: 42px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231833B8' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+}
+.mm_combination_facet_action_container {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+  margin-top: 12px !important;
+}
+.mm_combination_facet_action_container .mm_combination_facet_action.c-button {
+  flex: 1 !important;
+  padding: 13px 16px !important;
+  font-family: 'Oswald', system-ui, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  border-radius: 10px !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+.mm_combination_facet_action_container button[id^="mm_combination_facet_button_setcookie"] {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(24,51,184,0.35) !important;
+}
+.mm_combination_facet_action_container button[id^="mm_combination_facet_button_clearcookie"] {
+  background: transparent !important;
+  color: var(--blue) !important;
+  border: 1.5px solid rgba(24,51,184,0.30) !important;
+}
+
+/* =========================================================================
+   DESCRIPTION / TABS
+   ========================================================================= */
+section.x-product-description,
+.t-expanded-block.x-product-description {
+  background: rgba(255,255,255,0.72) !important;
+  backdrop-filter: blur(16px) saturate(1.6) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.6) !important;
+  border: 1px solid rgba(255,255,255,0.85) !important;
+  border-radius: var(--r) !important;
+  padding: 28px !important;
+  margin-top: 28px !important;
+  box-shadow: 0 4px 24px rgba(24,51,184,0.08), inset 0 1px 0 rgba(255,255,255,0.95) !important;
+}
+section.x-product-description h2,
+section.x-product-description h3 {
+  color: var(--blue) !important;
+  font-family: 'Oswald', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  font-size: 15px !important;
+  margin-bottom: 14px !important;
+}
+section.x-product-description p,
+section.x-product-description li {
+  color: var(--text-mid) !important;
+  font-size: 14px !important;
+  line-height: 1.75 !important;
+}
+
+/* =========================================================================
+   RELATED PRODUCTS — reuse CTGY glassmorphism card style
+   ========================================================================= */
+section.t-related-products {
+  margin-top: 40px !important;
+}
+section.t-related-products .t-related-product-list__heading,
+section.t-related-products h2 {
+  color: var(--blue) !important;
+  font-family: 'Oswald', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  font-size: 16px !important;
+  margin-bottom: 18px !important;
+}
+section.t-related-products div.o-layout__item.u-text-center.x-product-list__item,
+section.t-related-products .x-product-list__item {
+  background: linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.45) 100%) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255,255,255,0.60) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(24,51,184,0.08) !important;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease !important;
+}
+section.t-related-products div.o-layout__item.u-text-center.x-product-list__item:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px rgba(24,51,184,0.14) !important;
+}
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+@media (max-width: 900px) {
+  .sd-prod-shell {
+    padding: 16px 12px 60px !important;
+  }
+  #js-PROD section.x-product-layout,
+  body#js-PROD section.o-layout.x-product-layout {
+    flex-direction: column !important;
+  }
+  #js-PROD section.x-product-layout > div.o-layout__item.sidebar,
+  #js-PROD section.x-product-layout > form#apdr.x-product-layout-purchase,
+  body#js-PROD section.o-layout.x-product-layout > div.o-layout__item.sidebar,
+  body#js-PROD section.o-layout.x-product-layout > form#apdr.x-product-layout-purchase {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .x-product-layout-images {
+    flex-direction: column !important;
+  }
+  .x-product-layout-images .x-filmstrip-wrapper {
+    flex: none !important;
+    order: 2 !important;
+  }
+  .x-product-layout-images .x-filmstrip-wrapper .splide__track,
+  .x-product-layout-images .x-filmstrip-wrapper .splide__list {
+    flex-direction: row !important;
+  }
+  .x-product-layout-images #main_image,
+  .x-product-layout-images .x-product-layout-images__main-image {
+    order: 1 !important;
+    min-height: 280px !important;
+  }
+  .x-product-layout-purchase {
+    padding: 18px !important;
+  }
+}
+
+/* =========================================================================
+   OVERFLOW CONTAINMENT — PayPal/Affirm widget iframes report huge scrollWidth
+   (2695px seen live), which forces flex-shrink to crush the gallery sidebar
+   down to ~369px instead of its 55% basis (~660px). Contain the purchase
+   form's content and give the gallery sidebar a firm floor so it can't be
+   squeezed by its sibling's oversized embedded content.
+   ========================================================================= */
+#js-PROD form#apdr.x-product-layout-purchase {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+#js-PROD form#apdr.x-product-layout-purchase * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+#js-PROD form#apdr.x-product-layout-purchase iframe {
+  max-width: 100% !important;
+}
+#js-PROD section.x-product-layout > div.o-layout__item.sidebar,
+body#js-PROD section.o-layout.x-product-layout > div.o-layout__item.sidebar {
+  flex-shrink: 0 !important;
+  min-width: 420px !important;
+}
+@media (max-width: 900px) {
+  #js-PROD section.x-product-layout > div.o-layout__item.sidebar,
+  body#js-PROD section.o-layout.x-product-layout > div.o-layout__item.sidebar {
+    min-width: 0 !important;
+  }
+}
+
+/* =========================================================================
+   REDUCED MOTION
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

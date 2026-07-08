@@ -1,0 +1,453 @@
+<mvt:item name="html_profile" />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;">
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:store:name;: &mvt:page:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1">
+		<mvt:item name="head" param="css_list_dev" />
+	<mvt:else>
+		<mvt:item name="head" param="css_list" />
+	</mvt:if>
+	<mvt:item name="head" param="head_tag" />
+
+</head>
+
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+	<mvt:item name="hdft" param="global_header" />
+
+	<section class="o-layout">
+		<div class="o-layout__item u-width-12">
+			<section class="t-expanded-block u-bg-white">
+				<div class="o-layout__item t-expanded-block__item">
+					<br>
+
+					<div class="o-layout o-layout--column-reverse o-layout--row-reverse--l">
+
+						<!-- MAIN CONTENT -->
+						<div class="o-layout__item u-width-12 u-width-9--l u-width-10--w">
+
+							<div class="sd-warranty-wrap">
+
+								<header class="sd-warranty-hero">
+									<h1 class="sd-warranty-title">Shipping Policy</h1>
+									<p class="sd-warranty-subtitle">
+										At Sinister Diesel, we work hard to get your order processed, shipped, and delivered as quickly and accurately as possible.
+										This page explains how shipping works, what to expect after placing an order, and answers common shipping questions.
+									</p>
+
+									<div class="sd-warranty-links">
+										<!-- Update these URLs as needed -->
+										<a class="sd-btn sd-btn--primary" href="https://sinisterdiesel.com/help-center.html">Contact Support</a>
+										<a class="sd-btn sd-btn--ghost" href="https://sinisterdiesel.com/free-shipping.html">Free Shipping Policy</a>
+									</div>
+								</header>
+
+								<main class="sd-warranty-content">
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Order processing time</span></h2>
+										<p>
+											Orders placed by 2 pm Pacific Time on business days (Monday through Friday, excluding holidays) are typically processed the same day.
+											Orders placed after this cutoff, on weekends, or on holidays will begin processing on the next business day.
+										</p>
+										<p>
+											Some products are made to order, on backorder, or ship from different locations. In these cases, additional processing time may apply.
+											We do our best to display known lead times on product pages when available, and we will notify you by email if we become aware of a backorder
+											or delay after your order is placed.
+										</p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">When does shipping transit time begin?</span></h2>
+										<p>
+											Shipping transit time begins once your order has been picked up by the carrier and is in their possession. The day of pickup is not counted
+											as a transit day. For example, if a 2-Day Air order ships from Sinister Diesel on Monday, the carrier’s transit time begins on Tuesday and
+											delivery would typically occur on Wednesday. Transit times are calculated by the carrier and do not include order processing or handling time.
+										</p>
+										<p class="sd-muted">
+											All shipping transit times are based on business days only. Saturdays, Sundays, and carrier-observed holidays are not considered shipping or delivery days.
+										</p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Shipping carriers and tracking</span></h2>
+										<p>
+											We ship using trusted carriers including UPS and USPS. Carrier selection and service level are chosen by Sinister Diesel based on package size,
+											destination, and operational requirements. Once your order ships, tracking information will be sent via email.
+										</p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Shipping options</span></h2>
+										<p>
+											Available shipping options are displayed at checkout based on your order and delivery address. Expedited shipping options may be available for certain items.
+											Unless a customer selects and pays for a specific expedited shipping method or carrier at checkout, Sinister Diesel reserves the right to select the final carrier
+											and service used to fulfill the order. Free shipping, when available, does not include expedited or guaranteed delivery services.
+										</p>
+									</section>
+
+<section class="sd-section">
+	<h2 class="sd-h2">
+		<span class="sd-h2__text">Shipping Protection, Risk of Loss & Claims Policy</span>
+	</h2>
+
+	<p>
+		Enshield Shipping Protection is optional and provides coverage for loss, theft, or damage that occurs during transit.
+		This protection is pre-selected at checkout for your convenience.
+	</p>
+
+<h3 class="sd-h3">If You Decline Shipping Protection</h3>
+	<p>
+		If you manually deselect or decline Enshield Shipping Protection, you acknowledge and agree that:
+	</p>
+
+	<ul>
+		<li>Risk of loss transfers to you once the package is accepted by the carrier.</li>
+
+		<li>Your shipment will only be subject to the carrier’s standard liability limits (typically up to $100 for UPS shipments).</li>
+
+		<li>Sinister Diesel is not responsible for loss, theft, damage, or non-delivery once the package leaves our facility and is in the carrier’s possession.</li>
+
+		<li>Any claims for lost or damaged shipments must be filed directly with the carrier.</li>
+
+		<li>We do not guarantee replacement or refund for uninsured shipments.</li>
+
+		<li>If shipment tracking confirms delivery to the address provided at checkout, the order will be considered fulfilled.</li>
+	</ul>
+
+	<p>
+		By completing your purchase without Shipping Protection, you confirm that you understand and accept these terms.
+	</p>
+
+	<p>
+		If you prefer coverage for lost, stolen, or damaged packages, please leave Shipping Protection selected at checkout.
+	</p>
+</section>
+
+
+
+
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Free shipping</span></h2>
+										<p>
+											Free shipping is available on qualifying orders of eligible Sinister Diesel products that meet the minimum order threshold. Details, exclusions, and limitations
+											are outlined on our Free Shipping Policy page.
+<br></br>Free Shipping covers standard shipping charges only. Optional Shipping Protection, when selected, is a separate service and is not a shipping fee. Customers may opt out of Shipping Protection during checkout without impacting Free Shipping eligibility. No purchase of Shipping Protection is required to receive Free Shipping.
+										<br></br> <a href="https://sinisterdiesel.com/free-shipping.html">Free Shipping Policy</a></p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Where we ship</span></h2>
+										<p>
+											We ship to customers throughout the contiguous United States. International customers are responsible for all duties, taxes, brokerage fees, and import charges.
+										</p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Oversized and freight items</span></h2>
+										<p>
+											Some products are oversized, overweight, or require freight (LTL) shipping and may incur additional charges.
+										</p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Delays outside our control</span></h2>
+										<p>
+											Delivery delays can occur due to weather, carrier issues, or other circumstances beyond our control. Shipping transit times are estimates and are not guaranteed.
+										</p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Shipping protection</span></h2>
+										<p>
+											Shipping Protection is an optional service offered at checkout that provides coverage for eligible shipments.
+										</p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Address accuracy</span></h2>
+										<p>
+											Customers are responsible for providing a complete and accurate shipping address.
+										</p>
+									</section>
+
+									<section class="sd-section">
+										<h2 class="sd-h2"><span class="sd-h2__text">Policy updates</span></h2>
+										<p>
+											Sinister Diesel reserves the right to update or modify this Shipping Policy at any time.
+										</p>
+									</section>
+
+									<!-- ===== UPS TRANSIT MAP + DISCLAIMER (BOTTOM) ===== -->
+									<section class="sd-section sd-shipping-map">
+										<h2 class="sd-h2">
+											<span class="sd-h2__text">UPS Ground Transit Time Map</span>
+										</h2>
+
+										<p class="sd-muted">
+											The map below shows estimated UPS Ground transit times in business days for shipments originating
+											from Roseville, California (ZIP 95678). Transit times are estimates only and may vary.
+										</p>
+
+											<div class="sd-map-wrap">
+		<mvt:item name="readytheme" param="image( 'shipping_map' )" />
+	</div>
+
+										<div class="sd-shipping-disclaimer">
+											<p>
+												Subject to the Tariff/Terms and Conditions of Service, UPS guarantees on-schedule delivery of packages,
+												shipped via UPS services that are listed as guaranteed, or will refund transportation charges.
+												Guaranteed Service is not available in all areas and does not apply to shipments containing a package
+												with an Additional Handling or Large Package surcharge.
+											</p>
+											<p>
+												Scheduled business days and delivery schedules may change due to volume, holidays, or operational
+												conditions. Service to some remote areas may require additional delivery days. For current delivery
+												schedules, service availability, and details regarding the UPS Service Guarantee, please refer to
+												the UPS Rate and Service Guide. The most up-to-date transit time information is available at ups.com/ctc
+												at the time of shipping. Certain commodities and high-value shipments may require additional transit
+												time for customs clearance.
+											</p>
+										</div>
+									</section>
+									<!-- ===== /UPS TRANSIT MAP + DISCLAIMER ===== -->
+
+								</main>
+							</div>
+
+							<!-- KEEP YOUR EXISTING SCOPED STYLES EXACTLY AS-IS -->
+							<style>
+								/* ===== Turbo Warranty Page Styles (scoped) ===== */
+
+								.sd-warranty-wrap{
+									font-family: Arial, Helvetica, sans-serif;
+									color:#1f2937;
+									max-width: 1200px;
+									margin: 0 auto;
+									padding: 0 10px 28px;
+
+									font-size: 18px;
+									line-height: 1.6;
+								}
+								.sd-warranty-wrap p,
+								.sd-warranty-wrap li{
+									font-size: 18px;
+									line-height: 1.65;
+								}
+
+								.sd-warranty-hero{
+									padding: 8px 0 12px;
+									margin: 0 0 16px;
+									border: 0;
+									border-radius: 0;
+									background: transparent;
+									box-shadow: none;
+								}
+
+								.sd-warranty-title{
+									margin: 0 0 8px 0;
+									font-size: 28px;
+									line-height: 1.2;
+									font-weight: 800;
+									letter-spacing: -0.02em;
+								}
+
+								.sd-warranty-subtitle{
+									margin: 0 0 14px 0;
+									font-size: 20px;
+									color: #4b5563;
+								}
+
+								.sd-warranty-links{
+									display:flex;
+									flex-wrap: wrap;
+									gap: 10px;
+									margin: 10px 0 12px;
+								}
+
+
+.sd-h3{
+	margin: 14px 0 8px 0;
+	font-size: 18px;
+	line-height: 1.3;
+	font-weight: 800 !important;
+}
+
+/* ...rest of your existing styles... */
+
+
+								.sd-btn{
+									display:inline-block;
+									padding: 10px 14px;
+									border-radius: 999px;
+									font-weight: 700;
+									text-decoration: none;
+									border: 1px solid transparent;
+									transition: transform .08s ease, box-shadow .08s ease, background-color .08s ease;
+									font-size: 18px;
+								}
+								.sd-btn:focus{ outline: 2px solid #93c5fd; outline-offset: 2px; }
+								.sd-btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,0,0,0.10); }
+
+								.sd-btn--primary{
+									background:#0b5bd3;
+									color:#ffffff !important;
+									border-color:#0b5bd3;
+								}
+								.sd-btn--primary:hover,
+								.sd-btn--primary:focus{
+									background:#094fb8;
+									color:#ffffff !important;
+								}
+
+								.sd-btn--ghost{
+									background:#fff;
+									color:#0b5bd3 !important;
+									border-color:#cfe0ff;
+								}
+								.sd-btn--ghost:hover,
+								.sd-btn--ghost:focus{
+									background:#eff6ff;
+									color:#0b5bd3 !important;
+								}
+
+								.sd-warranty-note{
+									margin: 0;
+									font-size: 18px;
+									color:#374151;
+									background: rgba(11,91,211,0.06);
+									border-left: 4px solid #0b5bd3;
+									border-radius: 8px;
+									padding: 10px 12px;
+								}
+
+								.sd-warranty-content{
+									display:flex;
+									flex-direction: column;
+									gap: 0;
+								}
+
+								.sd-section{
+									padding: 18px 0;
+									border-top: 1px solid #e5e7eb;
+								}
+								.sd-section:first-child{
+									border-top: 0;
+									padding-top: 0;
+								}
+
+								.sd-h2{
+									margin: 0 0 10px 0;
+									font-size: 20px;
+									line-height: 1.25;
+									font-weight: 800 !important;
+								}
+								.sd-h2__text{
+									display:inline-block;
+									font-weight: 800 !important;
+									text-decoration: underline !important;
+									text-decoration-thickness: 2px;
+									text-underline-offset: 4px;
+								}
+
+								.sd-bullets{
+									margin: 10px 0 0 18px;
+									padding: 0;
+								}
+								.sd-bullets li{
+									margin: 8px 0;
+									line-height: 1.65;
+								}
+
+								.sd-muted{
+									color:#6b7280;
+									margin-top: 10px;
+									font-size: 18px;
+								}
+
+								.sd-alert{
+									margin-top: 12px;
+									padding: 12px 12px;
+									border-left: 4px solid #b91c1c;
+									border-radius: 8px;
+									background: rgba(185,28,28,0.06);
+									color:#7f1d1d;
+									font-weight: 700;
+									font-size: 18px;
+								}
+
+								.sd-warranty-wrap a{
+									color:#0b5bd3;
+									text-decoration: underline;
+									text-underline-offset: 3px;
+								}
+								.sd-warranty-wrap a:hover{
+									text-decoration-thickness: 2px;
+								}
+
+								/* ===== Shipping Transit Map ===== */
+
+								.sd-shipping-map{
+									padding-bottom: 28px;
+								}
+
+								.sd-map-wrap{
+									margin: 16px auto 18px;
+									max-width: 100%;
+									text-align: center;
+								}
+
+								.sd-map-wrap img{
+									max-width: 100%;
+									height: auto;
+									border-radius: 10px;
+									border: 1px solid #e5e7eb;
+									box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+									background: #ffffff;
+								}
+
+								.sd-shipping-disclaimer{
+									margin-top: 18px;
+									padding: 14px 16px;
+									background: #f9fafb;
+									border-left: 4px solid #9ca3af;
+									border-radius: 8px;
+									font-size: 16px;
+									line-height: 1.6;
+									color: #374151;
+								}
+
+								.sd-shipping-disclaimer p{
+									margin: 0 0 10px 0;
+									font-size: 16px;
+								}
+
+								.sd-shipping-disclaimer p:last-child{
+									margin-bottom: 0;
+								}
+							</style>
+
+						</div>
+
+						<!-- SIDEBAR -->
+						<aside class="o-layout__item u-width-12 u-width-3--l u-width-2--w">
+							<mvt:item name="readytheme" param="navigationset( 'static_navigation' )" />
+						</aside>
+
+					</div>
+					<br>
+				</div>
+			</section>
+		</div>
+	</section>
+
+	<mvt:item name="hdft" param="global_footer" />
+</body>
+</html>

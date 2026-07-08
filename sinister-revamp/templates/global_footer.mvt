@@ -1,0 +1,85 @@
+<mvt:comment>
+	Footer Experience V2 — additive, inactive. Real Miva constructs reused
+	verbatim from cssui-global-footer.mvt: navigationset('links_resources'/
+	'help_center'/'links_help'), contentsection('store_hours'/'site_copyright'),
+	social_* flags, &mvt:global:store:*; fields. Build Log cards below use
+	placeholder content pending real content/blog Miva integration in a later
+	milestone — not fabricated as final copy.
+</mvt:comment>
+
+<footer class="sd2-v2-footer">
+
+	<!-- BUILD LOG — content strategy pillar -->
+	<div class="sd2-v2-footer__log">
+		<div class="sd2-v2-footer__log-inner">
+			<div class="sd2-v2-footer__log-head">
+				<div>
+					<p class="sd2-v2-footer__log-eyebrow">From The Shop</p>
+					<h2 class="sd2-v2-footer__log-title">Latest Build Log</h2>
+				</div>
+				<a class="sd2-v2-footer__log-all" href="&mvte:urls:NEWS:auto;">View All Guides</a>
+			</div>
+			<div class="sd2-v2-footer__log-grid">
+				<a class="sd2-v2-footer__log-card" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
+					<span class="sd2-v2-footer__log-card-tag">Buying Guide</span>
+					<div class="sd2-v2-footer__log-card-title">6.7 Powerstroke Intercooler Buying Guide</div>
+				</a>
+				<a class="sd2-v2-footer__log-card" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="">
+					<span class="sd2-v2-footer__log-card-tag">Build Spotlight</span>
+					<div class="sd2-v2-footer__log-card-title">2015 Duramax Tow Rig, Built Right</div>
+				</a>
+				<a class="sd2-v2-footer__log-card" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="">
+					<span class="sd2-v2-footer__log-card-tag">Install Guide</span>
+					<div class="sd2-v2-footer__log-card-title">Cummins Turbo Upgrade: Install Notes</div>
+				</a>
+				<a class="sd2-v2-footer__log-card" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
+					<span class="sd2-v2-footer__log-card-tag">Dyno Results</span>
+					<div class="sd2-v2-footer__log-card-title">Verified Gains: Powerstroke Intake Kit</div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="sd2-v2-footer__main">
+		<div>
+			<div class="sd2-v2-footer__brand">Sinister<span>Diesel</span></div>
+			<p class="sd2-v2-footer__desc">High-performance diesel parts for Ford Power Stroke, Chevy Duramax, and Dodge Cummins.</p>
+			<span class="sd2-v2-footer__plate">
+				<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+				MADE &amp; TESTED IN THE USA &middot; SINCE 2008
+			</span>
+		</div>
+
+		<div class="sd2-v2-footer__col">
+			<div class="sd2-v2-footer__col-title">Resources</div>
+			<mvt:item name="readytheme" param="navigationset( 'links_resources' )" />
+		</div>
+
+		<div class="sd2-v2-footer__col">
+			<div class="sd2-v2-footer__col-title">Help Center</div>
+			<mvt:item name="readytheme" param="navigationset( 'help_center' )" />
+		</div>
+
+		<div class="sd2-v2-footer__col">
+			<div class="sd2-v2-footer__col-title">Quick Links</div>
+			<mvt:item name="readytheme" param="navigationset( 'links_help' )" />
+		</div>
+	</div>
+
+	<div class="sd2-v2-footer__bottom">
+		<div class="sd2-v2-footer__bottom-inner">
+			<div class="sd2-v2-footer__copy">
+				<mvt:item name="readytheme" param="contentsection( 'site_copyright' )" />
+			</div>
+			<div class="sd2-v2-footer__contact">
+				<a href="tel:19167729253">(916) 772-9253</a>
+				<span>&middot;</span>
+				<span>&mvt:global:store:address;, &mvt:global:store:city; &mvt:global:store:state; &mvt:global:store:zip;</span>
+			</div>
+		</div>
+	</div>
+</footer>

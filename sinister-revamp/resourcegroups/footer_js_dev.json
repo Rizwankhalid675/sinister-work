@@ -1,0 +1,15 @@
+{
+    "code": "footer_js_dev",
+    "linked_js_resources": [
+        "settings",
+        "dom",
+        "contact",
+        "core_scripts_no_integrety",
+        "searchfield",
+        "gd-filmstrip-gallery_dev",
+        "phone_validation_dev",
+        "account_create_dev",
+        "sd2-v2-components"
+    ],
+    "linked_css_resources": []
+}

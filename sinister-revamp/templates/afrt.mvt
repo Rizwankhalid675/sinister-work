@@ -1,0 +1,35 @@
+<mvt:item name="html_profile" />
+<head>
+    <mvt:if expr="NOT ISNULL l.settings:page:title">
+        <title>&mvt:page:title;</title>
+    <mvt:else>
+        <title>&mvt:store:name;: Affiliate Temporary Password</title>
+    </mvt:if>
+
+    <base href="&mvt:global:basehref;" />
+    <link rel="canonical" href="&mvte:urls:_self:auto;" />
+    <mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+    <mvt:item name="head" param="head_tag" />
+</head>
+<body class="&mvte:page:code;">
+    <div id="site-container">
+        <div id="global-header"><mvt:item name="hdft" param="global_header" /></div>
+        <div id="navigation-bar"><mvt:item name="navbar" /></div>
+        <table id="content-container">
+            <tr>
+                <td id="left-navigation"><mvt:item name="category_tree" /></td>
+                <td id="main-content">
+                    <div id="page-header"><mvt:item name="hdft" param="header" /></div>
+                    
+                    Your password has been reset. Your temporary password is &mvte:global:Affiliate_Temporary_Password;<br /><br />
+                    <a href="&mvte:urls:AFCL:auto;">Click Here to Log In</a> 
+
+                    <div id="page-footer"><mvt:item name="hdft" param="footer" /></div>
+                </td>
+            </tr>
+        </table>
+        <div id="bottom-wrap"></div>
+        <div id="global-footer"><mvt:item name="hdft" param="global_footer" /></div>
+    </div>
+</body>
+</html>

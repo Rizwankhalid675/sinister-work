@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<mvt:item name="html_profile" />
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;" />
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:store:name;: &mvt:category:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+
+	<mvt:comment>
+		Category Hub V2 staging template. Inactive only. Do not assign over live CTGY.
+		Preserves legacy ctgy.mvt child-category gate so tiles only render when
+		subcategories exist at top-level depth.
+	</mvt:comment>
+</head>
+<body id="js-&mvte:page:code;">
+	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
+
+<mvt:do file="g.Module_Library_DB" name="l.success" value="Runtime_CategoryList_Load_Parent(l.settings:category:id, l.settings:subcategories)" />
+<mvt:assign name="l.settings:subcategory_count" value="miva_array_elements(l.settings:subcategories)" />
+<mvt:assign name="l.settings:category_depth" value="miva_array_elements(l.settings:breadcrumbs:links)" />
+
+<main class="sd2-v2-search-page" data-v2-category-hub>
+	<div class="sd2-wrap">
+		<header class="sd2-v2-search-page__head">
+			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+				<a href="&mvte:urls:SFNT:auto;">Home</a>
+				<span aria-hidden="true">/</span>
+				<span>&mvte:category:name;</span>
+			</nav>
+			<div class="sd2-v2-search-page__title-row">
+				<div>
+					<p class="sd2-eyebrow">Category Hub</p>
+					<h1 class="sd2-heading-lg">&mvte:category:name;</h1>
+				</div>
+				<p class="sd2-v2-search-page__count">&mvt:subcategory_count; subcategories</p>
+			</div>
+			<mvt:if expr="l.settings:category:descrip">
+				<div class="sd2-body">&mvt:category:descrip;</div>
+			<mvt:else>
+				<p class="sd2-body">[Placeholder] Category introduction renders from Miva category description when available.</p>
+			</mvt:if>
+		</header>
+	</div>
+
+	<div class="sd2-wrap">
+		<mvt:comment>TODO: register Vehicle Banner V2 in Miva Admin as readytheme contentsection('vehicle_banner') before using mvt:item composition.</mvt:comment>
+	</div>
+
+	<mvt:if expr="l.settings:subcategory_count GT 0 AND l.settings:category_depth LE 1">
+		<section class="sd2-v2-cat-grid sd2-v2-cat-grid--lead" aria-label="Shop by category">
+			<mvt:foreach iterator="subcategory" array="subcategories">
+				<mvt:assign name="l.uri:cat_id" value="l.settings:subcategory:id" />
+				<mvt:do file="g.Module_Feature_URI_DB" name="l.have_uri" value="URI_Load_Item_Canonical(l.uri, l.settings:subcategory:link)" />
+				<a class="sd2-v2-cat-tile" href="&mvte:subcategory:link:uri;">
+					<mvt:if expr="l.settings:subcategory:image">
+						<img src="&mvte:subcategory:image;" alt="" loading="lazy">
+					<mvt:else>
+						<img src="graphics/00000001/placeholder.png" alt="" loading="lazy">
+					</mvt:if>
+					<span class="sd2-v2-cat-tile__cap">
+						<span class="sd2-v2-cat-tile__name">&mvte:subcategory:name;</span>
+						<span class="sd2-v2-cat-tile__spec">Browse category</span>
+					</span>
+				</a>
+			</mvt:foreach>
+		</section>
+	<mvt:else>
+		<section class="sd2-v2-empty-state" aria-label="Category products">
+			<h2>No child categories available</h2>
+			<p>[Placeholder] Product listing content should render here when category_depth/subcategory_count gate does not expose child categories.</p>
+			<a class="sd2-btn sd2-btn--primary" href="&mvte:urls:CTGY:auto;">View Products</a>
+		</section>
+	</mvt:if>
+</main>
+
+	<mvt:item name="hdft" param="footer" />
+	<mvt:item name="hdft" param="global_footer" />
+</body>
+</html>

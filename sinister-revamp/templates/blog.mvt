@@ -1,0 +1,193 @@
+<mvt:comment>
+#
+# ELEMENTS Blog Page Template version 3.520, July, 2023
+#
+# Scot's Blogger Module version 3.511 or later REQUIRED for this template
+#
+# Page Items: all stores are a little different. 
+# Take a look at your ABOUT US (ABUS) page to see what page items are required for your store.
+#
+</mvt:comment>
+
+<mvt:item name="scotsblogger" param="amp" />
+<mvt:item name="scotsblogger" param="feed" />
+<mvt:item name="scotsblogger" param="template" />
+
+<mvt:item name="html_profile" />
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;">
+
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+
+<mvt:comment>
+#
+# Try first with this commented out - if things don't look right, uncomment and then edit the head
+# tag in the User Interface Global Settings to block out canonical and other meta settings on the blog page
+#	
+	<mvt:item name="head" param="head_tag" />
+#
+</mvt:comment>
+
+<mvt:item name="head" param="GMT_for_Blogger" />
+
+<mvt:comment>
+#
+# new v3.511
+#
+# This takes care CSS and other "system" related head tag code. 
+# Meta is handled in meta_head() and meta_foot() page items.
+#
+</mvt:comment>
+
+	<mvt:item name="scotsblogger" param="head()" />
+
+<mvt:comment>
+#
+# All blogger meta data is avaialble in the l.settings:scotsblogger:metadata in case you want to customize meta data.
+# Json/LD microdata is displayed with meta_foot() and is also available in the metadata structure.
+#
+</mvt:comment>
+
+	<mvt:item name="scotsblogger" param="meta_head()" />
+
+<mvt:comment>
+#
+# COMMENT THREADS: this is required for the collapse and form for comment threads.
+# This is ignored if comment threads are not turned on.
+#
+</mvt:comment>
+
+    <mvt:if expr="g.scotsblogger_blog:settings:comments_multi">
+		<style>
+		.sb-collapsible {
+			background-color: #d5d5d5;
+	    		color: #727272;
+	  		cursor: pointer;
+	  		padding: 10px;
+	  		border: none;
+	  		text-align: left;
+	  		outline: none;
+	  		font-size: 15px;
+		}
+
+		.sb-active, .sb-collapsible:hover {
+	  		background-color: #d5d5d5;
+		}
+
+		.sb-collapse-content {
+	  		padding: 0 18px;
+	  		display: none;
+	  		overflow: hidden;
+	  		background-color: #f1f1f1;
+		}
+		</style>
+	</mvt:if>
+
+</head>
+
+
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+	<mvt:item name="hdft" param="global_header" />
+
+	<section class="o-layout o-layout--column-reverse o-layout--row-reverse--l">
+
+<mvt:comment>
+#
+# CATEGORY TREE: Use this line (instead of the one just below)  if you want to show the category tree on the left. 
+# You must also uncomment the left sidebar category tree display down towards the bottom of this section.
+#
+<div class="o-layout__item u-width-12 u-width-9--l u-width-10--w">
+#
+</mvt:comment>
+
+	<div class="o-layout__item u-width-12">
+
+<mvt:comment> 
+# this is the "extra" page name 
+
+			<section class="o-layout">
+				<div class="o-layout__item">
+					<h1 class="c-heading-delta u-text-bold u-text-uppercase">&mvte:page:name;</h1>
+					<hr class="c-keyline">
+				</div>
+			</section>
+
+#
+</mvt:comment>
+	
+
+<mvt:comment>
+#
+# Header: Uncomment this to use page header content (in the header/footer section below)
+
+			<section class="o-layout">
+				<div class="o-layout__item">
+					<mvt:item name="hdft" param="header" />
+				</div>
+			</section>
+
+#
+</mvt:comment>
+
+
+			<section class="o-layout">
+				<div class="o-layout__item">
+
+<mvt:comment>
+#
+# scots blogger and cms content here
+#
+</mvt:comment>
+
+					<mvt:item name="content" />
+
+				</div>
+			</section>
+			
+			<section class="o-layout">
+				<div class="o-layout__item">
+					<mvt:item name="hdft" param="footer" />
+				</div>
+			</section>
+		</div>
+
+<mvt:comment>
+#
+# Remove the left sidebar category tree
+
+		<aside class="o-layout__item u-width-12 u-width-3--l u-width-2--w">
+			<mvt:item name="readytheme" param="navigationset( 'static_navigation' )" />
+		</aside>
+#
+</mvt:comment>
+	</section>
+
+	<mvt:item name="hdft" param="global_footer" />
+
+<mvt:comment>
+#
+# JSON/LD can be moved to the head tag but recommended to keep here
+#
+</mvt:comment>
+
+	&mvt:scotsblogger:metadata:jsonld:blog;
+	&mvt:scotsblogger:metadata:jsonld:blogroll;
+	&mvt:scotsblogger:metadata:jsonld:post;
+
+<mvt:comment>
+#
+# Contains required js and related
+#
+</mvt:comment>
+
+	<mvt:item name="scotsblogger" param="foot" />
+</body>
+</html>
+
+
+

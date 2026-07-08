@@ -1,0 +1,60 @@
+<div class="o-layout__item u-width-12 u-width-12--m">
+	<p>Remanufactured parts, and many high performance ones as well, start off as used parts that are pulled from vehicles. CORE (or <strong>C</strong>ash <strong>O</strong>n <strong>RE</strong>turn) charges are a way to keep costs down by incentivizing their return for re-manufacturing. At the time of purchase of an applicable part, the customer may choose to pay the core charge and receive a refund for it when returning it in acceptable condition within 60 days. This can help minimize downtime for customer's vehicle. Alternatively, the customer may send in the core first and the purchased part will ship out upon receipt of an acceptable core.</p>
+	<p>While shipment of the CORE part back is the responsibility of the customer, we do provide prepaid shipping at a reduced cost for a limited number of products.</p>
+
+	<h2 class="c-heading-delta">Returning your core:</h2>
+	<p><strong><span class="c-button u-bg-primary u-color-white u-text-bold u-text-uppercase" style="cursor:initial;">1</span>&nbsp;Make sure that you have removed all of the fittings from your old unit</strong></p>
+	<p><strong><span class="c-button u-bg-primary u-color-white u-text-bold u-text-uppercase" style="cursor:initial;">2</span>&nbsp;Drain all Fuel/Oil from the unit, and package the Core so that any Fuel/Oil residue does not escape the packaging(this will cause delays in shipping)</strong></p>
+	<p><strong><span class="c-button u-bg-primary u-color-white u-text-bold u-text-uppercase" style="cursor:initial;">3</span>&nbsp;Include Core Return Form, and try to re-use boxes &amp; packaging that the new parts were shipped in</strong></p>
+	
+	<div class="o-layout">
+		<div class="o-layout__item u-width-12 u-width-6--m">
+
+			<h2 class="c-heading-delta u-text-center">Correctly Packaged Core</h2>
+
+			<mvt:item name="readytheme" param="image( 'correctly-packaged-core' )" />
+			
+			<ul>
+			<li>Original box and ample packaging materials were re-used to protect the core</li>
+			<li>There is no residue leaking through the box</li>
+			<li>The Core Return Form is placed inside box and is easily accessible</li>
+			</ul>
+		</div>
+
+		<div class="o-layout__item u-width-12 u-width-6--m">
+			<h2 class="c-heading-delta u-text-center">Incorrectly Packaged Core</h2>			
+			<mvt:item name="readytheme" param="image( 'incorrectly-packaged-core' )" />
+
+			<ul>
+				<li>Little to no packaging materials were used to protect the Core(s) in transit</li>
+				<li>Oil/Fuel residue is leaking through the box which delayed delivery of the Core</li>
+				<li>The Core Return Form was not included</li>
+			</ul>
+		</div>
+	</div>
+
+	<h2 class="c-heading-delta"><strong>Core Credit Breakdown</strong></h2>
+
+	<p><strong>Full Credit:&nbsp;</strong>The core must be received within 60 days of purchase in acceptable condition. Any damages to the core during shipment back to the manufacturer are the responsibility of the customer and their package carrier.</p>
+	<p><strong>1/2 Credit:&nbsp;</strong>If the core is returned after between 60 and 180 days or if the housing is slightly damaged</p>
+	<p><strong>No Core Credit:&nbsp;</strong>Rusted, Corroded, Fire Damage, Seized, or received after 180 days</p>
+	
+	<h2 class="c-heading-delta"><strong>Additional Notes:</strong></h2>
+	<ul>
+		<li>Keep all tracking Numbers until you have received your Core refund</li>
+		<li>Please allow up to Two (2) Weeks from the time that the Core is received for the refund to process</li>
+		<li>Refund will go back to original method of payments</li>
+	</ul>
+
+	<center style="margin: 2rem 0 2rem 0;">
+		<a target="_blank" class="c-button c-button--huge u-bg-primary u-color-white u-text-bold u-text-uppercase" href="/pdfs_forms/Core Return Form.pdf">Click Here for Core Return Form</a>
+	</center>
+
+	<h2 class="c-heading-delta"><strong>Frequently Asked Questions:</strong></h2>
+
+	<h3 class="u-text-uppercase"><strong>Q:&nbsp; What if the part that I purchased from you is built by another Manufacturer(i.e., Industrial Injection, BD Diesel, etc.)?</strong></h3>
+	<p><strong>A:</strong> If the part that you purchased from Sinister Diesel was built by another Manufacturer, the new part should come with instructions for returning the Core. The Core must go back to the Manufacturer of the part. Once the Manufacturer receives the Core and inspects it for viability, they will notify us so that we can process the refund. The determination of the viability of the Core is at the discretion of the Manufacturer. Please allow up to&nbsp;<strong>Two(2) Weeks</strong>&nbsp;for refund processing from the time that the Manufacturer notifies us that the Core is accepted.</p>
+
+	<h3 class="u-text-uppercase"><strong>Q:&nbsp; What if I choose to send my Core in first?</strong></h3>
+	<p><strong>A:</strong> If you elect to send your Core in first, instead of paying the upfront Core Charge, we will send you a Core Return email. This email will include the Core Return Form and a link to this Core Return page. Once the Core is received, inspected and accepted, your new part will be shipped.</p>
+</div>

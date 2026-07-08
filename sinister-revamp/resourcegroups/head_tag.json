@@ -1,0 +1,11 @@
+{
+    "code": "head_tag",
+    "linked_js_resources": [
+        "runtimecombofacets",
+        "GTM-head-tag",
+        "GTM-dataLayer"
+    ],
+    "linked_css_resources": [
+        "square-payment"
+    ]
+}

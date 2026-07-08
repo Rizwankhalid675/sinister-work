@@ -1,0 +1,19 @@
+{
+  "name": "sinister-tiktok-sync",
+  "version": "1.0.0",
+  "description": "Sinister Diesel TikTok Shop ↔ Miva ↔ NetSuite sync service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "auth": "node auth.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "node-cron": "^3.0.0",
+    "oauth-1.0a": "^2.2.6",
+    "open": "^9.1.0"
+  }
+}

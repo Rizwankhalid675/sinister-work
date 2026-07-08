@@ -1,0 +1,55 @@
+{
+    "flex": {
+        "mmx_texteditor": {
+            "component_code": "mmx-text-editor",
+            "item_code": "mmx_texteditor",
+            "settings": {
+                "_flex": {
+                    "flex_version": 10.1103,
+                    "settings_version": "10.11.03"
+                },
+                "content": {
+                    "value": "<section style=\"padding: 20px; background-color: #f9f9f9; border-radius: 12px; max-width: 800px; margin: auto; font-family: Arial, sans-serif;\">\r\n  <h2 style=\"font-size: 24px; margin-bottom: 16px; color: #333;\">Download Truck Instructional Aids</h2>\r\n  <p style=\"font-size: 16px; margin-bottom: 12px; color: #555;\">Access our detailed instructional aids for trucks below:</p>\r\n  <ul style=\"list-style-type: none; padding-left: 0;\">\r\n    <li style=\"margin-bottom: 10px;\">\r\n      \ud83d\udd27 <a href=\"https://sinisterdiesel.com/pdfs_forms/60L_Bible.pdf\" target=\"_blank\" style=\"color: #007BFF; text-decoration: none;\">6.0 Powerstroke Manual (PDF)</a>\r\n    </li>\r\n    <li>\r\n      \ud83d\udd27 <a href=\"https://sinisterdiesel.com/pdfs_forms/6.7%20Powerstroke%20Bible.pdf\" target=\"_blank\" style=\"color: #007BFF; text-decoration: none;\">6.7 Powerstroke Manual (PDF)</a>\r\n    </li>\r\n  </ul>\r\n</section>"
+                }
+            }
+        }
+    },
+    "hdft": {
+        "footer": {
+            "template_filename": "manuals-footer.mvc"
+        },
+        "header": {
+            "template_filename": "manuals-header.mvc"
+        }
+    },
+    "seo_settings": {
+        "cat_lit": "category",
+        "cat_lit_choice": "category",
+        "plit_in_bc": 0,
+        "prod_lit": "product",
+        "prod_lit_choice": "product",
+        "sc_always": 0,
+        "sf_active": 0,
+        "sl_active": 0,
+        "sm_active": 1,
+        "suffix": "html",
+        "suffix_choice": "html",
+        "surlprefix": "https://sinisterdiesel.com/",
+        "url_delim": "/",
+        "urlprefix": "https://sinisterdiesel.com/"
+    },
+    "sequence": {
+        "sequence": [
+            {
+                "dt_end": 0,
+                "dt_start": 0,
+                "enabled": 1,
+                "id": "588595f71240fd229360870005efbe07",
+                "item": "flex",
+                "name": "Rich Text Editor",
+                "param": "mmx_texteditor"
+            }
+        ],
+        "title": "Sequence"
+    }
+}

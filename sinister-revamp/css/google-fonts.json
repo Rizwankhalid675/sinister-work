@@ -1,0 +1,13 @@
+{
+    "code": "google-fonts",
+    "type": "E",
+    "filepath": "https://fonts.googleapis.com/css?family=Poppins:300,400,600,700|Roboto:400i&display=optional",
+    "is_global": true,
+    "active": true,
+    "attributes": [
+        {
+            "name": "rel",
+            "value": "stylesheet"
+        }
+    ]
+}

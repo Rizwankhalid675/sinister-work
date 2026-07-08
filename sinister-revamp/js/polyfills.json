@@ -1,0 +1,8 @@
+{
+    "code": "polyfills",
+    "type": "L",
+    "branchless_filepath": "themes/colossus/core/js/polyfills.js",
+    "is_global": true,
+    "active": false,
+    "attributes": []
+}

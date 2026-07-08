@@ -1,0 +1,126 @@
+<mvt:item name="html_profile" />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;">
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:store:name;: &mvt:page:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+	<mvt:item name="applepay" param="head" />
+
+
+	<mvt:comment>MJB 2023/10/23 Klaviyo </mvt:comment>
+	<mvt:if expr="g.MW_Klaviyo_Send_Options:enabled">
+		<mvt:do file="g.Module_Library_DB" name="l.success" value="ImageType_Load_Code('main', l.settings:imagetype)" />
+		<mvt:assign name="l.settings:global_assigned_categories" value="''" />
+		<mvt:assign name="l.settings:itemNames" value="''" />
+		<mvt:assign name="l.settings:global_assigned_categories" value="'['" />
+		<mvt:assign name="l.settings:time_t" value="s.time_t" />
+		<script type="text/javascript">
+			var _learnq = _learnq || [];
+			_learnq.push(["track", "Started Checkout", {
+				"$event_id": "&mvt:basket:basket_id;_&mvt:time_t;",
+				"$value": &mvt:basket:total;,
+				"CheckoutURL": "&mvte:urls:OINF:secure;",
+				"Items": [
+					<mvt:foreach iterator="item" array="global_minibasket:groups">
+						<mvt:comment> Clear vars </mvt:comment>
+						<mvt:assign name="l.settings:assigned_categories" value="''" />
+
+						<mvt:if expr="l.settings:itemNames NE ''">,
+							<mvt:assign name="l.settings:itemNames" value="l.settings:itemNames $ ','" />
+						<mvt:else>
+							<mvt:assign name="l.settings:itemNames" value="'['" />
+						</mvt:if>
+						<mvt:assign name="l.settings:itemNames" value="l.settings:itemNames $ '\"' $ l.settings:item:product:name $ '\"'"/>
+					
+						<mvt:do file="g.Module_Library_DB" name="l.success" value="Product_Load_Code(l.settings:item:product:code, l.settings:item_p )" />
+						<mvt:do file="g.Module_Feature_URI_UT" name="l.settings:item:uri" value="Store_Product_URL(l.settings:item:product, NULL)" />     
+				
+						<mvt:do name="l.result" file="g.Module_Library_DB" value="CategoryList_Load_Offset_Product_Assigned(l.settings:item:product:id,0,'','',0,l.null, g.assigned_categories )" />
+				
+						<mvt:assign name="l.settings:assigned_categories" value="'['" />
+						<mvt:foreach iterator="category" array="global:assigned_categories">
+							<mvt:if expr="POS2 GT 1">
+								<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ ','" />  
+							</mvt:if>
+
+							<mvt:if expr="l.settings:global_assigned_categories NE '['">
+								<mvt:assign name="l.settings:global_assigned_categories" value="l.settings:global_assigned_categories $ ','" />  
+							</mvt:if>
+							
+							<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ '\"' $ encodejavascriptstring(l.settings:category:name) $ '\"'" />   
+							<mvt:assign name="l.settings:global_assigned_categories" value="l.settings:global_assigned_categories $ '\"' $ encodejavascriptstring(l.settings:category:name) $ '\"'" />   
+						</mvt:foreach>
+						<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ ']'"/>  
+
+						<mvt:do name="l.success" file="g.Module_Library_DB" value="ProductImage_Load_Type(l.settings:item:product:id, 1, l.settings:imagetype)" />
+						<mvt:do name="l.success" file="g.Module_Library_DB" value="Image_Load_ID(l.settings:imagetype:image_id, l.settings:imagedata)" />
+						<mvt:assign name="g.socialImage" value="g.baseurl $ l.settings:imagedata:image" />
+						{
+						"ProductID": "&mvt:item:code;",
+						"SKU": "&mvt:item:sku;",
+						"ProductName": "&mvt:item:name;",
+						"Quantity": &mvt:item:quantity;,
+						"ItemPrice": &mvt:item:price;,
+						"RowTotal": <mvt:eval expr="l.settings:item:price * l.settings:item:quantity" />,
+						"ProductURL": "&mvt:item:uri;",
+						"ImageURL": "&mvt:global:socialImage;",
+						"ProductCategories": &mvt:assigned_categories;
+					},
+					</mvt:foreach>
+					<mvt:assign name="l.settings:global_assigned_categories" value="l.settings:global_assigned_categories $ ']'"/>     
+					
+					<mvt:assign name="l.settings:itemNames" value="l.settings:itemNames $ ']'"/>
+				],
+				"Categories": &mvt:global_assigned_categories;,
+				"ItemNames": &mvt:itemNames;
+				
+			}]);
+		</script>
+	</mvt:if>
+</head>
+
+
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+	<mvt:item name="hdft" param="global_header" />
+
+	<section class="o-layout">
+		<div class="o-layout__item">
+			<mvt:item name="hdft" param="header" />
+		</div>
+	</section>
+
+	<section class="o-layout">
+		<div class="o-layout__item u-width-12">
+			<section class="t-expanded-block t-account-landing-section u-bg-white">
+				<div class="o-layout__item t-expanded-block__item t-account-landing-section__content u-width-12">
+					<section class="o-layout o-layout--wide o-layout--justify-between">
+						<div class="o-layout__item u-width-12 u-width-7--l">
+							<mvt:item name="readytheme" param="contentsection( 'messages' )" />
+							<mvt:item name="customer" />
+						</div>
+						<aside class="o-layout__item u-width-12 u-width-5--l u-width-4--w">
+							<mvt:item name="basket" />
+						</aside>
+					</section>
+				</div>
+			</section>
+		</div>
+	</section>
+	
+	<section class="o-layout">
+		<div class="o-layout__item">
+			<mvt:item name="hdft" param="footer" />
+		</div>
+	</section>
+
+	<mvt:item name="hdft" param="global_footer" />
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+    "http_headers": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ]
+}

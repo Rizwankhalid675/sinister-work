@@ -1,0 +1,335 @@
+<link rel="icon" type="image/png" href="https://sinisterdiesel.com/mm5/graphics/00000001/8/apple-icon-1_2.png">
+<link rel="shortcut icon" href="https://sinisterdiesel.com/mm5/graphics/00000001/8/apple-icon-1_2.png">
+<link rel="apple-touch-icon" href="https://sinisterdiesel.com/graphics/00000001/8/apple-icon-1_2.png">
+<mvt:item name="customfields" param="Read_Basket( 'state_via_ip', l.settings:state_via_ip )" />
+<mvt:if expr="(NOT l.settings:state_via_ip) OR g.Test_Ip_Reset">
+	<mvt:if expr="g.Test_Use_Ip">
+		<mvt:assign name="l.settings:remote_addr" value="g.Test_Use_Ip" />
+	<mvt:else>
+		<mvt:assign name="l.settings:remote_addr" value="s.remote_addr" />
+	</mvt:if>
+
+	<mvt:assign name="l.settings:api_url" value="'https://pro.ip-api.com/json/' $ l.settings:remote_addr $ '?key=zEwoB0HWbQodmzp'"/>
+	<mvt:call ACTION="l.settings:api_url" METHOD="'GET'">
+		<mvt:assign name="l.settings:api_response" value="l.settings:api_response $ s.callvalue"/>
+	</mvt:call>
+	<mvt:assign name="l.decoded" value="Miva_Json_Decode(l.settings:api_response, l.settings:response_array)"/>
+
+	<mvt:item name="customfields" param="Write_Basket( 'state_via_ip', l.settings:response_array:region )" /> 
+	<mvt:assign name="l.settings:state_via_ip" value="l.settings:response_array:region" />
+</mvt:if>
+<mvt:item name="customfields" param="Read_Basket( 'state_via_ip', l.settings:state_via_ip )" />
+
+<mvt:if expr="'CTGY' CIN l.settings:page:code">
+	<link rel="canonical" href="&mvte:category:link;" itemprop="url">
+<mvt:elseif expr="'PROD' CIN l.settings:page:code OR l.settings:page:code EQ 'PATR'">
+	<link rel="canonical" href="&mvt:product:link;" itemprop="url">
+<mvt:else>
+	<link rel="canonical" href="&mvte:urls:_self:auto;" itemprop="url">
+</mvt:if>
+<mvt:item name="prodctgy_meta" param="combined" />
+<script type="text/javascript" src="&mvt:global:clientside_url;Module_Code=mvga&amp;Filename=mvga.js"></script>
+
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+<mvt:comment>
+	|
+	|	Moved Bing tracking back to GTM.
+	|	35400970 - GDMZ
+	|
+	<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"4077389"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+</mvt:comment>
+
+<mvt:comment>Searchspring Integration — deactivated while native Miva search/category_listing is being built out (subscription being cancelled). Flip back to 'true' to restore instantly.</mvt:comment>
+<mvt:assign name="g.ss_enable" value="'false'" />
+<mvt:assign name="g.ss_site_id" value="'5xnn9v'" />
+<mvt:assign name="g.ss_search_url" value="'shop'" />
+
+<mvt:assign name="g.ss_shopper_config" value="''" />
+<mvt:if expr="g.Basket:cust_id GT 0">
+	<mvt:assign name="g.ss_shopper_config" value="' shopper = { id: \"' $ g.Customer:id $ '\" };'" />
+</mvt:if>
+
+<mvt:assign name="g.ss_defer_config" value="' defer'" />
+<mvt:assign name="g.ss_category_config" value="''" />
+<mvt:if expr="'CTGY' CIN l.settings:page:code">
+	<mvt:assign name="g.ss_defer_config" value="''" />
+
+	<mvt:assign name="g.ss_category" value="''" />
+	<mvt:foreach iterator="cats" array="breadcrumbs:links">
+		<mvt:if expr="POS1 EQ 1">
+			<mvt:assign name="g.ss_category" value="l.settings:cats:name" />
+		<mvt:else>
+			<mvt:assign name="g.ss_category" value="g.ss_category $ '>' $ l.settings:cats:name" />
+		</mvt:if>
+	</mvt:foreach>
+	<mvt:assign name="g.ss_category_encoded" value="encodeattribute(g.ss_category)" />
+
+	<mvt:if expr="l.settings:category:code NE g.ss_search_url">
+		<mvt:assign name="g.ss_category_config" value="'category = { code : \"' $ l.settings:category:code $ '\", name: \"' $ l.settings:category:name $ '\", path: \"' $ g.ss_category_encoded $ '\" }'"/>
+	</mvt:if>
+</mvt:if>
+
+<mvt:comment>
+	Legacy third-party search runtime disabled for revamp_v2. Native Miva category/search
+	rendering now owns product discovery; keep feed templates separate.
+</mvt:comment>
+
+<style>
+
+
+.t-global-search{
+padding-bottom: 0 !important;
+}
+
+input.u-bg-primary, button.u-bg-primary{
+color:white !important;
+}
+.t-site-header__masthead .t-primary-link.c-button{
+padding:0;
+}
+.slick-next{
+right: 5px;
+}
+.slick-prev{
+left: 20px;
+}
+.t-featured-categories{
+align-items: center;
+	margin: auto;
+max-width: 1024px;
+}
+.x-hero .slick-slide img{
+width: 100%;
+}
+.slick-slider .slick-track, .slick-slider .slick-list{
+max-height:740px;
+height:auto;
+}
+.u-printable__content .o-layout, .u-printable__content{
+padding:16px;
+}
+.x-product-imagery__thumbnail-list.slick-initialized + .x-product-imagery__showcase {
+margin-bottom:10px !important;
+}
+.slick-slide img {
+height:auto;
+object-fit: contain;
+	margin: auto;
+
+}
+.t-featured-categories{
+padding-top:2.5rem;
+}
+.t-featured-categories__heading{
+margin-bottom:0.5rem;
+}
+.ss__has-results .x-product-list__figure {
+padding:8px 0;
+
+}
+.x-collapsing-breadcrumbs__group, .x-collapsing-breadcrumbs__list{
+padding-top:2rem;
+}
+.ss__has-results .x-product-list__figure .x-product-list__figure-caption{
+
+	padding-bottom: 8px;
+}
+.first_two > div {
+margin-bottom:10px;
+}
+footer .c-collapsible-menu__label{
+color:white;
+}
+.x-product-description article{
+padding: 0 30px;
+}
+.u-bg-white [class^="u-icon-"]::before, .u-bg-white [class*=" u-icon-"]::before, .u-bg-white [data-icon]::before {
+	color: black;
+}
+.u-bg-white [class^="u-icon-"]:hover::before, .u-bg-white [class*=" u-icon-"]:hover::before, .u-bg-white [data-icon]:hover::before{
+color: white;
+}
+.x-product-imagery__showcase, .x-product-layout-images__thumbnail-image{
+cursor: pointer;
+}
+.x-product-layout-images__thumbnail-image{
+	height:100px;
+min-height:100px;
+display:flex!important;
+justify-content:center;
+}
+.x-omega-navigation{
+top:auto;
+}
+
+.x-quantify>*{
+margin: 0px 3px !important;
+	padding: 5px;
+	border: solid 1px #c0c0c0 !important;
+}
+.x-messages--error, .x-messages--success{
+font-size:13px !important;
+}
+
+.x-product-list__image.t-lazy-load-image{
+animation-name: none;
+}
+.x-product-list__figure-caption {
+padding-top: 0;
+}
+.x-product-list__picture{
+
+}
+.t-site-header__logo img {
+	max-width: 185px;
+}
+
+.contact-info svg{
+margin-right:12px;
+}
+
+footer .address{
+padding: 0;
+}
+
+.left-footer{
+margin-left: auto;
+	justify-content: flex-start;
+padding-bottom: 10px;
+}
+.signup_form svg{
+	min-width: 60px;
+}
+footer.t-site-footer .top_footer .contact-info{
+padding-bottom: 0;
+margin-bottom:0;
+}
+footer.t-site-footer .top_footer {
+	padding: 10px 0 20px 0;
+}
+
+#js-PROD .slick-track > div > div, #js-PROD .slick-track, #js-PROD .slick-slide img{
+height:100%
+}
+
+#js-PROD .slick-vertical .slick-slide, #js-PROD #thumbnails .slick-track > div > div{
+height:100px;
+min-heihgt:100px;
+}
+#js-PROD .slick-vertical .slick-slide{
+display:contents;
+}
+
+@media only screen and (min-width: 60em) {
+	.secure-checkout{
+	position: absolute;
+	right: 0;
+	margin-right: 63px;}
+	.t-global-footer-social-links {
+	text-align: start;
+}
+}
+.newsletter_form.signup_form{
+padding-left: 38px;
+}
+
+.x-product-list__image{
+height:100%;
+object-fit: contain;
+}
+
+.t-featured-categories .x-product-list__image{
+height: auto;
+}
+
+.u-icon-heart-empty:hover::before{
+color:lightgray !important;
+}
+
+.recommended a{
+box-shadow: none !important;
+}
+
+.x-product-imagery__thumbnail-list .slick-next::before, .x-product-imagery__thumbnail-list .slick-prev::before{
+color:black;
+font-family: 'ReadyTheme Icons';
+}
+
+
+@media only screen and (max-width: 60em) {
+	.megamenu-shadow {
+		box-shadow: none;
+	}
+	.x-omega-navigation__list {
+		background: white;
+	}
+	.newsletter_form.signup_form{
+		justify-content: center;
+	padding:12px 0;
+
+	}
+	.top_footer>.o-wrapper{
+		padding: 0 8px;
+	}
+	.x-omega-navigation.is-open {
+		top: 0 !important;
+	}
+	.t-filters-trigger>*{
+	color:black !important;
+	}
+	.x-display-list-filtering__sort-by{
+	align-self: center;
+	border: solid rgba(205, 205, 205, 0.7);
+		border-width: 1px 1px 1px 1px;
+		padding: 1rem;
+	}
+}
+
+@media (max-width: 61.9em){
+.x-omega-navigation__parents {
+	display: none;
+}
+.megamenu-shadow {
+		box-shadow: none;
+	}
+	.x-omega-navigation__list {
+		background: white;
+	}
+}
+
+@media (max-width: 768px){
+footer.t-site-footer .top_footer .newsletter_form {
+align-items:center !important;
+}
+}
+
+@media (max-width: 640px){
+.fitment .mm_combination_facet_fields select {
+min-width: 100% !important;
+margin-bottom:6px;
+}
+.mm_combination_facet_action_container{
+padding:0 !important;
+}
+}
+
+
+button[aria-live="polite"] {
+background-color: red;
+}
+.t-related-product-list .slick-slider .slick-track, .t-related-product-list .slick-slider .slick-list{
+height:100%!important;
+max-height:100%!important;
+}
+<mvt:comment>MJB, this displays the "close" X for the zinrelo rewards popup</mvt:comment>
+#zrl_ld_close_button div{
+	display:inline-block;
+}
+</style>
+
+<mvt:item name="ga_tracking" />
+<script type="text/javascript" src="&mvt:global:clientside_url;Module_Code=mvga&amp;Filename=mvga.js"></script>
+<mvt:item name="ga_transaction" />
+<mvt:item name="head" param="modules" />

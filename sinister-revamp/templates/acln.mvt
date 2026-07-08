@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<mvt:item name="html_profile" />
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvte:global:basehref;">
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:page:name; | &mvt:store:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+	<mvt:comment>Revamp V2 route takeover fallback: direct V2 CSS while live page resource assignments are verified.</mvt:comment>
+	<link rel="stylesheet" href="/mm5/css/00000001/sd2-global.css" media="all">
+	<link rel="stylesheet" href="/css/00000001/sd2-global.css" media="all">
+	<link rel="stylesheet" href="/sd2-global.css" media="all">
+	<mvt:comment>
+		Customer Dashboard V2 staging template. Inactive only.
+		Do not assign over ACLN, ORDH, ORDL, ACAD, or ACED.
+			Option A repair: keep this file dashboard-only and link Orders,
+			Addresses, Returns, and Settings to existing legacy account pages.
+			Saved Vehicles preview uses existing sd2v2_garage localStorage reader
+			in js/sd2-v2-components.js; do not create a second saved-vehicle system.
+			TODO: wire real account/order/address arrays when confirmed.
+	</mvt:comment>
+</head>
+<body>
+	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
+
+<main class="sd2-v2-account" data-v2-account>
+	<mvt:comment>Composes existing account partials: dashboard, welcome header, summary, quick actions, recent orders, saved vehicles preview.</mvt:comment>
+	<header class="sd2-v2-account-hero">
+		<p class="sd2-kicker">Account Dashboard</p>
+		<h1>Welcome Back, &mvte:customer:ship_fname;</h1>
+		<p>Manage your orders, addresses, returns, and saved vehicles.</p>
+	</header>
+	<nav class="sd2-v2-account-nav" aria-label="Account sections">
+		<a class="is-current" href="&mvte:urls:ACLN:auto;">Dashboard</a>
+		<a href="&mvte:urls:ORDH:auto;">Orders</a>
+		<a href="&mvte:urls:ACAD:auto;">Addresses</a>
+		<a href="&mvte:urls:ACRT:auto;">Returns</a>
+		<a href="&mvte:urls:ACED:auto;">Settings</a>
+		<button type="button" data-v2-garage-toggle>Garage</button>
+	</nav>
+	<section class="sd2-v2-account-grid">
+		<div class="sd2-v2-account-main">
+			<section class="sd2-v2-account-card" aria-labelledby="sd2-v2-account-summary-title"><h2 id="sd2-v2-account-summary-title">Account Summary</h2><div class="sd2-v2-account-summary"><p><strong>Email</strong><span>&mvte:customer:bill_email;</span></p><p><strong>Primary Vehicle</strong><span data-v2-account-garage-copy>No active vehicle selected.</span></p></div>
+				<mvt:comment>TODO: no confirmed lifetime-order-count field found on the customer object in acln.mvt/ordh.mvt (only an orders_found boolean gate exists on the orderhistory_list item) — do not fabricate a count.</mvt:comment>
+			</section>
+			<section class="sd2-v2-account-card" aria-labelledby="sd2-v2-recent-orders-title">
+				<h2 id="sd2-v2-recent-orders-title">Recent Orders</h2>
+				<mvt:comment>Real orderhistory_list item, reused verbatim from acln.mvt — renders orders_found gate and the real orders/order:shipments iterators.</mvt:comment>
+				<div class="sd2-v2-account-table-wrap">
+					<mvt:item name="orderhistory_list" />
+				</div>
+			</section>
+		</div>
+		<aside class="sd2-v2-account-side">
+			<section class="sd2-v2-account-card"><h2>Quick Actions</h2><div class="sd2-v2-account-actions"><a class="sd2-btn sd2-btn--secondary" href="&mvte:urls:ORDH:auto;">View Orders</a><a class="sd2-btn sd2-btn--secondary" href="&mvte:urls:ACAD:auto;">Manage Addresses</a><a class="sd2-btn sd2-btn--secondary" href="&mvte:urls:ACRT:auto;">Start Return</a><a class="sd2-btn sd2-btn--secondary" href="&mvte:urls:ACED:auto;">Account Settings</a><button class="sd2-btn sd2-btn--secondary" type="button" data-v2-garage-toggle>Manage Garage</button></div></section>
+			<section class="sd2-v2-account-card"><h2>Saved Vehicles</h2><div class="sd2-v2-account-vehicles" data-v2-account-garage-list><p>[Placeholder] Saved vehicles render from Garage storage or account data.</p></div></section>
+		</aside>
+	</section>
+</main>
+	<mvt:item name="hdft" param="footer" />
+	<mvt:item name="hdft" param="global_footer" />
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="footer_js_dev" /><mvt:else><mvt:item name="head" param="footer_js" /></mvt:if>
+	<mvt:comment>Revamp V2 route takeover fallback: direct V2 JS while live page resource assignments are verified.</mvt:comment>
+	<script src="/mm5/scripts/00000001/sd2-v2-components.js" defer></script>
+	<script src="/scripts/00000001/sd2-v2-components.js" defer></script>
+	<script src="/sd2-v2-components.js" defer></script>
+	<mvt:comment>Revamp V2 fallback: legacy global scripts emitted pathless on route takeover pages.</mvt:comment>
+	<script src="/scripts/00000001/runtime_combofacets.js" defer></script>
+	<script src="/themes/colossus/core/js/searchfield.js" defer></script>
+	<script src="/themes/colossus/ui/js/theme.js" defer></script>
+</body>
+</html>

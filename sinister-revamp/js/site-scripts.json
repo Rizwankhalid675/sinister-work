@@ -1,0 +1,11 @@
+{
+    "code": "site-scripts",
+    "type": "C",
+    "is_global": true,
+    "active": true,
+    "attributes": [],
+    "linked_resources": [
+        "dom",
+        "core_scripts"
+    ]
+}

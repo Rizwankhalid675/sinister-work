@@ -1,0 +1,219 @@
+<section class="t-expanded-block t-related-products u-bg-white" style="width: 100%;">
+  <div class="t-related-product-list">
+    <h3 class="c-heading-delta u-text-bold t-related-product-list__heading">
+      Frequently Bought Together
+    </h3>
+
+    <!-- IMPORTANT: hook renamed so theme carousel JS won't touch it -->
+    <div class="x-product-list" data-hook="related-products-grid">
+      <mvt:foreach iterator="product" array="related_products:products">
+        <div class="u-text-center x-product-list__item">
+          <a class="u-block u-color-black x-product-list__link" href="&mvte:product:link;">
+            <figure class="x-product-list__figure">
+              <picture class="x-product-list__picture">
+                <img
+                  alt="&mvte:product:name;"
+                  class="x-product-list__image"
+                  loading="lazy"
+                  decoding="async"
+                  src="&mvte:product:imagetypes:main;"
+                >
+              </picture>
+
+              <figcaption class="x-product-list__figure-caption">
+                <span class="x-product-list__name">&mvte:product:name;</span>
+
+                <mvt:if expr="l.settings:product:base_price GT l.settings:product:price">
+                  <span class="x-product-list__price"><s>&mvt:product:formatted_base_price;</s></span>
+                  <span class="x-product-list__price-red">&mvt:product:formatted_price;</span>
+                <mvt:else>
+                  <span class="x-product-list__price">&mvt:product:formatted_price;</span>
+                </mvt:if>
+
+                <form method="post" action="/mm5/merchant.mvc?Screen=BASK">
+                  <input type="hidden" name="Action" value="ADPR">
+                  <input type="hidden" name="Product_Code" value="&mvte:product:code;">
+                  <input type="hidden" name="Quantity" value="1">
+                  <input class="related_adpr" type="submit" value="Add to Cart">
+                </form>
+              </figcaption>
+            </figure>
+          </a>
+        </div>
+      </mvt:foreach>
+    </div>
+  </div>
+</section>
+
+<style>
+.t-related-products{
+  width: min(100% - 40px, 1420px) !important;
+  margin: 34px auto 0 !important;
+  padding: clamp(24px, 3vw, 42px) !important;
+  border: 1px solid rgba(24,51,184,0.10) !important;
+  border-radius: 18px !important;
+  background: rgba(255,255,255,0.94) !important;
+  box-shadow: 0 18px 52px rgba(8,14,40,0.10) !important;
+}
+
+.t-related-product-list__heading{
+  display: inline-block !important;
+  margin: 0 0 22px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid #D4A017 !important;
+  color: #101421 !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: clamp(24px, 2.2vw, 34px) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+}
+
+.t-related-products [data-hook="related-products-grid"]{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 2vw, 24px) !important;
+}
+
+.t-related-products .x-product-list__item{
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+}
+
+.t-related-products .x-product-list__link{
+  display: flex !important;
+  height: 100% !important;
+  color: #101421 !important;
+  text-decoration: none !important;
+}
+
+.t-related-products .x-product-list__figure{
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border: 1px solid rgba(24,51,184,0.12) !important;
+  border-radius: 16px !important;
+  background: linear-gradient(145deg, #ffffff, #f5f7ff) !important;
+  box-shadow: 0 10px 28px rgba(24,51,184,0.09) !important;
+  overflow: hidden !important;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease !important;
+}
+
+.t-related-products .x-product-list__link:hover .x-product-list__figure{
+  transform: translateY(-4px) !important;
+  border-color: rgba(24,51,184,0.24) !important;
+  box-shadow: 0 18px 42px rgba(24,51,184,0.15) !important;
+}
+
+.t-related-products .x-product-list__picture{
+  min-height: 180px !important;
+  margin: 16px 16px 0 !important;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  background: #eef2ff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.t-related-products .x-product-list__image{
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 170px !important;
+  margin: 0 auto !important;
+  padding: 12px !important;
+  object-fit: contain !important;
+}
+
+.t-related-products .x-product-list__figure-caption{
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  padding: 16px !important;
+  text-align: left !important;
+}
+
+.t-related-products .x-product-list__name{
+  min-height: 3.3em !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  color: #101421 !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1.12 !important;
+}
+
+.t-related-products .x-product-list__price,
+.t-related-products .x-product-list__price-red{
+  color: #1833B8 !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+}
+
+.t-related-products form{
+  margin-top: auto !important;
+}
+
+.t-related-products .related_adpr{
+  width: 100% !important;
+  min-height: 42px !important;
+  border-radius: 10px !important;
+  background: #1833B8 !important;
+  border: 0 !important;
+  color: #fff !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  letter-spacing: .8px !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 10px 22px rgba(24,51,184,.22) !important;
+}
+
+@media (max-width: 1100px){
+  .t-related-products [data-hook="related-products-grid"]{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px){
+  .t-related-products{
+    width: calc(100% - 24px) !important;
+    padding: 18px !important;
+  }
+  .t-related-products [data-hook="related-products-grid"]{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 14px !important;
+  }
+  .t-related-products .x-product-list__picture{
+    min-height: 130px !important;
+    margin: 10px 10px 0 !important;
+  }
+  .t-related-products .x-product-list__image{
+    height: 118px !important;
+  }
+  .t-related-products .x-product-list__figure-caption{
+    padding: 10px 12px 12px !important;
+    text-align: center !important;
+  }
+  .t-related-products .x-product-list__name{
+    min-height: 2.6em !important;
+    -webkit-line-clamp: 2 !important;
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+  }
+  .t-related-products .x-product-list__item:nth-child(n+5){
+    display: none !important;
+  }
+}
+</style>

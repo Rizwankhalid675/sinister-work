@@ -1,0 +1,8 @@
+{
+    "active": 1,
+    "descrip": "Global Site Header Message",
+    "link_dest": "https://sinisterdiesel.com/",
+    "link_targ": "_self",
+    "link_type": "N",
+    "message": "<!DOCTYPE html>\n<html>\n<head>\n  <title>Website Banner</title>\n  <style>\n    .banner {\n      background-color: #3b3b3b;\n      padding: 6px 12px;\n      text-align: center;\n      font-size: 14px;\n      font-weight: 400;\n      color: #f4f4f4;\n    }\n\n    .banner a {\n      color: #f4f4f4;\n      text-decoration: none;\n      display: inline-block;\n    }\n\n    .line-1,\n    .line-2 {\n      display: inline;\n    }\n\n    .rating {\n      color: #0072CE; /* Sinister Blue */\n      font-weight: 400;\n    }\n\n    /* ---------- MOBILE ---------- */\n    @media (max-width: 600px) {\n      .banner {\n        font-size: 13px;\n        padding: 8px 10px;\n      }\n\n      .line-1,\n      .line-2 {\n        display: block;   /* stack lines */\n      }\n\n      .line-2 {\n        margin-top: 2px;\n      }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"banner\">\n    <a href=\"https://sinisterdiesel.com/customer-reviews.html\">\n      <span class=\"line-1\">\n        Trusted by Diesel Owners Since 2009\n      </span>\n      <span class=\"line-2\">\n        \u2022 <span class=\"rating\">4.8\u2605</span> (20,000+ Verified Reviews)\n      </span>\n    </a>\n  </div>\n</body>\n</html>"
+}

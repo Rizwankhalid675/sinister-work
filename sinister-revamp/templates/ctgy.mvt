@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<mvt:item name="html_profile" />
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvte:global:basehref;">
+
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:page:name; | &mvt:store:name;</title>
+	</mvt:if>
+
+	<mvt:if expr="g.useDevResources EQ 1">
+		<mvt:item name="head" param="css_list_dev" />
+	<mvt:else>
+		<mvt:item name="head" param="css_list" />
+	</mvt:if>
+
+	<mvt:item name="head" param="head_tag" />
+
+	<link rel="stylesheet" href="/mm5/css/00000001/sd2-global.css" media="all">
+	<link rel="stylesheet" href="/css/00000001/sd2-global.css" media="all">
+	<link rel="stylesheet" href="/sd2-global.css" media="all">
+</head>
+
+<body>
+	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
+
+	<main class="sd2-v2-search-page" data-v2-listing-page>
+		<div class="sd2-wrap">
+
+			<header class="sd2-v2-search-page__head">
+				<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+					<a href="&mvte:urls:SFNT:auto;">Home</a>
+					<span aria-hidden="true">/</span>
+					<span>&mvte:category:name;</span>
+				</nav>
+
+				<div class="sd2-v2-search-page__title-row">
+					<div>
+						<p class="sd2-eyebrow">Product Listing</p>
+						<h1 class="sd2-heading-lg">&mvte:category:name;</h1>
+					</div>
+					<p class="sd2-v2-search-page__count">Category products</p>
+				</div>
+			</header>
+
+			<div class="sd2-v2-result-tools">
+				<div class="sd2-v2-chips" data-v2-filter-chips>
+					<span class="sd2-v2-chip">&mvte:category:name;</span>
+				</div>
+
+				<form class="sd2-v2-sort" method="get" action="&mvte:urls:_self:auto_noparams;">
+					<mvt:item name="urls" param="hidden_params:_self:auto" />
+
+					<label class="sd2-label" for="sd2-v2-listing-sort">Sort</label>
+					<select class="sd2-field" id="sd2-v2-listing-sort" name="Sort_By" onchange="this.form.submit();">
+						<option value="disp_order">Recommended</option>
+						<option value="price_asc">Price: Low to High</option>
+						<option value="price_desc">Price: High to Low</option>
+						<option value="newest">Newest Items</option>
+					</select>
+				</form>
+			</div>
+
+			<section class="sd2-v2-search-page__layout" aria-label="Category products">
+				<aside class="sd2-v2-filter-rail" aria-label="Filters">
+					<mvt:item name="facets" />
+				</aside>
+
+				<div class="sd2-v2-pgrid-wrap">
+					<mvt:item name="category_listing" />
+				</div>
+			</section>
+
+			<mvt:comment>Temporary Revamp_v2 category_listing integration diagnostic. Remove after CTGY data is confirmed.</mvt:comment>
+			<mvt:assign name="l.sd2_category_listing_products_count" value="miva_array_elements(l.settings:category_listing:products)" />
+			<mvt:assign name="l.sd2_all_products_count" value="miva_array_elements(l.settings:all_products:products)" />
+			<mvt:assign name="l.sd2_facets_count" value="miva_array_elements(l.settings:facets:facets)" />
+			<mvt:assign name="l.sd2_applied_facets_count" value="miva_array_elements(l.settings:facets:applied_facets)" />
+			<script>
+				console.log('[SD2 CTGY DEBUG]', {
+					screen: '&mvte:global:Screen;',
+					categoryCode: '&mvte:global:Category_Code;',
+					categoryName: '&mvte:category:name;',
+					categoryId: '&mvte:category:id;',
+					categoryListingMode: '&mvte:category_listing:mode;',
+					categoryListingTotal: '&mvte:category_listing:total_prod_count;',
+					categoryListingProductsLength: '&mvte:sd2_category_listing_products_count;',
+					allProductsTotal: '&mvte:all_products:total_prod_count;',
+					allProductsLength: '&mvte:sd2_all_products_count;',
+					facetsCount: '&mvte:sd2_facets_count;',
+					appliedFacetsCount: '&mvte:sd2_applied_facets_count;',
+					domProductCards: document.querySelectorAll('.sd2-v2-product-card, .product-item, [data-mm-linktype="product-list-link"]').length,
+					domFacets: document.querySelectorAll('.x-refinery-set, [data-hook="add-refinery"], [data-hook="horizontal-refinery"]').length,
+					domProductGridText: document.querySelector('.sd2-v2-pgrid-wrap') ? document.querySelector('.sd2-v2-pgrid-wrap').innerText.trim().slice(0, 500) : null
+				});
+			</script>
+		</div>
+	</main>
+
+	<mvt:item name="hdft" param="footer" />
+	<mvt:item name="hdft" param="global_footer" />
+
+	<mvt:if expr="g.useDevResources EQ 1">
+		<mvt:item name="head" param="footer_js_dev" />
+	<mvt:else>
+		<mvt:item name="head" param="footer_js" />
+	</mvt:if>
+
+	<script src="/mm5/scripts/00000001/sd2-v2-components.js" defer></script>
+	<script src="/scripts/00000001/sd2-v2-components.js" defer></script>
+	<script src="/sd2-v2-components.js" defer></script>
+</body>
+</html>

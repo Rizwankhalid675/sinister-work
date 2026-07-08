@@ -1,0 +1,550 @@
+<mvt:comment>
+	Header Experience V2 — additive, inactive. Real Miva constructs reused
+	verbatim: readytheme logo data, readytheme banner('header_message'), account routed
+	to ACCTV2 for staging, cart drawer routed to BASKV2 for staging, with
+	data-hook="open-mini-basket"/"mini-basket-count". Search trigger opens the
+	Search Console overlay (cssui-search-console-v2.mvt) rather than a raw
+	form here — the real V2 search submission to &mvte:urls:SRCHV2:auto; with field name "Search"
+	lives in that component, verified there. Garage trigger opens the Garage
+	Experience panel (sd2-v2-garage-selector.mvt).
+</mvt:comment>
+
+<div class="sd2-v2-hdr-root">
+
+	<div class="sd2-v2-hdr-trust">
+		<div class="sd2-v2-hdr-trust__inner">
+			<span class="sd2-v2-hdr-trust__plate">MADE &amp; TESTED IN THE USA &middot; SINCE 2008</span>
+			<span class="sd2-v2-hdr-trust__links">
+				<a href="/help-center.html">Help Center</a>
+				<a href="&mvte:urls:ORDH:auto;">Track Order</a>
+			</span>
+		</div>
+	</div>
+
+	<mvt:item name="readytheme" param="banner( 'header_message' )" />
+
+	<header class="sd2-v2-hdr" data-hook="site-header" data-v2-sticky-header>
+		<div class="sd2-v2-hdr__row">
+
+			<button class="sd2-v2-hdr__mobile-toggle" type="button" data-v2-drawer-open aria-label="Open menu" aria-expanded="false">
+				<svg class="sd2-icon sd2-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+			</button>
+
+			<a class="sd2-v2-hdr__logo" href="&mvte:urls:SFNTV2:auto;" title="&mvt:global:store:name;" rel="nofollow">
+				<mvt:if expr="l.settings:readytheme:logo_type EQ 'text'">
+					<span class="sd2-v2-hdr__logo-text">&mvt:readytheme:logo_name;<small class="sd2-v2-hdr__logo-tag">&mvt:readytheme:logo_tagline;</small></span>
+				<mvt:elseif expr="l.settings:readytheme:logo_type EQ 'image'">
+					<img src="&mvte:readytheme:logo_image;" alt="&mvt:readytheme:logo_alt;">
+				<mvt:else>
+					<span class="sd2-v2-hdr__logo-text">Sinister Diesel<small class="sd2-v2-hdr__logo-tag">Diesel Performance</small></span>
+				</mvt:if>
+			</a>
+
+			<!-- GARAGE TRIGGER — "My Truck" -->
+			<button class="sd2-v2-hdr__garage" type="button" data-v2-garage-toggle aria-haspopup="true" aria-expanded="false">
+				<svg class="sd2-icon sd2-v2-hdr__garage-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12l1.5-5A2 2 0 0 1 6.4 5.5h11.2A2 2 0 0 1 19.5 7L21 12"/><path d="M3 12h18v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H6v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5Z"/><circle cx="7" cy="16" r="1"/><circle cx="17" cy="16" r="1"/></svg>
+				<span class="sd2-v2-hdr__garage-text">
+					<span class="sd2-v2-hdr__garage-label">My Truck</span>
+					<span class="sd2-v2-hdr__garage-value is-empty" data-v2-garage-label>Add Your Truck</span>
+				</span>
+			</button>
+
+			<!-- SEARCH TRIGGER -->
+			<div class="sd2-v2-hdr__search">
+				<button class="sd2-v2-hdr__search-btn" type="button" data-v2-search-open aria-haspopup="true" aria-expanded="false">
+					<svg class="sd2-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+					Search parts, part numbers, or your truck
+				</button>
+			</div>
+
+			<div class="sd2-v2-hdr__util">
+				<span class="sd2-v2-hdr__util-item">
+					<svg class="sd2-icon sd2-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>
+					<a href="&mvte:urls:ACCTV2:auto;">Account</a>
+				</span>
+				<button class="sd2-v2-hdr__util-item t-site-header__basket-link" data-hook="open-mini-basket" data-v2-cart-open type="button" aria-label="Cart">
+					<svg class="sd2-icon sd2-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 6Z"/><path d="M9 6V5a3 3 0 0 1 6 0v1"/></svg>
+					<span class="sd2-v2-hdr__cart-badge t-site-header__basket-link-quantity t-prevent-events" data-hook="mini-basket-count">&mvte:global_minibasket:basket_count;</span>
+				</button>
+			</div>
+		</div>
+
+		<nav class="sd2-v2-hdr-nav" aria-label="Primary">
+			<div class="sd2-v2-hdr-nav__row" data-v2-menu-root>
+				<div class="sd2-v2-hdr-nav__item">
+					<a class="sd2-v2-hdr-nav__link" href="&mvte:urls:CTGYENGV2:auto;" data-v2-menu-trigger="1" aria-haspopup="true" aria-expanded="false">
+						Powerstroke
+						<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+					</a>
+				</div>
+				<div class="sd2-v2-hdr-nav__item">
+					<a class="sd2-v2-hdr-nav__link" href="&mvte:urls:CTGYENGV2:auto;" data-v2-menu-trigger="2" aria-haspopup="true" aria-expanded="false">
+						Duramax
+						<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+					</a>
+				</div>
+				<div class="sd2-v2-hdr-nav__item">
+					<a class="sd2-v2-hdr-nav__link" href="&mvte:urls:CTGYENGV2:auto;" data-v2-menu-trigger="3" aria-haspopup="true" aria-expanded="false">
+						Cummins
+						<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+					</a>
+				</div>
+				<div class="sd2-v2-hdr-nav__item">
+					<a class="sd2-v2-hdr-nav__link" href="https://sinisterdiesel.com/merchandise-apparel-5534.html">Apparel</a>
+				</div>
+				<span class="sd2-v2-hdr-nav__spacer"></span>
+				<a class="sd2-v2-hdr-nav__pill" href="/help-center.html">
+					<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 3"/><path d="M12 17h.01"/></svg>
+					Help Center
+				</a>
+
+				<!-- Mega panel mount point — markup + behavior in cssui-mega-menu-v2.mvt -->
+				<div data-v2-mega-mount></div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="sd2-v2-scrim" data-v2-drawer-close></div>
+	<aside class="sd2-v2-drawer" data-v2-drawer aria-hidden="true">
+		<div class="sd2-v2-drawer__head">
+			<strong>Menu</strong>
+			<button class="sd2-v2-drawer__close" type="button" data-v2-drawer-close aria-label="Close menu">
+				<svg class="sd2-icon sd2-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+			</button>
+		</div>
+		<div class="sd2-v2-drawer__body">
+			<button class="sd2-btn sd2-btn--outline sd2-btn--full sd2-v2-drawer__garage-btn" type="button" data-v2-garage-toggle>My Truck</button>
+			<nav aria-label="Mobile">
+				<div class="sd2-v2-drawer__group">
+					<button class="sd2-v2-drawer__parent" type="button" data-v2-acc aria-expanded="false">Powerstroke
+						<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+					<div class="sd2-v2-drawer__sub">
+						<a href="&mvte:urls:CTGYENGV2:auto;">Shop All Powerstroke</a>
+						<a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a>
+						<a href="&mvte:urls:CTGYLISTV2:auto;">Turbos</a>
+					</div>
+				</div>
+				<div class="sd2-v2-drawer__group">
+					<button class="sd2-v2-drawer__parent" type="button" data-v2-acc aria-expanded="false">Duramax
+						<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+					<div class="sd2-v2-drawer__sub">
+						<a href="&mvte:urls:CTGYENGV2:auto;">Shop All Duramax</a>
+						<a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a>
+						<a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a>
+					</div>
+				</div>
+				<div class="sd2-v2-drawer__group">
+					<button class="sd2-v2-drawer__parent" type="button" data-v2-acc aria-expanded="false">Cummins
+						<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+					<div class="sd2-v2-drawer__sub">
+						<a href="&mvte:urls:CTGYENGV2:auto;">Shop All Cummins</a>
+						<a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a>
+						<a href="&mvte:urls:CTGYLISTV2:auto;">Turbos</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</aside>
+</div>
+<mvt:comment>data-v2-mega] composed root: existing V2 component markup copied into the registered header because arbitrary .mvt includes are not supported.</mvt:comment>
+<mvt:comment>
+	Mega Menu Experience V2 — additive, inactive. Nav category hrefs are the
+	same production-verified canonical URLs the live header resolves by
+	category ID (Code-based paths 404 in prod). Featured products/buying
+	guides/popular builds use placeholder copy pending real Miva product/
+	content lookups in a later milestone — do not treat placeholder image
+	paths as final assets.
+</mvt:comment>
+
+<div class="sd2-v2-mega" data-v2-mega>
+
+	<!-- Powerstroke -->
+	<div class="sd2-v2-mega__panel" data-v2-panel="1">
+		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Ford Powerstroke build in the shop">
+			<span class="sd2-v2-mega__hero-cap">
+				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
+				<span class="sd2-v2-mega__hero-title">Powerstroke</span>
+				<span class="sd2-v2-mega__hero-link">Shop All Powerstroke</span>
+			</span>
+		</a>
+		<div class="sd2-v2-mega__body">
+			<div class="sd2-v2-mega__head">
+				<div>
+					<p class="sd2-v2-mega__eyebrow">Ford Diesel Performance</p>
+					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
+				</div>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+			</div>
+			<div class="sd2-v2-mega__cats">
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Air &amp; Fuel</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Fuel System</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Turbos</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Engine &amp; EGR</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Coolant &amp; Oil Filtration</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Braking System</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Accessories</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">50 State Legal Products</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="sd2-v2-mega__side">
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
+				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
+					<span><span class="sd2-v2-mega__guide-title">6.7 Powerstroke Intercooler Guide</span><span class="sd2-v2-mega__guide-meta">8 min read</span></span>
+				</a>
+			</div>
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2017 F-250 Build Spotlight</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Duramax -->
+	<div class="sd2-v2-mega__panel" data-v2-panel="2">
+		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="GM Duramax build in the shop">
+			<span class="sd2-v2-mega__hero-cap">
+				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
+				<span class="sd2-v2-mega__hero-title">Duramax</span>
+				<span class="sd2-v2-mega__hero-link">Shop All Duramax</span>
+			</span>
+		</a>
+		<div class="sd2-v2-mega__body">
+			<div class="sd2-v2-mega__head">
+				<div>
+					<p class="sd2-v2-mega__eyebrow">GM Diesel Performance</p>
+					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
+				</div>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+			</div>
+			<div class="sd2-v2-mega__cats">
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Air &amp; Cooling</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Coolant &amp; Oil Filtration</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Engine</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts &amp; Performance</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers &amp; Components</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Lift Pumps &amp; Fuel System</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Support Parts</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="sd2-v2-mega__side">
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
+				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="">
+					<span><span class="sd2-v2-mega__guide-title">Duramax EGR Delete: What to Know</span><span class="sd2-v2-mega__guide-meta">6 min read</span></span>
+				</a>
+			</div>
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2015 Duramax Tow Rig</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Cummins -->
+	<div class="sd2-v2-mega__panel" data-v2-panel="3">
+		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Dodge Cummins build in the shop">
+			<span class="sd2-v2-mega__hero-cap">
+				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
+				<span class="sd2-v2-mega__hero-title">Cummins</span>
+				<span class="sd2-v2-mega__hero-link">Shop All Cummins</span>
+			</span>
+		</a>
+		<div class="sd2-v2-mega__body">
+			<div class="sd2-v2-mega__head">
+				<div>
+					<p class="sd2-v2-mega__eyebrow">Ram Diesel Performance</p>
+					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
+				</div>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+			</div>
+			<div class="sd2-v2-mega__cats">
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Air &amp; Fuel</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Lift Pumps &amp; Fuel System</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Turbos</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Engine &amp; Cooling</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers &amp; Components</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Accessories</h3>
+					<ul class="sd2-v2-mega__list">
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
+						<li><a href="&mvte:urls:CTGYLISTV2:auto;">50 State Legal Products</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="sd2-v2-mega__side">
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
+				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="">
+					<span><span class="sd2-v2-mega__guide-title">Cummins Turbo Upgrade Basics</span><span class="sd2-v2-mega__guide-meta">7 min read</span></span>
+				</a>
+			</div>
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2019 Ram Cummins Pull Truck</a>
+			</div>
+		</div>
+	</div>
+</div>
+<mvt:comment>
+	Search Console V2 — additive, inactive. Real Miva construct reused
+	V2 staging search form submits to &mvte:urls:SRCHV2:auto; with input name="Search",
+	data-mm_searchfield hooks + x-search-preview mount for live suggestions.
+	Popular Searches / recent searches / zero-result recovery are frontend
+	shell only — no fabricated result data is rendered; the preview panel
+	renders only what Miva's real search-preview response returns.
+</mvt:comment>
+
+<div class="sd2-v2-search-overlay" data-v2-search>
+	<div class="sd2-v2-search-scrim" data-v2-search-close></div>
+	<div class="sd2-v2-search-console" aria-hidden="true" role="dialog" aria-label="Search">
+		<div class="sd2-v2-search-console__bar">
+			<div class="sd2-v2-search-console__bar-inner">
+				<div class="sd2-v2-search-console__form" itemscope itemtype="http://schema.org/WebSite">
+					<form method="get" action="&mvte:urls:SRCHV2:auto;" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+						<fieldset>
+							<legend>Product Search</legend>
+							<div class="sd2-v2-search-console__group">
+								<meta itemprop="target" content="&mvte:urls:SRCHV2:auto;?Search={Search}"/>
+								<span class="sd2-v2-search-console__icon" aria-hidden="true">
+									<svg class="sd2-icon sd2-icon--lg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+								</span>
+								<input class="sd2-v2-search-console__input" type="search" name="Search" value=""
+									placeholder="Search parts, part numbers, or your truck" autocomplete="off"
+									aria-label="Search parts" data-v2-search-input
+									data-mm_searchfield="Yes" data-mm_searchfield_id="x-search-preview-v2" itemprop="query-input">
+								<button class="sd2-v2-search-console__submit" type="submit">Search</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<button class="sd2-v2-search-console__close" type="button" data-v2-search-close aria-label="Close search">
+					<svg class="sd2-icon sd2-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+				</button>
+			</div>
+		</div>
+
+		<div class="sd2-v2-search-console__body">
+			<div>
+				<!-- Live results mount — real Miva search-preview hook -->
+				<div class="sd2-v2-search-console__results x-search-preview t-search-preview" data-hook="search-preview" data-mm_searchfield_menu="Yes" data-mm_searchfield_id="x-search-preview-v2">
+					<p class="sd2-v2-search-console__empty" data-v2-search-empty>Start typing to see parts, categories, and guides.</p>
+				</div>
+
+				<div class="sd2-v2-search-console__popular">
+					<h3 class="sd2-v2-search-console__col-title">Popular Searches</h3>
+					<div class="sd2-v2-search-console__chips">
+						<a class="sd2-v2-search-console__chip" href="&mvte:urls:CTGYLISTV2:auto;">Powerstroke Turbos</a>
+						<a class="sd2-v2-search-console__chip" href="&mvte:urls:CTGYLISTV2:auto;">Duramax Intercoolers</a>
+						<a class="sd2-v2-search-console__chip" href="&mvte:urls:CTGYLISTV2:auto;">Cummins Injectors</a>
+						<a class="sd2-v2-search-console__chip" href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers</a>
+						<a class="sd2-v2-search-console__chip" href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="sd2-v2-search-console__side">
+				<div>
+					<h3 class="sd2-v2-search-console__col-title">Shop By Platform</h3>
+					<a class="sd2-v2-search-console__platform" href="&mvte:urls:CTGYENGV2:auto;">Powerstroke</a>
+					<a class="sd2-v2-search-console__platform" href="&mvte:urls:CTGYENGV2:auto;">Duramax</a>
+					<a class="sd2-v2-search-console__platform" href="&mvte:urls:CTGYENGV2:auto;">Cummins</a>
+				</div>
+				<div data-v2-search-recent hidden>
+					<h3 class="sd2-v2-search-console__col-title">Recent Searches</h3>
+					<div data-v2-search-recent-list></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<mvt:comment>
+	Garage Experience V2 — additive, inactive. Frontend architecture and
+	integration points only, per this milestone's explicit scope: NO backend
+	fitment/vehicle-data logic implemented here. Make/Engine/Year options
+	below are placeholder UI states pending real Miva category/attribute data
+	in a later milestone. The Vehicle Profile card (.sd2-v2-vehicle-card) is
+	the canonical component every future milestone (category, product,
+	account) should reuse rather than inventing a page-specific variant.
+</mvt:comment>
+
+<div class="sd2-v2-garage" data-v2-garage>
+	<div class="sd2-v2-garage-scrim" data-v2-garage-close></div>
+	<aside class="sd2-v2-garage-panel" aria-hidden="true" role="dialog" aria-label="Your Garage">
+		<div class="sd2-v2-garage-panel__head">
+			<strong>My Garage</strong>
+			<button class="sd2-v2-garage-panel__close" type="button" data-v2-garage-close aria-label="Close garage">
+				<svg class="sd2-icon sd2-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+			</button>
+		</div>
+		<div class="sd2-v2-garage-panel__body">
+
+			<!-- VEHICLE PROFILE CARD — signature component -->
+			<div class="sd2-v2-vehicle-card" data-v2-garage-card>
+				<span class="sd2-v2-vehicle-card__eyebrow">Active Vehicle</span>
+				<p class="sd2-v2-vehicle-card__empty" data-v2-garage-card-empty>Add your truck to see fitment-confirmed parts everywhere on the site.</p>
+				<h3 class="sd2-v2-vehicle-card__name" data-v2-garage-card-name hidden></h3>
+				<p class="sd2-v2-vehicle-card__spec" data-v2-garage-card-spec hidden></p>
+			</div>
+
+			<form class="sd2-v2-garage-form" data-v2-garage-form>
+				<div>
+					<label class="sd2-label" for="sd2-v2-garage-make">Make</label>
+					<select class="sd2-field" id="sd2-v2-garage-make" data-v2-garage-field="make">
+						<option value="">Select Make</option>
+						<option value="Ford">Ford</option>
+						<option value="GM">GM</option>
+						<option value="Dodge / Ram">Dodge / Ram</option>
+					</select>
+				</div>
+				<div>
+					<label class="sd2-label" for="sd2-v2-garage-engine">Engine</label>
+					<select class="sd2-field" id="sd2-v2-garage-engine" data-v2-garage-field="engine" disabled>
+						<option value="">Select Make First</option>
+					</select>
+				</div>
+				<div>
+					<label class="sd2-label" for="sd2-v2-garage-year">Year</label>
+					<select class="sd2-field" id="sd2-v2-garage-year" data-v2-garage-field="year" disabled>
+						<option value="">Select Engine First</option>
+					</select>
+				</div>
+				<div class="sd2-v2-garage-form__actions">
+					<button class="sd2-btn sd2-btn--primary sd2-btn--full" type="submit">Save Vehicle</button>
+				</div>
+			</form>
+
+			<div class="sd2-v2-garage-saved" data-v2-garage-saved-wrap hidden>
+				<h3 class="sd2-v2-garage-saved__title">Saved Vehicles</h3>
+				<div data-v2-garage-saved-list></div>
+			</div>
+		</div>
+	</aside>
+</div>
+<mvt:comment>
+	Cart Drawer Experience V2 — additive, inactive. Real Miva constructs
+	reused verbatim: live basket count
+	binding (&mvte:global_minibasket:basket_count;, data-hook=
+	"mini-basket-count"). Real line-item list, real subtotal, and real free-
+	shipping threshold logic are explicitly deferred to the Cart & Checkout
+	milestone — the $99 threshold and recommendation products below are
+	placeholder UI states only, not wired to Miva order totals or the product
+	catalog yet.
+</mvt:comment>
+
+<div class="sd2-v2-cart-drawer" data-v2-cart>
+	<div class="sd2-v2-cart-scrim" data-v2-cart-close></div>
+	<aside class="sd2-v2-cart-panel" aria-hidden="true" role="dialog" aria-label="Cart">
+		<div class="sd2-v2-cart-panel__head">
+			<strong>Your Cart (<span data-hook="mini-basket-count">&mvte:global_minibasket:basket_count;</span>)</strong>
+			<button class="sd2-v2-cart-panel__close" type="button" data-v2-cart-close aria-label="Close cart">
+				<svg class="sd2-icon sd2-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+			</button>
+		</div>
+
+		<!-- Vehicle reminder — reflects the Garage Experience's active vehicle -->
+		<div class="sd2-v2-cart-vehicle is-empty" data-v2-cart-vehicle>
+			<svg class="sd2-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12l1.5-5A2 2 0 0 1 6.4 5.5h11.2A2 2 0 0 1 19.5 7L21 12"/><path d="M3 12h18v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H6v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5Z"/></svg>
+			<span data-v2-cart-vehicle-text>Add your truck to confirm fitment</span>
+			<a href="&mvte:urls:SFNTV2:auto;" data-v2-garage-toggle>Add</a>
+		</div>
+
+		<!-- Shipping progress messaging (placeholder threshold, wired to real order total in Cart milestone) -->
+		<div class="sd2-v2-cart-shipping">
+			<p class="sd2-v2-cart-shipping__msg" data-v2-cart-shipping-msg>Add <strong>$99.00</strong> more for free shipping</p>
+			<div class="sd2-v2-cart-shipping__track"><div class="sd2-v2-cart-shipping__fill sd2-v2-cart-shipping__fill--empty"></div></div>
+		</div>
+
+		<div class="sd2-v2-cart-panel__body">
+			<div class="sd2-v2-cart-empty" data-v2-cart-empty>
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 6Z"/><path d="M9 6V5a3 3 0 0 1 6 0v1"/></svg>
+				<p>Your cart is empty.</p>
+				<a class="sd2-btn sd2-btn--outline" href="&mvte:urls:SFNTV2:auto;">Continue Shopping</a>
+			</div>
+			<!-- Real line items render here once wired to Miva basket data in the Cart & Checkout milestone -->
+
+			<div class="sd2-v2-cart-reco">
+				<h3 class="sd2-v2-cart-reco__title">You Might Also Need</h3>
+				<div class="sd2-v2-cart-reco__row">
+					<div class="sd2-v2-cart-reco__card">
+						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
+						<div class="sd2-v2-cart-reco__card-name">Intercooler Pipe Kit</div>
+						<div class="sd2-v2-cart-reco__card-price">$249.00</div>
+					</div>
+					<div class="sd2-v2-cart-reco__card">
+						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="">
+						<div class="sd2-v2-cart-reco__card-name">EGR Cooler Kit</div>
+						<div class="sd2-v2-cart-reco__card-price">$389.00</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="sd2-v2-cart-panel__foot">
+			<div class="sd2-v2-cart-panel__subtotal">
+				<span>Subtotal</span>
+				<span data-v2-cart-subtotal>&mdash;</span>
+			</div>
+			<a class="sd2-btn sd2-btn--primary sd2-btn--full" href="&mvte:urls:BASKV2:auto;">View Cart &amp; Checkout</a>
+		</div>
+	</aside>
+</div>

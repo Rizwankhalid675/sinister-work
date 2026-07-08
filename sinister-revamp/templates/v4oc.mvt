@@ -1,0 +1,1998 @@
+<mvt:item name="html_profile" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="&mvte:global:basehref;">
+    <mvt:if expr="NOT ISNULL l.settings:page:title">
+        <title>&mvt:page:title;</title>
+    <mvt:else>
+        <title>6.0 Powerstroke Oil Cooler Upgrade | &mvt:store:name;</title>
+    </mvt:if>
+    <mvt:if expr="g.useDevResources EQ 1">
+        <mvt:item name="head" param="css_list_dev" />
+    <mvt:else>
+        <mvt:item name="head" param="css_list" />
+    </mvt:if>
+    <mvt:item name="head" param="head_tag" />
+
+    <!-- Load Product Data -->
+    <mvt:assign name="g.product_code" value="'sd-oc-6_0'" />
+    <mvt:do file="g.Module_Library_DB" name="l.load_product" value="Product_Load_Code(g.product_code, l.settings:product)" />
+    
+    <!-- Set up product data -->
+    <mvt:do file="g.Module_Feature_URI_DB" name="l.success" value="Store_Product_URL(l.settings:product, l.settings:product:uri)" />
+    <mvt:assign name="g.socialURL" value="l.settings:product:uri" />
+    <mvt:assign name="g.socialText" value="'Check out the deal on ' $ l.settings:product:name $ ' at ' $ g.store:name" />
+    
+    <!-- Load main product image -->
+    <mvt:do file="g.Module_Library_DB" name="l.success" value="ProductImage_Load_Type(l.settings:product:id, 1, l.settings:imagetype)" />
+    <mvt:do file="g.Module_Library_DB" name="l.success" value="Image_Load_ID(l.settings:imagetype:image_id, l.settings:imagedata)" />
+    <mvt:assign name="g.socialImage" value="g.baseurl $ l.settings:imagedata:image" />
+
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    
+    <!-- Fancybox for image galleries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+/* Hide ONLY the page title */
+h1.c-heading-delta.u-text-bold.u-color-primary {
+    display: none !important;
+}
+        :root {
+            --primary: #1833b8; /* Sinister Diesel Blue */
+            --primary-dark: #122a9a;
+            --primary-light: #e8eaf6;
+            --secondary: #e63946; /* Contrasting red */
+            --secondary-dark: #c1121f;
+            --accent: #f77f00; /* Orange accent */
+            --accent-dark: #d56a00;
+            --text-primary: #1d1d1f;
+            --text-secondary: #4a4a4f;
+            --bg-light: #f5f5f7;
+            --bg-dark: #1d1d1f;
+            --bg-darker: #121212;
+            --border-radius: 16px;
+            --border-radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --section-spacing: 8rem;
+            --content-spacing: 1.5rem;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.15);
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background-color: #fff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 { 
+            font-size: clamp(2.5rem, 6vw, 3.5rem); 
+            letter-spacing: -0.05em;
+        }
+        h2 { 
+            font-size: clamp(2rem, 5vw, 2.75rem); 
+            letter-spacing: -0.03em;
+        }
+        h3 { 
+            font-size: clamp(1.75rem, 4vw, 2.25rem); 
+            letter-spacing: -0.02em;
+        }
+        h4 {
+            font-size: clamp(1.5rem, 3vw, 1.75rem);
+        }
+        p { 
+            font-size: clamp(1rem, 2vw, 1.125rem); 
+            color: var(--text-secondary);
+            margin-bottom: var(--content-spacing);
+        }
+        
+        .text-lead {
+            font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+            line-height: 1.6;
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .container-narrow {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Spacing System */
+        .section {
+            padding: 50px;
+            position: relative;
+        }
+        
+        .section-sm {
+            padding: calc(var(--section-spacing) * 0.75) 0;
+        }
+        
+        .section-xl {
+            padding: calc(var(--section-spacing) * .4) 0;
+border-radius: 16px;
+        }
+        
+        /* Premium Hero Section */
+        .hero-premium {
+            position: relative;
+            height: 70vh;
+border-radius: 16px;
+            min-height: 700px;
+            max-height: 1000px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), 
+                        url('https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png') no-repeat center center/cover;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            isolation: isolate;
+        }
+        
+        .hero-premium::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            z-index: 1;
+        }
+        
+        .hero-premium-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+        
+        .hero-premium-title {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-premium-title span {
+            background: linear-gradient(90deg, #f7f7f7, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hero-premium-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+        
+        /* Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 47%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            font-size: 0.875rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .scroll-down:hover {
+            opacity: 1;
+        }
+        
+        .scroll-down::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 50px;
+            background: rgba(255,255,255,0.5);
+            margin-top: 1rem;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            gap: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(24, 51, 184, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(24, 51, 184, 0.4);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.8);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+        
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+            box-shadow: 0 4px 15px rgba(247, 127, 0, 0.3);
+        }
+        
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(247, 127, 0, 0.4);
+        }
+        
+        .btn-block {
+            display: flex;
+            width: 100%;
+        }
+        
+        .btn-icon {
+            font-size: 1.25rem;
+        }
+        
+        /* Feature Sections */
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+        }
+        
+        /* Split Layout */
+        .split-feature {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            margin: 5rem 0;
+        }
+        
+        .split-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .split-media {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .split-media img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+        
+        .split-media img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .stat-item p {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .feature-list li {
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .feature-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-primary);
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: var(--border-radius);
+            margin: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 1;
+        }
+        
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-section p {
+            color: rgba(255,255,255,0.9);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Product Highlight */
+        .product-highlight {
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin: 4rem auto;
+            max-width: 1400px;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+        }
+        
+        .product-highlight-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .product-highlight-header h2 {
+            font-size: clamp(2rem, 5vw, 2.75rem);
+        }
+        
+        .product-highlight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .product-highlight-image {
+            position: relative;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            align-self: center;
+            box-shadow: var(--shadow-md);
+            aspect-ratio: 1/1;
+        }
+        
+        .product-highlight-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            transition: var(--transition);
+            object-fit: cover;
+        }
+        
+        .product-highlight-image:hover img {
+            transform: scale(1.03);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .product-highlight-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .product-included h3 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .product-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+.spec-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(0,0,0,0.08); /* subtle border */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* soft shadow */
+    transition: var(--transition);
+}
+
+.spec-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.spec-icon {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.spec-item h4 {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600; /* bolder text */
+}
+
+.spec-item p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.5; /* better line spacing */
+    margin-bottom: 0;
+}
+        
+        .product-action {
+            margin-top: 1rem;
+            background: var(--primary-light);
+            padding: 2rem;
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .product-price {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .shipping-note {
+            display: block;
+            font-size: 1rem;
+            color: red;
+            font-weight: 500;
+            margin-top: 0.75rem;
+        }
+        
+        /* Dark Theme */
+        .theme-dark {
+            background-color: var(--bg-darker);
+            color: white;
+        }
+
+.theme-dark .spec-item {
+    background: #2a2a2e;
+    border-color: rgba(255,255,255,0.1);
+}
+        
+        .theme-dark .product-highlight {
+            background: #252529;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .theme-dark h2,
+        .theme-dark h3,
+        .theme-dark h4,
+        .theme-dark .product-included h3,
+        .theme-dark .spec-item h4 {
+            color: white;
+        }
+        
+        .theme-dark p,
+        .theme-dark .product-included li,
+        .theme-dark .spec-item p {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .theme-dark .product-action {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .theme-dark .product-price {
+            color: white;
+        }
+        
+        .theme-dark .stat-item {
+            background: #252529;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Testimonial Carousel */
+        .testimonial-section {
+            position: relative;
+            padding: 6rem 0;
+            background: url('https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+        
+        .testimonial-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+        }
+        
+        .testimonial-carousel {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            height: 400px;
+        }
+        
+        .testimonial-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .testimonial-card.active {
+            opacity: 1;
+            position: relative;
+        }
+        
+        .stars {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .testimonial-content p {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        
+        .testimonial-content p::before,
+        .testimonial-content p::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content p::before {
+            top: -1rem;
+            left: -2rem;
+        }
+        
+        .testimonial-content p::after {
+            bottom: -2.5rem;
+            right: -1rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .testimonial-author h4 {
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .testimonial-author p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Carousel Controls */
+        .carousel-controls {
+            position: absolute;
+            bottom: 2;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .carousel-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        /* Cart Popup */
+        .cart-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        .cart-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            display: none;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .cart-popup h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+        
+        .cart-popup p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.125rem;
+        }
+        
+        .cart-popup-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            animation: bounce 0.5s;
+        }
+        
+        .cart-popup-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .cart-popup-btn {
+            display: block;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .cart-popup-btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .cart-popup-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(24, 51, 184, 0.3);
+        }
+        
+        .cart-popup-btn-secondary {
+            border: 2px solid #ddd;
+            color: var(--text-primary);
+        }
+        
+        .cart-popup-btn-secondary:hover {
+            background: #f5f5f5;
+            transform: translateY(-3px);
+        }
+        
+        /* Button Group */
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .comparison-table .feature-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .comparison-table .checkmark {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .comparison-table .xmark {
+            color: #ccc;
+            font-size: 1.5rem;
+        }
+        
+        /* Installation Gallery */
+.gallery-section {
+    background: var(--bg-light);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    color: white;
+    padding: 1.5rem;
+}
+
+/* Ensure consistent heading and text styling */
+.gallery-caption h4 {
+    margin: 0 0 0.5rem 0; /* Remove default margins and add bottom margin */
+    font-size: 1.25rem;
+    line-height: 1.3;
+    color: white; /* Explicit white color */
+    font-weight: 600;
+}
+
+.gallery-caption p {
+    margin: 0;
+    color: rgba(255,255,255,0.9); /* Slightly transparent white */
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Remove the hover effect entirely */
+        
+        /* FAQ Section */
+        .faq-section {
+            background: var(--bg-light);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: white;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            color: var(--primary);
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .faq-item.active .faq-question::after {
+            content: '-';
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        /* Warranty Badge */
+        .warranty-badge {
+            position: fixed;
+            bottom: 3rem;
+            right: .25rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-md);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .warranty-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(24, 51, 184, 0.3);
+        }
+        
+        .warranty-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* Animations */
+        @keyframes popIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            :root {
+                --section-spacing: 6rem;
+            }
+            
+            .product-highlight-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-highlight-image {
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            
+            .testimonial-carousel {
+                height: 450px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .section-title h2::after {
+                width: 60px;
+                height: 3px;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 5rem;
+                --content-spacing: 1rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .hero-premium {
+                min-height: 600px;
+            }
+            
+            .hero-premium-title {
+                font-size: 2.5rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .product-specs {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                margin: 0 1rem;
+                padding: 4rem 1rem;
+            }
+            
+            .testimonial-carousel {
+                height: 500px;
+            }
+            
+            .cart-popup {
+                padding: 2rem;
+            }
+            
+            .faq-question {
+                padding: 1rem;
+            }
+            
+            .faq-answer {
+                padding: 0 1rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 0 1rem 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            :root {
+                --section-spacing: 4rem;
+                --border-radius: 12px;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero-premium {
+                min-height: 500px;
+                border-radius: 0;
+                margin: 0;
+            }
+            
+            .hero-premium-content {
+                padding: 0 1rem;
+            }
+            
+            .hero-premium-title {
+                font-size: 2rem;
+            }
+            
+            .product-highlight {
+                padding: 1.5rem;
+                margin: 2rem auto;
+            }
+            
+            .testimonial-carousel {
+                height: 450px;
+                padding: 0 1rem;
+            }
+            
+            .testimonial-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .testimonial-content p::before {
+                left: -1rem;
+            }
+            
+            .cart-popup {
+                padding: 1.5rem;
+            }
+            
+            .warranty-badge {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body class="single-column">
+    <!-- Cart Success Popup -->
+    <div class="cart-popup-overlay" id="cartPopupOverlay"></div>
+    <div class="cart-popup" id="cartPopup">
+        <div class="cart-popup-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Successfully Added to Cart!</h3>
+        <p>Your item is ready for checkout.</p>
+        <div class="cart-popup-buttons">
+            <a href="https://sinisterdiesel.com/basket-contents.html" class="cart-popup-btn cart-popup-btn-primary">Proceed to Checkout</a>
+            <a href="#" class="cart-popup-btn cart-popup-btn-secondary" id="keepShoppingBtn">Keep Shopping</a>
+        </div>
+    </div>
+
+    <!-- Warranty Badge -->
+    <a href="#warranty" class="warranty-badge">
+        <i class="fas fa-shield-alt warranty-icon"></i>
+        <span>2-Year Warranty</span>
+    </a>
+
+    <mvt:item name="hdft" param="global_header" />
+    <mvt:item name="hdft" param="header" />
+
+    <mvt:if expr="l.settings:product:id">
+        <!-- PRODUCT LOADED SUCCESSFULLY -->
+        
+        <!-- Premium Hero Section -->
+        <section class="hero-premium" data-aos="fade">
+            <div class="hero-premium-content">
+                <h1 class="hero-premium-title" data-aos="fade-up" data-aos-delay="100">
+                    <span>Engineered for Performance</span>
+                    Ultimate 6.0 Powerstroke<br>Oil Cooler Upgrade
+                </h1>
+                <p class="hero-premium-subtitle" data-aos="fade-up" data-aos-delay="200">
+                    Eliminate the weak factory oil cooler with our precision-engineered aluminum upgrade that delivers superior cooling performance and prevents catastrophic engine damage.
+                </p>
+                <div class="btn-group" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#product" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart btn-icon"></i> Shop Now
+                    </a>
+                    <a href="#comparison" class="btn btn-secondary">
+                        <i class="fas fa-chart-bar btn-icon"></i> See Comparison
+                    </a>
+                </div>
+            </div>
+            <a href="#features" class="scroll-down" data-aos="fade-up" data-aos-delay="400">Scroll Down</a>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Engineered for Maximum Reliability</h2>
+                    <p class="text-lead">Our upgraded oil cooler solves the factory unit's weaknesses with higher flow and precision engineering</p>
+                </div>
+                
+                <div class="split-feature">
+                    <div class="split-content" data-aos="fade-right">
+                        <h3>Superior Aluminum Construction</h3>
+                        <p class="text-lead">The Sinister Diesel oil cooler replaces the failure-prone factory unit with aluminum construction that withstands extreme conditions.</p>
+                        <ul class="feature-list">
+                            <li>40% larger cooling passages for optimal flow</li>
+                            <li>Advanced thermal transfer properties</li>
+                            <li>Includes all necessary gaskets and O-rings</li>
+                            <li>corrosion resistance</li>
+                            <li>Precision-matched to OEM specifications</li>
+                        </ul>
+                    </div>
+                    <div class="split-media" data-aos="fade-left">
+                        <a href="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" data-fancybox="gallery">
+                            <img src="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" alt="Factory vs Sinister Diesel Oil Cooler" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="split-feature">
+                    <div class="split-media" data-aos="fade-right">
+                        <a href="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" data-fancybox="gallery">
+                            <img src="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" alt="Installed Oil Cooler" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="split-content" data-aos="fade-left">
+                        <h3>Direct Drop-In Replacement</h3>
+                        <p class="text-lead">Engineered as a perfect fit for your 6.0 Powerstroke, our oil cooler installs without modifications using factory mounting points and connections.</p>
+                        <div class="stats-grid" data-aos="fade-up">
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <p>Direct OEM Fitment</p>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">2YR</div>
+                                <p>Warranty Coverage</p>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">30%</div>
+                                <p>Better Cooling Efficiency</p>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">5X</div>
+                                <p>More Durable Than OEM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Gallery Section -->
+        <section class="section gallery-section">
+            <div class="container">
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Precision Engineering</h2>
+                    <p class="text-lead">See the quality and craftsmanship that goes into every Sinister Diesel oil cooler</p>
+                </div>
+                
+                <div class="gallery-grid" data-aos="fade-up">
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" alt="Oil Cooler Detail" loading="lazy">
+                        <div class="gallery-caption">
+                            <h4>Precision Machined</h4>
+                            <p>Aluminum Construction</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" alt="Oil Cooler Detail" loading="lazy">
+                        <div class="gallery-caption">
+                            <h4>Optimized Flow</h4>
+                            <p>Larger cooling passages for better performance</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" alt="Oil Cooler Detail" loading="lazy">
+                        <div class="gallery-caption">
+                            <h4>Complete Kit</h4>
+                            <p>Includes all necessary hardware</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Product Highlight -->
+        <section class="section section-xl theme-dark" id="product">
+            <div class="container">
+                <div class="product-highlight" data-aos="fade-up">
+                    <div class="product-highlight-header">
+                        <h2>&mvt:product:name;</h2>
+                        <p class="text-lead">Complete solution for 2003-2007 Ford 6.0L Powerstroke engines</p>
+                    </div>
+                
+                    <div class="product-highlight-grid">
+                        <div class="product-highlight-image">
+                            <a href="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" data-fancybox="product">
+                                <img src="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" alt="&mvt:product:name;" loading="lazy">
+                            </a>
+                            <div class="product-badge">Direct Fit Replacement</div>
+                        </div>
+                        
+                        <div class="product-highlight-details">
+                            <div class="product-included">
+                                <h3>What's Included:</h3>
+                                <ul class="feature-list">
+                                    <li>High-performance aluminum oil cooler</li>
+                                    <li>Complete gasket and O-ring set</li>
+                                    <li>All necessary hardware</li>
+                                    <li>Detailed installation instructions</li>
+                                    <li>Lifetime technical support</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="product-specs">
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Improved Performance</h4>
+                                        <p>Larger cooling passages prevent clogging and improve flow</p>
+                                    </div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Durable Construction</h4>
+                                        <p>Aluminum resists corrosion and wear</p>
+                                    </div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Complete Solution</h4>
+                                        <p>Everything needed for professional installation</p>
+                                    </div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-icon">
+                                        <i class="fas fa-certificate"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Warranty</h4>
+                                        <p>2-year protection against defects</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="product-action">
+                                <div class="product-price">
+                                    &mvt:product:formatted_price;
+                                    <span class="shipping-note">Free shipping on orders over $99</span>
+                                </div>
+                                <form method="post" action="&mvt:global:sessionurl;" id="addToCartForm">
+                                    <input type="hidden" name="Action" value="ADPR">
+                                    <input type="hidden" name="Screen" value="PROD">
+                                    <input type="hidden" name="Store_Code" value="&mvte:store:code;">
+                                    <input type="hidden" name="Product_Code" value="&mvte:product:code;">
+                                    <input type="hidden" name="Quantity" value="1">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        <i class="fas fa-shopping-cart btn-icon"></i> Add to Cart
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Benefits Section -->
+        <section class="section">
+            <div class="container">
+                <div class="split-feature">
+                    <div class="split-content" data-aos="fade-right">
+                        <h2>Why Replace Your 6.0 Powerstroke Oil Cooler?</h2>
+                        <p class="text-lead">The factory oil cooler is one of the most common failure points on 6.0 Powerstroke engines, often leading to expensive repairs:</p>
+                        <ul class="feature-list">
+                            <li>Factory coolers clog easily, reducing oil flow by up to 40%</li>
+                            <li>Poor cooling leads to overheating and engine damage</li>
+                            <li>Failed coolers can cause EGR cooler failure ($1,200+ repair)</li>
+                            <li>Oil temperature spikes damage turbos and injectors</li>
+                            <li>Coolant contamination leads to head gasket failure</li>
+                            <li>Average repair cost exceeds $3,000 when neglected</li>
+                        </ul>
+                        <a href="https://sinisterdiesel.com/sinister-diesel-oil-cooler-for-2003-2007-ford-powerstroke-60l.html" class="btn btn-accent" style="margin-top: 1rem;">
+                            <i class="fas fa-wrench btn-icon"></i> Upgrade Now
+                        </a>
+                    </div>
+                    <div class="split-media" data-aos="fade-left">
+                        <a href="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" data-fancybox="gallery">
+                            <img src="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" alt="Oil Cooler Function Diagram" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonial Section -->
+        <section class="testimonial-section">
+            <div class="container">
+                <div class="section-title" data-aos="fade-up">
+                    <h2 style="color: white;">Rated 4.9/5 Stars by 6.0 Powerstroke Owners</h2>
+                    <p class="text-lead" style="color: rgba(255,255,255,0.9);">See what other diesel enthusiasts say about our oil cooler upgrade</p>
+                </div>
+                
+                <div class="testimonial-carousel">
+                    <!-- Review 1 -->
+                    <div class="testimonial-card active">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>Looks like a top quality Oil cooler and a much better design than the OEM. I haven't driven with it yet, so time will tell if it can go the distance. I'm confident that it will!</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">EP</div>
+                            <div>
+                                <h4>Eric P.</h4>
+                                <p>CA, US</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 2 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>The gasket material was better than I could have hoped for! This is exactly what I needed and more thank you!</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SB</div>
+                            <div>
+                                <h4>Shawn B.</h4>
+                                <p>NC, US</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 3 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>Worked out amazing! All the seals and gaskets fit perfectly</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">DC</div>
+                            <div>
+                                <h4>Douglas C.</h4>
+                                <p>NC, US</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 4 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>Product was better than factory and installed nicely.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JJ</div>
+                            <div>
+                                <h4>Joseph J.</h4>
+                                <p>OH, US</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 5 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>Got it quick, customer service is nice, knowledgeable, and very friendly</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">KM</div>
+                            <div>
+                                <h4>Kenneth M.</h4>
+                                <p>OK, US</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 6 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>Exactly what i was looking for to finish off the bullet proofing process for my 6.0!</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JC</div>
+                            <div>
+                                <h4>Jacob C.</h4>
+                                <p>TX, US</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <div class="carousel-dot active" data-index="0"></div>
+                    <div class="carousel-dot" data-index="1"></div>
+                    <div class="carousel-dot" data-index="2"></div>
+                    <div class="carousel-dot" data-index="3"></div>
+                    <div class="carousel-dot" data-index="4"></div>
+                    <div class="carousel-dot" data-index="5"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="section faq-section" id="faq">
+            <div class="container-narrow">
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Frequently Asked Questions</h2>
+                    <p class="text-lead">Everything you need to know about upgrading your 6.0 Powerstroke oil cooler</p>
+                </div>
+                
+                <div class="faq-container">
+                    <div class="faq-item" data-aos="fade-up">
+                        <div class="faq-question">
+                            Is this a direct replacement for my factory oil cooler?
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, our oil cooler is designed as a direct bolt-on replacement for the factory unit in all 2003-2007 Ford 6.0L Powerstroke engines. It uses all the original mounting points and connections, requiring no modifications for installation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <div class="faq-question">
+                            What's included in the kit?
+                        </div>
+                        <div class="faq-answer">
+                            <p>The complete kit includes: the aluminum oil cooler assembly, all necessary gaskets and O-rings, installation hardware, and detailed instructions. Everything you need for a professional installation is included in the box.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <div class="faq-question">
+                            How difficult is the installation?
+                        </div>
+                        <div class="faq-answer">
+                            <p>The installation is moderately difficult and typically takes 4-6 hours for a skilled DIYer. You'll need to remove the turbocharger and intake manifold to access the oil cooler. We recommend having a service manual and proper tools. If you're not comfortable with this level of work, professional installation is advised.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <div class="faq-question">
+                            Will this prevent EGR cooler failure?
+                        </div>
+                        <div class="faq-answer">
+                            <p>While our oil cooler significantly reduces the risk of EGR cooler failure by maintaining proper oil temperatures, we recommend also upgrading the EGR cooler for complete protection. The factory EGR cooler is another known weak point in the 6.0 Powerstroke.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <div class="faq-question">
+                            What's your warranty policy?
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer a 2-year unlimited mileage warranty against defects in materials and workmanship. This doesn't cover damage from improper installation, accidents, or neglect. Proof of purchase is required for warranty claims.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Warranty Section -->
+        <section class="section" id="warranty">
+            <div class="container">
+                <div class="split-feature">
+                    <div class="split-media" data-aos="fade-right">
+                        <img src="https://i.ibb.co/p6HYmxvD/Chat-GPT-Image-Aug-12-2025-02-35-58-PM.png" alt="Warranty" loading="lazy">
+                    </div>
+                    <div class="split-content" data-aos="fade-left">
+                        <h2>2-Year Warranty Protection</h2>
+                        <p class="text-lead">We stand behind our products with industry-leading warranty coverage</p>
+                        <ul class="feature-list">
+                            <li>24-month unlimited mileage protection</li>
+                            <li>No-hassle replacement policy</li>
+                            <li>Dedicated warranty support team</li>
+                            <li>Coverage for defects in materials and workmanship</li>
+                            <li>Lifetime technical support</li>
+                        </ul>
+                        <a href="#product" class="btn btn-primary" style="margin-top: 1rem;">
+                            <i class="fas fa-shield-alt btn-icon"></i> Shop with Confidence
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section" id="cta" data-aos="fade">
+            <div class="container">
+                <h2>Stop Worrying About Oil Cooler Failure</h2>
+                <p class="text-lead">Upgrade to the Sinister Diesel oil cooler today and enjoy peace of mind with improved cooling performance and reliability.</p>
+                <form method="post" action="&mvt:global:sessionurl;" id="ctaAddToCartForm">
+                    <input type="hidden" name="Action" value="ADPR">
+                    <input type="hidden" name="Screen" value="PROD">
+                    <input type="hidden" name="Store_Code" value="&mvte:store:code;">
+                    <input type="hidden" name="Product_Code" value="&mvte:product:code;">
+                    <input type="hidden" name="Quantity" value="1">
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-bolt btn-icon"></i> Add to Cart Now
+                    </button>
+                </form>
+            </div>
+        </section>
+        
+    <mvt:else>
+        <!-- PRODUCT NOT FOUND -->
+        <div class="section">
+            <div class="container">
+                <div style="text-align: center; max-width: 600px; margin: 0 auto; background: #fff; padding: 3rem; border-radius: var(--border-radius); box-shadow: var(--shadow-lg);">
+                    <h2 style="color: var(--primary); margin-bottom: 1.5rem;">Product Loading Error</h2>
+                    <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;">We couldn't load product "sd-oc-6_0"</h3>
+                    <p style="margin-bottom: 1.5rem;">Please verify:</p>
+                    <ul class="feature-list" style="text-align: left; margin-bottom: 2.5rem;">
+                        <li>The product exists in your Miva admin</li>
+                        <li>The product is active and available</li>
+                        <li>The product code matches exactly</li>
+                    </ul>
+                    <div class="btn-group">
+                        <a href="/" class="btn btn-primary">
+                            <i class="fas fa-home btn-icon"></i> Homepage
+                        </a>
+                        <a href="/contact-us.html" class="btn btn-secondary">
+                            <i class="fas fa-headset btn-icon"></i> Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mvt:if>
+
+    <mvt:item name="hdft" param="footer" />
+    <mvt:item name="hdft" param="global_footer" />
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                easing: 'ease-in-out-quad',
+                offset: 100
+            });
+            
+            // Initialize Fancybox
+            Fancybox.bind("[data-fancybox]", {
+                // Your custom options
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Testimonial Carousel
+            const testimonials = document.querySelectorAll('.testimonial-card');
+            const dots = document.querySelectorAll('.carousel-dot');
+            let currentTestimonial = 0;
+            let carouselInterval;
+            
+            function showTestimonial(index) {
+                // Hide current testimonial
+                testimonials[currentTestimonial].classList.remove('active');
+                dots[currentTestimonial].classList.remove('active');
+                
+                // Update current index
+                currentTestimonial = index;
+                
+                // Show next testimonial
+                testimonials[currentTestimonial].classList.add('active');
+                dots[currentTestimonial].classList.add('active');
+            }
+            
+            function rotateTestimonials() {
+                let nextIndex = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(nextIndex);
+            }
+            
+            // Start rotation every 5 seconds
+            carouselInterval = setInterval(rotateTestimonials, 5000);
+            
+            // Add click handlers for dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    clearInterval(carouselInterval);
+                    showTestimonial(index);
+                    carouselInterval = setInterval(rotateTestimonials, 5000);
+                });
+            });
+            
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Cart Popup Functionality
+            const cartPopupOverlay = document.getElementById('cartPopupOverlay');
+            const cartPopup = document.getElementById('cartPopup');
+            const keepShoppingBtn = document.getElementById('keepShoppingBtn');
+            const addToCartForms = document.querySelectorAll('form[id^="addToCartForm"], form[id^="ctaAddToCartForm"]');
+            
+            function showCartPopup() {
+                cartPopupOverlay.style.display = 'block';
+                cartPopup.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function hideCartPopup() {
+                cartPopupOverlay.style.display = 'none';
+                cartPopup.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            
+            // Close popup when clicking overlay or keep shopping button
+            cartPopupOverlay.addEventListener('click', hideCartPopup);
+            keepShoppingBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideCartPopup();
+            });
+            
+            // Handle form submissions
+            if (addToCartForms) {
+                addToCartForms.forEach(form => {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // Immediately increment the cart count
+                        const cartCountElements = document.querySelectorAll('span[data-hook="mini-basket-count"]');
+                        if (cartCountElements) {
+                            cartCountElements.forEach(el => {
+                                const currentCount = parseInt(el.textContent) || 0;
+                                el.textContent = currentCount + 1;
+                            });
+                        }
+                        
+                        // Submit the form via AJAX
+                        fetch(form.action, {
+                            method: 'POST',
+                            body: new URLSearchParams(new FormData(form)),
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            }
+                        })
+                        .then(response => {
+                            if(response.ok) {
+                                // Show success popup
+                                showCartPopup();
+                            } else {
+                                // If add to cart failed, revert the count
+                                if (cartCountElements) {
+                                    cartCountElements.forEach(el => {
+                                        const currentCount = parseInt(el.textContent) || 1;
+                                        el.textContent = currentCount - 1;
+                                    });
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            // If error occurred, revert the count
+                            if (cartCountElements) {
+                                cartCountElements.forEach(el => {
+                                    const currentCount = parseInt(el.textContent) || 1;
+                                    el.textContent = currentCount - 1;
+                                });
+                            }
+                        });
+                    });
+                });
+            }
+            
+            // Add scroll effect to header
+            const header = document.querySelector('header');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        header.style.backgroundColor = 'rgba(0,0,0,0.95)';
+                        header.style.padding = '1rem 0';
+                        header.style.boxShadow = '0 5px 30px rgba(0,0,0,0.2)';
+                    } else {
+                        header.style.backgroundColor = 'transparent';
+                        header.style.padding = '2rem 0';
+                        header.style.boxShadow = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

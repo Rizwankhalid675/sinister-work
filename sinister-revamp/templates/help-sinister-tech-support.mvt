@@ -1,0 +1,55 @@
+<mvt:item name="html_profile" />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;">
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:store:name;: &mvt:page:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+</head>
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+	<mvt:item name="hdft" param="global_header" />
+
+	<section class="o-layout">
+		<div class="o-layout__item u-width-12">
+			<section class="t-expanded-block u-bg-white">
+				<div class="o-layout__item t-expanded-block__item">
+
+					
+							<section class="o-layout">
+								<div class="o-layout__item">
+									<mvt:item name="hdft" param="header" />
+								</div>
+							</section>
+<iframe src="https://forms.monday.com/forms/embed/d810a568cbae6f864f992d6892f33230?r=use1" width="1650" height="1500" style="border: 0; box-shadow: 5px 5px 56px 0px rgba(0,0,0,0.25);"></iframe>
+							</section>					
+
+<div id="ticketForm"></div>
+                                
+							</section>
+								
+							<section class="o-layout">
+								<div class="o-layout__item">
+									<mvt:item name="hdft" param="footer" />
+								</div>
+							</section>
+						</div>
+<mvt:comment>
+
+</mvt:comment>
+					</div>
+					<br>
+				</div>
+			</section>
+		</div>
+	</section>
+	<br>
+
+	<mvt:item name="hdft" param="global_footer" />
+</body>
+</html>

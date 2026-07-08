@@ -1,0 +1,72 @@
+<mvt:item name="html_profile" />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;">
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:store:name;: &mvt:page:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+<link type="text/css" media="all" rel="stylesheet" href="css/00000001/b05/lhn_forms.css"></link> 
+	<mvt:item name="head" param="head_tag" />
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<style>
+
+</style>
+</head>
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+	<mvt:item name="hdft" param="global_header" />
+
+
+					
+							<section class="o-layout">
+								<div class="o-layout__item">
+									<mvt:item name="hdft" param="header" />
+								</div>
+							</section>
+							<section class="o-layout">
+								<div class="form_note o-layout__item">
+									<mvt:item name="form_note"/>
+								</div>
+							</section>					
+							<section class="o-layout">
+
+<div style="margin: 0; padding: 0;">
+  <iframe src="https://forms.monday.com/forms/embed/6f615bc55d53713f58963418491f3ee7?r=use1"
+          style="width: 100vw; height: 100vh; border: 0; display: block; box-shadow: 5px 5px 56px 0px rgba(0,0,0,0.25);">
+  </iframe>
+</div>
+
+                                
+							</section>
+							<section class="o-layout">
+								<div class="form_note o-layout__item">
+									<mvt:item name="form_note_bottom"/>
+								</div>
+							</section>								
+							<section class="o-layout">
+								<div class="o-layout__item">
+									<mvt:item name="hdft" param="footer" />
+								</div>
+							</section>
+						</div>
+<mvt:comment>
+						<aside id="help_aside" class="u-hidden u-flex--m o-layout__item u-width-12 u-width-3--l u-width-2--w">
+							<mvt:item name="readytheme" param="navigationset( 'help_navigation' )" />
+						</aside>
+</mvt:comment>
+					</div>
+					<br>
+				</div>
+			</section>
+		</div>
+	</section>
+	<br>
+
+	<mvt:item name="hdft" param="global_footer" />
+</body>
+</html>

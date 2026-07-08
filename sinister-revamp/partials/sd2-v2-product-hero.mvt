@@ -1,0 +1,17 @@
+<mvt:comment>Product Hero V2 partial.</mvt:comment>
+<header class="sd2-v2-product-hero">
+	<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+		<a href="&mvte:urls:SFNT:auto;">Home</a>
+		<span aria-hidden="true">/</span>
+		<a href="&mvte:urls:CTGY:auto;">Parts</a>
+		<span aria-hidden="true">/</span>
+		<span>&mvte:product:name;</span>
+	</nav>
+	<p class="sd2-kicker">Sinister Diesel Product</p>
+	<h1>&mvte:product:name;</h1>
+	<div class="sd2-v2-product-hero__meta">
+		<span>SKU &mvte:product:code;</span>
+		<span>[Placeholder] Review count</span>
+		<span data-v2-fitment-copy>Garage fitment not selected.</span>
+	</div>
+</header>

@@ -1,17 +1,23 @@
 <mvt:comment>
-	Mega Menu Experience V2 — additive, inactive. Nav category hrefs are the
-	same production-verified canonical URLs the live header resolves by
-	category ID (Code-based paths 404 in prod). Featured products/buying
-	guides/popular builds use placeholder copy pending real Miva product/
-	content lookups in a later milestone — do not treat placeholder image
-	paths as final assets.
+	Mega Menu Experience V2. Category links are resolved from the live
+	ReadyTheme navigation sets so every submenu item uses its own canonical
+	category URL instead of the former shared CTGYLISTV2 placeholder.
 </mvt:comment>
+
+<mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954746_ford_powerstroke', l.settings:sd2_mega_powerstroke)" />
+<mvt:do file="g.Module_Feature_URI_UT" name="l.settings:sd2_mega_powerstroke:url" value="Store_Category_URL(l.settings:sd2_mega_powerstroke, NULL)" />
+<mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954952_gm_duramax', l.settings:sd2_mega_duramax)" />
+<mvt:do file="g.Module_Feature_URI_UT" name="l.settings:sd2_mega_duramax:url" value="Store_Category_URL(l.settings:sd2_mega_duramax, NULL)" />
+<mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954540_dodge_cummins', l.settings:sd2_mega_cummins)" />
+<mvt:do file="g.Module_Feature_URI_UT" name="l.settings:sd2_mega_cummins:url" value="Store_Category_URL(l.settings:sd2_mega_cummins, NULL)" />
+<mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('1209610_merchandise_apparel', l.settings:sd2_mega_apparel)" />
+<mvt:do file="g.Module_Feature_URI_UT" name="l.settings:sd2_mega_apparel:url" value="Store_Category_URL(l.settings:sd2_mega_apparel, NULL)" />
 
 <div class="sd2-v2-mega" data-v2-mega>
 
-	<!-- Powerstroke -->
+	<mvt:item name="readytheme" param="navigationset( 'powerstroke_navigation' )" />
 	<div class="sd2-v2-mega__panel" data-v2-panel="1">
-		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+		<a class="sd2-v2-mega__hero" href="&mvte:sd2_mega_powerstroke:url;">
 			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Ford Powerstroke build in the shop">
 			<span class="sd2-v2-mega__hero-cap">
 				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
@@ -25,35 +31,35 @@
 					<p class="sd2-v2-mega__eyebrow">Ford Diesel Performance</p>
 					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
 				</div>
-				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:sd2_mega_powerstroke:url;">Shop All</a>
 			</div>
 			<div class="sd2-v2-mega__cats">
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Air &amp; Fuel</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Fuel System</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Turbos</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Air Intakes & Parts'"><li><a href="&mvte:navigationitem:url;">Air Intakes &amp; Parts</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Fuel System'"><li><a href="&mvte:navigationitem:url;">Fuel System</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Injectors'"><li><a href="&mvte:navigationitem:url;">Injectors</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Intercoolers & Pipes'"><li><a href="&mvte:navigationitem:url;">Intercoolers &amp; Pipes</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Turbos'"><li><a href="&mvte:navigationitem:url;">Turbos</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Engine &amp; EGR</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Coolant &amp; Oil Filtration</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Braking System</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Engine Parts and Performance'"><li><a href="&mvte:navigationitem:url;">Engine Parts &amp; Performance</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'EGR Coolers & Components'"><li><a href="&mvte:navigationitem:url;">EGR Coolers &amp; Components</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Coolant & Oil Filtration'"><li><a href="&mvte:navigationitem:url;">Coolant &amp; Oil Filtration</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Exhaust Tips / Systems'"><li><a href="&mvte:navigationitem:url;">Exhaust Tips / Systems</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Braking System'"><li><a href="&mvte:navigationitem:url;">Braking System</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Accessories</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">50 State Legal Products</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Gauges and Pods'"><li><a href="&mvte:navigationitem:url;">Gauges &amp; Pods</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Tuners & Programmers'"><li><a href="&mvte:navigationitem:url;">Tuners &amp; Programmers</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ '50 State Legal Sinister Diesel Products'"><li><a href="&mvte:navigationitem:url;">50 State Legal Products</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 			</div>
@@ -73,9 +79,9 @@
 		</div>
 	</div>
 
-	<!-- Duramax -->
+	<mvt:item name="readytheme" param="navigationset( 'duramax_navigation' )" />
 	<div class="sd2-v2-mega__panel" data-v2-panel="2">
-		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+		<a class="sd2-v2-mega__hero" href="&mvte:sd2_mega_duramax:url;">
 			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="GM Duramax build in the shop">
 			<span class="sd2-v2-mega__hero-cap">
 				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
@@ -89,32 +95,32 @@
 					<p class="sd2-v2-mega__eyebrow">GM Diesel Performance</p>
 					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
 				</div>
-				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:sd2_mega_duramax:url;">Shop All</a>
 			</div>
 			<div class="sd2-v2-mega__cats">
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Air &amp; Cooling</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Coolant &amp; Oil Filtration</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Air Intakes & Parts'"><li><a href="&mvte:navigationitem:url;">Air Intakes &amp; Parts</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Coolant & Oil Filtration'"><li><a href="&mvte:navigationitem:url;">Coolant &amp; Oil Filtration</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Intercoolers & Pipes'"><li><a href="&mvte:navigationitem:url;">Intercoolers &amp; Pipes</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Exhaust Tips / Systems'"><li><a href="&mvte:navigationitem:url;">Exhaust Tips / Systems</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Engine</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts &amp; Performance</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers &amp; Components</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Lift Pumps &amp; Fuel System</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Engine Parts and Performance'"><li><a href="&mvte:navigationitem:url;">Engine Parts &amp; Performance</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'EGR Coolers & Components'"><li><a href="&mvte:navigationitem:url;">EGR Coolers &amp; Components</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Lift Pumps & Fuel System'"><li><a href="&mvte:navigationitem:url;">Lift Pumps &amp; Fuel System</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Injectors'"><li><a href="&mvte:navigationitem:url;">Injectors</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Support Parts</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Gauges and Pods'"><li><a href="&mvte:navigationitem:url;">Gauges &amp; Pods</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Tuners & Programmers'"><li><a href="&mvte:navigationitem:url;">Tuners &amp; Programmers</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 			</div>
@@ -134,9 +140,9 @@
 		</div>
 	</div>
 
-	<!-- Cummins -->
+	<mvt:item name="readytheme" param="navigationset( 'cummins_navigation' )" />
 	<div class="sd2-v2-mega__panel" data-v2-panel="3">
-		<a class="sd2-v2-mega__hero" href="&mvte:urls:CTGYENGV2:auto;">
+		<a class="sd2-v2-mega__hero" href="&mvte:sd2_mega_cummins:url;">
 			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Dodge Cummins build in the shop">
 			<span class="sd2-v2-mega__hero-cap">
 				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
@@ -150,33 +156,33 @@
 					<p class="sd2-v2-mega__eyebrow">Ram Diesel Performance</p>
 					<h2 class="sd2-v2-mega__title">Performance Categories</h2>
 				</div>
-				<a class="sd2-v2-mega__shop-all" href="&mvte:urls:CTGYENGV2:auto;">Shop All</a>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:sd2_mega_cummins:url;">Shop All</a>
 			</div>
 			<div class="sd2-v2-mega__cats">
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Air &amp; Fuel</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Air Intakes &amp; Parts</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Lift Pumps &amp; Fuel System</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Injectors</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Intercoolers &amp; Pipes</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Turbos</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Air Intakes & Parts'"><li><a href="&mvte:navigationitem:url;">Air Intakes &amp; Parts</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Lift Pumps & Fuel System'"><li><a href="&mvte:navigationitem:url;">Lift Pumps &amp; Fuel System</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Injectors'"><li><a href="&mvte:navigationitem:url;">Injectors</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Intercoolers & Pipes'"><li><a href="&mvte:navigationitem:url;">Intercoolers &amp; Pipes</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Turbos'"><li><a href="&mvte:navigationitem:url;">Turbos</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Engine &amp; Cooling</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Engine Parts</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">EGR Coolers &amp; Components</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Exhaust Systems</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Engine Parts and Performance'"><li><a href="&mvte:navigationitem:url;">Engine Parts &amp; Performance</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'EGR Coolers & Components'"><li><a href="&mvte:navigationitem:url;">EGR Coolers &amp; Components</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Exhaust Tips / Systems'"><li><a href="&mvte:navigationitem:url;">Exhaust Tips / Systems</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 				<div>
 					<h3 class="sd2-v2-mega__col-title">Accessories</h3>
 					<ul class="sd2-v2-mega__list">
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Gauges &amp; Pods</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">Tuners &amp; Programmers</a></li>
-						<li><a href="&mvte:urls:CTGYLISTV2:auto;">50 State Legal Products</a></li>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Gauges and Pods'"><li><a href="&mvte:navigationitem:url;">Gauges &amp; Pods</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Tuners & Programmers'"><li><a href="&mvte:navigationitem:url;">Tuners &amp; Programmers</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ '50 State Legal Sinister Diesel Products'"><li><a href="&mvte:navigationitem:url;">50 State Legal Products</a></li></mvt:if></mvt:foreach>
 					</ul>
 				</div>
 			</div>
@@ -192,6 +198,53 @@
 			<div class="sd2-v2-mega__side-block">
 				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
 				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2019 Ram Cummins Pull Truck</a>
+			</div>
+		</div>
+	</div>
+
+	<mvt:item name="readytheme" param="navigationset( 'apparel_navigation' )" />
+	<div class="sd2-v2-mega__panel" data-v2-panel="4">
+		<a class="sd2-v2-mega__hero" href="&mvte:sd2_mega_apparel:url;">
+			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="Sinister Diesel merchandise">
+			<span class="sd2-v2-mega__hero-cap">
+				<span class="sd2-v2-mega__hero-eyebrow">Shop the Brand</span>
+				<span class="sd2-v2-mega__hero-title">Apparel</span>
+				<span class="sd2-v2-mega__hero-link">Shop All Apparel</span>
+			</span>
+		</a>
+		<div class="sd2-v2-mega__body">
+			<div class="sd2-v2-mega__head">
+				<div>
+					<p class="sd2-v2-mega__eyebrow">Sinister Diesel Merchandise</p>
+					<h2 class="sd2-v2-mega__title">Apparel Categories</h2>
+				</div>
+				<a class="sd2-v2-mega__shop-all" href="&mvte:sd2_mega_apparel:url;">Shop All</a>
+			</div>
+			<div class="sd2-v2-mega__cats">
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Featured</h3>
+					<ul class="sd2-v2-mega__list">
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Merchandise'"><li><a href="&mvte:navigationitem:url;">Merchandise</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Shirts'"><li><a href="&mvte:navigationitem:url;">Shirts</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Hoodies'"><li><a href="&mvte:navigationitem:url;">Hoodies</a></li></mvt:if></mvt:foreach>
+					</ul>
+				</div>
+				<div>
+					<h3 class="sd2-v2-mega__col-title">Accessories</h3>
+					<ul class="sd2-v2-mega__list">
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Hats'"><li><a href="&mvte:navigationitem:url;">Hats</a></li></mvt:if></mvt:foreach>
+						<mvt:foreach iterator="navigationitem" array="readytheme:navigationitems"><mvt:if expr="l.settings:navigationitem:active AND l.settings:navigationitem:name EQ 'Shop All'"><li><a href="&mvte:navigationitem:url;">Shop All Apparel</a></li></mvt:if></mvt:foreach>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="sd2-v2-mega__side">
+			<div class="sd2-v2-mega__side-block">
+				<h3 class="sd2-v2-mega__col-title">From the Shop</h3>
+				<a class="sd2-v2-mega__guide" href="&mvte:sd2_mega_apparel:url;">
+					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="">
+					<span><span class="sd2-v2-mega__guide-title">New merch and customer favorites</span><span class="sd2-v2-mega__guide-meta">Shop apparel</span></span>
+				</a>
 			</div>
 		</div>
 	</div>

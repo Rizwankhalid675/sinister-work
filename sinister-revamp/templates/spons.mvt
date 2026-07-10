@@ -18,23 +18,23 @@
 		.mm-sequence-container{background:transparent;padding:0!important;max-width:none!important;margin:0!important}
 
 		:root {
-			--blue:    #1e3cff;
-			--blue2:   #2a55ff;
-			--blue-lt: #eef1ff;
-			--dark:    #0d1117;
-			--text:    #111827;
-			--muted:   #6b7280;
-			--line:    #e5e7eb;
-			--bg:      #f3f4f8;
-			--white:   #ffffff;
+			--blue:    var(--sd2-blue);
+			--blue2:   var(--sd2-blue-mid);
+			--blue-lt: var(--sd2-blue-light);
+			--dark:    var(--sd2-text);
+			--text:    var(--sd2-text);
+			--muted:   var(--sd2-text-mid);
+			--line:    var(--sd2-border-mid);
+			--bg:      var(--sd2-bg-subtle);
+			--white:   var(--sd2-bg-white);
 			--success: #059669;
 			--danger:  #dc2626;
-			--shadow:  0 4px 24px rgba(30,60,255,.08);
-			--shadow-lg: 0 12px 48px rgba(30,60,255,.13);
+			--shadow:  0 4px 24px rgba(24,51,184,.08);
+			--shadow-lg: 0 12px 48px rgba(24,51,184,.13);
 		}
 
 		*,*::before,*::after{box-sizing:border-box}
-		body{background:var(--bg)!important;color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;margin:0}
+		body{background:var(--bg)!important;color:var(--text);font-family:var(--sd2-font-body);margin:0}
 
 		/* ── BLEED ── */
 		.sd-bleed{position:relative;left:50%;right:50%;width:100vw;margin-left:-50vw;margin-right:-50vw;overflow:hidden}
@@ -48,7 +48,7 @@
 		.sd-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.18) 60%,transparent 100%);pointer-events:none}
 		.sd-hero-content{position:absolute;inset:0;display:flex;align-items:flex-end;padding:clamp(20px,3vw,48px) clamp(16px,4vw,64px)}
 		.sd-hero-kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.9);background:rgba(30,60,255,.35);border:1px solid rgba(100,140,255,.4);padding:7px 14px;border-radius:999px;backdrop-filter:blur(8px);margin-bottom:14px}
-		.sd-hero-title{margin:0 0 10px;font-size:clamp(28px,3.5vw,52px);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.3px;text-shadow:0 4px 32px rgba(0,0,0,.5)}
+		.sd-hero-title{margin:0 0 10px;font-family:var(--sd2-font-display);font-size:clamp(28px,3.5vw,52px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-.3px;text-shadow:0 4px 32px rgba(0,0,0,.5)}
 		.sd-hero-sub{margin:0;color:rgba(255,255,255,.82);font-size:clamp(14px,1.3vw,17px);line-height:1.55;max-width:60ch}
 		.sd-hero-dots{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
 		.sd-dot{width:8px;height:8px;border-radius:999px;border:1.5px solid rgba(255,255,255,.6);background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s ease}

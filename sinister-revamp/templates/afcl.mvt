@@ -24,21 +24,21 @@
 
 	<section class="o-layout o-layout--justify-around">
 		<div class="o-layout__item u-width-12 u-width-6--m u-width-4--l">
-			<p class="c-heading-delta u-text-uppercase">Welcome Back</p>
+			<p class="sd2-v2-heading-delta u-text-uppercase">Welcome Back</p>
 			<form data-hook="afcl-form" method="post" action="&mvte:urls:AFED:secure;">
 				<fieldset>
 					<legend>&mvt:page:name;</legend>
 					<input type="hidden" name="Action" value="ALGI" />
-					<ul class="c-form-list">
-						<li class="c-form-list__item">
-							<label class="c-form-label u-text-bold is-required &mvt:global:invalid_credentials;" for="l-Affiliate_Code">Affiliate Code</label>
-							<input id="l-Affiliate_Code" class="c-form-input" type="text" name="Affiliate_Code" value="&mvte:global:Affiliate_Code;" required>
+					<ul class="sd2-v2-form-list">
+						<li class="sd2-v2-form-list__item">
+							<label class="sd2-v2-form-label u-text-bold is-required &mvt:global:invalid_credentials;" for="l-Affiliate_Code">Affiliate Code</label>
+							<input id="l-Affiliate_Code" class="sd2-v2-form-input" type="text" name="Affiliate_Code" value="&mvte:global:Affiliate_Code;" required>
 						</li>
-						<li class="c-form-list__item">
-							<label class="c-form-label u-text-bold is-required &mvt:global:invalid_credentials;" for="l-Affiliate_Password">Password</label>
-							<input id="l-Affiliate_Password" class="c-form-input" type="password" name="Affiliate_Password" required>
+						<li class="sd2-v2-form-list__item">
+							<label class="sd2-v2-form-label u-text-bold is-required &mvt:global:invalid_credentials;" for="l-Affiliate_Password">Password</label>
+							<input id="l-Affiliate_Password" class="sd2-v2-form-input" type="password" name="Affiliate_Password" required>
 						</li>
-						<li class="c-form-list__item u-text-right">
+						<li class="sd2-v2-form-list__item u-text-right">
 							<mvt:item name="buttons" param="Login" />
 						</li>
 					</ul>
@@ -55,16 +55,12 @@
 			<p class="u-font-small"><a href="#" onclick="forgot_password(); return false;" title="Forgot Password">Forgot your password?</a></p>
 		</div>
 		<div class="o-layout__item u-width-12 u-width-6--m u-width-4--l">
-			<p class="c-heading-delta u-text-uppercase">New Affiliate</p>
-			<p class="u-text-right"><a class="c-button" href="&mvte:urls:AFAD:secure;" title="Register">Register</a></p>
+			<p class="sd2-v2-heading-delta u-text-uppercase">New Affiliate</p>
+			<p class="u-text-right"><a class="sd2-btn" href="&mvte:urls:AFAD:secure;" title="Register">Register</a></p>
 		</div>
 	</section>
 	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-		</div>
-	</section>
+	<mvt:item name="hdft" param="footer" />
 
 	<mvt:item name="hdft" param="global_footer" />
 </body>

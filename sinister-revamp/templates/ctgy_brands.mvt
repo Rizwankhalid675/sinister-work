@@ -29,13 +29,9 @@
 
 			<div class="o-layout o-layout--row-reverse--l o-layout--wide">
 				<div class="o-layout__item u-width-12">
+					<mvt:item name="hdft" param="header" />
+
 					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="header" />
-						</div>
-					</section>
-					
-					<section class="o-layout">	
 					<mvt:if expr="NOT ISNULL l.settings:secondary_title_image">
 						<div class="o-layout__item u-width-12 u-width-9--l">
 							<mvt:item name="prod_ctgy_hdft" param="ctgy_header" />
@@ -91,11 +87,7 @@
 						</div>
 					</section>
 					
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="footer" />
-						</div>
-					</section>
+					<mvt:item name="hdft" param="footer" />
 				</div>				
 			</div>
 		</div>

@@ -152,16 +152,6 @@ var product_name = "&mvtj:product:name;";
 .u-bg-primary::before, .u-bg-primary {
 	background-color: #ff061b;
 }
-#thumbnails .slick-list{
-max-height:480px!important;
-}
-.x-product-list__picture {
-	height: 220px;
-
-}
-.x-product-layout {
- padding-bottom: 0;
-}
 .ind_cnt {
 	text-decoration: underline;
 }

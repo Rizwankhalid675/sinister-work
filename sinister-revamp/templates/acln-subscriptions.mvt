@@ -1,24 +1,24 @@
 <mvt:if expr="l.settings:subscriptions:total_count EQ 0">
-	<p class="x-messages x-messages--info">No subscriptions found.</p>
+	<p class="sd2-v2-account-empty">No subscriptions found.</p>
 	<mvt:exit />
 </mvt:if>
 
-<div class="t-account-landing__order-list t-account-landing__order-list--subscriptions">
-	<table class="c-table-responsive">
-		<thead class="c-table-responsive_thead">
-			<tr class="c-table-responsive__row u-border-none u-color-black u-font-tiny u-text-bold u-text-uppercase">
-				<th class="c-table-responsive__cell c-table-responsive__cell--flush" scope="col">Product</th>
-				<th class="c-table-responsive__cell c-table-responsive__cell--flush" scope="col">Frequency</th>
-				<th class="c-table-responsive__cell c-table-responsive__cell--flush" scope="col">Total</th>
-				<th class="c-table-responsive__cell c-table-responsive__cell--flush" scope="col">&nbsp;</th>
+<div class="sd2-v2-account-table-wrap">
+	<table class="sd2-v2-account-table">
+		<thead>
+			<tr>
+				<th scope="col">Product</th>
+				<th scope="col">Frequency</th>
+				<th scope="col">Total</th>
+				<th scope="col">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
 			<mvt:foreach iterator="subscription" array="subscriptions:items">
-				<tr class="c-table-responsive__row u-border-none u-color-gray-50">
-					<td class="c-table-responsive__cell c-table-responsive__cell--flush c-table-responsive__cell--flex" data-label="Product">
+				<tr>
+					<td data-label="Product">
 						<mvt:foreach iterator="item" array="subscription:items">
-							<div class="t-account-landing__subscription-product">
+							<div class="sd2-v2-account-row-actions">
 								<mvt:if expr="ISNULL l.settings:item:imagetypes:main">
 									&nbsp;
 								<mvt:else>
@@ -45,18 +45,18 @@
 							</div>
 						</mvt:foreach>
 					</td>
-					<td class="c-table-responsive__cell c-table-responsive__cell--flush c-table-responsive__cell--flex" data-label="Frequency">
+					<td data-label="Frequency">
 						&mvte:subscription:productsubscriptionterm:descrip;
 					</td>
-					<td class="c-table-responsive__cell c-table-responsive__cell--flush c-table-responsive__cell--flex" data-label="Total">
+					<td data-label="Total">
 						&mvt:subscription:formatted_display_total;
 					</td>
-					<td class="c-table-responsive__cell c-table-responsive__cell--flush c-table-responsive__cell--flex" data-label="">
+					<td data-label="">
 						<mvt:if expr="l.settings:subscription:status NE 'C'">
 							<mvt:if expr="l.settings:subscription:nextdate EQ 0">
-								<a class="c-button c-button--clear c-button--flush u-bg-transparent u-color-green u-text-medium u-font-tiny u-text-uppercase" href="&mvte:urls:CSBE:auto_sep;Subscription_ID=&mvta:subscription:id;">Next Order: N/A; <span class="u-font-small u-icon-chevron-right"></span></a>
+								<a class="sd2-link" href="&mvte:urls:CSBE:auto_sep;Subscription_ID=&mvta:subscription:id;">Next Order: N/A</a>
 							<mvt:else>
-								<a class="c-button c-button--clear c-button--flush u-bg-transparent u-color-green u-text-medium u-font-tiny u-text-uppercase" href="&mvte:urls:CSBE:auto_sep;Subscription_ID=&mvta:subscription:id;">Next Order: &mvt:subscription:formatted_nextdate_date; <span class="u-font-small u-icon-chevron-right"></span></a>
+								<a class="sd2-link" href="&mvte:urls:CSBE:auto_sep;Subscription_ID=&mvta:subscription:id;">Next Order: &mvt:subscription:formatted_nextdate_date;</a>
 							</mvt:if>
 						</mvt:if>
 					</td>

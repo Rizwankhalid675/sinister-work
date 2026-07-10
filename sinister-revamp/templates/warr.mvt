@@ -17,251 +17,68 @@
 	<mvt:item name="head" param="head_tag" />
 </head>
 
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+<body>
 	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block u-bg-white">
-				<div class="o-layout__item t-expanded-block__item">
-					<br>
+	<main class="sd2-v2-search-page" data-v2-static-page>
+		<div class="sd2-wrap">
+			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+				<a href="&mvte:urls:SFNT:auto;">Home</a>
+				<span aria-hidden="true">/</span>
+				<span>Warranty Policy</span>
+			</nav>
 
-					<div class="o-layout o-layout--column-reverse o-layout--row-reverse--l">
+			<header class="sd2-v2-search-page__head">
+				<p class="sd2-eyebrow">Help Center</p>
+				<h1 class="sd2-heading-lg">Warranty Policy</h1>
+				<p class="sd2-v2-help-page__intro">Warranty coverage details, exclusions, and exchanges under warranty.</p>
+				<div style="display: flex; flex-wrap: wrap; gap: var(--sd2-space-3); margin-top: var(--sd2-space-4);">
+					<a class="sd2-btn sd2-btn--primary" href="https://sinisterdiesel.com/help-warranty-inquiry.html">Begin Warranty Claim</a>
+					<a class="sd2-btn sd2-btn--outline" href="https://sinisterdiesel.com/warranty-turbo.html">Turbo Warranty Policy</a>
+				</div>
+			</header>
 
-						<!-- MAIN CONTENT -->
-						<div class="o-layout__item u-width-12 u-width-9--l u-width-10--w">
+			<div class="sd2-v2-static-page">
+				<div class="sd2-v2-static-page__layout">
+					<div class="sd2-v2-static-page__main">
+						<div class="sd2-v2-static-page__body">
 
-							<div class="sd-warranty-wrap">
+							<h2>Warranty Terms and Conditions</h2>
+							<ul>
+								<li>The warranty for parts covers manufacturer defects. Should a part fail due to a defect in manufacturing as determined by Sinister Diesel, customer is entitled to replacement of that specific part, or the equivalent amount in Store Credit. No credit will be issued for labor expenses incurred.</li>
+								<li>To initiate a warranty claim, please submit a claim through our help center to begin the process.</li>
+								<li>All warranty determinations including, but not limited to, the cause of part failure and customer remedy will be determined solely by Sinister Diesel.</li>
+								<li>In all cases, the item must not have exceeded the Manufacturer's warranty period.</li>
+								<li>If the part was built by another Manufacturer, all Warranty Requests and Claims have to be made directly with the Manufacturer themselves.</li>
+								<li>Gaskets, O-Rings and other Wearable Parts are not covered under Warranty.</li>
+							</ul>
 
-								<header class="sd-warranty-hero">
-									<h1 class="sd-warranty-title">Warranty Policy</h1>
-									<p class="sd-warranty-subtitle">
-										Warranty coverage details, exclusions, and exchanges under warranty.
-									</p>
+							<h2>One Year Warranty Policy and Guidelines</h2>
+							<p>Sinister Diesel® branded products covered by this warranty are warranted to the original owner against manufacturing defects in materials and workmanship for one (1) year from the date of purchase. This warranty applies to specified Sinister Diesel branded products. All warranty requests and claims for products built by other manufacturer(s), have to be made directly with the manufacturer(s) themselves.</p>
+							<p>If your Sinister Diesel product covered by this warranty fails due to a manufacturing defect Sinister Diesel will repair it without charge, or replace it, at Sinister Diesel's discretion. Only original, unaltered and unmodified items and workmanship are covered. This warranty does not cover gaskets, rubber or silicone hoses, o-rings and other wearable parts, damage caused by accident, improper care, negligence, normal wear and tear, or the natural breakdown of colors and materials over extended time and use.</p>
 
-									<div class="sd-warranty-links">
+							<h2>Other Warranty Limitations and Exclusions</h2>
+							<p>This warranty is only available in the United States and Canada. Sinister Diesel is not responsible for direct, incidental or consequential damages for any reason including damage resulting from a breach of a warranty or condition such as scratches in a device surface, lost data or lost or destroyed personal property. Some states do not allow the exclusion or limitation of incidental or consequential damages, so the above limitation or exclusion may not apply to you. Some states do not allow limitations on how long an implied warranty lasts, so the above limitations on the duration of the warranty may not apply to you.</p>
 
-
-	<a class="sd-btn sd-btn--primary" href="https://sinisterdiesel.com/help-warranty-inquiry.html">
-		Begin Warranty Claim
-	</a>
-
-	<a class="sd-btn sd-btn--ghost" href="https://sinisterdiesel.com/warranty-turbo.html">
-		Turbo Warranty Policy
-	</a>
-</div>
-								</header>
-
-								<main class="sd-warranty-content">
-
-									<section class="sd-section">
-										<h2 class="sd-h2"><span class="sd-h2__text">Warranty Terms and Conditions</span></h2>
-
-										<ul class="sd-bullets sd-bullets--neutral">
-											<li>The warranty for parts covers manufacturer defects. Should a part fail due to a defect in manufacturing as determined by Sinister Diesel, customer is entitled to replacement of that specific part, or the equivalent amount in Store Credit. No credit will be issued for labor expenses incurred.</li>
-											<li>To initiate a warranty claim, please submit a claim through our help center to begin the process.</li>
-											<li>All warranty determinations including, but not limited to, the cause of part failure and customer remedy will be determined solely by Sinister Diesel.</li>
-											<li>In all cases, the item must not have exceeded the Manufacturer’s warranty period.</li>
-											<li>If the part was built by another Manufacturer, all Warranty Requests and Claims have to be made directly with the Manufacturer themselves.</li>
-											<li>Gaskets, O-Rings and other Wearable Parts are not covered under Warranty.</li>
-										</ul>
-									</section>
-
-									<section class="sd-section">
-										<h2 class="sd-h2"><span class="sd-h2__text">One Year Warranty Policy and Guidelines</span></h2>
-										<p>
-											Sinister Diesel® branded products covered by this warranty are warranted to the original owner against manufacturing defects in materials and workmanship for one (1) year from the date of purchase. This warranty applies to specified Sinister Diesel branded products. All warranty requests and claims for products built by other manufacturer(s), have to be made directly with the manufacturer(s) themselves.
-										</p>
-										<p>
-											If your Sinister Diesel product covered by this warranty fails due to a manufacturing defect Sinister Diesel will repair it without charge, or replace it, at Sinister Diesel’s discretion. Only original, unaltered and unmodified items and workmanship are covered. This warranty does not cover gaskets, rubber or silicone hoses, o-rings and other wearable parts, damage caused by accident, improper care, negligence, normal wear and tear, or the natural breakdown of colors and materials over extended time and use.
-										</p>
-									</section>
-
-									<section class="sd-section">
-										<h2 class="sd-h2"><span class="sd-h2__text">Other Warranty Limitations and Exclusions</span></h2>
-										<p>
-											This warranty is only available in the United States and Canada. Sinister Diesel is not responsible for direct, incidental or consequential damages for any reason including damage resulting from a breach of a warranty or condition such as scratches in a device surface, lost data or lost or destroyed personal property. Some states do not allow the exclusion or limitation of incidental or consequential damages, so the above limitation or exclusion may not apply to you. Some states do not allow limitations on how long an implied warranty lasts, so the above limitations on the duration of the warranty may not apply to you.
-										</p>
-									</section>
-
-									<section class="sd-section">
-										<h2 class="sd-h2"><span class="sd-h2__text">Exchanges Under Warranty</span></h2>
-										<p>Exchanges under Sinister Diesel’s Warranty Policy include the following options:</p>
-										<ul class="sd-bullets sd-bullets--neutral">
-											<li>Potentially defective part must be returned to Sinister Diesel for Warranty Inspection. If found to have a Manufacturer Flaw or Defect, the replacement part will then be shipped out.</li>
-											<li>Replacement part can be purchased now, and potentially defective part must then be returned to Sinister Diesel for Warranty Inspection. If found to have a Manufacturer Flaw or Defect, a refund will be issued for the purchase of the replacement part.</li>
-										</ul>
-									</section>
-
-								</main>
-							</div>
-
-							<style>
-								/* ===== Policy Page Styles (scoped) ===== */
-
-								.sd-warranty-wrap{
-									font-family: Arial, Helvetica, sans-serif;
-									color:#1f2937;
-									max-width: 1200px;
-									margin: 0 auto;
-									padding: 0 10px 28px;
-
-									font-size: 18px;
-									line-height: 1.6;
-								}
-								.sd-warranty-wrap p,
-								.sd-warranty-wrap li{
-									font-size: 18px;
-									line-height: 1.65;
-								}
-
-								.sd-warranty-hero{
-									padding: 8px 0 12px;
-									margin: 0 0 16px;
-									border: 0;
-									border-radius: 0;
-									background: transparent;
-									box-shadow: none;
-								}
-
-								.sd-warranty-title{
-									margin: 0 0 8px 0;
-									font-size: 28px;
-									line-height: 1.2;
-									font-weight: 800;
-									letter-spacing: -0.02em;
-								}
-
-								.sd-warranty-subtitle{
-									margin: 0 0 14px 0;
-									font-size: 20px;
-									color: #4b5563;
-								}
-
-								.sd-warranty-links{
-									display:flex;
-									flex-wrap: wrap;
-									gap: 10px;
-									margin: 10px 0 12px;
-								}
-
-								.sd-btn{
-									display:inline-block;
-									padding: 10px 14px;
-									border-radius: 999px;
-									font-weight: 700;
-									text-decoration: none;
-									border: 1px solid transparent;
-									transition: transform .08s ease, box-shadow .08s ease, background-color .08s ease;
-									font-size: 18px;
-								}
-								.sd-btn:focus{ outline: 2px solid #93c5fd; outline-offset: 2px; }
-								.sd-btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,0,0,0.10); }
-
-								.sd-btn--primary{
-									background:#0b5bd3;
-									color:#ffffff !important;
-									border-color:#0b5bd3;
-								}
-								.sd-btn--primary:hover,
-								.sd-btn--primary:focus{
-									background:#094fb8;
-									color:#ffffff !important;
-								}
-
-								.sd-btn--ghost{
-									background:#fff;
-									color:#0b5bd3 !important;
-									border-color:#cfe0ff;
-								}
-								.sd-btn--ghost:hover,
-								.sd-btn--ghost:focus{
-									background:#eff6ff;
-									color:#0b5bd3 !important;
-								}
-
-								.sd-warranty-content{
-									display:flex;
-									flex-direction: column;
-									gap: 0;
-								}
-
-								.sd-section{
-									padding: 18px 0;
-									border-top: 1px solid #e5e7eb;
-								}
-								.sd-section:first-child{
-									border-top: 0;
-									padding-top: 0;
-								}
-
-								.sd-h2{
-									margin: 0 0 10px 0;
-									font-size: 20px;
-									line-height: 1.25;
-									font-weight: 800 !important;
-								}
-								.sd-h2__text{
-									display:inline-block;
-									font-weight: 800 !important;
-									text-decoration: none !important;
-									
-								}
-
-								.sd-bullets{
-									margin: 10px 0 0 18px;
-									padding: 0;
-								}
-								.sd-bullets li{
-									margin: 8px 0;
-									line-height: 1.65;
-								}
-
-								.sd-bullets--neutral{
-									margin-left: 0;
-									list-style: none;
-								}
-								.sd-bullets--neutral li{
-									position: relative;
-									padding-left: 28px;
-									break-inside: avoid;
-								}
-								.sd-bullets--neutral li::before{
-									content: "";
-									position: absolute;
-									left: 0;
-									top: 0.6em;
-									width: 10px;
-									height: 10px;
-									border-radius: 50%;
-									background: #6b7280;
-									box-shadow: 0 0 0 3px rgba(107,114,128,0.15);
-								}
-
-								.sd-warranty-wrap a{
-									color:#0b5bd3;
-									text-decoration: none;
-									
-								}
-								.sd-warranty-wrap a:hover{
-									text-decoration-thickness: 2px;
-								}
-							</style>
+							<h2>Exchanges Under Warranty</h2>
+							<p>Exchanges under Sinister Diesel's Warranty Policy include the following options:</p>
+							<ul>
+								<li>Potentially defective part must be returned to Sinister Diesel for Warranty Inspection. If found to have a Manufacturer Flaw or Defect, the replacement part will then be shipped out.</li>
+								<li>Replacement part can be purchased now, and potentially defective part must then be returned to Sinister Diesel for Warranty Inspection. If found to have a Manufacturer Flaw or Defect, a refund will be issued for the purchase of the replacement part.</li>
+							</ul>
 
 						</div>
-
-						<!-- SIDEBAR -->
-						<aside class="o-layout__item u-width-12 u-width-3--l u-width-2--w">
-							<mvt:item name="readytheme" param="navigationset( 'static_navigation' )" />
-						</aside>
-
 					</div>
-					<br>
+					<aside class="sd2-v2-static-page__aside">
+						<mvt:item name="readytheme" param="navigationset( 'static_navigation' )" />
+					</aside>
 				</div>
-			</section>
+			</div>
 		</div>
-	</section>
+	</main>
 
+	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

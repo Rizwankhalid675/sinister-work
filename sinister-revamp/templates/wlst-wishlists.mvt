@@ -4,29 +4,29 @@
 </mvt:if>
 
 <div class="t-account-landing__order-list t-account-landing__order-list--subscriptions">
-	<table class="c-table-responsive">
-		<thead class="c-table-responsive_thead">
-			<tr class="c-table-responsive__row u-border-none u-color-black u-font-tiny u-text-bold u-text-uppercase">
-				<th class="c-table-responsive__cell c-table-responsive__cell--flush" scope="col">Title</th>
+	<table class="sd2-v2-table-responsive">
+		<thead class="sd2-v2-table-responsive_thead">
+			<tr class="sd2-v2-table-responsive__row u-border-none u-color-black u-font-tiny u-text-bold u-text-uppercase">
+				<th class="sd2-v2-table-responsive__cell sd2-v2-table-responsive__cell--flush" scope="col">Title</th>
 				<mvt:if expr="NOT ISNULL g.WishListSearch">
-					<th class="c-table-responsive__cell c-table-responsive__cell--flush" scope="col">Name</th>
+					<th class="sd2-v2-table-responsive__cell sd2-v2-table-responsive__cell--flush" scope="col">Name</th>
 				</mvt:if>
-				<th class="c-table-responsive__cell c-table-responsive__cell--flush" scope="col">Notes</th>
-				<td class="c-table-responsive__cell c-table-responsive__cell--flush" scope="col">&nbsp;</td>
+				<th class="sd2-v2-table-responsive__cell sd2-v2-table-responsive__cell--flush" scope="col">Notes</th>
+				<td class="sd2-v2-table-responsive__cell sd2-v2-table-responsive__cell--flush" scope="col">&nbsp;</td>
 			</tr>
 		</thead>
 		<tbody>
 			<mvt:foreach iterator="wishlist" array="wishlists:items">
-				<tr class="c-table-responsive__row u-border-none u-color-gray-50">
-					<td class="c-table-responsive__cell c-table-responsive__cell--flush c-table-responsive__cell--flex" data-label="Title">
+				<tr class="sd2-v2-table-responsive__row u-border-none u-color-gray-50">
+					<td class="sd2-v2-table-responsive__cell sd2-v2-table-responsive__cell--flush sd2-v2-table-responsive__cell--flex" data-label="Title">
 						<a class="u-text-bold u-color-black" href="&mvte:urls:WISH:rr_sep;WishList_ID=&mvta:wishlist:id;">&mvte:wishlist:title;</a>
 					</td>
 					<mvt:if expr="NOT ISNULL g.WishListSearch">
-						<td class="c-table-responsive__cell c-table-responsive__cell--flush c-table-responsive__cell--flex" data-label="Name">&mvte:wishlist:bill_fname; &mvte:wishlist:bill_lname;</td>
+						<td class="sd2-v2-table-responsive__cell sd2-v2-table-responsive__cell--flush sd2-v2-table-responsive__cell--flex" data-label="Name">&mvte:wishlist:bill_fname; &mvte:wishlist:bill_lname;</td>
 					</mvt:if>
-					<td class="c-table-responsive__cell c-table-responsive__cell--flush c-table-responsive__cell--flex" data-label="Notes">&mvte:wishlist:notes;</td>
-					<td class="c-table-responsive__cell c-table-responsive__cell--flush c-table-responsive__cell--flex" data-label="">
-						<a class="c-button c-button--clear u-bg-transparent u-color-black u-text-medium u-font-tiny u-text-uppercase" href="&mvte:urls:WISH:rr_sep;WishList_ID=&mvta:wishlist:id;" aria-label="View &mvte:wishlist:title;"><span class="u-font-small u-icon-chevron-right"></span></a>
+					<td class="sd2-v2-table-responsive__cell sd2-v2-table-responsive__cell--flush sd2-v2-table-responsive__cell--flex" data-label="Notes">&mvte:wishlist:notes;</td>
+					<td class="sd2-v2-table-responsive__cell sd2-v2-table-responsive__cell--flush sd2-v2-table-responsive__cell--flex" data-label="">
+						<a class="sd2-v2-button sd2-v2-button--clear u-bg-transparent u-color-black u-text-medium u-font-tiny u-text-uppercase" href="&mvte:urls:WISH:rr_sep;WishList_ID=&mvta:wishlist:id;" aria-label="View &mvte:wishlist:title;"><span class="u-font-small u-icon-chevron-right"></span></a>
 					</td>
 				</tr>
 			</mvt:foreach>
@@ -47,8 +47,8 @@
 				</li>
 			</mvt:if>
 			<li class="o-list-inline__item o-layout--grow">
-				<div class="c-form-select">
-					<select class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold u-color-gray-50" name="Sort_By" onchange="window.location.href=this.options[ this.selectedIndex ].value">
+				<div class="sd2-v2-form-select">
+					<select class="sd2-v2-form-select__dropdown u-font-small u-text-uppercase u-text-bold u-color-gray-50" name="Sort_By" onchange="window.location.href=this.options[ this.selectedIndex ].value">
 						<mvt:foreach iterator="pages" array="wishlists:page_links:pages">
 							<mvt:if expr="l.settings:wishlists:page_links:current_page EQ l.settings:pages:page_num">
 								<option value="&mvte:urls:_self:auto_sep;&mvte:pages:link_params;" selected>Page &mvte:pages:page_num; of &mvte:wishlists:page_links:last_page;</option>

@@ -10,86 +10,54 @@
 		<title>&mvt:store:name;: &mvt:page:name;</title>
 	</mvt:if>
 	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
-<link type="text/css" media="all" rel="stylesheet" href="css/00000001/b05/lhn_forms.css"></link> 
 	<mvt:item name="head" param="head_tag" />
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-<script type="text/javascript">
-    window.lhnJsSdkInit = function () {
-        lhnJsSdk.setup = {
-            application_id: "C6D37A75-78BC-456B-30CD-8E8A2C1D33A4",
-            application_secret: "3D3hTw8zGswwRJkk6uPPqawbjxX/37iS6qZOyj50kK9Its9ypn"
-        };
-    };
+	<script type="text/javascript">
+		window.lhnJsSdkInit = function () {
+			lhnJsSdk.setup = {
+				application_id: "C6D37A75-78BC-456B-30CD-8E8A2C1D33A4",
+				application_secret: "3D3hTw8zGswwRJkk6uPPqawbjxX/37iS6qZOyj50kK9Its9ypn"
+			};
+		};
 
-    (function (d, s) {
-        var newjs, lhnjs = d.getElementsByTagName(s)[0];
-        newjs = d.createElement(s);
-        newjs.src = "https://developer.livehelpnow.net/js/sdk/lhn-jssdk-current.min.js";
-        lhnjs.parentNode.insertBefore(newjs, lhnjs);
-    }(document, "script"));
+		(function (d, s) {
+			var newjs, lhnjs = d.getElementsByTagName(s)[0];
+			newjs = d.createElement(s);
+			newjs.src = "https://developer.livehelpnow.net/js/sdk/lhn-jssdk-current.min.js";
+			lhnjs.parentNode.insertBefore(newjs, lhnjs);
+		}(document, "script"));
 
-    function lhnJsSdkReady(){
-        lhnJsSdk.embedTicket("ticketForm", 40078);
-    }
-</script>
-
-<style>
-#help_aside{
-    padding-left:0;
-}
-</style>
+		function lhnJsSdkReady(){
+			lhnJsSdk.embedTicket("ticketForm", 40078);
+		}
+	</script>
 </head>
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+<body>
 	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block u-bg-white">
-				<div class="o-layout__item t-expanded-block__item">
-					<br>
-					<div class="o-layout o-layout--column-reverse o-layout--row-reverse--l">
-						<div class="o-layout__item u-width-12 u-width-9--l u-width-10--w">
-					
-							<section class="o-layout">
-								<div class="o-layout__item">
-									<mvt:item name="hdft" param="header" />
-								</div>
-							</section>
-							<section class="o-layout">
-								<div class="form_note o-layout__item">
-									<mvt:item name="form_note"/>
-								</div>
-							</section>					
-							<section class="o-layout">
+	<main class="sd2-v2-search-page" data-v2-help-page>
+		<div class="sd2-wrap">
+			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+				<a href="/help-center.html">Help Center</a>
+				<span aria-hidden="true">/</span>
+				<span>Order Tracking</span>
+			</nav>
 
-<div id="ticketForm"></div>
-                                
-							</section>
-							<section class="o-layout">
-								<div class="form_note o-layout__item">
-									<mvt:item name="form_note_bottom"/>
-								</div>
-							</section>								
-							<section class="o-layout">
-								<div class="o-layout__item">
-									<mvt:item name="hdft" param="footer" />
-								</div>
-							</section>
-						</div>
-<mvt:comment>
-						<aside id="help_aside" class="u-hidden u-flex--m o-layout__item u-width-12 u-width-3--l u-width-2--w">
-							<mvt:item name="readytheme" param="navigationset( 'help_navigation' )" />
-						</aside>
-</mvt:comment>
-					</div>
-					<br>
-				</div>
-			</section>
+			<header class="sd2-v2-search-page__head sd2-v2-help-page__head">
+				<p class="sd2-eyebrow">Help Center</p>
+				<h1 class="sd2-heading-lg">Order Tracking</h1>
+				<p class="sd2-v2-help-page__intro">Track your order status, shipments, and get delivery updates. Submit a ticket below and our team will follow up.</p>
+			</header>
+
+			<div class="sd2-v2-help-embed-wrap" data-v2-help-embed-wrap="help-check-order-status">
+				<div id="ticketForm" class="sd2-v2-help-embed sd2-v2-help-embed--native"></div>
+			</div>
 		</div>
-	</section>
-	<br>
+	</main>
 
+	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

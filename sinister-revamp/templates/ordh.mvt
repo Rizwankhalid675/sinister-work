@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <mvt:item name="html_profile" />
 <head>
 	<meta charset="utf-8">
@@ -14,96 +16,94 @@
 </head>
 <body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
 	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
+	<mvt:item name="readytheme" param="contentsection( 'messages' )" />
 
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="header" />
-			<mvt:item name="readytheme" param="contentsection( 'messages' )" />
-		</div>
-	</section>
+	<main class="sd2-v2-account" data-v2-account>
+		<div class="sd2-wrap">
+			<header class="sd2-v2-account-hero">
+				<mvt:item name="breadcrumbs" />
+				<p class="sd2-kicker">Account</p>
+				<h1>Order History</h1>
+			</header>
 
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block t-account-landing-section u-bg-white">
-				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header u-width-12">
-					<mvt:item name="breadcrumbs" />
-					<div class="o-layout o-layout--align-center o-layout--justify-between">
-						<span class="o-layout__item c-heading-delta t-account-landing-section__heading u-width-12 u-width-5--l u-width-8--w">Order History</span>
-						<section class="o-layout__item t-account-filtering u-width-12 u-width-7--l u-width-4--w">
-							<form class="t-account-filtering__search" method="post" action="&mvte:urls:ORDS:auto;">
-								<fieldset>
-									<legend>Search Orders</legend>
-									<ul class="c-form-list">
-										<li class="c-form-list__item c-control-group u-flex">
-											<label class="u-font-small u-text-uppercase u-hide-visually" for="Order_ID">Missing an order? We can help you find it.</label>
-											<input id="Order_ID" class="c-form-input c-control-group__field" type="tel" inputmode="tel" name="Order_ID" placeholder="search order history" required>
-											<input class="c-button c-control-group__button u-bg-gray-50 u-text-uppercase" type="submit" value="Find">
-										</li>
-									</ul>
-								</fieldset>
-							</form>
-							<form class="t-account-filtering__sort-by" method="get" action="&mvte:urls:_self:auto_sep;">
-								<fieldset>
-									<legend>Sort Orders By</legend>
-									<input type="hidden" name="Order_BillEmail" value="&mvte:global:Order_BillEmail;"/>
-									<input type="hidden" name="Order_BillZip" value="&mvte:global:Order_BillZip;"/>
-									<ul class="c-form-list">
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-uppercase u-text-normal u-hidden" for="l-sort_by">Sort</label>
-											<div class="c-form-select">
-												<select id="l-sort_by" class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold" data-hook="custom-select" data-label="Sort By" name="SortBy" onChange="this.form.submit();">
-													<mvt:if expr="ISNULL g.SortBy">
-														<option value="InvAsc" selected>Order # (Low to High)</option>
-													<mvt:else>
-														<option value="InvAsc">Order # (Low to High)</option>
-													</mvt:if>
-													<mvt:if expr="g.SortBy EQ 'InvDesc'">
-														<option value="InvDesc" selected>Order # (High to Low)</option>
-													<mvt:else>
-														<option value="InvDesc">Order # (High to Low)</option>
-													</mvt:if>
-													<mvt:if expr="g.SortBy EQ 'OrdDtAsc'">
-														<option value="OrdDtAsc" selected>Date (Oldest)</option>
-													<mvt:else>
-														<option value="OrdDtAsc">Date (Oldest)</option>
-													</mvt:if>
-													<mvt:if expr="g.SortBy EQ 'OrdDtDesc'">
-														<option value="OrdDtDesc" selected>Date (Newest)</option>
-													<mvt:else>
-														<option value="OrdDtDesc">Date (Newest)</option>
-													</mvt:if>
-													<mvt:if expr="g.SortBy EQ 'OrdTotAsc'">
-														<option value="OrdTotAsc" selected>Total (Low to High)</option>
-													<mvt:else>
-														<option value="OrdTotAsc">Total (Low to High)</option>
-													</mvt:if>
-													<mvt:if expr="g.SortBy EQ 'OrdTotDesc'">
-														<option value="OrdTotDesc" selected>Total (High to Low)</option>
-													<mvt:else>
-														<option value="OrdTotDesc">Total (High to Low)</option>
-													</mvt:if>
-												</select>
-											</div>
-										</li>
-									</ul>
-								</fieldset>
-							</form>
-						</section>
-					</div>
+			<nav class="sd2-v2-account-nav" aria-label="Account sections">
+				<a href="&mvte:urls:ACLN:auto;">Dashboard</a>
+				<a class="is-current" href="&mvte:urls:ORDH:auto;">Orders</a>
+				<a href="&mvte:urls:CABK:auto;">Addresses</a>
+				<a href="&mvte:urls:CPCD:auto;">Payment</a>
+				<a href="&mvte:urls:CSUB:auto;">Subscriptions</a>
+				<a href="&mvte:urls:WLST:auto;">Wish Lists</a>
+				<a href="https://sinisterdiesel.com/rewards.html">Rewards</a>
+				<a href="https://sinisterdiesel.com/core-returns.html">Returns</a>
+				<a href="&mvte:urls:ACED:auto;">Settings</a>
+				<a href="&mvte:urls:CPRO:auto;">Password</a>
+				<button type="button" data-v2-garage-toggle>Garage</button>
+			</nav>
+
+			<section class="sd2-v2-account-card" aria-labelledby="sd2-v2-ordh-title">
+				<div class="sd2-v2-account-section-head">
+					<h2 id="sd2-v2-ordh-title">Your Orders</h2>
+					<form class="sd2-v2-account-actions" method="post" action="&mvte:urls:ORDS:auto;">
+						<fieldset>
+							<legend>Search Orders</legend>
+							<div class="sd2-v2-field-row">
+								<label class="u-hide-visually" for="Order_ID">Missing an order? We can help you find it.</label>
+								<input id="Order_ID" type="tel" inputmode="tel" name="Order_ID" placeholder="search order history" required>
+								<button class="sd2-btn sd2-btn--secondary" type="submit">Find</button>
+							</div>
+						</fieldset>
+					</form>
+					<form method="get" action="&mvte:urls:_self:auto_sep;">
+						<fieldset>
+							<legend>Sort Orders By</legend>
+							<input type="hidden" name="Order_BillEmail" value="&mvte:global:Order_BillEmail;"/>
+							<input type="hidden" name="Order_BillZip" value="&mvte:global:Order_BillZip;"/>
+							<label class="u-hide-visually" for="l-sort_by">Sort</label>
+							<select id="l-sort_by" data-hook="custom-select" data-label="Sort By" name="SortBy" onChange="this.form.submit();">
+								<mvt:if expr="ISNULL g.SortBy">
+									<option value="InvAsc" selected>Order # (Low to High)</option>
+								<mvt:else>
+									<option value="InvAsc">Order # (Low to High)</option>
+								</mvt:if>
+								<mvt:if expr="g.SortBy EQ 'InvDesc'">
+									<option value="InvDesc" selected>Order # (High to Low)</option>
+								<mvt:else>
+									<option value="InvDesc">Order # (High to Low)</option>
+								</mvt:if>
+								<mvt:if expr="g.SortBy EQ 'OrdDtAsc'">
+									<option value="OrdDtAsc" selected>Date (Oldest)</option>
+								<mvt:else>
+									<option value="OrdDtAsc">Date (Oldest)</option>
+								</mvt:if>
+								<mvt:if expr="g.SortBy EQ 'OrdDtDesc'">
+									<option value="OrdDtDesc" selected>Date (Newest)</option>
+								<mvt:else>
+									<option value="OrdDtDesc">Date (Newest)</option>
+								</mvt:if>
+								<mvt:if expr="g.SortBy EQ 'OrdTotAsc'">
+									<option value="OrdTotAsc" selected>Total (Low to High)</option>
+								<mvt:else>
+									<option value="OrdTotAsc">Total (Low to High)</option>
+								</mvt:if>
+								<mvt:if expr="g.SortBy EQ 'OrdTotDesc'">
+									<option value="OrdTotDesc" selected>Total (High to Low)</option>
+								<mvt:else>
+									<option value="OrdTotDesc">Total (High to Low)</option>
+								</mvt:if>
+							</select>
+						</fieldset>
+					</form>
 				</div>
-				<div class="o-layout__item t-expanded-block__item t-account-landing-section__content u-width-12">
+
+				<div class="sd2-v2-account-table-wrap">
 					<mvt:item name="orderhistory_list" />
 				</div>
 			</section>
 		</div>
-	</section>
-	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-		</div>
-	</section>
+	</main>
 
+	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

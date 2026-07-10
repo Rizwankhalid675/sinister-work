@@ -1,0 +1,95 @@
+<mvt:item name="html_profile" />
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvte:global:basehref;">
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:page:name; | &mvt:store:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+</head>
+<body>
+	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
+
+	<main class="sd2-v2-offers-page" data-v2-static-page>
+		<div class="sd2-wrap">
+			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+				<a href="&mvte:urls:SFNT:auto;">Home</a>
+				<span aria-hidden="true">/</span>
+				<span>&mvte:page:name;</span>
+			</nav>
+
+			<section class="sd2-v2-offers-hero">
+				<div class="sd2-v2-offers-hero__body">
+					<p class="sd2-eyebrow">Sinister Diesel</p>
+					<h1 class="sd2-heading-lg">Special Offers</h1>
+					<p class="sd2-v2-offers-hero__text">Limited-time deals, clearance pricing, and bundle savings on Powerstroke, Duramax, and Cummins performance parts. Check back often&mdash;offers rotate and sell out fast.</p>
+				</div>
+			</section>
+
+			<section class="sd2-v2-offers-grid" aria-label="Current Offers">
+
+				<article class="sd2-v2-offer-card">
+					<div class="sd2-v2-offer-card__media">
+						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Clearance and scratch and dent parts" loading="lazy" decoding="async">
+						<span class="sd2-v2-offer-card__badge">Clearance</span>
+					</div>
+					<div class="sd2-v2-offer-card__body">
+						<h2 class="sd2-v2-offer-card__title">Clearance / Scratch &amp; Dent</h2>
+						<p class="sd2-v2-offer-card__text">Save big on overstock and cosmetically-imperfect parts&mdash;fully functional, deeply discounted.</p>
+						<a class="sd2-v2-button sd2-v2-button--primary" href="https://sinisterdiesel.com/shop/Clearance-Scratch-Dent-checyq.html">Shop Clearance</a>
+					</div>
+				</article>
+
+				<article class="sd2-v2-offer-card">
+					<div class="sd2-v2-offer-card__media">
+						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Powerstroke performance bundles" loading="lazy" decoding="async">
+						<span class="sd2-v2-offer-card__badge">Bundle</span>
+					</div>
+					<div class="sd2-v2-offer-card__body">
+						<h2 class="sd2-v2-offer-card__title">Powerstroke Performance Bundles</h2>
+						<p class="sd2-v2-offer-card__text">Pair intercoolers, injectors, and turbo upgrades together and save versus buying separately.</p>
+						<a class="sd2-v2-button sd2-v2-button--primary" href="https://sinisterdiesel.com/powerstroke-parts-for-powerstroke.html">Shop Powerstroke</a>
+					</div>
+				</article>
+
+				<article class="sd2-v2-offer-card">
+					<div class="sd2-v2-offer-card__media">
+						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Duramax performance bundles" loading="lazy" decoding="async">
+						<span class="sd2-v2-offer-card__badge">Bundle</span>
+					</div>
+					<div class="sd2-v2-offer-card__body">
+						<h2 class="sd2-v2-offer-card__title">Duramax Performance Bundles</h2>
+						<p class="sd2-v2-offer-card__text">Coolant filtration, turbo piping, and wheel upgrades bundled for maximum airflow and reliability gains.</p>
+						<a class="sd2-v2-button sd2-v2-button--primary" href="https://sinisterdiesel.com/duramax-products.html">Shop Duramax</a>
+					</div>
+				</article>
+
+				<article class="sd2-v2-offer-card">
+					<div class="sd2-v2-offer-card__media">
+						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Cummins performance bundles" loading="lazy" decoding="async">
+						<span class="sd2-v2-offer-card__badge">Bundle</span>
+					</div>
+					<div class="sd2-v2-offer-card__body">
+						<h2 class="sd2-v2-offer-card__title">Cummins Performance Bundles</h2>
+						<p class="sd2-v2-offer-card__text">Save on curated Cummins upgrade kits covering intakes, exhaust, and cooling.</p>
+						<a class="sd2-v2-button sd2-v2-button--primary" href="https://sinisterdiesel.com/cummins-products.html">Shop Cummins</a>
+					</div>
+				</article>
+
+			</section>
+
+			<section class="sd2-v2-offers-note">
+				<p class="sd2-v2-text-body">Offers are subject to change without notice and cannot be combined with other promotions or coupon codes unless stated otherwise. See our <a href="&mvte:urls:SARP:auto;">Sale Policies</a> for full terms.</p>
+			</section>
+		</div>
+	</main>
+
+	<mvt:item name="hdft" param="footer" />
+	<mvt:item name="hdft" param="global_footer" />
+</body>
+</html>

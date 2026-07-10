@@ -112,10 +112,6 @@
 					</mvt:comment>
 				</div>
 
-				<div class="sd2-v2-skeleton-grid" data-v2-search-loading hidden aria-hidden="true">
-					<div></div><div></div><div></div>
-				</div>
-
 				<div class="sd2-v2-error-fallback" data-v2-search-error hidden>
 					<strong>Search is temporarily unavailable.</strong>
 					<span>Use platform navigation or try again.</span>

@@ -112,8 +112,8 @@
 
 			<section class="o-layout">
 				<div class="o-layout__item">
-					<h1 class="c-heading-delta u-text-bold u-text-uppercase">&mvte:page:name;</h1>
-					<hr class="c-keyline">
+					<h1 class="sd2-v2-heading-delta u-text-bold u-text-uppercase">&mvte:page:name;</h1>
+					<hr class="sd2-v2-keyline">
 				</div>
 			</section>
 

@@ -103,12 +103,13 @@
 							<input id="l-quantity" name="Quantity" type="tel" value="1" inputmode="numeric" data-v2-qty-input>
 							<button type="button" data-v2-qty-plus aria-label="Increase quantity">+</button>
 						</div>
-						<span class="sd2-btn sd2-btn--primary sd2-btn--wide" data-v2-buy-button onclick="document.forms.add.action = '&mvtj:urls:BASK:auto;'; document.forms.add.elements.Action.value = 'ADPR';">
+						<div class="sd2-v2-buybox__native-button-wrap sd2-v2-buybox__native-button-wrap--primary" data-v2-buy-button data-hook="add-to-cart" data-action="&mvtj:urls:BASK:auto;" onclick="document.forms.add.action = '&mvtj:urls:BASK:auto;'; document.forms.add.elements.Action.value = 'ADPR';">
 							<mvt:item name="buttons" param="AddToBasket"/>
-						</span>
-						<span class="sd2-btn sd2-btn--secondary sd2-btn--wide" data-mmnodisable="true" onclick="document.forms.add.action = '&mvtj:urls:WISH:secure;'; document.forms.add.elements.Action.value = 'ATWL';">
+						</div>
+						<div class="sd2-v2-buybox__native-button-wrap sd2-v2-buybox__native-button-wrap--secondary" data-mmnodisable="true" onclick="document.forms.add.action = '&mvtj:urls:WISH:secure;'; document.forms.add.elements.Action.value = 'ATWL';">
 							<mvt:item name="buttons" param="AddToWishList"/>
-						</span>
+						</div>
+						<div class="sd2-v2-buybox__message" data-hook="purchase-message"></div>
 					<mvt:else>
 						<p class="sd2-v2-buybox__oos">This item is currently out of stock.</p>
 					</mvt:if>
@@ -190,21 +191,55 @@
 				<div class="sd2-v2-pgrid">
 					<mvt:foreach iterator="product" array="related_products:products">
 						<article class="sd2-card sd2-v2-product-card">
-							<a class="sd2-v2-product-card__media" href="&mvte:product:link;">
-								<img src="&mvte:product:imagetypes:main;" alt="&mvte:product:name;" loading="lazy">
+							<a class="sd2-v2-product-card__media" data-mm-linktype="product-list-link" href="&mvte:product:link;">
+								<mvt:if expr="NOT ISNULL l.settings:product:thumbnail">
+									<img src="&mvte:product:thumbnail;" alt="&mvte:product:name;" loading="lazy" decoding="async">
+								<mvt:elseif expr="NOT ISNULL l.settings:product:imagetypes:main">
+									<img src="&mvte:product:imagetypes:main;" alt="&mvte:product:name;" loading="lazy" decoding="async">
+								<mvt:else>
+									<span class="thumbnail-not-available" title="&mvte:product:name;"></span>
+								</mvt:if>
+								<mvt:if expr="l.settings:product:inv_level EQ 'out'">
+									<span class="sd2-v2-product-card__flag">Out of Stock</span>
+								</mvt:if>
 							</a>
 							<div class="sd2-v2-product-card__body">
-								<h3 class="sd2-v2-product-card__title"><a href="&mvte:product:link;">&mvte:product:name;</a></h3>
-								<p class="sd2-v2-product-card__note" data-v2-fitment-copy>No vehicle selected. Confirm fitment in Garage.</p>
+								<p class="sd2-v2-product-card__platform">SKU &mvte:product:code;</p>
+								<h3 class="sd2-v2-product-card__title"><a data-mm-linktype="product-list-link" href="&mvte:product:link;">&mvte:product:name;</a></h3>
 								<div class="sd2-v2-product-card__foot">
-									<span class="sd2-v2-product-card__price">
-										<mvt:if expr="l.settings:product:base_price GT l.settings:product:price">
-											<s>&mvt:product:formatted_base_price;</s>
-										</mvt:if>
-										&mvt:product:formatted_price;
-									</span>
-									<a class="sd2-v2-product-card__link" href="&mvte:product:link;">View</a>
+									<div class="sd2-v2-price">
+										<span class="sd2-v2-price__label">Price</span>
+										<div class="sd2-v2-price__row">
+											<mvt:if expr="l.settings:product:base_price GT l.settings:product:price">
+												<span class="sd2-v2-price__was"><s>&mvt:product:formatted_base_price;</s></span>
+											</mvt:if>
+											<span class="sd2-v2-price__current">&mvt:product:formatted_price;</span>
+										</div>
+									</div>
+									<a class="sd2-v2-product-card__link" data-mm-linktype="product-list-link" href="&mvte:product:link;">View</a>
 								</div>
+								<mvt:if expr="l.settings:product:inv_active">
+									<p class="sd2-v2-stock"><span class="sd2-v2-stock__dot"></span>&mvt:product:inv_short;</p>
+								</mvt:if>
+								<mvt:if expr="l.settings:product:inv_level NE 'out'">
+									<div class="purchase-buttons">
+										<form method="post" action="&mvte:urls:BASK:rr;">
+											<input type="hidden" name="Old_Screen" value="&mvte:global:Screen;">
+											<input type="hidden" name="Old_Search" value="&mvte:global:Search;">
+											<input type="hidden" name="Action" value="ADPR">
+											<input type="hidden" name="Product_Code" value="&mvte:product:code;">
+											<input type="hidden" name="Quantity" value="1">
+											<input type="hidden" name="Current_Product_Code" value="&mvte:global:Product_Code;">
+											<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;">
+											<input type="hidden" name="Offset" value="&mvte:global:CatListingOffset;">
+											<input type="hidden" name="AllOffset" value="&mvte:global:AllOffset;">
+											<input type="hidden" name="CatListingOffset" value="&mvte:global:CatListingOffset;">
+											<input type="hidden" name="RelatedOffset" value="&mvte:global:RelatedOffset;">
+											<input type="hidden" name="SearchOffset" value="&mvte:global:SearchOffset;">
+											<mvt:item name="buttons" param="AddToBasketE" />
+										</form>
+									</div>
+								</mvt:if>
 							</div>
 						</article>
 					</mvt:foreach>

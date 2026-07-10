@@ -14,106 +14,75 @@
 </head>
 <body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
 	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="header" />
-		</div>
-	</section>
-	<br>
+	<section class="sd2-v2-auth">
+		<header class="sd2-v2-account-hero">
+			<p class="sd2-kicker">Checkout</p>
+			<h1>&mvt:page:name;</h1>
+		</header>
 
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block t-account-landing-section u-bg-white">
-				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header u-width-12">
-					<mvt:item name="readytheme" param="contentsection( 'messages' )" />
-					<div class="o-layout o-layout--wide o-layout--justify-around u-text-center">
-						<div class="o-layout__item u-width-12 u-width-4--l t-customer-profile">
-							<div class="t-account-landing-section__header">
-								<span class="c-heading-delta t-account-landing-section__heading">Current Customer?</span>
-								<p class="u-font-small">Please sign in to continue your order.</p>
-							</div>
-							<form class="u-inline-block u-text-left" method="post" action="&mvte:urls:OCST:secure;" autocomplete="off">
-								<fieldset>
-									<legend>&mvt:page:name;</legend>
-									<input type="hidden" name="Action" value="LOGN" />
-									<ul class="c-form-list">
-										<li class="c-form-list__item c-form-list__item--full">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required &mvt:global:invalid_credentials;" for="l-Customer_LoginEmail">Email Address</label>
-											<input id="l-Customer_LoginEmail" class="c-form-input c-form-input--large" type="email" name="Customer_LoginEmail" value="&mvte:global:Customer_LoginEmail;" autocomplete="email" required>
-										</li>
-										<li class="c-form-list__item c-form-list__item--full">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required &mvt:global:invalid_credentials;" for="l-Customer_Password">Password:</label>
-											<input id="l-Customer_Password" class="c-form-input c-form-input--large" type="password" name="Customer_Password" autocomplete="current-password" required>
-										</li>
-										<li class="c-form-list__item c-form-list__item--full">
-											<input class="c-button c-button--full c-button--huge u-bg-gray-50 u-font-small u-text-bold u-text-uppercase" type="submit" value="Log In">
-											<span class="u-font-small">
-												<a class="c-button c-button--full c-button--huge u-bg-white u-color-gray-50 u-font-tiny u-text-uppercase" data-mini-modal data-mini-modal-type="inline" data-mini-modal-content="data-forgot-password" href="&mvte:urls:FPWD:secure;" title="Forgot Your Password?">Forgot Password?</a>
-											</span>
-										</li>
-									</ul>
-								</fieldset>
-							</form>
+		<mvt:item name="readytheme" param="contentsection( 'messages' )" />
+
+		<mvt:if expr="g.Basket:sub_count EQ 0">
+			<div class="sd2-v2-auth__grid sd2-v2-auth__grid--3up">
+		<mvt:else>
+			<div class="sd2-v2-auth__grid">
+		</mvt:if>
+			<div class="sd2-v2-auth__panel">
+				<h2>Current Customer?</h2>
+				<p>Please sign in to continue your order.</p>
+				<form method="post" action="&mvte:urls:OCST:secure;" autocomplete="off">
+					<fieldset>
+						<legend>&mvt:page:name;</legend>
+						<input type="hidden" name="Action" value="LOGN" />
+						<label class="&mvt:global:invalid_credentials;" for="l-Customer_LoginEmail">Email Address</label>
+						<input id="l-Customer_LoginEmail" type="email" name="Customer_LoginEmail" value="&mvte:global:Customer_LoginEmail;" autocomplete="email" required>
+						<label class="&mvt:global:invalid_credentials;" for="l-Customer_Password">Password</label>
+						<input id="l-Customer_Password" type="password" name="Customer_Password" autocomplete="current-password" required>
+						<div class="sd2-v2-account-actions">
+							<button class="sd2-btn sd2-btn--primary" type="submit">Log In</button>
+							<a class="sd2-btn sd2-btn--outline" data-mini-modal data-mini-modal-type="inline" data-mini-modal-content="data-forgot-password" href="&mvte:urls:FPWD:secure;" title="Forgot Your Password?">Forgot Password?</a>
 						</div>
-						<div class="o-layout__item u-width-12 u-width-4--l t-customer-profile">
-							<div class="t-account-landing-section__header">
-								<span class="c-heading-delta t-account-landing-section__heading">New Customer?</span>
-								<p class="u-font-small">Please create an account to continue your order.</p>
-							</div>
-							<form class="u-inline-block u-text-left" method="post" action="&mvte:urls:CACT:secure;">
-								<fieldset>
-									<legend>Customer Log In</legend>
-									<input type="hidden" name="current_location" value="&mvte:urls:OCST:secure_sep;">
-									<input type="hidden" name="Order" value="&mvte:global:Order;">
-									<ul class="c-form-list">
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_fname">First Name</label>
-											<input id="l-register_fname" class="c-form-input c-form-input--large" type="text" name="register_fname" value="" autocomplete="name given-name" required>
-										</li>
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_lname">Last Name</label>
-											<input id="l-register_lname" class="c-form-input c-form-input--large" type="text" name="register_lname" autocomplete="name family-name" required>
-										</li>
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_email">Email Address</label>
-											<input id="l-register_email" class="c-form-input c-form-input--large" type="email" name="register_email" value="&mvte:global:register_email;" autocomplete="email" required>
-										</li>
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_password">Password</label>
-											<input id="l-register_password" class="c-form-input c-form-input--large" type="password" name="register_password" autocomplete="new-password" required>
-										</li>
-										<li class="c-form-list__item u-text-right">
-											<input class="c-button c-button--full c-button--hollow c-button--huge u-bg-white u-color-gray-50 u-font-small u-text-bold u-text-uppercase" type="submit" value="Create My Account">
-										</li>
-									</ul>
-								</fieldset>
-							</form>
-							<br>
+					</fieldset>
+				</form>
+			</div>
+			<div class="sd2-v2-auth__panel">
+				<h2>New Customer?</h2>
+				<p>Please create an account to continue your order.</p>
+				<form method="post" action="&mvte:urls:CACT:secure;">
+					<fieldset>
+						<legend>Customer Log In</legend>
+						<input type="hidden" name="current_location" value="&mvte:urls:OCST:secure_sep;">
+						<input type="hidden" name="Order" value="&mvte:global:Order;">
+						<label for="l-register_fname">First Name</label>
+						<input id="l-register_fname" type="text" name="register_fname" value="" autocomplete="name given-name" required>
+						<label for="l-register_lname">Last Name</label>
+						<input id="l-register_lname" type="text" name="register_lname" autocomplete="name family-name" required>
+						<label for="l-register_email">Email Address</label>
+						<input id="l-register_email" type="email" name="register_email" value="&mvte:global:register_email;" autocomplete="email" required>
+						<label for="l-register_password">Password</label>
+						<input id="l-register_password" type="password" name="register_password" autocomplete="new-password" required>
+						<div class="sd2-v2-account-actions">
+							<button class="sd2-btn sd2-btn--outline" type="submit">Create My Account</button>
 						</div>
-						<mvt:if expr="g.Basket:sub_count EQ 0">
-							<div class="o-layout__item u-width-12 u-width-4--l">
-								<div class="t-account-landing-section__header">
-									<span class="c-heading-delta t-account-landing-section__heading">Guest Checkout</span>
-								</div>
-								<p class="u-color-gray-50 u-font-small">Finalize your order without creating an account.</p>
-								<br>
-								<a class="c-button c-button--huge u-bg-gray-50 u-font-small u-text-bold u-text-uppercase" href="&mvte:urls:OCST:secure;" title="Continue As A Guest">Continue As A Guest</a>
-								<br>
-							</div>
-						</mvt:if>
+					</fieldset>
+				</form>
+			</div>
+			<mvt:if expr="g.Basket:sub_count EQ 0">
+				<div class="sd2-v2-auth__panel">
+					<h2>Guest Checkout</h2>
+					<p>Finalize your order without creating an account.</p>
+					<div class="sd2-v2-account-actions">
+						<a class="sd2-btn sd2-btn--primary" href="&mvte:urls:OCST:secure;" title="Continue As A Guest">Continue As A Guest</a>
 					</div>
-			</section>
-		</div>
-	</section>
-	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-			<mvt:item name="readytheme" param="contentsection( 'forgot-password' )" />
+				</div>
+			</mvt:if>
 		</div>
 	</section>
 
+	<mvt:item name="hdft" param="footer" />
+	<mvt:item name="readytheme" param="contentsection( 'forgot-password' )" />
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

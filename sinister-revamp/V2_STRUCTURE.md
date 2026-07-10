@@ -41,7 +41,7 @@ templates/srch-v2.mvt
 templates/prod-product_display-v2.mvt
 templates/prod-product_display-v2-test.mvt
 templates/bask-v2.mvt
-templates/ocst-v2.mvt
+templates/ocstv2.mvt
 templates/account-dashboard-v2.mvt
 ```
 
@@ -154,6 +154,89 @@ partials/sd2-v2-account-profile-card.mvt
 partials/sd2-v2-account-empty-state.mvt
 ```
 
+## Live Account Template Migration
+
+Unlike the inactive Customer Dashboard V2 partials above (still unwired), the following **live** account/order templates have been migrated in place to the `sd2-v2-account`/`sd2-v2-auth` shell (not routed through staging `-v2` files):
+
+```
+templates/acln.mvt          Dashboard
+templates/aced.mvt          Settings (profile fields)
+templates/acad.mvt          Add/edit address sub-form
+templates/cabk.mvt          Addresses (real listing; uses cabk-addressbook.mvt partial)
+templates/cabk-addressbook.mvt  Address card partial (.sd2-v2-address-card)
+templates/cada.mvt          Add address sub-form
+templates/cade.mvt          Edit address sub-form
+templates/cpca.mvt          Add payment card sub-form
+templates/cpcd.mvt          Payment (payment cards listing)
+templates/cpce.mvt          Edit payment card sub-form
+templates/cpro.mvt          Password / email settings (URL: customer-profile.html)
+templates/csub.mvt          Subscriptions
+templates/wlst.mvt          Wish Lists (dual-mode: account shell when logged in, .sd2-v2-auth gate when logged out)
+templates/ordh.mvt          Order History list
+templates/ords.mvt          Order detail / invoice (.sd2-v2-account-grid: detail + customer sidebar)
+templates/ordl.mvt          Checkout order-login gate (.sd2-v2-auth__grid--3up: login / register / guest)
+templates/orhl.mvt          Order-history-login gate (.sd2-v2-auth__grid: login / find-by-email+zip)
+templates/logn.mvt          Pre-login auth gate (.sd2-v2-auth__grid: login / register)
+templates/acrt.mvt          Temp-password re-auth gate (single .sd2-v2-auth panel)
+```
+
+All 10 account destination pages share one nav (`.sd2-v2-account-nav`): Dashboard, Orders, Addresses, Payment, Subscriptions, Wish Lists, Rewards, Returns, Settings, Password, plus a Garage toggle. Screen-code routing notes, since several are not what the filename implies:
+- **Addresses** links to `CABK` (the real address book listing), not `ACAD` (a single add-address form).
+- **Password** links to `CPRO` (`customer-profile.html`), not `CPWD` (a separate forgot/reset-password gate).
+- **Returns** is a stopgap pointing at the static `/core-returns.html` page — no real "My Returns" account dashboard screen exists yet; this is a known gap, not a final destination.
+- **Rewards** links to the static `/rewards.html` page (Miva template `templates/rewards.mvt`, content managed via Admin sequence — not part of the account nav set).
+
+CSS additions supporting this migration: `.sd2-v2-address-grid` / `.sd2-v2-address-card__*` (account address cards, distinct from the checkout-flow `.sd2-v2-address-card` radio-select variant), `.sd2-v2-account-cards-2up` (equal-width 2-card layout, e.g. Email + Password on `cpro.mvt`), `.sd2-v2-auth__grid--3up` (3-panel auth gate variant for `ordl.mvt`), and `.sd2-v2-static-page__body img/video/iframe/embed/object` max-width guards (prevents Admin-managed sequence content, e.g. `rewards.mvt`, from overflowing on embedded media).
+
+## Live Static Content Page Migration
+
+Unlike the inactive staging templates above, the following **live** content/help pages have been migrated in place to the V2 shell (not routed through staging `-v2` files). All Miva plumbing (`contentsection`, `navigationset`, `sequence`, third-party embeds) preserved unchanged — only markup/CSS restyled.
+
+Help Center hub + sub-pages (share `.sd2-v2-search-page` + `.sd2-v2-help-embed-wrap` pattern; embed heights configured via `HELP_EMBED_HEIGHTS` in `js/sd2-v2-components.js`):
+
+```
+templates/help-center.mvt                    Hub (.sd2-v2-help-grid / .sd2-v2-help-card)
+templates/help-sales-inquiry.mvt              monday.com iframe embed
+templates/help-order-status.mvt               LiveHelpNow ticketForm widget (native, not iframe)
+templates/help-sinister-tech-support.mvt      monday.com iframe embed
+templates/help-warranty-inquiry.mvt           monday.com iframe embed
+templates/help-online-account-issues.mvt      monday.com iframe embed
+templates/shipping-protection-requests.mvt    monday.com iframe embed
+templates/returns_exchanges.mvt               monday.com iframe embed
+```
+
+Footer content pages, migrated to the canonical `.sd2-v2-static-page` shell (`__layout` / `__main` / `__aside` with `static_navigation`, or single-column where no aside nav exists):
+
+```
+templates/abus.mvt                    About Us — contentsection('abus_content')
+templates/customer-reviews.mvt        contentsection('customer-reviews')
+templates/race-parts-notice.mvt       contentsection('race-parts-notice')
+templates/sinister-notice.mvt         contentsection('sinister-notice')
+templates/prpo.mvt                    Privacy Policy — contentsection('prpo_content')
+templates/authorized-resellers.mvt    contentsection('authorized-resellers')
+templates/genuine-sinister-parts.mvt  contentsection('identifying-genuine-sinister-parts')
+templates/not-suing-over-blue.mvt     contentsection('not-suing-over-blue')
+templates/core-returns.mvt            contentsection('core-returns')
+templates/faqs.mvt                    contentsection('faqs_content')
+templates/smap.mvt                    Site Map — <mvt:item name="sitemap" />
+templates/policies-terms-conditions.mvt  Terms & Conditions — navigationset('policies-terms-conditions')
+templates/dlrq.mvt                    Become a Dealer — single-column, monday.com iframe embed
+templates/salerestr.mvt               Sales/Promo Details — <mvt:item name="sequence" />, single-column
+templates/rewards.mvt                 How To Use Rewards — sequence, single-column
+templates/mildisc.mvt                 Military Discount — sequence + klaviyo-form-YbRcU3, single-column
+templates/news.mvt                    Join Sinister Insider — klaviyo-form-UWYVkc only, single-column
+templates/warr.mvt                    Warranty Policy — real legal content, bespoke rebuild
+templates/spons.mvt                   Sponsor Application — restyle only; JS/monday.com submit logic untouched
+templates/jobapplication.mvt          Careers — real hdft header/footer restored, sequence_job_video + sequence (gd-job-posting widget) preserved
+```
+
+Known gaps in this batch:
+- **`Return/Exchange` footer link** (→ `return-and-warranty-policies.html`) has no confirmed matching template; `returns_exchanges.mvt` is wired to Help Center's `help_returns_exchanges` nav set and may or may not be the same destination — unresolved.
+- **`spons.mvt`** contains a hardcoded monday.com API token in client-side JS (pre-existing, not introduced by this migration) — flagged to the user as a live credential exposure; left untouched per explicit instruction ("restyle only, don't touch the API/token logic"). Needs manual rotation by the user in monday.com's API settings.
+- **Deferred, not yet converted**: `templates/blog.mvt` (third-party Scot's Blogger module — too risky to restructure), `templates/install-instructions.mvt` (custom JS accordion/search widget), `templates/shipping-policies.mvt` (extensive existing bespoke `.sd-*` design, similar scope to the Warranty Policy rebuild).
+
+CSS additions supporting this migration: `.sd2-v2-help-grid` / `.sd2-v2-help-card` (Help Center hub icon-tile cards), `.sd2-v2-help-embed-wrap` / `.sd2-v2-help-embed` (monday.com iframe / LiveHelpNow widget container, height driven by `--sd2-help-embed-h`), `.sd2-v2-help-page__intro`. Reused pre-existing `.sd2-v2-static-page` family (previously unused in markup) as the canonical static-content shell.
+
 ## Canonical Component Rules
 
 - Product Card V2 is canonical in `templates/sd2-v2-product-card.mvt` and `.sd2-v2-pcard*`.
@@ -200,7 +283,7 @@ Shipping/tax                         Miva shipping, tax, and coupon calculations
 - Replace marked `[Placeholder]` content with real Miva arrays, custom fields, and service responses.
 - Wire Category Hub, Engine Hub, and Product Listing staging templates to confirmed CTGY child category, product, facet, sort, and pagination arrays.
 - Confirm BASK `basket:groups` iterator alias and Miva item/contentsection mapping before activating cart line-item composition via `partials/sd2-v2-cart-line-item.mvt`, then wire quantity updates, remove actions, coupon validation, shipping estimator, and totals.
-- Preserve OCST parity from `ocst.mvt`, `ocst-customer.mvt`, `ocst-mivapay.mvt`, and `ocst-basket.mvt` before activating checkout fields, payment gateway fields, validation messages, and order review. Confirmed field names are documented in `templates/ocst-v2.mvt`.
+- Preserve OCST parity from `ocst.mvt`, `ocst-customer.mvt`, `ocst-mivapay.mvt`, and `ocst-basket.mvt` before activating checkout fields, payment gateway fields, validation messages, and order review. Confirmed field names are documented in `templates/ocstv2.mvt`.
 - Wire customer dashboard order history, invoices, tracking, returns, addresses, profile updates, and preferences.
 - Wire PDP reviews, related products, complete-build bundles, install documents, specs, and media galleries.
 - Wire search suggestions, popular searches, recent searches handoff, spelling fallback, and no-results recommendations.

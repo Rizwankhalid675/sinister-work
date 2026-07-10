@@ -12,13 +12,9 @@
 	</mvt:if>
 	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
 	<mvt:item name="head" param="head_tag" />
-	<mvt:comment>Revamp V2 route takeover fallback: direct V2 CSS while live page resource assignments are verified.</mvt:comment>
-	<link rel="stylesheet" href="/mm5/css/00000001/sd2-global.css" media="all">
-	<link rel="stylesheet" href="/css/00000001/sd2-global.css" media="all">
-	<link rel="stylesheet" href="/sd2-global.css" media="all">
 	<mvt:comment>
-		Sinister Diesel Homepage V2. Inactive template. Do not activate over SFNT.
-		Required V2 global layer files:
+		Sinister Diesel Homepage. Live SFNT template migrated to the approved
+		Revamp V2 design. Uses the same global layer as header/footer/nav:
 		- cssui-global-header-v2.mvt
 		- cssui-mega-menu-v2.mvt
 		- cssui-search-console-v2.mvt
@@ -45,7 +41,7 @@
 					<p class="sd2-body">Shop Powerstroke, Duramax, and Cummins parts through a V2 experience built around fitment, proof, and real garage context.</p>
 					<div class="sd2-v2-home-hero__actions">
 						<button class="sd2-btn sd2-btn--primary" type="button" data-v2-garage-toggle>Build Around My Truck</button>
-						<a class="sd2-btn sd2-btn--outline" href="&mvte:urls:CTGYENGV2:auto;">Shop Platforms</a>
+						<a class="sd2-btn sd2-btn--outline" href="https://sinisterdiesel.com/954746_ford_powerstroke">Shop Platforms</a>
 					</div>
 				</div>
 				<div class="sd2-v2-home-hero__media" aria-label="Sinister Diesel shop truck placeholder">
@@ -79,15 +75,15 @@
 				<h2 class="sd2-heading-lg" id="sd2-v2-platforms-title">Start with the truck, then narrow the build.</h2>
 			</div>
 			<div class="sd2-v2-platform-grid">
-				<a class="sd2-v2-platform-card sd2-v2-platform-card--large" href="&mvte:urls:CTGYENGV2:auto;">
+				<a class="sd2-v2-platform-card sd2-v2-platform-card--large" href="https://sinisterdiesel.com/954746_ford_powerstroke">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Ford Powerstroke placeholder">
 					<span>Powerstroke</span>
 				</a>
-				<a class="sd2-v2-platform-card" href="&mvte:urls:CTGYENGV2:auto;">
+				<a class="sd2-v2-platform-card" href="https://sinisterdiesel.com/954952_gm_duramax">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="GM Duramax placeholder">
 					<span>Duramax</span>
 				</a>
-				<a class="sd2-v2-platform-card" href="&mvte:urls:CTGYENGV2:auto;">
+				<a class="sd2-v2-platform-card" href="https://sinisterdiesel.com/954540_dodge_cummins">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Ram Cummins placeholder">
 					<span>Cummins</span>
 				</a>
@@ -116,24 +112,24 @@
 			</div>
 			<div class="sd2-v2-product-grid">
 				<article class="sd2-card sd2-v2-product-card sd2-v2-product-card--hero">
-					<a class="sd2-v2-product-card__media" href="&mvte:urls:CTGYLISTV2:auto;">
+					<a class="sd2-v2-product-card__media" href="https://sinisterdiesel.com/954746_ford_powerstroke">
 						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Placeholder featured Powerstroke part">
 						<span class="sd2-v2-product-card__flag">PLACEHOLDER</span>
 					</a>
 					<div class="sd2-v2-product-card__body">
 						<p class="sd2-v2-product-card__platform">Powerstroke</p>
-						<h3 class="sd2-v2-product-card__title"><a href="&mvte:urls:CTGYLISTV2:auto;">Intercooler and pipe systems</a></h3>
+						<h3 class="sd2-v2-product-card__title"><a href="https://sinisterdiesel.com/954746_ford_powerstroke">Intercooler and pipe systems</a></h3>
 						<p class="sd2-v2-product-card__note">Representative category card until real product data is wired.</p>
-						<div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="&mvte:urls:CTGYLISTV2:auto;">View</a></div>
+						<div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="https://sinisterdiesel.com/954746_ford_powerstroke">View</a></div>
 					</div>
 				</article>
 				<article class="sd2-card sd2-v2-product-card">
-					<a class="sd2-v2-product-card__media" href="&mvte:urls:CTGYLISTV2:auto;"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Placeholder filtration product"><span class="sd2-v2-product-card__flag">PLACEHOLDER</span></a>
-					<div class="sd2-v2-product-card__body"><p class="sd2-v2-product-card__platform">Filtration</p><h3 class="sd2-v2-product-card__title"><a href="&mvte:urls:CTGYLISTV2:auto;">Coolant and oil filtration</a></h3><p class="sd2-v2-product-card__note">Real product binding pending.</p><div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="&mvte:urls:CTGYLISTV2:auto;">View</a></div></div>
+					<a class="sd2-v2-product-card__media" href="https://sinisterdiesel.com/954746_ford_powerstroke"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Placeholder filtration product"><span class="sd2-v2-product-card__flag">PLACEHOLDER</span></a>
+					<div class="sd2-v2-product-card__body"><p class="sd2-v2-product-card__platform">Filtration</p><h3 class="sd2-v2-product-card__title"><a href="https://sinisterdiesel.com/954746_ford_powerstroke">Coolant and oil filtration</a></h3><p class="sd2-v2-product-card__note">Real product binding pending.</p><div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="https://sinisterdiesel.com/954746_ford_powerstroke">View</a></div></div>
 				</article>
 				<article class="sd2-card sd2-v2-product-card">
-					<a class="sd2-v2-product-card__media" href="&mvte:urls:CTGYLISTV2:auto;"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="Placeholder turbo product"><span class="sd2-v2-product-card__flag">PLACEHOLDER</span></a>
-					<div class="sd2-v2-product-card__body"><p class="sd2-v2-product-card__platform">Airflow</p><h3 class="sd2-v2-product-card__title"><a href="&mvte:urls:CTGYLISTV2:auto;">Turbo systems</a></h3><p class="sd2-v2-product-card__note">Real product binding pending.</p><div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="&mvte:urls:CTGYLISTV2:auto;">View</a></div></div>
+					<a class="sd2-v2-product-card__media" href="https://sinisterdiesel.com/954746_ford_powerstroke"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="Placeholder turbo product"><span class="sd2-v2-product-card__flag">PLACEHOLDER</span></a>
+					<div class="sd2-v2-product-card__body"><p class="sd2-v2-product-card__platform">Airflow</p><h3 class="sd2-v2-product-card__title"><a href="https://sinisterdiesel.com/954746_ford_powerstroke">Turbo systems</a></h3><p class="sd2-v2-product-card__note">Real product binding pending.</p><div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="https://sinisterdiesel.com/954746_ford_powerstroke">View</a></div></div>
 				</article>
 			</div>
 		</div>
@@ -180,14 +176,5 @@
 </div>
 	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
-	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="footer_js_dev" /><mvt:else><mvt:item name="head" param="footer_js" /></mvt:if>
-	<mvt:comment>Revamp V2 route takeover fallback: direct V2 JS while live page resource assignments are verified.</mvt:comment>
-	<script src="/mm5/scripts/00000001/sd2-v2-components.js" defer></script>
-	<script src="/scripts/00000001/sd2-v2-components.js" defer></script>
-	<script src="/sd2-v2-components.js" defer></script>
-	<mvt:comment>Revamp V2 SFNT fallback: legacy global scripts emitted pathless on storefront route.</mvt:comment>
-	<script src="/scripts/00000001/runtime_combofacets.js" defer></script>
-	<script src="/themes/colossus/core/js/searchfield.js" defer></script>
-	<script src="/themes/colossus/ui/js/theme.js" defer></script>
 </body>
 </html>

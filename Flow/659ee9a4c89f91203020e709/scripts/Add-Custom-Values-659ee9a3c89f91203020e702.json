@@ -1,9 +1,0 @@
-{
-  "_id": "659ee9a3c89f91203020e702",
-  "lastModified": "2024-01-10T19:01:56.043Z",
-  "createdAt": "2024-01-10T19:01:55.959Z",
-  "name": "Add Custom Values",
-  "_sourceId": "62d5648e771dc206b3c0b8e9",
-  "sandbox": false,
-  "postResponseHookToProcessOnChildRecord": true
-}

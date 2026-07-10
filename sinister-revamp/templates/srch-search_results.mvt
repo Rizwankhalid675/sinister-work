@@ -1,210 +1,90 @@
-<style>
-/* sd2 search results revamp layer */
-body#js-SRCH .x-product-list {
-	display: grid !important;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
-	gap: 24px;
-	margin: 0 auto;
-	padding: 28px 0 48px;
-	width: min(100% - 48px, 1680px);
-	max-width: 1680px;
-	align-items: stretch !important;
-}
-body#js-SRCH .x-product-list__item {
-	width: auto !important;
-	max-width: none !important;
-	min-width: 0 !important;
-	flex: none !important;
-	display: block !important;
-	padding: 0 !important;
-	margin: 0 !important;
-}
-body#js-SRCH .x-product-list__link,
-body#js-SRCH .x-product-list__figure {
-	display: flex !important;
-	flex-direction: column;
-	width: 100% !important;
-	min-width: 0 !important;
-	height: 100%;
-	margin: 0 !important;
-	text-decoration: none;
-	background: #fff;
-	border: 1px solid rgba(24,51,184,0.10);
-	border-radius: 16px;
-	box-shadow: 0 2px 12px rgba(24,51,184,0.07);
-	overflow: hidden;
-	transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease;
-}
-body#js-SRCH .x-product-list__link:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 12px 34px rgba(24,51,184,0.14);
-	border-color: rgba(24,51,184,0.22);
-}
-body#js-SRCH .x-product-list__picture {
-	display: flex !important;
-	align-items: center;
-	justify-content: center;
-	aspect-ratio: 1.16 / 1;
-	margin: 16px 16px 0;
-	padding: 16px !important;
-	background: #f0f2fa;
-}
-body#js-SRCH .x-product-list__image {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
-}
-body#js-SRCH .x-product-list__figure-caption {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	flex: 1 1 auto;
-	padding: 16px !important;
-	text-align: left;
-}
-body#js-SRCH .x-product-list__name {
-	min-height: 40px;
-	font-size: 14px;
-	font-weight: 800;
-	line-height: 1.35;
-	color: #0d0f1a;
-	white-space: normal !important;
-	overflow-wrap: normal !important;
-	word-break: normal !important;
-}
-body#js-SRCH .x-product-list__price,
-body#js-SRCH .x-product-list__price-red {
-	font-family: 'Oswald', sans-serif;
-	font-size: 18px;
-	font-weight: 700;
-	color: #1833B8;
-}
-body#js-SRCH .x-product-list__figure > form {
-	margin-top: auto !important;
-	padding: 0 16px 16px !important;
-}
-body#js-SRCH .x-product-list__figure > form input[type="submit"] {
-	width: 100%;
-	min-height: 42px;
-	border: 0;
-	border-radius: 10px;
-	background: #1833B8;
-	color: #fff;
-	font-family: 'Oswald', sans-serif;
-	font-size: 12px;
-	font-weight: 700;
-	letter-spacing: 0.7px;
-	text-transform: uppercase;
-	cursor: pointer;
-	box-shadow: 0 6px 16px rgba(24,51,184,0.24);
-}
-body#js-SRCH .t-pagination {
-	width: min(100% - 48px, 1680px);
-	max-width: 1680px;
-	margin: 0 auto 64px;
-}
-body#js-SRCH .t-pagination ul {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 10px;
-}
-body#js-SRCH .t-pagination__button,
-body#js-SRCH .t-pagination .c-form-select__dropdown {
-	border: 1px solid rgba(24,51,184,0.16);
-	border-radius: 10px;
-	background: #fff;
-	color: #1833B8 !important;
-}
-body#js-SRCH .t-expanded-block > .t-wrapper > .o-layout {
-	display: block !important;
-}
-body#js-SRCH .t-expanded-block .x-messages--info {
-	width: min(100% - 48px, 960px) !important;
-	margin: 42px auto 90px !important;
-	padding: 24px 28px !important;
-	border: 1px solid rgba(24,51,184,0.14) !important;
-	border-radius: 14px !important;
-	background: rgba(255,255,255,0.8) !important;
-	box-shadow: 0 14px 34px rgba(24,51,184,0.10) !important;
-	color: #27304f !important;
-	font-family: 'Inter', system-ui, sans-serif !important;
-	font-size: 15px !important;
-	text-align: center !important;
-}
-@media (max-width: 980px) {
-	body#js-SRCH .x-product-list { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-inline: 18px; }
-}
-@media (max-width: 560px) {
-	body#js-SRCH .x-product-list { grid-template-columns: 1fr; gap: 16px; }
-}
-</style>
-
-<section class="o-layout u-grids-2 u-grids-4--l x-product-list">
+<div class="sd2-v2-pgrid sd2-v2-pgrid--native">
 	<mvt:foreach iterator="product" array="search_results:products">
-		<div class="o-layout__item u-text-center x-product-list__item">
-			<figure class="x-product-list__figure">
-				<a class="u-block x-product-list__link" href="&mvte:product:link;">
-					<picture class="x-product-list__picture">
-						<img class="x-product-list__image" src="&mvte:product:imagetypes:main;" alt="&mvte:product:name;" loading="lazy" decoding="async">
-					</picture>
-					<figcaption class="x-product-list__figure-caption">
-						<span class="x-product-list__name">&mvte:product:name;</span>
+	<mvt:do name="l.sd2_success" file="g.Module_Library_DB" value="ImageType_Load_Code('main', l.settings:sd2_srch_imagetype)" />
+	<mvt:do name="l.sd2_success" file="g.Module_Library_DB" value="ProductImage_Load_Type(l.settings:product:id, 1, l.settings:sd2_srch_imagetype)" />
+	<mvt:do name="l.sd2_success" file="g.Module_Library_DB" value="Image_Load_ID(l.settings:sd2_srch_imagetype:image_id, l.settings:sd2_srch_imagedata)" />
+	<article class="sd2-card sd2-v2-product-card">
+		<a class="sd2-v2-product-card__media" data-mm-linktype="product-list-link" href="&mvte:product:link;">
+			<mvt:if expr="NOT ISNULL l.settings:product:thumbnail">
+				<img src="&mvte:product:thumbnail;" alt="&mvte:product:name;" loading="lazy" decoding="async">
+			<mvt:elseif expr="NOT ISNULL l.settings:product:imagetypes:main">
+				<img src="&mvte:product:imagetypes:main;" alt="&mvte:product:name;" loading="lazy" decoding="async">
+			<mvt:elseif expr="NOT ISNULL l.settings:sd2_srch_imagedata:image">
+				<img src="&mvte:sd2_srch_imagedata:image;" alt="&mvte:product:name;" loading="lazy" decoding="async">
+			<mvt:else>
+				<span class="thumbnail-not-available" title="&mvte:product:name;"></span>
+			</mvt:if>
+			<mvt:if expr="l.settings:product:inv_level EQ 'out'">
+				<span class="sd2-v2-product-card__flag">Out of Stock</span>
+			</mvt:if>
+		</a>
+		<div class="sd2-v2-product-card__body">
+			<p class="sd2-v2-product-card__platform">SKU &mvte:product:code;</p>
+			<h3 class="sd2-v2-product-card__title">
+				<a data-mm-linktype="product-list-link" href="&mvte:product:link;">&mvte:product:name;</a>
+			</h3>
+			<div class="sd2-v2-product-card__foot">
+				<div class="sd2-v2-price">
+					<span class="sd2-v2-price__label">Price</span>
+					<div class="sd2-v2-price__row">
 						<mvt:if expr="l.settings:product:base_price GT l.settings:product:price">
-							<span class="x-product-list__price"><s>&mvt:product:formatted_base_price;</s></span>
-							<span class="x-product-list__price-red">&mvt:product:formatted_price;</span>
-						<mvt:else>
-							<span class="x-product-list__price">&mvt:product:formatted_price;</span>
+							<span class="sd2-v2-price__was"><s>&mvt:product:formatted_base_price;</s></span>
 						</mvt:if>
-					</figcaption>
-				</a>
-				<form method="post" action="/mm5/merchant.mvc?Screen=BASK">
-					<input type="hidden" name="Action" value="ADPR">
-					<input type="hidden" name="Product_Code" value="&mvte:product:code;">
-					<input type="hidden" name="Quantity" value="1" >
-					<input type="submit" value="Add to Cart" >
-				</form>
-			</figure>
+						<span class="sd2-v2-price__current">&mvt:product:formatted_price;</span>
+					</div>
+				</div>
+				<a class="sd2-v2-product-card__link" data-mm-linktype="product-list-link" href="&mvte:product:link;">View</a>
+			</div>
+			<mvt:if expr="l.settings:product:inv_active">
+				<p class="sd2-v2-stock"><span class="sd2-v2-stock__dot"></span>&mvt:product:inv_short;</p>
+			</mvt:if>
+			<mvt:if expr="l.settings:product:inv_level NE 'out'">
+				<div class="purchase-buttons">
+					<form method="post" action="&mvte:urls:BASK:rr;">
+						<input type="hidden" name="Old_Screen" value="&mvte:global:Screen;">
+						<input type="hidden" name="Old_Search" value="&mvte:global:Search;">
+						<input type="hidden" name="Action" value="ADPR">
+						<input type="hidden" name="Product_Code" value="&mvte:product:code;">
+						<input type="hidden" name="Quantity" value="1">
+						<input type="hidden" name="SearchOffset" value="&mvte:global:SearchOffset;">
+						<mvt:item name="buttons" param="AddToBasketE" />
+					</form>
+				</div>
+			</mvt:if>
 		</div>
+	</article>
 	</mvt:foreach>
-</section>
-<!-- end .x-product-list -->
+</div>
 
 <mvt:if expr="l.settings:search_results:page_links:last_page GT 1">
-	<nav class="x-pagination x-pagination--centered t-pagination">
-		<ul class="o-list-inline">
+	<nav class="page-links sd2-v2-pagination" aria-label="Search pagination">
+		<span class="page-links-title">Page(s):</span>
+		<span class="page-links-container">
 			<mvt:if expr="l.settings:search_results:page_links:current_page NE 1">
-				<li class="o-list-inline__item">
-					<a class="u-color-gray-40 u-icon-chevron-left t-pagination__button" href="&mvte:urls:_self:auto_sep;&mvte:search_results:page_links:prev_link_params;" title="Go to the previous page."></a>
-				</li>
+				<a href="&mvte:urls:_self:auto_sep;&mvte:search_results:page_links:prev_link_params;" class="page-links-previous">&lt;</a>
 			<mvt:else>
-				<li class="o-list-inline__item">
-					<span class="u-color-gray-40 u-icon-chevron-left t-pagination__button" title="You are on the first page."></span>
-				</li>
+				<span class="page-links-previous page-links-deactivated">&lt;</span>
 			</mvt:if>
-			<li class="o-list-inline__item o-layout--grow">
-				<div class="c-form-select">
-					<select class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold u-color-gray-40" name="Sort_By" onchange="window.location.href=this.options[ this.selectedIndex ].value">
-						<mvt:foreach iterator="pages" array="search_results:page_links:pages">
-							<mvt:if expr="l.settings:search_results:page_links:current_page EQ l.settings:pages:page_num">
-								<option value="&mvte:urls:_self:auto_sep;&mvte:pages:link_params;" selected>Page &mvte:pages:page_num; of &mvte:search_results:page_links:last_page;</option>
-							<mvt:else>
-								<option value="&mvte:urls:_self:auto_sep;&mvte:pages:link_params;">Page &mvte:pages:page_num; of &mvte:search_results:page_links:last_page;</option>
-							</mvt:if>
-						</mvt:foreach>
-					</select>
-				</div>
-			</li>
 			<mvt:if expr="l.settings:search_results:page_links:current_page NE l.settings:search_results:page_links:last_page">
-				<li class="o-list-inline__item">
-					<a class="u-color-gray-40 u-icon-chevron-right t-pagination__button" href="&mvte:urls:_self:auto_sep;&mvte:search_results:page_links:next_link_params;" title="Go to the next page."></a>
-				</li>
+				<a href="&mvte:urls:_self:auto_sep;&mvte:search_results:page_links:next_link_params;" class="page-links-next">&gt;</a>
 			<mvt:else>
-				<li class="o-list-inline__item">
-					<span class="u-color-gray-40 u-icon-chevron-right t-pagination__button" title="You are on the last page."></span>
-				</li>
+				<span class="page-links-next page-links-deactivated">&gt;</span>
 			</mvt:if>
-		</ul>
+			<span class="page-disp">
+				<mvt:if expr="NOT l.settings:search_results:page_links:contains_first">
+					<a href="&mvte:urls:_self:auto_sep;&mvte:search_results:page_links:first_link_params;" class="page-links-inactive">1</a>...
+				</mvt:if>
+				<mvt:foreach iterator="pages" array="search_results:page_links:pages">
+					<mvt:if expr="l.settings:search_results:page_links:current_page EQ l.settings:pages:page_num">
+						<span class="page-links-active">&mvte:pages:page_num;</span>
+					<mvt:else>
+						<a href="&mvte:urls:_self:auto_sep;&mvte:pages:link_params;" class="page-links-inactive">&mvte:pages:page_num;</a>
+					</mvt:if>
+				</mvt:foreach>
+				<mvt:if expr="NOT l.settings:search_results:page_links:contains_last">
+					...<a href="&mvte:urls:_self:auto_sep;&mvte:search_results:page_links:last_link_params;" class="page-links-inactive">&mvte:search_results:page_links:last_page;</a>
+				</mvt:if>
+			</span>
+		</span>
 	</nav>
-	<!-- end .x-pagination -->
 </mvt:if>

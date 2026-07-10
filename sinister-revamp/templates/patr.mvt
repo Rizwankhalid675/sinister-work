@@ -31,7 +31,7 @@
 		body#js-PATR [class*="message"] {
 			border-radius: 10px !important;
 		}
-		body#js-PATR .c-heading-echo {
+		body#js-PATR .sd2-v2-heading-echo {
 			max-width: 980px !important;
 			margin: 22px auto 26px !important;
 			color: #141827 !important;
@@ -74,7 +74,7 @@
 			padding: 0 !important;
 			text-align: center !important;
 		}
-		body#js-PATR .c-form-label {
+		body#js-PATR .sd2-v2-form-label {
 			margin: 0 0 10px !important;
 			color: #141827 !important;
 			font-family: 'Oswald', sans-serif !important;
@@ -158,7 +158,7 @@
 					</section>
 		
 					<section class="o-layout o-layout--justify-center">
-						<p class="o-layout__item u-width-12 c-heading-echo u-text-center">There are some required attributes you need to select to continue adding &mvt:product:name; to your cart.</p>
+						<p class="o-layout__item u-width-12 sd2-v2-heading-echo u-text-center">There are some required attributes you need to select to continue adding &mvt:product:name; to your cart.</p>
 						<div class="o-layout__item u-width-12 u-width-6--m u-width-4--l">
 							<form method="post" action="&mvte:urls:_self:rr;">
 								<fieldset>
@@ -172,12 +172,12 @@
 									<input type="hidden" name="Quantity" value="&mvte:global:Quantity;" />
 									<input type="hidden" name="Offset" value="&mvte:global:Offset;" />
 									<input type="hidden" name="Search" value="&mvte:global:Search;" />
-									<ul class="c-form-list">
-										<li class="c-form-list__item o-layout--column x-product-layout-purchase__options">
+									<ul class="sd2-v2-form-list">
+										<li class="sd2-v2-form-list__item o-layout--column x-product-layout-purchase__options">
 											<mvt:item name="product_attributes" param="product:id" />
 										</li>
-										<li class="c-form-list__item c-form-list__item--full u-text-center">
-											<input class="c-button c-button--huge u-bg-primary u-color-black u-font-small u-text-bold u-text-uppercase" type="submit" value="Continue">
+										<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full u-text-center">
+											<input class="sd2-btn sd2-btn--huge u-bg-primary u-color-black u-font-small u-text-bold u-text-uppercase" type="submit" value="Continue">
 										</li>
 									</ul>
 								</fieldset>
@@ -186,11 +186,7 @@
 						</div>
 					</section>
 					
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="footer" />
-						</div>
-					</section>
+					<mvt:item name="hdft" param="footer" />
 					<br>
 				</div>
 			</section>

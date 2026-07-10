@@ -34,12 +34,12 @@
 									<input type="hidden" name="Action" value="&mvte:global:Action;">
 									<input type="hidden" name="Upsell_Product_Count" value="&mvte:global:Upsell_Product_Count;">
 									<mvt:item name="tax" />
-									<ul class="c-form-list">
-										<li class="c-form-list__item c-form-list__item--full t-multiple-product-upsell-purchase__options">
+									<ul class="sd2-v2-form-list">
+										<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full t-multiple-product-upsell-purchase__options">
 											<mvt:item name="upsell_attr_mult" />
 										</li>
-										<li class="c-form-list__item u-text-right">
-											<input class="c-button c-button--large u-bg-primary u-font-small u-text-bold u-text-uppercase" type="submit" value="Continue">
+										<li class="sd2-v2-form-list__item u-text-right">
+											<input class="sd2-btn sd2-btn--large u-bg-primary u-font-small u-text-bold u-text-uppercase" type="submit" value="Continue">
 										</li>
 									</ul>
 								</fieldset>
@@ -47,11 +47,7 @@
 						</div>
 					</section>
 		
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="footer" />
-						</div>
-					</section>
+					<mvt:item name="hdft" param="footer" />
 				</div>
 			</div>
 		</div>

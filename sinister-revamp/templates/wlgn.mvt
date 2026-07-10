@@ -15,11 +15,7 @@
 <body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
 	<mvt:item name="hdft" param="global_header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="header" />
-		</div>
-	</section>
+	<mvt:item name="hdft" param="header" />
 
 	<section class="o-layout">
 		<div class="o-layout__item u-width-12">
@@ -29,7 +25,7 @@
 					<div class="o-layout o-layout--wide o-layout--justify-around u-text-center">
 						<div class="o-layout__item u-width-12 u-width-6--l u-width-5--w t-customer-profile">
 							<div class="t-account-landing-section__header">
-								<span class="c-heading-delta t-account-landing-section__heading">Current Customer?</span>
+								<span class="sd2-v2-heading-delta t-account-landing-section__heading">Current Customer?</span>
 								<p class="u-font-small">Please sign in to view your wish lists.</p>
 							</div>
 							<form class="u-inline-block u-text-left" method="post" action="&mvte:urls:WISH:secure;" autocomplete="off">
@@ -55,21 +51,21 @@
 											<input type="hidden" name="Product_Attributes[ &mvt:attribute_index; ]:template_code" value="&mvte:attribute:template_code;" />
 										</mvt:if>
 									</mvt:foreach>
-									<ul class="c-form-list">
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-small u-text-bold u-text-uppercase is-required &mvt:global:invalid_credentials;" for="l-Customer_LoginEmail">Email Address</label>
-											<input id="l-Customer_LoginEmail" class="c-form-input" type="email" name="Customer_LoginEmail" value="&mvte:global:Customer_LoginEmail;" autocomplete="email" required>
+									<ul class="sd2-v2-form-list">
+										<li class="sd2-v2-form-list__item">
+											<label class="sd2-v2-form-label u-font-small u-text-bold u-text-uppercase is-required &mvt:global:invalid_credentials;" for="l-Customer_LoginEmail">Email Address</label>
+											<input id="l-Customer_LoginEmail" class="sd2-v2-form-input" type="email" name="Customer_LoginEmail" value="&mvte:global:Customer_LoginEmail;" autocomplete="email" required>
 										</li>
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-small u-text-bold u-text-uppercase is-required &mvt:global:invalid_credentials;" for="l-Customer_Password">Password:</label>
+										<li class="sd2-v2-form-list__item">
+											<label class="sd2-v2-form-label u-font-small u-text-bold u-text-uppercase is-required &mvt:global:invalid_credentials;" for="l-Customer_Password">Password:</label>
 											<mvt:if expr="g.Customer_Temporary_Password">
 												<input type="hidden" name="Customer_Temporary_Password" value="&mvte:global:Customer_Temporary_Password;">
-												<input id="l-Customer_Password" class="c-form-input" type="password" name="Customer_Password" value="&mvte:global:Customer_Temporary_Password;" required>
+												<input id="l-Customer_Password" class="sd2-v2-form-input" type="password" name="Customer_Password" value="&mvte:global:Customer_Temporary_Password;" required>
 											<mvt:else>
-												<input id="l-Customer_Password" class="c-form-input" type="password" name="Customer_Password" autocomplete="current-password" required>
+												<input id="l-Customer_Password" class="sd2-v2-form-input" type="password" name="Customer_Password" autocomplete="current-password" required>
 											</mvt:if>
 										</li>
-										<li class="c-form-list__item u-text-right">
+										<li class="sd2-v2-form-list__item u-text-right">
 											<mvt:item name="buttons" param="Login" />
 										</li>
 									</ul>
@@ -80,7 +76,7 @@
 						</div>
 						<div class="o-layout__item u-width-12 u-width-6--l u-width-5--w">
 							<div class="t-account-landing-section__header">
-								<span class="c-heading-delta t-account-landing-section__heading">No Account? No Problem&hellip;</span>
+								<span class="sd2-v2-heading-delta t-account-landing-section__heading">No Account? No Problem&hellip;</span>
 								<p class="u-font-small">Create an account and add products to your wish list.</p>
 							</div>
 							<form class="u-inline-block u-text-left" method="post" action="&mvte:urls:CACT:secure;" autocomplete="off">
@@ -91,25 +87,25 @@
 									<mvt:else>
 										<input type="hidden" name="current_location" value="&mvte:urls:PROD:secure_sep;Product_Code=&mvte:global:Product_Code;&">
 									</mvt:if>
-									<ul class="c-form-list">
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_fname">First Name</label>
-											<input id="l-register_fname" class="c-form-input c-form-input--large" type="text" name="register_fname" value="" autocomplete="name given-name" required>
+									<ul class="sd2-v2-form-list">
+										<li class="sd2-v2-form-list__item">
+											<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_fname">First Name</label>
+											<input id="l-register_fname" class="sd2-v2-form-input sd2-v2-form-input--large" type="text" name="register_fname" value="" autocomplete="name given-name" required>
 										</li>
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_lname">Last Name</label>
-											<input id="l-register_lname" class="c-form-input c-form-input--large" type="text" name="register_lname" autocomplete="name family-name" required>
+										<li class="sd2-v2-form-list__item">
+											<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_lname">Last Name</label>
+											<input id="l-register_lname" class="sd2-v2-form-input sd2-v2-form-input--large" type="text" name="register_lname" autocomplete="name family-name" required>
 										</li>
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_email">Email Address</label>
-											<input id="l-register_email" class="c-form-input c-form-input--large" type="email" name="register_email" value="&mvte:global:register_email;" autocomplete="email" required>
+										<li class="sd2-v2-form-list__item">
+											<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_email">Email Address</label>
+											<input id="l-register_email" class="sd2-v2-form-input sd2-v2-form-input--large" type="email" name="register_email" value="&mvte:global:register_email;" autocomplete="email" required>
 										</li>
-										<li class="c-form-list__item">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_password">Password</label>
-											<input id="l-register_password" class="c-form-input c-form-input--large" type="password" name="register_password" autocomplete="new-password" required>
+										<li class="sd2-v2-form-list__item">
+											<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_password">Password</label>
+											<input id="l-register_password" class="sd2-v2-form-input sd2-v2-form-input--large" type="password" name="register_password" autocomplete="new-password" required>
 										</li>
-										<li class="c-form-list__item u-text-right">
-											<input class="c-button c-button--full c-button--hollow c-button--huge u-bg-white u-color-gray-50 u-font-small u-text-bold u-text-uppercase" type="submit" value="Create My Account">
+										<li class="sd2-v2-form-list__item u-text-right">
+											<input class="sd2-v2-button sd2-v2-button--full sd2-v2-button--hollow sd2-v2-button--huge u-bg-white u-color-gray-50 u-font-small u-text-bold u-text-uppercase" type="submit" value="Create My Account">
 										</li>
 									</ul>
 								</fieldset>

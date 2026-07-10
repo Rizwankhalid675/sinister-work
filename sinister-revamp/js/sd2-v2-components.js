@@ -114,9 +114,15 @@
 	root.querySelectorAll('[data-v2-search-close]').forEach(function (b) { b.addEventListener('click', close); });
 	document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); } });
 	if (form && input) {
-		form.addEventListener('submit', function (e) {
-			e.preventDefault();
-			window.location.assign('/mm5/merchant.mvc?Screen=SRCHV2&Search=' + encodeURIComponent(input.value || ''));
+		form.addEventListener('submit', function () {
+			var term = (input.value || '').trim();
+			if (!term) { return; }
+			try {
+				var recentSearches = JSON.parse(window.localStorage.getItem('sd2v2_recent_searches') || '[]');
+				recentSearches = recentSearches.filter(function (item) { return item !== term; });
+				recentSearches.unshift(term);
+				window.localStorage.setItem('sd2v2_recent_searches', JSON.stringify(recentSearches.slice(0, 5)));
+			} catch (e) { /* localStorage unavailable; allow native search submit */ }
 		});
 	}
 
@@ -134,6 +140,38 @@
 			wrap.hidden = false;
 		}
 	} catch (e) { /* localStorage unavailable; recent searches simply don't render */ }
+})();
+
+/* Live listing layout guard. Some CTGY/SRCH pages can render the revamp shell
+   before Miva outputs any actual facet controls, leaving an empty 280px rail
+   that creates inconsistent whitespace between otherwise identical categories.
+   Normalize the rendered state from the DOM so empty filter rails collapse to
+   the same one-column grid used by single-product/no-facet categories. */
+(function () {
+	'use strict';
+	function railHasContent(rail) {
+		if (!rail) { return false; }
+		return !!rail.querySelector('.x-refinery, .x-refinery-set, .x-category-tree, .c-form-checkbox, .c-form-select__dropdown, input[type="checkbox"], select');
+	}
+
+	function syncLayout(layout) {
+		if (!layout) { return; }
+		var rail = layout.querySelector('.sd2-v2-filter-rail, .sd2-v2-filter-panel');
+		var hasFilters = railHasContent(rail);
+		layout.classList.toggle('sd2-v2-search-page__layout--has-filters', hasFilters);
+		layout.classList.toggle('sd2-v2-search-page__layout--no-filters', !hasFilters);
+		if (rail) {
+			rail.hidden = !hasFilters;
+		}
+	}
+
+	document.querySelectorAll('.sd2-v2-search-page__layout').forEach(function (layout) {
+		syncLayout(layout);
+		var rail = layout.querySelector('.sd2-v2-filter-rail, .sd2-v2-filter-panel');
+		if (!rail || typeof MutationObserver === 'undefined') { return; }
+		var observer = new MutationObserver(function () { syncLayout(layout); });
+		observer.observe(rail, { childList: true, subtree: true });
+	});
 })();
 
 /* Garage Experience V2 controller — panel open/close, cascading select
@@ -280,6 +318,8 @@ document.querySelectorAll('[data-v2-cart-open]').forEach(function (b) { b.addEve
    and optional account section disclosure. */
 (function () {
 	'use strict';
+	var accountRoot = document.querySelector('[data-v2-account]');
+	if (!accountRoot) { return; }
 	function loadGarage() {
 		try {
 			return JSON.parse(window.localStorage.getItem('sd2v2_garage') || '[]');
@@ -599,6 +639,8 @@ counters.forEach(run);
 			var value = parseInt(input.value || String(min), 10);
 			input.value = String(Math.max(min, value + delta));
 			input.dispatchEvent(new Event('change', { bubbles: true }));
+			var form = root.closest('form');
+			if (form) { form.submit(); }
 		}
 		if (minus) { minus.addEventListener('click', function () { step(-1); }); }
 		if (plus) { plus.addEventListener('click', function () { step(1); }); }
@@ -669,5 +711,53 @@ counters.forEach(run);
 			});
 		});
 		observer.observe(target);
+	});
+})();
+
+/* Help sub-page form embeds (monday.com iframes + the LiveHelpNow ticket widget on
+   Order Tracking). Both are effectively cross-origin: we cannot read their real
+   rendered content height, so there is no way to size the container exactly from
+   here. Two-tier strategy:
+     1. Best-effort auto-resize via postMessage, for any embed that broadcasts its
+        height that way (some monday.com form embeds do; LiveHelpNow's widget does
+        not, since it isn't in an iframe).
+     2. HELP_EMBED_HEIGHTS below — one fallback height per page, used whenever no
+        resize message ever arrives. This is the single place to adjust a page's
+        height; add a new "<page-code>: <px>" entry here for any future Help Center
+        form instead of hardcoding a height in the template. */
+(function () {
+	'use strict';
+
+	var HELP_EMBED_HEIGHTS = {
+		'help-sales-inquiry': 820, // was 950px with a large empty gap below the card per full-page screenshot; trimmed
+		'help-check-order-status': 1100, // was 1137px with Submit visible but a bit of trailing gap; trimmed slightly
+		'help-sinister-diesel-parts-tech-support': 2050, // was 1750px, form was cut off mid-file-upload with a scrollbar; increased
+		'help-warranty-inquiry': 1700, // not visually re-checked in the latest screenshot batch — still unconfirmed
+		'help-online-account-issues': 1650, // was 1700px, Submit visible right at the edge with minimal gap; roughly correct, trimmed slightly
+		'shipping-protection-requests': 1750, // was 1200px, form was cut off mid-file-upload with a scrollbar; increased
+		'returns_exchanges': 1750, // was 1900px, Submit/Save-as-draft visible with a bit of trailing gap; trimmed
+		'dlrq': 1400 // Become a Dealer / dealer-application.html — unconfirmed estimate, needs a live check
+	};
+
+	document.querySelectorAll('[data-v2-help-embed-wrap]').forEach(function (wrap) {
+		if (wrap.dataset.v2Ready) { return; }
+		wrap.dataset.v2Ready = '1';
+
+		var pageCode = wrap.dataset.v2HelpEmbedWrap;
+		var fallback = HELP_EMBED_HEIGHTS[pageCode];
+		if (fallback) {
+			wrap.style.setProperty('--sd2-help-embed-h', fallback + 'px');
+		}
+
+		var frame = wrap.querySelector('iframe');
+		if (!frame) { return; }
+
+		window.addEventListener('message', function (event) {
+			if (event.source !== frame.contentWindow || typeof event.data !== 'object' || !event.data) { return; }
+			var height = event.data.height || (event.data.data && event.data.data.height);
+			if (height && height > 0) {
+				wrap.style.setProperty('--sd2-help-embed-h', Math.ceil(height) + 'px');
+			}
+		});
 	});
 })();

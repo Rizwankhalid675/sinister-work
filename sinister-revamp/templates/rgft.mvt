@@ -27,20 +27,20 @@
 			<section class="t-expanded-block t-account-landing-section u-bg-white">
 				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header">
 					<mvt:item name="breadcrumbs" />
-					<span class="c-heading-delta t-account-landing-section__heading">&mvt:page:name;</span>
+					<span class="sd2-v2-heading-delta t-account-landing-section__heading">&mvt:page:name;</span>
 				</div>
 				<div class="o-layout__item t-expanded-block__item t-account-landing-section__content">
 					<form class="o-layout o-layout--justify-center" data-hook="cpca-form" method="post" action="&mvte:urls:_self:secure;">
 						<fieldset class="o-layout__item u-width-12 u-width-5--l">
 							<legend>&mvt:page:name;</legend>
 							<input type="hidden" name="Action" value="RDGC" />
-							<p class="c-heading-echo">Current Balance: <span class="u-color-green">&mvt:customer:formatted_credit;</span></p>
-							<ul class="c-form-list">
-								<li class="c-form-list__item c-form-list__item--full">
-									<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-GiftCertificate_Code">Enter Gift Certificate Code</label>
-									<div class="c-control-group">
-										<input id="l-GiftCertificate_Code" class="c-form-input c-form-input--large c-control-group__field" type="text" name="GiftCertificate_Code" value="&mvte:global:GiftCertificate_Code;" required>
-										<input class="c-button c-button--huge u-bg-black u-font-tiny u-text-bold u-text-uppercase" type="submit" value="Redeem" title="Click here to redeem your certificate code">
+							<p class="sd2-v2-heading-echo">Current Balance: <span class="u-color-green">&mvt:customer:formatted_credit;</span></p>
+							<ul class="sd2-v2-form-list">
+								<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full">
+									<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-GiftCertificate_Code">Enter Gift Certificate Code</label>
+									<div class="sd2-v2-control-group">
+										<input id="l-GiftCertificate_Code" class="sd2-v2-form-input sd2-v2-form-input--large sd2-v2-control-group__field" type="text" name="GiftCertificate_Code" value="&mvte:global:GiftCertificate_Code;" required>
+										<input class="sd2-btn sd2-btn--huge u-bg-black u-font-tiny u-text-bold u-text-uppercase" type="submit" value="Redeem" title="Click here to redeem your certificate code">
 									</div>
 								</li>
 							</ul>
@@ -51,11 +51,7 @@
 		</div>
 	</section>
 	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-		</div>
-	</section>
+	<mvt:item name="hdft" param="footer" />
 
 	<mvt:item name="hdft" param="global_footer" />
 </body>

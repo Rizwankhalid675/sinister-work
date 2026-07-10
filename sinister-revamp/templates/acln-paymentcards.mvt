@@ -1,5 +1,5 @@
 <mvt:if expr="l.settings:paymentcards:paymentcard_count EQ 0">
-	<div class="x-messages x-messages--info">No payment cards found.</div>
+	<p class="sd2-v2-account-empty">No payment cards found.</p>
 	<mvt:exit />
 </mvt:if>
 
@@ -20,9 +20,11 @@
 	<mvt:if expr="l.settings:card_count GT 1">
 		<mvt:foreachstop />
 	</mvt:if>
-	<div class="u-text-bold">
-		<img src="&mvt:paymentcard:image;" alt="&mvte:paymentcard:type;"> &mvte:paymentcard:lastfour;<br>
-		&mvte:paymentcard:fname; &mvte:paymentcard:lname;<br>
-		<span class="u-text-regular">Expires:</span> &mvte:paymentcard:exp_month;/&mvte:paymentcard:exp_year;
+	<div class="sd2-v2-account-products">
+		<article>
+			<div><img src="&mvt:paymentcard:image;" alt="&mvte:paymentcard:type;"> <strong>&mvte:paymentcard:lastfour;</strong></div>
+			<span>&mvte:paymentcard:fname; &mvte:paymentcard:lname;</span>
+			<span>Expires: &mvte:paymentcard:exp_month;/&mvte:paymentcard:exp_year;</span>
+		</article>
 	</div>
 </mvt:foreach>

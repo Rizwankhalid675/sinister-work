@@ -27,7 +27,7 @@
 			<section class="t-expanded-block t-account-landing-section u-bg-white">
 				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header">
 					<mvt:item name="breadcrumbs" />
-					<span class="c-heading-delta t-account-landing-section__heading">&mvt:page:name;</span>
+					<span class="sd2-v2-heading-delta t-account-landing-section__heading">&mvt:page:name;</span>
 				</div>
 				<div class="o-layout__item t-expanded-block__item t-account-landing-section__content">
 					<form class="o-layout o-layout--justify-center" method="post" action="&mvte:urls:CEML:secure;" autocomplete="off">
@@ -35,43 +35,43 @@
 							<legend>&mvt:page:name;</legend>
 							<input type="hidden" name="Action" value="CEML" />
 							<input type="hidden" name="CSRF_Token" value="&mvte:global:Basket:csrf_token;">
-							<ul class="c-form-list">
-								<li class="c-form-list__item c-form-list__item--full">
+							<ul class="sd2-v2-form-list">
+								<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full">
 									<p class="x-messages x-messages--borderless x-messages--info x-messages--with-icon">
 										<span class="x-messages__icon u-icon-info u-color-gray-30">&nbsp;</span>
 										<span>For security purposes, please enter your current password.</span>
 									</p>
 									<mvt:if expr="g.Customer_CurrentPassword_Invalid">
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_CurrentPassword">Current Password</label>
+										<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_CurrentPassword">Current Password</label>
 									<mvt:else>
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_CurrentPassword">Current Password</label>
+										<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_CurrentPassword">Current Password</label>
 									</mvt:if>
-									<input id="l-Customer_CurrentPassword" class="c-form-input c-form-input--large" type="password" name="Customer_CurrentPassword" required>
+									<input id="l-Customer_CurrentPassword" class="sd2-v2-form-input sd2-v2-form-input--large" type="password" name="Customer_CurrentPassword" required>
 								</li>
-								<li class="c-form-list__item c-form-list__item--full">
-									<hr class="c-divider">
+								<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full">
+									<hr class="sd2-v2-divider">
 								</li>
-								<li class="c-form-list__item c-form-list__item--full">
+								<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full">
 									<p>
 										<strong>Please enter your new email address.</strong><br>
 										<span class="u-font-small">Old Email Address: &mvte:global:Customer:pw_email;</span>
 									</p>
 									<mvt:if expr="g.Customer_LoginEmail_Invalid">
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_LoginEmail">New Email Address</label>
+										<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_LoginEmail">New Email Address</label>
 									<mvt:else>
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_LoginEmail">New Email Address</label>
+										<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_LoginEmail">New Email Address</label>
 									</mvt:if>
-									<input id="l-Customer_LoginEmail" class="c-form-input c-form-input--large" type="email" name="Customer_LoginEmail" required>
+									<input id="l-Customer_LoginEmail" class="sd2-v2-form-input sd2-v2-form-input--large" type="email" name="Customer_LoginEmail" required>
 								</li>
-								<li class="c-form-list__item c-form-list__item--full">
+								<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full">
 									<mvt:if expr="g.Customer_VerifyLoginEmail_Invalid">
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_VerifyLoginEmail">Confirm Email Address</label>
+										<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_VerifyLoginEmail">Confirm Email Address</label>
 									<mvt:else>
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_VerifyLoginEmail">Confirm Email Address</label>
+										<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_VerifyLoginEmail">Confirm Email Address</label>
 									</mvt:if>
-									<input id="l-Customer_VerifyLoginEmail" class="c-form-input c-form-input--large" type="email" name="Customer_VerifyLoginEmail" required>
+									<input id="l-Customer_VerifyLoginEmail" class="sd2-v2-form-input sd2-v2-form-input--large" type="email" name="Customer_VerifyLoginEmail" required>
 								</li>
-								<li class="c-form-list__item c-form-list__item--full u-text-right">
+								<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full u-text-right">
 									<mvt:item name="buttons" param="Save" />
 								</li>
 							</ul>
@@ -82,11 +82,7 @@
 		</div>
 	</section>
 	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-		</div>
-	</section>
+	<mvt:item name="hdft" param="footer" />
 
 	<mvt:item name="hdft" param="global_footer" />
 </body>

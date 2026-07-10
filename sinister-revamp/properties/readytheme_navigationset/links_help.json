@@ -166,6 +166,14 @@
             "link_targ": "_self",
             "link_type": "G",
             "name": "Join Sinister Insider"
+        },
+        {
+            "active": 1,
+            "id": "d4a3f0b1c2e5487a9c6e0f2b8d7a1e93",
+            "link_dest": "special-offers",
+            "link_targ": "_self",
+            "link_type": "G",
+            "name": "Special Offers"
         }
     ],
     "layout": "S",

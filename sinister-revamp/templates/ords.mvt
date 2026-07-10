@@ -15,52 +15,45 @@
 <body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
 	<div class="u-printable">
 		<mvt:item name="hdft" param="global_header" />
-	
-		<section class="o-layout">
-			<div class="o-layout__item u-width-12">
-				<section class="t-expanded-block t-account-landing-section u-bg-white">
-					<div class="o-layout__item t-expanded-block__item t-account-landing-section__header u-width-12">
-						<mvt:item name="breadcrumbs" />
-						
-						<div class="o-layout o-layout--align-center o-layout--justify-between">
-							<span class="o-layout__item c-heading-delta t-account-landing-section__heading">
-								Order #&mvt:order:id;
-								<span class="c-heading--subheading">Placed on &mvt:order:date;</span>
-							</span>
-							<section class="o-layout__item u-text-right">
-								<button class="c-button c-button--large u-bg-black u-color-white u-font-tiny u-text-uppercase" data-hook="print-invoice">Print Invoice</button>
-							</section>
-						</div>
-						
-						<div class="o-layout">
-							<div class="o-layout__item">
-								<mvt:item name="hdft" param="header" />
-								<mvt:item name="readytheme" param="contentsection( 'messages' )" />
-							</div>
-						</div>
-					</div>
-				</section>
-				<section class="t-expanded-block t-account-landing-section u-bg-white">
-					<div class="o-layout__item t-expanded-block__item t-account-landing-section__content u-width-12">
-						<section class="o-layout o-layout--wide">
-							<div class="o-layout__item u-width-12 u-width-8--l">
-								<mvt:item name="view_order" />
-							</div>
-							<aside class="o-layout__item u-width-12 u-width-4--l">
-								<mvt:item name="order_customer" />
-							</aside>
-						</section>
-		
-						<section class="o-layout">
-							<div class="o-layout__item">
-								<mvt:item name="hdft" param="footer" />
-							</div>
-						</section>
-					</div>
-				</section>
-			</div>
-		</section>
-	
+		<mvt:item name="hdft" param="header" />
+		<mvt:item name="readytheme" param="contentsection( 'messages' )" />
+
+		<main class="sd2-v2-account" data-v2-account>
+			<header class="sd2-v2-account-hero">
+				<mvt:item name="breadcrumbs" />
+				<p class="sd2-kicker">Account</p>
+				<div class="sd2-v2-account-section-head">
+					<h1>Order #&mvt:order:id;</h1>
+					<button class="sd2-btn sd2-btn--outline" data-hook="print-invoice" type="button">Print Invoice</button>
+				</div>
+				<p>Placed on &mvt:order:date;</p>
+			</header>
+
+			<nav class="sd2-v2-account-nav" aria-label="Account sections">
+				<a href="&mvte:urls:ACLN:auto;">Dashboard</a>
+				<a class="is-current" href="&mvte:urls:ORDH:auto;">Orders</a>
+				<a href="&mvte:urls:CABK:auto;">Addresses</a>
+				<a href="&mvte:urls:CPCD:auto;">Payment</a>
+				<a href="&mvte:urls:CSUB:auto;">Subscriptions</a>
+				<a href="&mvte:urls:WLST:auto;">Wish Lists</a>
+				<a href="https://sinisterdiesel.com/rewards.html">Rewards</a>
+				<a href="https://sinisterdiesel.com/core-returns.html">Returns</a>
+				<a href="&mvte:urls:ACED:auto;">Settings</a>
+				<a href="&mvte:urls:CPRO:auto;">Password</a>
+				<button type="button" data-v2-garage-toggle>Garage</button>
+			</nav>
+
+			<section class="sd2-v2-account-grid">
+				<div class="sd2-v2-account-card">
+					<mvt:item name="view_order" />
+				</div>
+				<aside class="sd2-v2-account-card">
+					<mvt:item name="order_customer" />
+				</aside>
+			</section>
+		</main>
+
+		<mvt:item name="hdft" param="footer" />
 		<mvt:item name="hdft" param="global_footer" />
 	</div>
 	<mvt:item name="printer_friendly_content" />

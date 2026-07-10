@@ -14,92 +14,77 @@
 </head>
 <body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
 	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="header" />
-			<mvt:item name="readytheme" param="contentsection( 'messages' )" />
-		</div>
-	</section>
+	<section class="sd2-v2-auth">
+		<header class="sd2-v2-account-hero">
+			<mvt:item name="breadcrumbs" />
+			<p class="sd2-kicker">Account</p>
+			<h1>&mvt:page:name;</h1>
+		</header>
 
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block t-account-landing-section u-bg-white">
-				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header">
-					<mvt:item name="breadcrumbs" />
-					<span class="c-heading-delta t-account-landing-section__heading">&mvt:page:name;</span>
-				</div>
-				<div class="o-layout__item t-expanded-block__item t-account-landing-section__content">
-					<form class="o-layout o-layout--justify-center" method="post" action="&mvte:urls:ACLN:secure;" autocomplete="off">
-						<fieldset class="o-layout__item u-width-12 u-width-5--l">
-							<legend>&mvt:page:name;</legend>
-							<input type="hidden" name="Action" value="CPWD" />
-							<input type="hidden" name="CSRF_Token" value="&mvte:global:Basket:csrf_token;">
-							<ul class="c-form-list">
-								<mvt:if expr="g.Customer_Temporary_Password">
-									<input type="hidden" name="Customer_CurrentPassword" value="&mvte:global:Customer_Temporary_Password;">
-									<input type="hidden" name="Customer_Temporary_Password" value="&mvte:global:Customer_Temporary_Password;">
+		<mvt:item name="readytheme" param="contentsection( 'messages' )" />
+
+		<div class="sd2-v2-auth__panel">
+			<form method="post" action="&mvte:urls:ACLN:secure;" autocomplete="off">
+				<fieldset>
+					<legend>&mvt:page:name;</legend>
+					<input type="hidden" name="Action" value="CPWD" />
+					<input type="hidden" name="CSRF_Token" value="&mvte:global:Basket:csrf_token;">
+					<mvt:if expr="g.Customer_Temporary_Password">
+						<input type="hidden" name="Customer_CurrentPassword" value="&mvte:global:Customer_Temporary_Password;">
+						<input type="hidden" name="Customer_Temporary_Password" value="&mvte:global:Customer_Temporary_Password;">
+					<mvt:else>
+						<p class="sd2-v2-validation">For security purposes, please enter your current password.</p>
+						<ul class="sd2-v2-account-fields">
+							<li class="sd2-v2-account-field sd2-v2-account-field--wide">
+								<mvt:if expr="g.Customer_CurrentPassword_Invalid">
+									<label class="u-color-red" for="l-Customer_CurrentPassword">Current Password</label>
 								<mvt:else>
-									<li class="c-form-list__item c-form-list__item--full">
-										<p class="x-messages x-messages--borderless x-messages--info x-messages--with-icon">
-											<span class="x-messages__icon u-icon-info u-color-gray-30">&nbsp;</span>
-											<span>For security purposes, please enter your current password.</span>
-										</p>
-										<mvt:if expr="g.Customer_CurrentPassword_Invalid">
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_CurrentPassword">Current Password</label>
-										<mvt:else>
-											<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_CurrentPassword">Current Password</label>
-										</mvt:if>
-										<input id="l-Customer_CurrentPassword" class="c-form-input c-form-input--large" type="password" name="Customer_CurrentPassword" required>
-									</li>
-									<li class="c-form-list__item c-form-list__item--full">
-										<hr class="c-divider">
-									</li>
+									<label for="l-Customer_CurrentPassword">Current Password</label>
 								</mvt:if>
-								<li class="c-form-list__item c-form-list__item--full">
-									<mvt:do file="g.Module_Feature_CUS_DB" name="l.success" value="CustomerSettings_Load(l.settings:customersettings)" />
-									<p class="x-messages x-messages--borderless">
-										<span class="c-heading-echo u-block u-text-bold u-text-center u-text-uppercase">Requirements</span>
-										<span class="u-font-small">&bull; Minimum Password Length: &mvt:customersettings:pw_min_len;</span><br>
-										<mvt:if expr="l.settings:customersettings:pw_complex EQ 1">
-											<span class="u-font-small">&bull; At Least one Letter and one Number or Punctuation Character</span>
-										<mvt:elseif expr="l.settings:customersettings:pw_complex EQ 2">
-											<span class="u-font-small">&bull; Mixed Case Letters and at Least one Number or Punctuation Character</span>
-										</mvt:if>
-									</p>
-									<p class="u-text-bold">Please enter your new password.</p>
-									<mvt:if expr="g.Customer_Password_Invalid">
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_Password">New Password</label>
-									<mvt:else>
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_Password">New Password</label>
-									</mvt:if>
-									<input id="l-Customer_Password" class="c-form-input c-form-input--large" type="password" name="Customer_Password" required>
-								</li>
-								<li class="c-form-list__item c-form-list__item--full">
-									<mvt:if expr="g.Customer_VerifyPassword_Invalid">
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required u-color-red" for="l-Customer_VerifyPassword">Confirm Password</label>
-									<mvt:else>
-										<label class="c-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-Customer_VerifyPassword">Confirm Password</label>
-									</mvt:if>
-									<input id="l-Customer_VerifyPassword" class="c-form-input c-form-input--large" type="password" name="Customer_VerifyPassword" required>
-								</li>
-								<li class="c-form-list__item c-form-list__item--full u-text-right">
-									<mvt:item name="buttons" param="Save" />
-								</li>
-							</ul>
-						</fieldset>
-					</form>
-				</div>
-			</section>
-		</div>
-	</section>
-	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
+								<input id="l-Customer_CurrentPassword" type="password" name="Customer_CurrentPassword" required>
+							</li>
+						</ul>
+					</mvt:if>
+					<mvt:do file="g.Module_Feature_CUS_DB" name="l.success" value="CustomerSettings_Load(l.settings:customersettings)" />
+					<p class="sd2-v2-validation">
+						<strong>Requirements</strong><br>
+						Minimum Password Length: &mvt:customersettings:pw_min_len;
+						<mvt:if expr="l.settings:customersettings:pw_complex EQ 1">
+							&mdash; At Least one Letter and one Number or Punctuation Character
+						<mvt:elseif expr="l.settings:customersettings:pw_complex EQ 2">
+							&mdash; Mixed Case Letters and at Least one Number or Punctuation Character
+						</mvt:if>
+					</p>
+					<p>Please enter your new password.</p>
+					<ul class="sd2-v2-account-fields">
+						<li class="sd2-v2-account-field sd2-v2-account-field--wide">
+							<mvt:if expr="g.Customer_Password_Invalid">
+								<label class="u-color-red" for="l-Customer_Password">New Password</label>
+							<mvt:else>
+								<label for="l-Customer_Password">New Password</label>
+							</mvt:if>
+							<input id="l-Customer_Password" type="password" name="Customer_Password" required>
+						</li>
+						<li class="sd2-v2-account-field sd2-v2-account-field--wide">
+							<mvt:if expr="g.Customer_VerifyPassword_Invalid">
+								<label class="u-color-red" for="l-Customer_VerifyPassword">Confirm Password</label>
+							<mvt:else>
+								<label for="l-Customer_VerifyPassword">Confirm Password</label>
+							</mvt:if>
+							<input id="l-Customer_VerifyPassword" type="password" name="Customer_VerifyPassword" required>
+						</li>
+					</ul>
+					<div class="sd2-v2-account-actions">
+						<mvt:item name="buttons" param="Save" />
+					</div>
+				</fieldset>
+			</form>
 		</div>
 	</section>
 
+	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

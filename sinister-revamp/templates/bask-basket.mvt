@@ -1,41 +1,16 @@
-<!DOCTYPE html>
-<html>
-<mvt:item name="html_profile" />
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<base href="&mvte:global:basehref;">
-	<mvt:if expr="NOT ISNULL l.settings:page:title">
-		<title>&mvt:page:title;</title>
-	<mvt:else>
-		<title>&mvt:page:name; | &mvt:store:name;</title>
-	</mvt:if>
-	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
-	<mvt:item name="head" param="head_tag" />
-	<mvt:comment>Revamp V2 route takeover fallback: direct V2 CSS while live page resource assignments are verified.</mvt:comment>
-	<link rel="stylesheet" href="/mm5/css/00000001/sd2-global.css" media="all">
-	<link rel="stylesheet" href="/css/00000001/sd2-global.css" media="all">
-	<link rel="stylesheet" href="/sd2-global.css" media="all">
-	<mvt:comment>
-		Cart Page V2 staging template. Inactive only. Do not assign over BASK.
-		Uses verified basket:groups iterator with group fields from bask-basket.mvt.
-		TODO: wire coupon, shipping-estimate, and final BASK staging behavior before activation.
-	</mvt:comment>
-</head>
-<body>
-	<mvt:item name="hdft" param="global_header" />
-	<mvt:item name="hdft" param="header" />
-
+<mvt:comment>
+	Real basket item template (registered via bask.json template_filename
+	"bask-basket.mvc", rendered inside bask.mvt's <mvt:item name="basket" />
+	slot). Must be a fragment only — bask.mvt already owns the page
+	doctype/head/hdft header+footer/resource loading.
+	Uses verified basket:groups iterator with group fields.
+</mvt:comment>
 <main class="sd2-v2-cart-page" data-v2-cart-page>
 	<header class="sd2-v2-checkout-hero">
 		<p class="sd2-kicker">Cart</p>
 		<h1>Review Your Order</h1>
 		<p>Review fitment, shipping, and totals before checkout.</p>
 	</header>
-
-	<div class="sd2-wrap">
-		<mvt:comment>TODO: register Vehicle Banner V2 in Miva Admin as readytheme contentsection('vehicle_banner') before using mvt:item composition.</mvt:comment>
-	</div>
 
 	<section class="sd2-v2-cart-page__layout">
 		<div class="sd2-v2-cart-page__main">
@@ -57,7 +32,6 @@
 								</mvt:if>
 							</h3>
 							<p class="sd2-v2-cart-item__meta">SKU &mvte:group:code;</p>
-							<p class="sd2-v2-cart-item__fitment" data-v2-fitment-copy>No vehicle selected. Confirm fitment in Garage.</p>
 							<form class="sd2-v2-cart-item__controls" method="post" action="&mvte:urls:BASK:auto;" data-hook="group-&mvte:group:group_id;">
 								<input type="hidden" name="Action" value="QTYG">
 								<input type="hidden" name="Basket_Group" value="&mvte:group:group_id;">
@@ -71,6 +45,7 @@
 									<button type="button" data-v2-qty-minus aria-label="Decrease quantity">-</button>
 									<input name="Quantity" type="number" min="0" value="&mvte:group:quantity;" inputmode="numeric" data-v2-qty-input aria-label="Quantity for &mvte:group:name;">
 									<button type="button" data-v2-qty-plus aria-label="Increase quantity">+</button>
+									<button type="submit" class="sd2-v2-qty__update" data-v2-qty-submit>Update</button>
 								</div>
 								<mvt:if expr="(l.settings:group:product:code NE g.MW_Sinister_insurance_Options:sinister_product_code) AND (l.settings:group:product:code NE 'sinister_shipping_insurance') AND (('Extend-' CIN l.settings:group:sku) EQ 0)">
 									<a class="sd2-v2-link-button" href="&mvte:urls:BASK:auto_sep;Action=RGRP&Basket_Group=&mvta:group:group_id;&Restore_Name=&mvta:group:name;&Restore_Params=&mvta:group:restore:params;&quote_item=&mvta:global:quote_item;">Remove</a>
@@ -91,7 +66,7 @@
 
 			<section class="sd2-v2-coupon" aria-labelledby="sd2-v2-cart-coupon-title">
 				<h2 id="sd2-v2-cart-coupon-title">Promo Code</h2>
-				<mvt:comment>Real basket:coupons iterator + Action=ACPN/RCPN forms, reused verbatim from bask-basket.mvt.</mvt:comment>
+				<mvt:comment>Real basket:coupons iterator + Action=ACPN/RCPN forms.</mvt:comment>
 				<mvt:foreach iterator="coupon" array="basket:coupons">
 					<div class="sd2-v2-coupon__applied">
 						<form method="post" action="&mvte:urls:BASK:auto;">
@@ -119,7 +94,7 @@
 			<h2 id="sd2-v2-cart-summary-title">Order Summary</h2>
 			<dl>
 				<div><dt>Subtotal</dt><dd>&mvt:basket:formatted_subtotal;</dd></div>
-				<mvt:comment>Real basket:charges iterator, reused verbatim from bask-basket.mvt — covers shipping, tax, and any other applied charges; legacy renders each charge generically rather than fixed "Shipping"/"Tax" rows.</mvt:comment>
+				<mvt:comment>Real basket:charges iterator — covers shipping, tax, and any other applied charges; legacy renders each charge generically rather than fixed "Shipping"/"Tax" rows.</mvt:comment>
 				<mvt:foreach iterator="charge" array="basket:charges">
 					<div><dt>&mvt:charge:descrip;</dt><dd>&mvt:charge:formatted_disp_amt;</dd></div>
 				</mvt:foreach>
@@ -130,16 +105,3 @@
 		</aside>
 	</section>
 </main>
-	<mvt:item name="hdft" param="footer" />
-	<mvt:item name="hdft" param="global_footer" />
-	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="footer_js_dev" /><mvt:else><mvt:item name="head" param="footer_js" /></mvt:if>
-	<mvt:comment>Revamp V2 route takeover fallback: direct V2 JS while live page resource assignments are verified.</mvt:comment>
-	<script src="/mm5/scripts/00000001/sd2-v2-components.js" defer></script>
-	<script src="/scripts/00000001/sd2-v2-components.js" defer></script>
-	<script src="/sd2-v2-components.js" defer></script>
-	<mvt:comment>Revamp V2 fallback: legacy global scripts emitted pathless on route takeover pages.</mvt:comment>
-	<script src="/scripts/00000001/runtime_combofacets.js" defer></script>
-	<script src="/themes/colossus/core/js/searchfield.js" defer></script>
-	<script src="/themes/colossus/ui/js/theme.js" defer></script>
-</body>
-</html>

@@ -17,65 +17,34 @@
 		<mvt:item name="head" param="css_list" />
 	</mvt:if>
 
-	<link type="text/css" media="all" rel="stylesheet" href="css/00000001/b05/lhn_forms.css">
 	<mvt:item name="head" param="head_tag" />
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-	<style>
-		/* Monday form embed styling */
-		.monday-embed-wrap{
-			width: 100%;
-			padding: 16px;
-			box-sizing: border-box;
-		}
-
-		.monday-embed{
-			width: min(1650px, 100%);
-			height: 1000px;
-			border: 0;
-			display: block;
-			margin: 0 auto;
-			box-shadow: 5px 5px 56px 0 rgba(0,0,0,0.25);
-		}
-
-		@media (max-width: 768px){
-			.monday-embed{
-				height: 1200px;
-			}
-		}
-	</style>
 </head>
 
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
-
+<body>
 	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="header" />
+	<main class="sd2-v2-search-page" data-v2-help-page>
+		<div class="sd2-wrap">
+			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+				<a href="/help-center.html">Help Center</a>
+				<span aria-hidden="true">/</span>
+				<span>Missing/Damaged Parts</span>
+			</nav>
+
+			<header class="sd2-v2-search-page__head sd2-v2-help-page__head">
+				<p class="sd2-eyebrow">Help Center</p>
+				<h1 class="sd2-heading-lg">Missing/Damaged Parts</h1>
+				<p class="sd2-v2-help-page__intro">Report missing or damaged items and get quick replacements. Fill out the form below and our team will get it sorted.</p>
+			</header>
+
+			<div class="sd2-v2-help-embed-wrap" data-v2-help-embed-wrap="help-online-account-issues">
+				<iframe class="sd2-v2-help-embed" src="https://forms.monday.com/forms/embed/0ae9b14be0bd9d3226cd31c623bfcd4b?r=use1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+			</div>
 		</div>
-	</section>
+	</main>
 
-	<!-- Embedded Monday Form -->
-	<section class="o-layout">
-		<div class="o-layout__item monday-embed-wrap">
-			<iframe
-				class="monday-embed"
-				src="https://forms.monday.com/forms/embed/0ae9b14be0bd9d3226cd31c623bfcd4b?r=use1"
-				loading="lazy"
-				referrerpolicy="no-referrer-when-downgrade"
-				allowfullscreen>
-			</iframe>
-		</div>
-	</section>
-
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-		</div>
-	</section>
-
+	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
-
 </body>
 </html>

@@ -83,12 +83,8 @@ font-weight: bold;
 								<mvt:item name="order_contents" />
 							</div>
 						</section>
-		
-						<section class="o-layout">
-							<div class="o-layout__item">
-								<mvt:item name="hdft" param="footer" />
-							</div>
-						</section>
+
+						<mvt:item name="hdft" param="footer" />
 					</div>
 				</section>
 			</div>
@@ -151,14 +147,10 @@ font-weight: bold;
 							<aside class="o-layout__item u-width-12 u-width-4--l">
 								<mvt:item name="order_customer" />
 							</aside>
-						
+
 						</section>
-		
-						<section class="o-layout">
-							<div class="o-layout__item">
-								<mvt:item name="hdft" param="footer" />
-							</div>
-						</section>
+
+						<mvt:item name="hdft" param="footer" />
 					</div>
 				</section>
 			</div>

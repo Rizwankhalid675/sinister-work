@@ -28,21 +28,21 @@
 				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header u-width-12">
 					<mvt:item name="breadcrumbs" />
 					<div class="o-layout o-layout--align-center o-layout--justify-between">
-						<span class="o-layout__item c-heading-delta t-account-landing-section__heading">
+						<span class="o-layout__item sd2-v2-heading-delta t-account-landing-section__heading">
 							&mvte:wishlist:title;
 							<mvt:if expr="l.settings:wishlist:cust_id EQ g.Basket:cust_id AND g.Customer_Session_Verified">
 								<mvt:if expr="l.settings:wishlist:shared">
-									<span class="c-heading--subheading">[Public]</span>
+									<span class="sd2-v2-heading--subheading">[Public]</span>
 								<mvt:else>
-									<span class="c-heading--subheading u-color-red">[Private]</span>
+									<span class="sd2-v2-heading--subheading u-color-red">[Private]</span>
 								</mvt:if>
 							</mvt:if>
 						</span>
 						<span class="o-layout__item">
 							<mvt:if expr="l.settings:wishlist:cust_id EQ g.Basket:cust_id AND g.Customer_Session_Verified">
-								<span class="c-control-group u-font-small u-text-uppercase o-layout--justify-end">
-									<a class="c-button c-control-group__button u-bg-black" href="&mvte:urls:WLED:auto_sep;WishList_ID=&mvta:wishlist:id;">Edit</a>
-									<a class="c-button c-button--hollow c-control-group__button u-bg-white u-color-gray-50" href="&mvte:urls:WLST:secure_sep;Action=DWSH&WishList_ID=&mvta:wishlist:id;" onClick="if ( !confirm( 'Are you sure you want to delete your wish list? This action cannot be undone\x0A\x0AContinue?' ) ) return false;">Delete</a>
+								<span class="sd2-v2-control-group u-font-small u-text-uppercase o-layout--justify-end">
+									<a class="sd2-v2-button sd2-v2-control-group__button u-bg-black" href="&mvte:urls:WLED:auto_sep;WishList_ID=&mvta:wishlist:id;">Edit</a>
+									<a class="sd2-v2-button sd2-v2-button--hollow sd2-v2-control-group__button u-bg-white u-color-gray-50" href="&mvte:urls:WLST:secure_sep;Action=DWSH&WishList_ID=&mvta:wishlist:id;" onClick="if ( !confirm( 'Are you sure you want to delete your wish list? This action cannot be undone\x0A\x0AContinue?' ) ) return false;">Delete</a>
 								</span>
 							</mvt:if>
 						</span>
@@ -76,9 +76,9 @@
 								<legend>Add All &mvte:wishlist:title; Items to Cart</legend>
 								<input type="hidden" name="Action" value="AFWA">
 								<input type="hidden" name="WishList_ID" value="&mvte:global:WishList_ID;">
-								<ul class="c-form-list">
-									<li class="c-form-list__item c-form-list__item--full u-text-right">
-										<input class="c-button c-button--huge u-bg-black u-text-bold u-font-small u-text-uppercase" type="submit" value="Add All To Cart">
+								<ul class="sd2-v2-form-list">
+									<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full u-text-right">
+										<input class="sd2-v2-button sd2-v2-button--huge u-bg-black u-text-bold u-font-small u-text-uppercase" type="submit" value="Add All To Cart">
 									</li>
 							</fieldset>
 						</form>
@@ -88,11 +88,7 @@
 		</div>
 	</section>
 	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-		</div>
-	</section>
+	<mvt:item name="hdft" param="footer" />
 
 	<mvt:item name="hdft" param="global_footer" />
 </body>

@@ -15,11 +15,7 @@
 <body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvte:global:pageClass; t-page-osel">
 	<mvt:item name="hdft" param="global_header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="header" />
-		</div>
-	</section>
+	<mvt:item name="hdft" param="header" />
 
 	<section class="o-layout o-layout--wide">
 		<div class="o-layout__item u-width-12 u-width-8--l u-width-5--w u-offset-2--w">
@@ -32,32 +28,32 @@
 					<mvt:item name="tax" />
 					<input type="hidden" name="Action" value="SHIP,PSHP,CTAX" />
 					<input type="hidden" name="PaymentMethod" value="amazonpay:" />
-					<div class="c-form-list u-text-constrain">
-						<div class="c-form-list__item c-form-list__item--full">
+					<div class="sd2-v2-form-list u-text-constrain">
+						<div class="sd2-v2-form-list__item sd2-v2-form-list__item--full">
 							<mvt:item name="amazonpay_address" />
 						</div>
 					</div>
-					<p class="c-heading-echo u-text-bold u-text-uppercase">Choose A Shipping Method</p>
-					<div class="c-form-list u-text-constrain">
+					<p class="sd2-v2-heading-echo u-text-bold u-text-uppercase">Choose A Shipping Method</p>
+					<div class="sd2-v2-form-list u-text-constrain">
 						<mvt:if expr="ISNULL l.settings:shippingmethods">
-							<div class="c-form-list__item c-form-list__item--full">
+							<div class="sd2-v2-form-list__item sd2-v2-form-list__item--full">
 								<p class="x-messages x-messages--info">No valid shipping methods are available for your order. You will be contacted regarding shipping when your order is processed.</p>
 							</div>
 						</mvt:if>
 						<mvt:if expr="ISNULL l.settings:shippingmethods">
-							<div class="c-form-list__item c-form-list__item--full u-font-small">
+							<div class="sd2-v2-form-list__item sd2-v2-form-list__item--full u-font-small">
 								<mvt:if expr="ISNULL l.settings:fallbackshippingmethod">
-									<label class="c-form-checkbox c-form-checkbox--radio">
-										<input class="c-form-checkbox__input" type="radio" name="ShippingMethod" value="" checked>
-										<span class="c-form-checkbox__caption">Unable to Calculate Shipping Costs</span>
+									<label class="sd2-v2-form-checkbox sd2-v2-form-checkbox--radio">
+										<input class="sd2-v2-form-checkbox__input" type="radio" name="ShippingMethod" value="" checked>
+										<span class="sd2-v2-form-checkbox__caption">Unable to Calculate Shipping Costs</span>
 									</label>
 								<mvt:else>
-									<label class="c-form-checkbox c-form-checkbox--radio">
-										<input class="c-form-checkbox__input" type="radio" name="ShippingMethod" value="" checked>
-										<span class="c-form-checkbox__caption o-layout o-list-inline o-layout--align-baseline u-flex">
+									<label class="sd2-v2-form-checkbox sd2-v2-form-checkbox--radio">
+										<input class="sd2-v2-form-checkbox__input" type="radio" name="ShippingMethod" value="" checked>
+										<span class="sd2-v2-form-checkbox__caption o-layout o-list-inline o-layout--align-baseline u-flex">
 											<span class="o-list-inline__item">&mvt:fallbackshippingmethod:name;</span>
 											<span class="o-list-inline__item o-layout--grow">
-												<span class="c-keyline c-keyline--small u-block"></span>
+												<span class="sd2-v2-keyline sd2-v2-keyline--small u-block"></span>
 											</span>
 											<span class="o-list-inline__item">&mvt:fallbackshippingmethod:formatted_price;</span>
 										</span>
@@ -66,28 +62,28 @@
 							</div>
 						<mvt:else>
 							<mvt:foreach array="shippingmethods" iterator="method">
-								<div class="c-form-list__item c-form-list__item--full u-font-small">
+								<div class="sd2-v2-form-list__item sd2-v2-form-list__item--full u-font-small">
 									<mvt:if expr="pos1 EQ 1">
-										<label class="c-form-checkbox c-form-checkbox--radio">
-											<input class="c-form-checkbox__input" type="radio" name="ShippingMethod" value="&mvte:method:module;:&mvte:method:code" checked>
-											<span class="c-form-checkbox__caption o-layout o-list-inline o-layout--align-baseline u-flex">
+										<label class="sd2-v2-form-checkbox sd2-v2-form-checkbox--radio">
+											<input class="sd2-v2-form-checkbox__input" type="radio" name="ShippingMethod" value="&mvte:method:module;:&mvte:method:code" checked>
+											<span class="sd2-v2-form-checkbox__caption o-layout o-list-inline o-layout--align-baseline u-flex">
 												<span class="o-list-inline__item">&mvt:method:name;</span>
 												<mvt:if expr="NOT ISNULL l.settings:method:price">
 													<span class="o-list-inline__item o-layout--grow">
-														<span class="c-keyline c-keyline--small u-block"></span>
+														<span class="sd2-v2-keyline sd2-v2-keyline--small u-block"></span>
 													</span>
 													<span class="o-list-inline__item">&mvt:method:formatted_price;</span>
 												</mvt:if>
 											</span>
 										</label>
 									<mvt:else>
-										<label class="c-form-checkbox c-form-checkbox--radio">
-											<input class="c-form-checkbox__input" type="radio" name="ShippingMethod" value="&mvte:method:module;:&mvte:method:code">
-											<span class="c-form-checkbox__caption o-layout o-list-inline o-layout--align-baseline u-flex">
+										<label class="sd2-v2-form-checkbox sd2-v2-form-checkbox--radio">
+											<input class="sd2-v2-form-checkbox__input" type="radio" name="ShippingMethod" value="&mvte:method:module;:&mvte:method:code">
+											<span class="sd2-v2-form-checkbox__caption o-layout o-list-inline o-layout--align-baseline u-flex">
 												<span class="o-list-inline__item">&mvt:method:name;</span>
 												<mvt:if expr="NOT ISNULL l.settings:method:price">
 													<span class="o-list-inline__item o-layout--grow">
-														<span class="c-keyline c-keyline--small u-block"></span>
+														<span class="sd2-v2-keyline sd2-v2-keyline--small u-block"></span>
 													</span>
 													<span class="o-list-inline__item">&mvt:method:formatted_price;</span>
 												</mvt:if>
@@ -99,17 +95,17 @@
 						</mvt:if>
 					</div>
 					<br>
-					<div class="c-form-list">
-						<div class="c-form-list__item c-form-list__item--full">
+					<div class="sd2-v2-form-list">
+						<div class="sd2-v2-form-list__item sd2-v2-form-list__item--full">
 							<mvt:item name="customfields" param="Read_Basket('order_instructions', g.order_instructions)" />
-							<label class="c-form-label c-heading-echo u-text-bold u-text-uppercase" for="order_instructions" title="Delivery Notes">Delivery Notes <span class="c-heading--subheading">(Optional)</span></label>
-							<textarea id="order_instructions" class="c-form-input c-form-input--long" name="order_instructions">&mvte:global:order_instructions;</textarea>
+							<label class="sd2-v2-form-label sd2-v2-heading-echo u-text-bold u-text-uppercase" for="order_instructions" title="Delivery Notes">Delivery Notes <span class="sd2-v2-heading--subheading">(Optional)</span></label>
+							<textarea id="order_instructions" class="sd2-v2-form-input sd2-v2-form-input--long" name="order_instructions">&mvte:global:order_instructions;</textarea>
 						</div>
 					</div>
-					<hr class="c-keyline">
-					<div class="c-form-list">
-						<div class="c-form-list__item c-form-list__item--full u-text-right">
-							<input class="c-button c-button--huge u-bg-gray-50 u-font-small u-text-medium u-text-uppercase" type="submit" value="Continue to Payment">
+					<hr class="sd2-v2-keyline">
+					<div class="sd2-v2-form-list">
+						<div class="sd2-v2-form-list__item sd2-v2-form-list__item--full u-text-right">
+							<input class="sd2-btn sd2-btn--huge u-bg-gray-50 u-font-small u-text-medium u-text-uppercase" type="submit" value="Continue to Payment">
 						</div>
 					</div>
 				</fieldset>
@@ -120,11 +116,7 @@
 		</aside>
 	</section>
 	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-		</div>
-	</section>
+	<mvt:item name="hdft" param="footer" />
 
 	<mvt:item name="hdft" param="global_footer" />
 </body>

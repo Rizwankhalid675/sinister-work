@@ -19,23 +19,15 @@
 		<div class="o-layout__item u-width-12">
 			<section class="t-expanded-block t-account-landing-section u-bg-white">
 				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header u-width-12">
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="header" />
-						</div>
-					</section>
-					
+					<mvt:item name="hdft" param="header" />
+
 					<section class="o-layout o-layout--justify-center">
 						<div class="o-layout__item u-width-12 u-width-6--m">
 							<mvt:item name="messages" />
 						</div>
 					</section>
-					
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="footer" />
-						</div>
-					</section>
+
+					<mvt:item name="hdft" param="footer" />
 					
 				</div>
 			</section>

@@ -2193,11 +2193,7 @@
     </section>
   </main>
 
-  <section class="o-layout">
-    <div class="o-layout__item">
-      <mvt:item name="hdft" param="footer" />
-    </div>
-  </section>
+  <mvt:item name="hdft" param="footer" />
   <mvt:item name="hdft" param="global_footer" />
 
   <script>

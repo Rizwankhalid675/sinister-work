@@ -12,20 +12,10 @@
 	</mvt:if>
 	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
 	<mvt:item name="head" param="head_tag" />
-	<mvt:comment>Revamp V2 route takeover fallback: direct V2 CSS while live page resource assignments are verified.</mvt:comment>
-	<link rel="stylesheet" href="/mm5/css/00000001/sd2-global.css" media="all">
-	<link rel="stylesheet" href="/css/00000001/sd2-global.css" media="all">
-	<link rel="stylesheet" href="/sd2-global.css" media="all">
 	<mvt:comment>
-		Sinister Diesel Search Experience V2. Inactive template. Do not activate
-		over SRCH. Intended manual preview order:
-		- cssui-global-header-v2.mvt
-		- cssui-mega-menu-v2.mvt
-		- cssui-search-console-v2.mvt
-		- sd2-v2-garage-selector.mvt
-		- sd2-v2-cart-drawer.mvt
-		- srchv2.mvt
-		- cssui-global-footer-v2.mvt
+		Sinister Diesel native SRCH template using the approved revamp design
+		patterns on the live search shell. Native Miva search_results owns the
+		result data and pagination; this shell owns the page chrome only.
 	</mvt:comment>
 </head>
 <body>
@@ -94,7 +84,12 @@
 			</div>
 		</section>
 
-		<section class="sd2-v2-search-page__layout" aria-label="Search products">
+		<mvt:if expr="NOT ISNULL g.Search AND l.settings:facets:facet_count GT 0">
+			<mvt:assign name="l.settings:sd2_srch_layout_class" value="'sd2-v2-search-page__layout sd2-v2-search-page__layout--has-filters'" />
+		<mvt:else>
+			<mvt:assign name="l.settings:sd2_srch_layout_class" value="'sd2-v2-search-page__layout sd2-v2-search-page__layout--no-filters'" />
+		</mvt:if>
+		<section class="&mvte:sd2_srch_layout_class;" aria-label="Search products">
 			<aside class="sd2-v2-filter-panel" aria-label="Filters">
 				<div class="sd2-v2-filter-panel__head">
 					<h2>Filters</h2>
@@ -124,29 +119,18 @@
 					</mvt:comment>
 				</div>
 
-				<div class="sd2-v2-skeleton-grid" data-v2-search-loading hidden aria-hidden="true">
-					<div></div><div></div><div></div>
-				</div>
-
-				<div class="sd2-v2-error-fallback" data-v2-search-error hidden>
-					<strong>Search is temporarily unavailable.</strong>
-					<span>Use platform navigation or try again.</span>
-				</div>
-
 				<mvt:if expr="ISNULL g.Search">
 					<div class="sd2-v2-search-discovery" data-v2-search-discovery>
 						<p class="sd2-body">Start with a part number, engine, symptom, or product family. Discovery links above keep the page useful before a query is entered.</p>
 					</div>
 				<mvt:elseif expr="l.settings:search_product_count GT 0">
-					<div class="sd2-v2-product-grid" data-v2-product-grid>
-						<mvt:comment>
-							search_results item owns product cards AND its own real pagination
-							(search_results:page_links). Do not duplicate a "Load More" control here —
-							legacy has no infinite-scroll mechanism, only page-link pagination rendered
-							inside this item.
-						</mvt:comment>
-						<mvt:item name="search_results" />
-					</div>
+					<mvt:comment>
+						search_results item owns product cards AND its own real pagination
+						(search_results:page_links). Do not duplicate a "Load More" control here —
+						legacy has no infinite-scroll mechanism, only page-link pagination rendered
+						inside this item.
+					</mvt:comment>
+					<mvt:item name="search_results" />
 				<mvt:else>
 					<section class="sd2-v2-search-empty" aria-labelledby="sd2-v2-search-empty-title" data-v2-search-empty-state>
 						<div>
@@ -171,14 +155,5 @@
 </main>
 	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
-	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="footer_js_dev" /><mvt:else><mvt:item name="head" param="footer_js" /></mvt:if>
-	<mvt:comment>Revamp V2 route takeover fallback: direct V2 JS while live page resource assignments are verified.</mvt:comment>
-	<script src="/mm5/scripts/00000001/sd2-v2-components.js" defer></script>
-	<script src="/scripts/00000001/sd2-v2-components.js" defer></script>
-	<script src="/sd2-v2-components.js" defer></script>
-	<mvt:comment>Revamp V2 fallback: legacy global scripts emitted pathless on route takeover pages.</mvt:comment>
-	<script src="/scripts/00000001/runtime_combofacets.js" defer></script>
-	<script src="/themes/colossus/core/js/searchfield.js" defer></script>
-	<script src="/themes/colossus/ui/js/theme.js" defer></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <section class="sd2-v2-pgrid-wrap">
-	<div class="sd2-v2-toolbar">
 	<mvt:if expr="l.settings:category_listing:total_prod_count GT 1">
+	<div class="sd2-v2-toolbar">
 		<p class="sd2-v2-toolbar__count">&mvt:category_listing:total_prod_count; products</p>
 		<div class="sd2-v2-toolbar__group">
-		<div class="sorting">
+		<div class="sorting sd2-v2-toolbar__control">
 			<form method="get" action="&mvte:urls:_self:auto_noparams;">	
 				<mvt:if expr="tolower( l.settings:category_listing:mode ) EQ 'ctgy' AND toupper( g.Screen ) NE 'CTGY'">
 					<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;" />
@@ -20,8 +20,8 @@
 					</mvt:foreach>
 				</mvt:foreach>
 
-				<label for="Sort_By">Sort By:</label>
-				<select id="Sort_By" name="Sort_By" onchange="MMProdList_UpdateQuery( this ); return true;">
+				<label class="sd2-v2-toolbar__label" for="Sort_By">Sort By:</label>
+				<select class="sd2-v2-toolbar__select" id="Sort_By" name="Sort_By" onchange="MMProdList_UpdateQuery( this ); return true;">
 
 					<mvt:if expr="ISNULL g.Sort_By">
 						<option value="disp_order" selected="selected">Default</option>
@@ -56,9 +56,8 @@
 				</select>
 			</form>
 		</div>
-	</mvt:if>
-		<mvt:if expr="l.settings:category_listing:total_prod_count GT 1">
-			<div class="per-page">
+			<mvt:if expr="l.settings:category_listing:total_prod_count GT 1">
+			<div class="per-page sd2-v2-toolbar__control">
 				<form method="get" action="&mvte:urls:_self:auto_noparams;">	
 					<mvt:if expr="tolower( l.settings:category_listing:mode ) EQ 'ctgy' AND toupper( g.Screen ) NE 'CTGY'">
 						<input type="hidden" name="Category_Code" value="&mvte:global:Category_Code;" />
@@ -75,8 +74,8 @@
 						</mvt:foreach>
 					</mvt:foreach>
 
-					<label for="Per_Page">View:</label>
-					<select id="Per_Page" name="Per_Page" onchange="MMProdList_UpdateQuery( this ); return true;">
+					<label class="sd2-v2-toolbar__label" for="Per_Page">View:</label>
+					<select class="sd2-v2-toolbar__select" id="Per_Page" name="Per_Page" onchange="MMProdList_UpdateQuery( this ); return true;">
 
 						<mvt:if expr="g.Per_Page EQ 10">
 							<option value="10" selected="selected">10</option>
@@ -101,10 +100,12 @@
 					</select>
 				</form>
 			</div>
-		</mvt:if>
+			</mvt:if>
 		</div>
+	</div>
+	</mvt:if>
 	<mvt:if expr="l.settings:category_listing:page_links:last_page GT 1">
-		<div class="page-links">
+		<nav class="page-links sd2-v2-pagination" aria-label="Category pagination">
 			<span class="page-links-title">Page(s):</span>
 			<span class="page-links-container">
 				<mvt:if expr="l.settings:category_listing:page_links:current_page NE 1">
@@ -133,16 +134,23 @@
 					</mvt:if>
 				</span>
 			</span>
-		</div>
+		</nav>
 		
 	</mvt:if>
-	</div>
-	<div class="sd2-v2-pgrid">
+	<mvt:if expr="miva_array_elements(l.settings:category_listing:products) GT 0">
+	<div class="sd2-v2-pgrid sd2-v2-pgrid--native">
 	<mvt:foreach iterator="product" array="category_listing:products">
+	<mvt:do name="l.sd2_success" file="g.Module_Library_DB" value="ImageType_Load_Code('main', l.settings:sd2_ctgy_imagetype)" />
+	<mvt:do name="l.sd2_success" file="g.Module_Library_DB" value="ProductImage_Load_Type(l.settings:product:id, 1, l.settings:sd2_ctgy_imagetype)" />
+	<mvt:do name="l.sd2_success" file="g.Module_Library_DB" value="Image_Load_ID(l.settings:sd2_ctgy_imagetype:image_id, l.settings:sd2_ctgy_imagedata)" />
 	<article class="sd2-card sd2-v2-product-card">
 		<a class="sd2-v2-product-card__media" data-mm-linktype="product-list-link" href="&mvte:product:link;">
 			<mvt:if expr="NOT ISNULL l.settings:product:thumbnail">
 				<img src="&mvte:product:thumbnail;" alt="&mvte:product:name;" loading="lazy" />
+			<mvt:elseif expr="NOT ISNULL l.settings:product:imagetypes:main">
+				<img src="&mvte:product:imagetypes:main;" alt="&mvte:product:name;" loading="lazy" />
+			<mvt:elseif expr="NOT ISNULL l.settings:sd2_ctgy_imagedata:image">
+				<img src="&mvte:sd2_ctgy_imagedata:image;" alt="&mvte:product:name;" loading="lazy" />
 			<mvt:else>
 				<span class="thumbnail-not-available" title="&mvte:product:name;"></span>
 			</mvt:if>
@@ -159,6 +167,9 @@
 				<div class="sd2-v2-price">
 					<span class="sd2-v2-price__label">Price</span>
 					<div class="sd2-v2-price__row">
+						<mvt:if expr="l.settings:product:base_price GT l.settings:product:price">
+							<span class="sd2-v2-price__was"><s>&mvt:product:formatted_base_price;</s></span>
+						</mvt:if>
 						<span class="sd2-v2-price__current">&mvt:product:formatted_price;</span>
 					</div>
 				</div>
@@ -196,6 +207,46 @@
 	</article>
 	</mvt:foreach>
 	</div>
+	<mvt:else>
+		<mvt:do file="g.Module_Library_DB" name="l.sd2_ctgy_have_children" value="Runtime_CategoryList_Load_Parent(l.settings:category:id, l.settings:sd2_ctgy_subcategories)" />
+		<mvt:assign name="l.sd2_ctgy_subcategory_count" value="miva_array_elements(l.settings:sd2_ctgy_subcategories)" />
+		<mvt:if expr="l.sd2_ctgy_subcategory_count GT 0">
+			<div class="sd2-v2-cat-grid" data-sd2-template-source="layout-ctgy-category-listing">
+				<mvt:foreach iterator="sd2_ctgy_subcategory" array="sd2_ctgy_subcategories">
+					<mvt:assign name="l.sd2_ctgy_uri" value="''" />
+					<mvt:assign name="l.settings:sd2_ctgy_subcategory:link" value="''" />
+					<mvt:assign name="l.sd2_ctgy_have_uri" value="0" />
+					<mvt:assign name="l.sd2_ctgy_sub_href" value="''" />
+					<mvt:assign name="l.sd2_ctgy_uri:store_id" value="g.Store:id" />
+					<mvt:assign name="l.sd2_ctgy_uri:cat_id" value="l.settings:sd2_ctgy_subcategory:id" />
+					<mvt:do file="g.Module_Feature_URI_UT" name="l.sd2_ctgy_sub_href" value="Store_Category_URL(l.settings:sd2_ctgy_subcategory, NULL)" />
+					<mvt:do file="g.Module_Feature_URI_DB" name="l.sd2_ctgy_have_uri" value="URI_Load_Item_Canonical(l.sd2_ctgy_uri, l.settings:sd2_ctgy_subcategory:link)" />
+					<mvt:if expr="l.sd2_ctgy_have_uri AND NOT ISNULL l.settings:sd2_ctgy_subcategory:link:uri">
+						<mvt:assign name="l.sd2_ctgy_sub_href" value="l.settings:sd2_ctgy_subcategory:link:uri" />
+					</mvt:if>
+					<a class="sd2-v2-cat-tile<mvt:if expr="NOT l.settings:sd2_ctgy_subcategory:image"> sd2-v2-cat-tile--no-image</mvt:if>" href="&mvte:sd2_ctgy_sub_href;" data-category-code="&mvte:sd2_ctgy_subcategory:code;" data-category-id="&mvte:sd2_ctgy_subcategory:id;" data-link-uri-present="<mvt:if expr="NOT ISNULL l.settings:sd2_ctgy_subcategory:link:uri">1<mvt:else>0</mvt:if>" data-have-uri="<mvt:if expr="l.sd2_ctgy_have_uri">1<mvt:else>0</mvt:if>">
+						<mvt:if expr="l.settings:sd2_ctgy_subcategory:image">
+							<img src="&mvte:sd2_ctgy_subcategory:image;" alt="" loading="lazy">
+						</mvt:if>
+						<span class="sd2-v2-cat-tile__cap">
+							<span class="sd2-v2-cat-tile__name">&mvte:sd2_ctgy_subcategory:name;</span>
+						</span>
+					</a>
+				</mvt:foreach>
+			</div>
+		<mvt:else>
+			<section class="sd2-v2-search-empty" aria-labelledby="sd2-v2-ctgy-empty-title">
+				<div>
+					<p class="sd2-eyebrow">No Products</p>
+					<h2 class="sd2-heading-lg" id="sd2-v2-ctgy-empty-title">No products found in this category.</h2>
+					<p class="sd2-body">Browse another category or search for what you need.</p>
+					<div class="sd2-v2-search-empty__actions">
+						<a class="sd2-btn sd2-btn--primary" href="&mvte:urls:SRCH:auto;">Search Products</a>
+					</div>
+				</div>
+			</section>
+		</mvt:if>
+	</mvt:if>
 	<mvt:if expr="NOT l.settings:category_listing:page_disp_count GT 0">
 		<mvt:if expr="g.CatListingOffset OR g.CatListingNextOffset">
 		<div class="next-previous">

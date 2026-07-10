@@ -21,19 +21,11 @@
 
 			<div class="o-layout o-layout--wide">
 				<div class="o-layout__item">
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="header" />
-						</div>
-					</section>
-					
+					<mvt:item name="hdft" param="header" />
+
 					<mvt:item name="all_products" />
-					
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="footer" />
-						</div>
-					</section>
+
+					<mvt:item name="hdft" param="footer" />
 				</div>
 			</div>
 			

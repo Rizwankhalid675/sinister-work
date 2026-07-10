@@ -1,8 +1,0 @@
-{
-  "_id": "65985e58fd22fa2551f118b4",
-  "lastModified": "2026-06-05T23:37:05.358Z",
-  "createdAt": "2024-01-05T19:54:00.840Z",
-  "name": "MIVA_NS_ORDER_FLOW",
-  "sandbox": false,
-  "postResponseHookToProcessOnChildRecord": false
-}

@@ -24,10 +24,10 @@
 				<section class="o-layout">
 					<div class="o-layout__item">
 						<mvt:item name="hdft" param="header" />
-						<h1 class="c-heading-echo u-text-bold u-text-uppercase u-text-center">Special Offer</h1>
-						<div class="c-heading-charlie u-text-center">
+						<h1 class="sd2-v2-heading-echo u-text-bold u-text-uppercase u-text-center">Special Offer</h1>
+						<div class="sd2-v2-heading-charlie u-text-center">
 							Save &mvt:upsale:formatted_upsell_savings;
-							<span class="c-heading--subheading u-block">Offer valid for this order only</span>
+							<span class="sd2-v2-heading--subheading u-block">Offer valid for this order only</span>
 						</div>
 					</div>
 				</section>
@@ -46,9 +46,9 @@
 										<br>
 									</picture>
 									<div class="o-layout__item u-width-6--m">
-										<h4 class="c-heading-delta">&mvt:upsale:name;</h4>
+										<h4 class="sd2-v2-heading-delta">&mvt:upsale:name;</h4>
 										<div>
-											
+
 											Regular Price: &mvt:upsale:formatted_price;<br>
 											<b><font color="red"> Special Price:</font></b> <b>&mvt:upsale:formatted_upsell_price;</b><br>
 											You Save: &mvt:upsale:formatted_upsell_savings;<br>
@@ -59,7 +59,7 @@
 									</div>
 								</div>
 							<mvt:else>
-								<h4 class="c-heading-delta">&mvt:upsale:name;</h4>
+								<h4 class="sd2-v2-heading-delta">&mvt:upsale:name;</h4>
 								<div>
 									
 									Regular Price: &mvt:upsale:formatted_price;<br>
@@ -80,11 +80,11 @@
 										<input type="hidden" name="BasketPaymentGateway" value="1" />
 									</mvt:if>
 									<mvt:item name="tax" />
-									<ul class="c-form-list">
-										<li class="c-form-list__item x-product-layout-purchase__options">
+									<ul class="sd2-v2-form-list">
+										<li class="sd2-v2-form-list__item x-product-layout-purchase__options">
 											<mvt:item name="product_attributes" param="upsale:id" />
 										</li>
-										<li class="c-form-list__item c-form-list__item--full u-text-center">
+										<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full u-text-center">
 											<mvt:item name="buttons" param="AddToOrder" />
 										</li>
 									</ul>
@@ -98,8 +98,8 @@
 										<input type="hidden" name="BasketPaymentGateway" value="1" />
 									</mvt:if>
 									<mvt:item name="tax" />
-									<ul class="c-form-list">
-										<li class="c-form-list__item c-form-list__item--full u-text-center">
+									<ul class="sd2-v2-form-list">
+										<li class="sd2-v2-form-list__item sd2-v2-form-list__item--full u-text-center">
 											<mvt:item name="buttons" param="DoNotAddToOrder" />
 										</li>
 									</ul>
@@ -107,17 +107,13 @@
 							</form>
 						</div>
 					</section>
-					
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="footer" />
-						</div>
-					</section>
+
+					<mvt:item name="hdft" param="footer" />
 				</div>
 			</section>
 		</div>
 	</section>
-	
+
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

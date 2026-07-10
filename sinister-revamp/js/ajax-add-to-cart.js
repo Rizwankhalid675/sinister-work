@@ -15,13 +15,103 @@
 		return;
 	}
 
-	var purchaseButton = document.querySelector('[data-hook="add-to-cart"]');
-	var purchaseButtonText = (purchaseButton.nodeName.toLowerCase() === 'input') ? purchaseButton.value : purchaseButton.textContent;
+	var purchaseHook = document.querySelector('[data-hook="add-to-cart"]');
 	var purchaseForm = document.querySelector('[data-hook="purchase"]');
+	if (!purchaseForm) {
+		return;
+	}
+
+	/* Revamp PDP uses the native Miva purchase form and basket handoff directly.
+	   Skip the legacy AJAX shim there so native ADPR handling, attribute-machine
+	   validation, and basket rendering stay in sync. */
+	if (purchaseForm.hasAttribute('data-v2-buy-form')) {
+		return;
+	}
+
+	var purchaseButton = purchaseHook.matches('input, button') ? purchaseHook : purchaseHook.querySelector('input, button');
+	if (!purchaseButton) {
+		return;
+	}
+
+	var purchaseButtonText = (purchaseButton.nodeName.toLowerCase() === 'input') ? purchaseButton.value : purchaseButton.textContent;
 	var purchaseFormActionInput = purchaseForm.querySelector('input[name="Action"]');
 	var responseMessage = document.querySelector('[data-hook="purchase-message"]');
 	var miniBasketCount = document.querySelectorAll('[data-hook~="mini-basket-count"]');
 	var miniBasketAmount = document.querySelectorAll('[data-hook~="mini-basket-amount"]');
+	var v2CartRoot = document.querySelector('[data-v2-cart]');
+
+	function escapeHtml(value) {
+		return String(value || '')
+			.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;')
+			.replace(/'/g, '&#39;');
+	}
+
+	function syncV2CartDrawer(basketData) {
+		if (!v2CartRoot || !basketData) {
+			return false;
+		}
+
+		var body = v2CartRoot.querySelector('.sd2-v2-cart-panel__body');
+		var subtotal = v2CartRoot.querySelector('[data-v2-cart-subtotal]');
+		var shippingMessage = v2CartRoot.querySelector('[data-v2-cart-shipping-msg]');
+		var count = parseInt(basketData.getAttribute('data-item-count') || '0', 10);
+		var subtotalText = basketData.getAttribute('data-subtotal') || '$0.00';
+
+		if (subtotal) {
+			subtotal.textContent = subtotalText;
+		}
+
+		if (shippingMessage) {
+			shippingMessage.innerHTML = count > 0 ? ('Cart subtotal: <strong>' + escapeHtml(subtotalText) + '</strong>') : 'Shipping is calculated during checkout.';
+		}
+
+		if (!body) {
+			return true;
+		}
+
+		if (!count) {
+			body.innerHTML = [
+				'<div class="sd2-v2-cart-empty" data-v2-cart-empty>',
+					'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 6Z"></path><path d="M9 6V5a3 3 0 0 1 6 0v1"></path></svg>',
+					'<p>Your cart is empty.</p>',
+					'<a class="sd2-btn sd2-btn--outline" href="/">Continue Shopping</a>',
+				'</div>'
+			].join('');
+			return true;
+		}
+
+		var lines = Array.prototype.slice.call(basketData.querySelectorAll('.x-mini-basket__line')).map(function (line) {
+			var image = line.querySelector('.x-mini-basket__image img');
+			var name = line.querySelector('.x-mini-basket__item-name');
+			var price = line.querySelector('.x-mini-basket__item-price');
+			var qty = line.querySelector('.x-mini-basket__item-quantity .u-text-medium');
+			var remove = line.querySelector('.x-mini-basket__item-total a[href*="Action=RPRD"]');
+			var options = Array.prototype.slice.call(line.querySelectorAll('.x-mini-basket__item-attributes')).map(function (option) {
+				return '<p class="sd2-v2-cart-item__meta">' + escapeHtml(option.textContent.trim()) + '</p>';
+			}).join('');
+
+			return [
+				'<article class="sd2-v2-cart-item">',
+					'<a class="sd2-v2-cart-item__media" href="', escapeHtml(name ? name.getAttribute('href') : '#'), '">',
+						'<img src="', escapeHtml(image ? image.getAttribute('src') : ''), '" alt="', escapeHtml(image ? image.getAttribute('alt') : ''), '" loading="lazy">',
+					'</a>',
+					'<div class="sd2-v2-cart-item__body">',
+						'<h3><a href="', escapeHtml(name ? name.getAttribute('href') : '#'), '">', escapeHtml(name ? name.textContent.trim() : ''), '</a></h3>',
+						'<p class="sd2-v2-cart-item__meta">Qty ', escapeHtml(qty ? qty.textContent.trim() : '1'), '</p>',
+						options,
+						remove ? '<a class="sd2-v2-link-button" href="' + escapeHtml(remove.getAttribute('href')) + '">Remove</a>' : '',
+					'</div>',
+					'<strong class="sd2-v2-cart-item__price">', escapeHtml(price ? price.textContent.trim() : ''), '</strong>',
+				'</article>'
+			].join('');
+		}).join('');
+
+		body.innerHTML = '<div class="sd2-v2-cart-lines" data-v2-cart-items>' + lines + '</div>';
+		return true;
+	}
 
 //MJB 2022/09/21 target to purchaseButton (from purchaseForm) and changed event to 'click" to avoid conflict with mvga.js (GoogleAnalytics) which also binds to submit 
 
@@ -33,7 +123,7 @@
 		evt.preventDefault();
 		evt.stopImmediatePropagation();
 
-		purchaseForm.action = purchaseButton.getAttribute('data-action');
+		purchaseForm.action = purchaseHook.getAttribute('data-action') || purchaseButton.getAttribute('data-action') || purchaseForm.action;
 		purchaseFormActionInput.value = 'ADPR';
 
 		var data = new FormData(purchaseForm);
@@ -117,7 +207,15 @@ _ltk.SCA.Submit();
 							}
 						}
 
-						if (typeof miniBasket !== 'undefined') {
+						if (syncV2CartDrawer(basketData)) {
+							setTimeout(function () {
+								var trigger = document.querySelector('[data-v2-cart-open], [data-hook="open-mini-basket"]');
+								if (trigger) {
+									trigger.click();
+								}
+							}, 100);
+						}
+						else if (typeof miniBasket !== 'undefined' && document.querySelector('[data-hook="mini-basket"]')) {
 							document.querySelector('[data-hook="mini-basket"]').innerHTML = response.querySelector('[data-hook="mini-basket"]').innerHTML;
 
 							setTimeout(function () {

@@ -1,7 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <mvt:item name="html_profile" />
+
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;" />
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title>&mvt:page:title;</title>
+	<mvt:else>
+		<title>&mvt:store:name;</title>
+	</mvt:if>
 	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
 	<mvt:item name="head" param="head_tag" />
 <mvt:comment>
@@ -29,7 +39,7 @@
 	do not wire V2 checkout fields until the copied staging OCST item assignments are confirmed.
 </mvt:comment>
 </head>
-<body>
+<body id="js-&mvte:page:code;">
 	<mvt:item name="hdft" param="global_header" />
 	<mvt:item name="hdft" param="header" />
 

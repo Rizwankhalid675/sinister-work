@@ -41,8 +41,8 @@
 									<input type="hidden" name="CatListingOffset" value="&mvte:global:CatListingOffset;" />
 									<input type="hidden" name="RelatedOffset" value="&mvte:global:RelatedOffset;" />
 									<input type="hidden" name="SearchOffset" value="&mvte:global:SearchOffset;" />
-									<ul class="c-form-list">
-										<li class="c-form-list__item u-text-right">
+									<ul class="sd2-v2-form-list">
+										<li class="sd2-v2-form-list__item u-text-right">
 											<mvt:item name="buttons" param="Back" />
 										</li>
 									</ul>
@@ -51,11 +51,7 @@
 						</div>
 					</section>
 					
-					<section class="o-layout">
-						<div class="o-layout__item">
-							<mvt:item name="hdft" param="footer" />
-						</div>
-					</section>
+					<mvt:item name="hdft" param="footer" />
 					
 				</div>
 			</section>

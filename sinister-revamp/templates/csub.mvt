@@ -14,72 +14,74 @@
 </head>
 <body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
 	<mvt:item name="hdft" param="global_header" />
+	<mvt:item name="hdft" param="header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="header" />
-			<mvt:item name="readytheme" param="contentsection( 'messages' )" />
-		</div>
-	</section>
+	<main class="sd2-v2-account" data-v2-account>
+		<header class="sd2-v2-account-hero">
+			<mvt:item name="breadcrumbs" />
+			<p class="sd2-kicker">Account</p>
+			<h1>&mvt:page:name;</h1>
+		</header>
 
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block t-account-landing-section u-bg-white">
-				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header u-width-12">
-					<mvt:item name="breadcrumbs" />
-					<div class="o-layout o-layout--align-center o-layout--justify-between">
-						<span class="o-layout__item c-heading-delta t-account-landing-section__heading">&mvt:page:name;</span>
-						<span class="o-layout__item u-text-right--m">
-							<mvt:if expr="l.settings:subscriptions:total_count GT l.settings:subscriptions:per_page">
-								<section class="u-flex o-layout--align-center o-layout--justify-end o-layout--wrap">
-									<div class="x-display-list-filtering t-display-list-filtering">
-										<nav class="x-display-list-filtering__per-page">
-											<label class="c-form-label u-font-tiny u-text-uppercase u-text-normal u-hide-visually" for="l-per_page">View</label>
-											<div class="c-form-select">
-												<select id="l-per_page" class="c-form-select__dropdown u-font-small u-text-uppercase u-text-bold" name="Per_Page" onchange="window.location.href='&mvtj:urls:_self:auto_sep;Per_Page=' + encodeURIComponent( this.options[ this.selectedIndex ].value ) + '&amp;Sort_By=' + encodeURIComponent( '&mvtj:global:Sort_By;' );">
-													<mvt:if expr="g.Per_Page EQ 12">
-														<option value="12" selected="selected">12 Subscriptions/Page</option>
-													<mvt:else>
-														<option value="12">12 Subscriptions/Page</option>
-													</mvt:if>
-													<mvt:if expr="g.Per_Page EQ 24">
-														<option value="24" selected="selected">24 Subscriptions/Page</option>
-													<mvt:else>
-														<option value="24">24 Subscriptions/Page</option>
-													</mvt:if>
-													<mvt:if expr="g.Per_Page EQ 48">
-														<option value="48" selected="selected">48 Subscriptions/Page</option>
-													<mvt:else>
-														<option value="48">48 Subscriptions/Page</option>
-													</mvt:if>
-													<mvt:if expr="g.Per_Page EQ -1">
-														<option value="-1" selected="selected">All Subscriptions</option>
-													<mvt:else>
-														<option value="-1">All Subscriptions</option>
-													</mvt:if>
-												</select>
-											</div>
-										</nav>
-									</div>
-									<!-- end .x-display-list-filtering -->
-								</section>
-							</mvt:if>
-						</span>
-					</div>
-				</div>
-				<div class="o-layout__item t-expanded-block__item t-account-landing-section__content u-width-12">
-					<mvt:item name="subscriptions" />
-				</div>
-			</section>
-		</div>
-	</section>
-	
-	<section class="o-layout">
-		<div class="o-layout__item">
-			<mvt:item name="hdft" param="footer" />
-		</div>
-	</section>
+		<nav class="sd2-v2-account-nav" aria-label="Account sections">
+			<a href="&mvte:urls:ACLN:auto;">Dashboard</a>
+			<a href="&mvte:urls:ORDH:auto;">Orders</a>
+			<a href="&mvte:urls:CABK:auto;">Addresses</a>
+			<a href="&mvte:urls:CPCD:auto;">Payment</a>
+			<a class="is-current" href="&mvte:urls:CSUB:auto;">Subscriptions</a>
+			<a href="&mvte:urls:WLST:auto;">Wish Lists</a>
+			<a href="https://sinisterdiesel.com/rewards.html">Rewards</a>
+			<a href="https://sinisterdiesel.com/core-returns.html">Returns</a>
+			<a href="&mvte:urls:ACED:auto;">Settings</a>
+			<a href="&mvte:urls:CPRO:auto;">Password</a>
+			<button type="button" data-v2-garage-toggle>Garage</button>
+		</nav>
 
+		<mvt:item name="readytheme" param="contentsection( 'messages' )" />
+
+		<section class="sd2-v2-account-card" aria-labelledby="sd2-v2-csub-title">
+			<div class="sd2-v2-account-section-head">
+				<h2 id="sd2-v2-csub-title">&mvt:page:name;</h2>
+				<mvt:if expr="l.settings:subscriptions:total_count GT l.settings:subscriptions:per_page">
+					<form method="get" action="&mvte:urls:_self:auto_sep;">
+						<fieldset>
+							<legend>View</legend>
+							<input type="hidden" name="Sort_By" value="&mvte:global:Sort_By;" />
+							<label class="u-hide-visually" for="l-per_page">View</label>
+							<select id="l-per_page" name="Per_Page" onchange="window.location.href='&mvtj:urls:_self:auto_sep;Per_Page=' + encodeURIComponent( this.options[ this.selectedIndex ].value ) + '&amp;Sort_By=' + encodeURIComponent( '&mvtj:global:Sort_By;' );">
+								<mvt:if expr="g.Per_Page EQ 12">
+									<option value="12" selected="selected">12 Subscriptions/Page</option>
+								<mvt:else>
+									<option value="12">12 Subscriptions/Page</option>
+								</mvt:if>
+								<mvt:if expr="g.Per_Page EQ 24">
+									<option value="24" selected="selected">24 Subscriptions/Page</option>
+								<mvt:else>
+									<option value="24">24 Subscriptions/Page</option>
+								</mvt:if>
+								<mvt:if expr="g.Per_Page EQ 48">
+									<option value="48" selected="selected">48 Subscriptions/Page</option>
+								<mvt:else>
+									<option value="48">48 Subscriptions/Page</option>
+								</mvt:if>
+								<mvt:if expr="g.Per_Page EQ -1">
+									<option value="-1" selected="selected">All Subscriptions</option>
+								<mvt:else>
+									<option value="-1">All Subscriptions</option>
+								</mvt:if>
+							</select>
+						</fieldset>
+					</form>
+				</mvt:if>
+			</div>
+
+			<div class="sd2-v2-account-table-wrap">
+				<mvt:item name="subscriptions" />
+			</div>
+		</section>
+	</main>
+
+	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

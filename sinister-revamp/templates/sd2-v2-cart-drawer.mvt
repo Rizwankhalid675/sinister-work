@@ -1,12 +1,13 @@
 <mvt:comment>
-	Cart Drawer Experience V2 — additive, inactive. Real Miva constructs
-	reused verbatim: cart URL (&mvte:urls:BASK:auto;), live basket count
-	binding (&mvte:global_minibasket:basket_count;, data-hook=
-	"mini-basket-count"). Real line-item list, real subtotal, and real free-
-	shipping threshold logic are explicitly deferred to the Cart & Checkout
-	milestone — the $99 threshold and recommendation products below are
-	placeholder UI states only, not wired to Miva order totals or the product
-	catalog yet.
+	Cart Drawer Experience V2. Real Miva constructs reused verbatim: cart
+	URL (&mvte:urls:BASKV2:auto;, the V2 staging basket screen — never the
+	live BASK), live basket count binding
+	(&mvte:global_minibasket:basket_count;, data-hook="mini-basket-count"),
+	and verified basket:groups iterator (same pattern as bask-basket.mvt)
+	for real line items, images, quantities, and formatted subtotal. The
+	$99 free-shipping threshold and recommendation products below remain
+	placeholder UI states only, not wired to Miva order totals or the
+	product catalog yet.
 </mvt:comment>
 
 <div class="sd2-v2-cart-drawer" data-v2-cart>
@@ -33,12 +34,34 @@
 		</div>
 
 		<div class="sd2-v2-cart-panel__body">
-			<div class="sd2-v2-cart-empty" data-v2-cart-empty>
-				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 6Z"/><path d="M9 6V5a3 3 0 0 1 6 0v1"/></svg>
-				<p>Your cart is empty.</p>
-				<a class="sd2-btn sd2-btn--outline" href="&mvte:urls:SFNTV2:auto;">Continue Shopping</a>
-			</div>
-			<!-- Real line items render here once wired to Miva basket data in the Cart & Checkout milestone -->
+			<mvt:if expr="miva_array_elements(l.settings:basket:groups) EQ 0">
+				<div class="sd2-v2-cart-empty" data-v2-cart-empty>
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 6Z"/><path d="M9 6V5a3 3 0 0 1 6 0v1"/></svg>
+					<p>Your cart is empty.</p>
+					<a class="sd2-btn sd2-btn--outline" href="&mvte:urls:SFNTV2:auto;">Continue Shopping</a>
+				</div>
+			<mvt:else>
+				<mvt:comment>Verified legacy pattern: basket line items render inline inside basket:groups with iterator group (same as bask-basket.mvt).</mvt:comment>
+				<div class="sd2-v2-cart-items" data-v2-cart-items>
+					<mvt:foreach iterator="group" array="basket:groups">
+						<article class="sd2-v2-cart-item">
+							<div class="sd2-v2-cart-item__media">
+								<img src="&mvte:group:imagetypes:main;" alt="&mvte:group:name;" loading="lazy">
+							</div>
+							<div class="sd2-v2-cart-item__body">
+								<h3 class="sd2-v2-cart-item__name">&mvte:group:name;</h3>
+								<mvt:if expr="NOT ISNULL l.settings:group:attributes">
+									<p class="sd2-v2-cart-item__attr">&mvte:group:attributes;</p>
+								</mvt:if>
+								<div class="sd2-v2-cart-item__meta">
+									<span class="sd2-v2-cart-item__qty">Qty: &mvte:group:quantity;</span>
+									<span class="sd2-v2-cart-item__price">&mvte:group:formatted_extended_price;</span>
+								</div>
+							</div>
+						</article>
+					</mvt:foreach>
+				</div>
+			</mvt:if>
 
 			<div class="sd2-v2-cart-reco">
 				<h3 class="sd2-v2-cart-reco__title">You Might Also Need</h3>
@@ -60,9 +83,13 @@
 		<div class="sd2-v2-cart-panel__foot">
 			<div class="sd2-v2-cart-panel__subtotal">
 				<span>Subtotal</span>
-				<span data-v2-cart-subtotal>&mdash;</span>
+				<span data-v2-cart-subtotal><mvt:if expr="miva_array_elements(l.settings:basket:groups) EQ 0">&mdash;<mvt:else>&mvte:basket:formatted_subtotal;</mvt:if></span>
 			</div>
-			<a class="sd2-btn sd2-btn--primary sd2-btn--full" href="&mvte:urls:BASKV2:auto;">View Cart &amp; Checkout</a>
+			<mvt:if expr="miva_array_elements(l.settings:basket:groups) EQ 0">
+				<a class="sd2-btn sd2-btn--primary sd2-btn--full is-disabled" aria-disabled="true" tabindex="-1" href="&mvte:urls:BASKV2:auto;">View Cart &amp; Checkout</a>
+			<mvt:else>
+				<a class="sd2-btn sd2-btn--primary sd2-btn--full" href="&mvte:urls:BASKV2:auto;">View Cart &amp; Checkout</a>
+			</mvt:if>
 		</div>
 	</aside>
 </div>

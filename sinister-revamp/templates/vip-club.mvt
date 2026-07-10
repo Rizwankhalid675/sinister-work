@@ -26,26 +26,18 @@
 						<div class="o-layout__item u-width-12 u-width-9--l u-width-10--w">
 							<section class="o-layout">
 								<div class="o-layout__item">
-									<h1 class="c-heading-delta u-color-primary">&mvte:page:name;</h1>
-									<hr class="c-keyline">
+									<h1 class="sd2-v2-heading-delta u-color-primary">&mvte:page:name;</h1>
+									<hr class="sd2-v2-keyline">
 								</div>
 							</section>
 					
-							<section class="o-layout">
-								<div class="o-layout__item">
-									<mvt:item name="hdft" param="header" />
-								</div>
-							</section>
-				
+							<mvt:item name="hdft" param="header" />
+
 							<section class="o-layout">
 								<mvt:item name="readytheme" param="contentsection( 'vip-club' )" />
 							</section>
-							
-							<section class="o-layout">
-								<div class="o-layout__item">
-									<mvt:item name="hdft" param="footer" />
-								</div>
-							</section>
+
+							<mvt:item name="hdft" param="footer" />
 						</div>
 						<aside class="o-layout__item u-width-12 u-width-3--l u-width-2--w">
 							<mvt:item name="readytheme" param="navigationset( 'static_navigation' )" />

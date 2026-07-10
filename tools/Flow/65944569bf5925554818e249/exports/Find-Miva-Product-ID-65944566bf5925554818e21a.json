@@ -1,0 +1,81 @@
+{
+  "_id": "65944566bf5925554818e21a",
+  "name": "Find Miva Product ID",
+  "_connectionId": "659c281ec89f9120301fb0ce",
+  "apiIdentifier": "e770f2beac",
+  "asynchronous": true,
+  "isLookup": true,
+  "assistant": "miva",
+  "oneToMany": false,
+  "assistantMetadata": {
+    "resource": "products",
+    "version": "v1",
+    "operation": "productlist_load_query"
+  },
+  "http": {
+    "relativeURI": "/json.mvc",
+    "method": "POST",
+    "body": "{\"Store_Code\":\"{{connection.http.unencrypted.Store_Code}}\",\"Function\":\"ProductList_Load_Query\",\"Count\":1,\"Miva_Request_Timestamp\":\"{{dateFormat 'X'}}\",\"Filter\":[{\"name\":\"ondemandcolumns\",\"value\":[\"descrip\",\"catcount\",\"attributes\",\"productimagedata\",\"categories\",\"productshippingrules\",\"relatedproducts\",\"uris\",\"productinventorysettings\",\"CustomField_Values:*\"]},{\"name\":\"search\",\"value\":[{\"field\":\"sku\",\"operator\":\"EQ\",\"value\":\"{{Name}}\"}]}]}",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "isRest": true,
+    "sendAuthForFileDownloads": false,
+    "formType": "assistant",
+    "paging": {
+      "method": "body",
+      "lastPageStatusCode": 404,
+      "body": "{\"offset\":\"{{add pageIndex 0}}\",\"Store_Code\":\"{{connection.http.unencrypted.Store_Code}}\",\"Function\":\"ProductList_Load_Query\",\"Count\":1,\"Miva_Request_Timestamp\":\"{{dateFormat 'X'}}\",\"Filter\":[{\"name\":\"ondemandcolumns\",\"value\":[\"descrip\",\"catcount\",\"attributes\",\"productimagedata\",\"categories\",\"productshippingrules\",\"relatedproducts\",\"uris\",\"productinventorysettings\",\"CustomField_Values:*\"]},{\"name\":\"search\",\"value\":[{\"field\":\"sku\",\"operator\":\"EQ\",\"value\":\"{{Name}}\"}]}]}"
+    },
+    "response": {
+      "resourcePath": "data.data",
+      "successPath": "success",
+      "allowArrayforSuccessPath": true,
+      "twoDArray": {
+        "doNotNormalize": true
+      }
+    }
+  },
+  "rest": {
+    "relativeURI": "/json.mvc",
+    "method": "POST",
+    "resourcePath": "data.data",
+    "postBody": {
+      "Store_Code": "{{connection.rest.unencrypted.Store_Code}}",
+      "Function": "ProductList_Load_Query",
+      "Count": 1,
+      "Miva_Request_Timestamp": "{{dateFormat 'X'}}",
+      "Filter": [
+        {
+          "name": "ondemandcolumns",
+          "value": [
+            "descrip",
+            "catcount",
+            "attributes",
+            "productimagedata",
+            "categories",
+            "productshippingrules",
+            "relatedproducts",
+            "uris",
+            "productinventorysettings",
+            "CustomField_Values:*"
+          ]
+        },
+        {
+          "name": "search",
+          "value": [
+            {
+              "field": "sku",
+              "operator": "EQ",
+              "value": "{{Name}}"
+            }
+          ]
+        }
+      ]
+    },
+    "pagingMethod": "postbody",
+    "pagingPostBody": "{\"offset\":\"{{add pageIndex 0}}\",\"Store_Code\":\"{{connection.rest.unencrypted.Store_Code}}\",\"Function\":\"ProductList_Load_Query\",\"Count\":1,\"Miva_Request_Timestamp\":\"{{dateFormat 'X'}}\",\"Filter\":[{\"name\":\"ondemandcolumns\",\"value\":[\"descrip\",\"catcount\",\"attributes\",\"productimagedata\",\"categories\",\"productshippingrules\",\"relatedproducts\",\"uris\",\"productinventorysettings\",\"CustomField_Values:*\"]},{\"name\":\"search\",\"value\":[{\"field\":\"sku\",\"operator\":\"EQ\",\"value\":\"{{Name}}\"}]}]}",
+    "successPath": "success",
+    "lastPageStatusCode": 404
+  },
+  "adaptorType": "RESTExport"
+}

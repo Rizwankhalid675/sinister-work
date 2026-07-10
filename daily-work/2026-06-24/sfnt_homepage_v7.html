@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<mvt:item name="html_profile" />
+
+<head itemscope itemtype="http://schema.org/WebSite">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="&mvt:global:basehref;" />
+	<mvt:if expr="NOT ISNULL l.settings:page:title">
+		<title itemprop="name">&mvt:page:title;</title>
+	<mvt:else>
+		<title itemprop="name">&mvt:store:name;</title>
+	</mvt:if>
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
+	<mvt:item name="head" param="head_tag" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Play:wght@400;700&display=swap" rel="stylesheet">
+
+	<style>
+
+		/* ══════════════════════════════════════════════
+		   TOKENS
+		══════════════════════════════════════════════ */
+		:root {
+			--sd-blue:   #1833B8;
+			--sd-blue2:  #2a4aff;
+			--sd-navy:   #080d3b;
+			--sd-gold:   #FFD700;
+			--sd-gold2:  #ffc400;
+			--sd-dark:   #080a12;
+			--sd-text:   #c8cad8;
+			--sd-light:  #10132a;
+			--sd-white:  #ffffff;
+			--sd-radius: 10px;
+			--sd-max:    1200px;
+			--sd-trans:  0.3s ease;
+		}
+
+		*, *::before, *::after { box-sizing: border-box; }
+
+		body {
+			background: var(--sd-dark);
+			color: var(--sd-white);
+			margin: 0;
+			font-family: 'Rajdhani', sans-serif;
+		}
+
+		/* ══════════════════════════════════════════════
+		   MIVA OVERRIDES
+		══════════════════════════════════════════════ */
+		.o-wrapper.t-wrapper { padding-top: 0; }
+		.slick-dotted.slick-slider { margin-bottom: 0; }
+
+		/* ══════════════════════════════════════════════
+		   SCROLL REVEAL
+		══════════════════════════════════════════════ */
+		.sd-reveal {
+			opacity: 0;
+			transform: translateY(32px);
+			transition: opacity 0.7s ease, transform 0.7s ease;
+		}
+		.sd-reveal.sd-reveal--left  { transform: translateX(-36px); }
+		.sd-reveal.sd-reveal--right { transform: translateX(36px); }
+		.sd-reveal.sd-reveal--scale { transform: scale(0.94); }
+		.sd-reveal.is-visible { opacity: 1 !important; transform: none !important; }
+
+		/* ══════════════════════════════════════════════
+		   NOISE OVERLAY (texture)
+		══════════════════════════════════════════════ */
+		.sd-noise::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+			pointer-events: none;
+			opacity: 0.35;
+			mix-blend-mode: overlay;
+			z-index: 1;
+		}
+
+		/* ══════════════════════════════════════════════
+		   PROMO STRIP
+		══════════════════════════════════════════════ */
+		.sd-promo-strip {
+			position: relative;
+			background: linear-gradient(90deg, var(--sd-navy) 0%, #0c1580 50%, var(--sd-navy) 100%);
+			color: #fff;
+			text-align: center;
+			padding: 10px 16px;
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 14px;
+			font-weight: 600;
+			letter-spacing: 0.5px;
+			overflow: hidden;
+			z-index: 100;
+		}
+		.sd-promo-strip::before {
+			content: '';
+			position: absolute;
+			top: 0; left: -100%;
+			width: 60%; height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255,215,0,0.06), transparent);
+			animation: promo-shine 4s ease-in-out infinite;
+		}
+		@keyframes promo-shine {
+			0%   { left: -100%; }
+			100% { left: 200%; }
+		}
+		.sd-promo-strip strong { color: var(--sd-gold); font-weight: 900; letter-spacing: 1px; }
+		.sd-promo-strip a {
+			color: var(--sd-gold);
+			text-decoration: none;
+			margin-left: 12px;
+			font-weight: 700;
+			border-bottom: 1px solid rgba(255,215,0,0.4);
+			padding-bottom: 1px;
+			transition: border-color 0.2s;
+		}
+		.sd-promo-strip a:hover { border-color: var(--sd-gold); }
+
+		/* ══════════════════════════════════════════════
+		   HERO BANNER
+		══════════════════════════════════════════════ */
+		.sd-hero {
+			position: relative;
+			overflow: hidden;
+			background: #040608;
+		}
+
+		/* Slick slide images */
+		.sd-hero .slick-slide a { display: block; line-height: 0; }
+		.sd-hero img {
+			width: 100%;
+			height: clamp(320px, 52vw, 620px);
+			object-fit: cover;
+			display: block;
+			filter: brightness(0.75);
+			transition: transform 8s ease, filter 0.6s ease;
+		}
+		.sd-hero .slick-slide.slick-active img { transform: scale(1.04); }
+
+		/* Gradient overlays */
+		.sd-hero::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background:
+				linear-gradient(to right, rgba(8,10,18,0.85) 0%, rgba(8,10,18,0.2) 55%, transparent 100%),
+				linear-gradient(to top, rgba(8,10,18,0.9) 0%, transparent 50%);
+			pointer-events: none;
+			z-index: 2;
+		}
+
+		/* Hero text overlay */
+		.sd-hero-caption {
+			position: absolute;
+			inset: 0;
+			z-index: 3;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			padding: clamp(24px,4vw,64px) clamp(20px,5vw,80px);
+			pointer-events: none;
+		}
+		.sd-hero-caption__eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 4px;
+			text-transform: uppercase;
+			color: var(--sd-gold);
+			margin-bottom: 14px;
+		}
+		.sd-hero-caption__eyebrow::before {
+			content: '';
+			display: block;
+			width: 32px; height: 2px;
+			background: var(--sd-gold);
+		}
+		.sd-hero-caption h2 {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: clamp(42px, 7vw, 96px);
+			font-weight: 400;
+			letter-spacing: 2px;
+			color: #fff;
+			line-height: 0.92;
+			margin: 0 0 18px;
+			text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+		}
+		.sd-hero-caption h2 em {
+			font-style: normal;
+			color: var(--sd-gold);
+			-webkit-text-stroke: 0;
+		}
+		.sd-hero-caption p {
+			font-size: clamp(14px, 1.5vw, 17px);
+			color: rgba(255,255,255,0.75);
+			max-width: 52ch;
+			line-height: 1.65;
+			margin: 0 0 24px;
+			pointer-events: auto;
+		}
+		.sd-hero-caption .sd-cta {
+			pointer-events: auto;
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 14px 32px;
+			background: var(--sd-gold);
+			color: var(--sd-dark);
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 15px;
+			font-weight: 800;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+			text-decoration: none;
+			border-radius: 4px;
+			transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+			box-shadow: 0 0 24px rgba(255,215,0,0.25);
+			align-self: flex-start;
+		}
+		.sd-hero-caption .sd-cta:hover {
+			background: #fff;
+			transform: translateY(-2px);
+			box-shadow: 0 6px 32px rgba(255,215,0,0.35);
+		}
+		.sd-hero-caption .sd-cta svg { width: 16px; height: 16px; }
+
+		/* Slick dots - custom */
+		.sd-hero .slick-dots {
+			bottom: 24px;
+			z-index: 4;
+		}
+		.sd-hero .slick-dots li button:before {
+			font-size: 7px;
+			color: rgba(255,255,255,0.4);
+			opacity: 1;
+		}
+		.sd-hero .slick-dots li.slick-active button:before {
+			color: var(--sd-gold);
+			opacity: 1;
+		}
+
+		/* Slick arrows */
+		.sd-hero .slick-prev,
+		.sd-hero .slick-next {
+			z-index: 4;
+			width: 44px; height: 44px;
+			background: rgba(255,255,255,0.08);
+			border: 1px solid rgba(255,255,255,0.15);
+			border-radius: 50%;
+			backdrop-filter: blur(8px);
+			transition: background 0.2s;
+		}
+		.sd-hero .slick-prev:hover,
+		.sd-hero .slick-next:hover { background: rgba(255,215,0,0.2); }
+		.sd-hero .slick-prev { left: 20px; }
+		.sd-hero .slick-next { right: 20px; }
+		.sd-hero .slick-prev:before,
+		.sd-hero .slick-next:before { font-size: 18px; color: #fff; }
+
+		/* ══════════════════════════════════════════════
+		   STAT BAR
+		══════════════════════════════════════════════ */
+		.sd-stat-bar {
+			position: relative;
+			background: var(--sd-gold);
+			overflow: hidden;
+		}
+		.sd-stat-bar::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: repeating-linear-gradient(
+				-55deg,
+				transparent,
+				transparent 10px,
+				rgba(0,0,0,0.04) 10px,
+				rgba(0,0,0,0.04) 20px
+			);
+		}
+		.sd-stat-bar__inner {
+			position: relative;
+			max-width: var(--sd-max);
+			margin: 0 auto;
+			display: flex;
+			justify-content: center;
+			align-items: stretch;
+			flex-wrap: wrap;
+		}
+		.sd-stat-bar__item {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 14px 32px;
+			color: var(--sd-dark);
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 14px;
+			font-weight: 700;
+			letter-spacing: 0.5px;
+			text-transform: uppercase;
+			border-right: 1px solid rgba(0,0,0,0.12);
+		}
+		.sd-stat-bar__item:last-child { border-right: none; }
+		.sd-stat-bar__item svg { width: 18px; height: 18px; flex-shrink: 0; fill: var(--sd-dark); opacity: 0.7; }
+		.sd-stat-bar__num {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: 22px;
+			letter-spacing: 1px;
+			line-height: 1;
+		}
+
+		/* ══════════════════════════════════════════════
+		   SHOP BY TRUCK
+		══════════════════════════════════════════════ */
+		.sd-finder-wrap {
+			background: var(--sd-light);
+			border-bottom: 1px solid rgba(255,255,255,0.05);
+		}
+		.sd-finder-inner {
+			max-width: var(--sd-max);
+			margin: 0 auto;
+			padding: 28px 20px;
+		}
+		.sd-finder-label {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: 24px;
+			letter-spacing: 2px;
+			color: var(--sd-white);
+			margin-bottom: 16px;
+		}
+		.sd-finder-label span { color: var(--sd-gold); }
+
+		/* Mobile collapse */
+		@media (max-width: 768px) {
+			#searchspring-finder-home { position: relative; }
+			.ss-finder-toggle {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				background: var(--sd-blue);
+				color: #fff;
+				font-family: 'Rajdhani', sans-serif;
+				font-weight: 700;
+				font-size: 15px;
+				letter-spacing: 1px;
+				padding: 14px 18px;
+				cursor: pointer;
+				border: none;
+				width: 100%;
+				text-align: left;
+				text-transform: uppercase;
+			}
+			.ss-finder-toggle svg { width: 18px; height: 18px; fill: #fff; transition: transform 0.3s ease; flex-shrink: 0; }
+			.ss-finder-toggle.is-open svg { transform: rotate(180deg); }
+			.ss-finder-body { display: none; padding: 16px; background: rgba(255,255,255,0.04); }
+			.ss-finder-body.is-open { display: block; }
+		}
+		@media (min-width: 769px) {
+			.ss-finder-toggle { display: none; }
+			.ss-finder-body { display: block !important; }
+		}
+
+		/* ══════════════════════════════════════════════
+		   SECTION TITLES
+		══════════════════════════════════════════════ */
+		.sd-section {
+			padding: 72px 20px;
+		}
+		.sd-section__inner {
+			max-width: var(--sd-max);
+			margin: 0 auto;
+		}
+		.sd-section-tag {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 4px;
+			text-transform: uppercase;
+			color: var(--sd-gold);
+			margin-bottom: 12px;
+		}
+		.sd-section-tag::before {
+			content: '';
+			display: block;
+			width: 24px; height: 2px;
+			background: var(--sd-gold);
+		}
+		.sd-section-title {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: clamp(36px, 5vw, 60px);
+			font-weight: 400;
+			letter-spacing: 2px;
+			color: #fff;
+			line-height: 1;
+			margin: 0 0 40px;
+		}
+		.sd-section-title em {
+			font-style: normal;
+			color: var(--sd-gold);
+		}
+
+		/* ══════════════════════════════════════════════
+		   CATEGORIES GRID
+		══════════════════════════════════════════════ */
+		.sd-cats-section {
+			background: var(--sd-dark);
+			padding: 60px 20px 80px;
+		}
+		.sd-cats-inner {
+			max-width: var(--sd-max);
+			margin: 0 auto;
+		}
+
+		/* Miva navigation set wrapper override */
+		.sd-cats-inner .c-navigation-set,
+		.sd-cats-inner .mm-sequence-container {
+			background: transparent !important;
+			padding: 0 !important;
+		}
+
+		/* ══════════════════════════════════════════════
+		   FEATURE STRIP (diagonal divider)
+		══════════════════════════════════════════════ */
+		.sd-feature-strip {
+			position: relative;
+			background: linear-gradient(135deg, var(--sd-blue) 0%, var(--sd-navy) 100%);
+			overflow: hidden;
+			padding: 64px 20px;
+		}
+		.sd-feature-strip::before {
+			content: '';
+			position: absolute;
+			top: -80px; right: -80px;
+			width: 400px; height: 400px;
+			border-radius: 50%;
+			background: rgba(255,215,0,0.06);
+			pointer-events: none;
+		}
+		.sd-feature-strip::after {
+			content: '';
+			position: absolute;
+			bottom: -120px; left: -60px;
+			width: 500px; height: 500px;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.03);
+			pointer-events: none;
+		}
+		.sd-feature-strip__inner {
+			position: relative;
+			z-index: 1;
+			max-width: var(--sd-max);
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 2px;
+		}
+		.sd-feat {
+			padding: 40px 36px;
+			background: rgba(255,255,255,0.04);
+			border: 1px solid rgba(255,255,255,0.08);
+			transition: background 0.3s;
+			position: relative;
+			overflow: hidden;
+		}
+		.sd-feat::before {
+			content: '';
+			position: absolute;
+			top: 0; left: 0;
+			width: 3px; height: 0;
+			background: var(--sd-gold);
+			transition: height 0.4s ease;
+		}
+		.sd-feat:hover::before { height: 100%; }
+		.sd-feat:hover { background: rgba(255,255,255,0.07); }
+		.sd-feat__icon {
+			width: 52px; height: 52px;
+			border-radius: 12px;
+			background: rgba(255,215,0,0.12);
+			display: flex; align-items: center; justify-content: center;
+			margin-bottom: 20px;
+		}
+		.sd-feat__icon svg { width: 26px; height: 26px; fill: var(--sd-gold); }
+		.sd-feat__num {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: 48px;
+			color: var(--sd-gold);
+			line-height: 1;
+			margin-bottom: 4px;
+		}
+		.sd-feat__label {
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 13px;
+			font-weight: 700;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			color: rgba(255,255,255,0.5);
+			margin-bottom: 14px;
+		}
+		.sd-feat__text {
+			font-size: 15px;
+			color: rgba(255,255,255,0.7);
+			line-height: 1.65;
+		}
+
+		/* ══════════════════════════════════════════════
+		   REVIEWS
+		══════════════════════════════════════════════ */
+		.sd-reviews-section {
+			background: var(--sd-light);
+			padding: 72px 20px;
+			position: relative;
+			overflow: hidden;
+		}
+		.sd-reviews-section::before {
+			content: 'REVIEWS';
+			position: absolute;
+			right: -20px; top: 50%;
+			transform: translateY(-50%) rotate(90deg);
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: 120px;
+			color: rgba(255,255,255,0.03);
+			letter-spacing: 8px;
+			pointer-events: none;
+			white-space: nowrap;
+		}
+		.sd-reviews-inner {
+			position: relative;
+			z-index: 1;
+			max-width: var(--sd-max);
+			margin: 0 auto;
+		}
+		.sd-reviews-header {
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+			gap: 20px;
+			flex-wrap: wrap;
+			margin-bottom: 40px;
+		}
+		.sd-reviews-stars {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+			font-size: 20px;
+			color: var(--sd-gold);
+			margin-bottom: 8px;
+		}
+		.sd-reviews-meta {
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 14px;
+			color: rgba(255,255,255,0.45);
+			letter-spacing: 1px;
+		}
+		.sd-reviews-link {
+			font-family: 'Rajdhani', sans-serif;
+			font-size: 13px;
+			font-weight: 700;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			color: var(--sd-gold);
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			white-space: nowrap;
+			border-bottom: 1px solid rgba(255,215,0,0.3);
+			padding-bottom: 2px;
+			transition: border-color 0.2s;
+		}
+		.sd-reviews-link:hover { border-color: var(--sd-gold); }
+
+		/* Review carousel */
+		.sd-review-carousel { margin: 0 -8px; }
+		.sd-review-card {
+			background: rgba(255,255,255,0.04);
+			border: 1px solid rgba(255,255,255,0.07);
+			border-radius: 12px;
+			padding: 24px 22px;
+			margin: 4px 8px;
+			min-height: 180px;
+			display: flex !important;
+			flex-direction: column;
+			justify-content: space-between;
+			transition: border-color 0.3s, background 0.3s, transform 0.3s;
+			position: relative;
+			overflow: hidden;
+		}
+		.sd-review-card::before {
+			content: '"';
+			position: absolute;
+			top: -10px; right: 16px;
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: 80px;
+			color: rgba(255,215,0,0.07);
+			line-height: 1;
+			pointer-events: none;
+		}
+		.sd-review-card:hover {
+			border-color: rgba(255,215,0,0.25);
+			background: rgba(255,255,255,0.07);
+			transform: translateY(-4px);
+		}
+		.sd-review-card__top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+		.sd-review-card__avatar {
+			width: 40px; height: 40px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, var(--sd-blue), var(--sd-blue2));
+			color: #fff;
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: 18px;
+			display: flex; align-items: center; justify-content: center;
+			flex-shrink: 0;
+		}
+		.sd-review-card__name {
+			font-weight: 700;
+			font-size: 14px;
+			color: #fff;
+			line-height: 1.2;
+		}
+		.sd-review-card__meta { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+		.sd-review-card__meta .vb { color: #4ade80; font-weight: 600; }
+		.sd-review-card__stars { color: var(--sd-gold); font-size: 12px; margin-bottom: 10px; letter-spacing: 1px; }
+		.sd-review-card__text {
+			font-size: 14px;
+			color: rgba(255,255,255,0.65);
+			line-height: 1.65;
+			flex-grow: 1;
+			display: -webkit-box;
+			-webkit-line-clamp: 4; line-clamp: 4;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+		.sd-review-card__date { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 12px; }
+
+		.sd-review-carousel .slick-prev,
+		.sd-review-carousel .slick-next {
+			z-index: 10; width: 36px; height: 36px;
+			background: rgba(255,255,255,0.08);
+			border: 1px solid rgba(255,255,255,0.12);
+			border-radius: 50%;
+			transition: background 0.2s;
+		}
+		.sd-review-carousel .slick-prev { left: -10px; }
+		.sd-review-carousel .slick-next { right: -10px; }
+		.sd-review-carousel .slick-prev:before,
+		.sd-review-carousel .slick-next:before { font-size: 14px; color: #fff; }
+		.sd-review-carousel .slick-prev:hover,
+		.sd-review-carousel .slick-next:hover { background: rgba(255,215,0,0.2); }
+
+		/* ══════════════════════════════════════════════
+		   BRAND STORY PANELS
+		══════════════════════════════════════════════ */
+		.sd-story-panel {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			min-height: 480px;
+			overflow: hidden;
+		}
+		.sd-story-panel--flip { direction: rtl; }
+		.sd-story-panel--flip > * { direction: ltr; }
+
+		.sd-story-panel__img {
+			position: relative;
+			overflow: hidden;
+		}
+		.sd-story-panel__img img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			transition: transform 0.7s ease;
+		}
+		.sd-story-panel__img:hover img { transform: scale(1.05); }
+		.sd-story-panel__img::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(to right, transparent 60%, rgba(8,10,18,0.8) 100%);
+		}
+		.sd-story-panel--flip .sd-story-panel__img::after {
+			background: linear-gradient(to left, transparent 60%, rgba(8,10,18,0.8) 100%);
+		}
+
+		.sd-story-panel__body {
+			background: var(--sd-dark);
+			display: flex;
+			align-items: center;
+			padding: clamp(40px, 6vw, 80px);
+		}
+		.sd-story-panel__body-inner { max-width: 480px; }
+		.sd-story-panel__body h2 {
+			font-family: 'Bebas Neue', sans-serif;
+			font-size: clamp(32px, 3.5vw, 48px);
+			font-weight: 400;
+			letter-spacing: 2px;
+			color: #fff;
+			margin: 0 0 20px;
+			line-height: 1;
+		}
+		.sd-story-panel__body h2 span { color: var(--sd-gold); }
+		.sd-story-panel__body p {
+			font-size: 16px;
+			color: rgba(255,255,255,0.6);
+			line-height: 1.75;
+			margin: 0 0 14px;
+		}
+		.sd-story-panel__body p:last-child { margin-bottom: 0; }
+		.sd-story-panel__divider {
+			width: 48px; height: 2px;
+			background: var(--sd-gold);
+			margin-bottom: 20px;
+		}
+
+		/* ══════════════════════════════════════════════
+		   RESPONSIVE
+		══════════════════════════════════════════════ */
+		@media (max-width: 900px) {
+			.sd-story-panel,
+			.sd-story-panel--flip {
+				grid-template-columns: 1fr;
+				direction: ltr;
+			}
+			.sd-story-panel__img { height: 280px; }
+			.sd-story-panel__img::after,
+			.sd-story-panel--flip .sd-story-panel__img::after {
+				background: linear-gradient(to top, rgba(8,10,18,0.7) 0%, transparent 50%);
+			}
+			.sd-feature-strip__inner { grid-template-columns: 1fr; gap: 2px; }
+			.sd-reviews-header { flex-direction: column; align-items: flex-start; }
+		}
+
+		@media (max-width: 640px) {
+			.sd-hero img { height: clamp(260px, 60vw, 360px) !important; }
+			.sd-hero .slick-slide img { height: clamp(260px, 60vw, 360px) !important; }
+			.sd-stat-bar__item { padding: 10px 16px; font-size: 12px; }
+			.sd-stat-bar__item svg { display: none; }
+			.sd-section { padding: 48px 16px; }
+			.sd-feat { padding: 28px 24px; }
+			.sd-reviews-section { padding: 48px 16px; }
+		}
+
+		@media (max-width: 480px) {
+			.sd-stat-bar__inner { flex-direction: column; align-items: stretch; }
+			.sd-stat-bar__item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.12); justify-content: center; }
+			.sd-stat-bar__item:last-child { border-bottom: none; }
+		}
+
+	</style>
+</head>
+
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+
+	<mvt:item name="hdft" param="global_header" />
+	<section class="o-layout">
+		<div class="o-layout__item">
+			<mvt:item name="hdft" param="header" />
+		</div>
+	</section>
+
+	<!-- ══ PROMO STRIP ══ -->
+	<div class="sd-promo-strip">
+		<strong>PRIME2026</strong> &nbsp;·&nbsp; 4 Days Only: June 23–26 &nbsp;·&nbsp; 12–35% OFF Sitewide
+		<a href="https://sinisterdiesel.com/prime-day-sale.html">Shop the Sale &rarr;</a>
+	</div>
+
+	<!-- ══ HERO BANNER ══ -->
+	<section class="sd-hero">
+		<div class="sd-hero-slides">
+			<!-- Slide 1 -->
+			<div>
+				<a href="https://sinisterdiesel.com/prime-day-sale.html">
+					<picture>
+						<source media="(max-width: 768px)" srcset="https://sinisterdiesel.com/mm5/graphics/00000001/8/MOBILE.png">
+						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/DESKTOP.png"
+						     alt="Diesel Prime Time Sale — 12–35% Off"
+						     loading="eager">
+					</picture>
+				</a>
+			</div>
+			<!-- Slide 2 -->
+			<div>
+				<a href="https://sinisterdiesel.com/giveaway2026">
+					<picture>
+						<source media="(max-width: 768px)" srcset="https://sinisterdiesel.com/mm5/graphics/00000001/8/MOBILE%20Banner-50X.jpg">
+						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Desktop%20Banner-50X.jpg"
+						     alt="50X Entries — Win This Truck"
+						     loading="lazy">
+					</picture>
+				</a>
+			</div>
+			<!-- Slide 3 -->
+			<div>
+				<a href="https://sinisterdiesel.com/sinister-diesel.html">
+					<picture>
+						<source media="(max-width: 768px)" srcset="https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg">
+						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg"
+						     alt="All Sinister Diesel Parts"
+						     loading="lazy">
+					</picture>
+				</a>
+			</div>
+		</div>
+
+		<!-- Text overlay on active slide (positioned over hero) -->
+		<div class="sd-hero-caption" id="sdHeroCaption">
+			<span class="sd-hero-caption__eyebrow">Limited Time Offer</span>
+			<h2>Diesel Prime<em> Time</em></h2>
+			<p>Up to 35% off parts, upgrades, and accessories. Promo code <strong style="color:var(--sd-gold)">PRIME2026</strong> applied at checkout.</p>
+			<a href="https://sinisterdiesel.com/prime-day-sale.html" class="sd-cta">
+				Shop the Sale
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+			</a>
+		</div>
+	</section>
+
+	<!-- ══ STAT BAR ══ -->
+	<div class="sd-stat-bar">
+		<div class="sd-stat-bar__inner">
+			<div class="sd-stat-bar__item">
+				<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+				<div><div class="sd-stat-bar__num">20,000+</div>Verified Reviews</div>
+			</div>
+			<div class="sd-stat-bar__item">
+				<svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+				<div><div class="sd-stat-bar__num">Free Ship</div>Orders $99+</div>
+			</div>
+			<div class="sd-stat-bar__item">
+				<svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+				<div><div class="sd-stat-bar__num">USA Made</div>Quality Parts</div>
+			</div>
+			<div class="sd-stat-bar__item">
+				<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+				<div><div class="sd-stat-bar__num">Since 2008</div>Trusted Brand</div>
+			</div>
+		</div>
+	</div>
+
+	<main class="o-wrapper t-wrapper">
+
+		<!-- ══ SHOP BY TRUCK ══ -->
+		<div class="sd-finder-wrap">
+			<div class="sd-finder-inner">
+				<div class="sd-finder-label">Shop by <span>Truck</span></div>
+
+				<!-- Shop by truck collapse JS -->
+				<script>
+				(function() {
+					function initFinderToggle() {
+						if (window.innerWidth > 768) return;
+						var finder = document.getElementById('searchspring-finder-home');
+						if (!finder) return;
+						var toggle = document.createElement('button');
+						toggle.className = 'ss-finder-toggle';
+						toggle.innerHTML = 'Select Your Truck <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>';
+						var body = document.createElement('div');
+						body.className = 'ss-finder-body';
+						while (finder.firstChild) { body.appendChild(finder.firstChild); }
+						toggle.addEventListener('click', function() {
+							toggle.classList.toggle('is-open');
+							body.classList.toggle('is-open');
+						});
+						finder.appendChild(toggle);
+						finder.appendChild(body);
+					}
+					if (document.readyState === 'loading') {
+						document.addEventListener('DOMContentLoaded', function() { setTimeout(initFinderToggle, 1500); });
+					} else {
+						setTimeout(initFinderToggle, 1500);
+					}
+				})();
+				</script>
+
+				<div id="searchspring-finder-home"></div>
+			</div>
+		</div>
+
+		<!-- ══ CATEGORIES ══ -->
+		<div class="sd-cats-section">
+			<div class="sd-cats-inner">
+				<div class="sd-section-tag sd-reveal">Shop All Categories</div>
+				<div class="sd-section-title sd-reveal">Find Your <em>Parts</em></div>
+				<mvt:item name="readytheme" param="navigationset( 'top_categories' )" />
+			</div>
+		</div>
+
+		<!-- ══ FEATURE NUMBERS ══ -->
+		<div class="sd-feature-strip">
+			<div class="sd-feature-strip__inner">
+				<div class="sd-feat sd-reveal">
+					<div class="sd-feat__icon">
+						<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+					</div>
+					<div class="sd-feat__num">4.8</div>
+					<div class="sd-feat__label">Avg Rating</div>
+					<div class="sd-feat__text">Over 20,000 verified reviews from real customers across the USA.</div>
+				</div>
+				<div class="sd-feat sd-reveal" style="transition-delay:0.1s">
+					<div class="sd-feat__icon">
+						<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+					</div>
+					<div class="sd-feat__num">15+</div>
+					<div class="sd-feat__label">Years Experience</div>
+					<div class="sd-feat__text">Diesel specialists since 2008 — we know your truck inside and out.</div>
+				</div>
+				<div class="sd-feat sd-reveal" style="transition-delay:0.2s">
+					<div class="sd-feat__icon">
+						<svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+					</div>
+					<div class="sd-feat__num">100%</div>
+					<div class="sd-feat__label">Warranty Backed</div>
+					<div class="sd-feat__text">Every SD part is backed by our no-hassle warranty and US-based support team.</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ══ REVIEWS ══ -->
+		<div class="sd-reviews-section">
+			<div class="sd-reviews-inner">
+				<div class="sd-reviews-header sd-reveal">
+					<div>
+						<div class="sd-section-tag">Customer Reviews</div>
+						<div class="sd-reviews-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+						<div class="sd-reviews-meta">4.8 / 5 &nbsp;&middot;&nbsp; 20,142 Verified Reviews on Shopper Approved</div>
+					</div>
+					<a class="sd-reviews-link" href="https://www.shopperapproved.com/reviews/sinisterdiesel.com/" target="_blank" rel="noopener">
+						All Reviews
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+					</a>
+				</div>
+
+				<div class="sd-review-carousel sd-reveal">
+
+					<div>
+						<div class="sd-review-card">
+							<div>
+								<div class="sd-review-card__top">
+									<div class="sd-review-card__avatar">L</div>
+									<div>
+										<div class="sd-review-card__name">Laurie H.</div>
+										<div class="sd-review-card__meta"><span class="vb">&#10003; Verified</span></div>
+									</div>
+								</div>
+								<div class="sd-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+								<div class="sd-review-card__text">I totally appreciate Brian taking the time to call me to discuss my questions. You do not see that level of customer service anymore. It is so refreshing. Thank you!!</div>
+							</div>
+							<div class="sd-review-card__date">Sep 17, 2024</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="sd-review-card">
+							<div>
+								<div class="sd-review-card__top">
+									<div class="sd-review-card__avatar">J</div>
+									<div>
+										<div class="sd-review-card__name">Jen</div>
+										<div class="sd-review-card__meta"><span class="vb">&#10003; Verified</span></div>
+									</div>
+								</div>
+								<div class="sd-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+								<div class="sd-review-card__text">I've loved every product I purchased from Sinister Diesel! I'm so glad to have them around! It is so hard to find quality parts for my 19 year old diesel Excursion these days.</div>
+							</div>
+							<div class="sd-review-card__date">Sep 16, 2024</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="sd-review-card">
+							<div>
+								<div class="sd-review-card__top">
+									<div class="sd-review-card__avatar">S</div>
+									<div>
+										<div class="sd-review-card__name">Shane P.</div>
+										<div class="sd-review-card__meta"><span class="vb">&#10003; Verified</span></div>
+									</div>
+								</div>
+								<div class="sd-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+								<div class="sd-review-card__text">Super easy to find what I'm looking for. Never disappointed with Sinister.</div>
+							</div>
+							<div class="sd-review-card__date">Oct 12, 2021</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="sd-review-card">
+							<div>
+								<div class="sd-review-card__top">
+									<div class="sd-review-card__avatar">R</div>
+									<div>
+										<div class="sd-review-card__name">Roger U.</div>
+										<div class="sd-review-card__meta">&#128205; CA</div>
+									</div>
+								</div>
+								<div class="sd-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+								<div class="sd-review-card__text">Your system is amazing — had it up and running in 25 minutes. Everything fit like a glove and worked exactly how the detailed instructions said. Great product!</div>
+							</div>
+							<div class="sd-review-card__date">Jun 17, 2021</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="sd-review-card">
+							<div>
+								<div class="sd-review-card__top">
+									<div class="sd-review-card__avatar">A</div>
+									<div>
+										<div class="sd-review-card__name">Angel C.</div>
+										<div class="sd-review-card__meta">&#128205; WA</div>
+									</div>
+								</div>
+								<div class="sd-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+								<div class="sd-review-card__text">Great customer service! Not only did I get a superior product, I got it in 3 days. Highly recommend becoming a Sinister Diesel VIP.</div>
+							</div>
+							<div class="sd-review-card__date">Jun 24, 2021</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="sd-review-card">
+							<div>
+								<div class="sd-review-card__top">
+									<div class="sd-review-card__avatar">S</div>
+									<div>
+										<div class="sd-review-card__name">Shadow976</div>
+										<div class="sd-review-card__meta">&#128205; WA</div>
+									</div>
+								</div>
+								<div class="sd-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+								<div class="sd-review-card__text">Website was easy to navigate. Item shipped immediately. Coolant filtration system is well made. Install was quick because of the awesome instructions. Well worth the money.</div>
+							</div>
+							<div class="sd-review-card__date">Sep 28, 2021</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="sd-review-card">
+							<div>
+								<div class="sd-review-card__top">
+									<div class="sd-review-card__avatar">W</div>
+									<div>
+										<div class="sd-review-card__name">Wade N.</div>
+										<div class="sd-review-card__meta"><span class="vb">&#10003; Verified</span></div>
+									</div>
+								</div>
+								<div class="sd-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+								<div class="sd-review-card__text">Very easy even for an old guy!</div>
+							</div>
+							<div class="sd-review-card__date">Jun 17, 2021</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="sd-review-card">
+							<div>
+								<div class="sd-review-card__top">
+									<div class="sd-review-card__avatar">M</div>
+									<div>
+										<div class="sd-review-card__name">Magda</div>
+										<div class="sd-review-card__meta">&#128205; CA</div>
+									</div>
+								</div>
+								<div class="sd-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+								<div class="sd-review-card__text">I've been ordering from Sinister Diesel for a while now and have never had any issues. They are my number one diesel site for my 2007 Ford F-250. Great selection of parts.</div>
+							</div>
+							<div class="sd-review-card__date">Jun 26, 2021</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- ══ BRAND STORY: AMERICAN QUALITY ══ -->
+		<div class="sd-story-panel sd-reveal">
+			<div class="sd-story-panel__img">
+				<img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Brand-Story-CARD-2.jpg"
+				     alt="Made in USA — Sinister Diesel parts built in Roseville, California"
+				     loading="lazy">
+			</div>
+			<div class="sd-story-panel__body">
+				<div class="sd-story-panel__body-inner">
+					<div class="sd-section-tag">Our Craft</div>
+					<div class="sd-story-panel__divider"></div>
+					<h2>American <span>Quality</span></h2>
+					<p>At Sinister Diesel, we specialize in crafting high-performance diesel parts designed to maximize power, efficiency, and reliability. From intakes and charge pipes to oil and coolant filtration, our products are engineered for diesel enthusiasts and professionals alike.</p>
+					<p>Many of our parts are proudly designed and manufactured in the USA. Built tough. Built to perform.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- ══ BRAND STORY: SINISTER BLUE ══ -->
+		<div class="sd-story-panel sd-story-panel--flip sd-reveal">
+			<div class="sd-story-panel__img">
+				<img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg"
+				     alt="Sinister Blue — the signature color"
+				     loading="lazy">
+			</div>
+			<div class="sd-story-panel__body">
+				<div class="sd-story-panel__body-inner">
+					<div class="sd-section-tag">Our Identity</div>
+					<div class="sd-story-panel__divider"></div>
+					<h2>Sinister <span>Blue</span></h2>
+					<p>Sinister Blue isn't just a color — it's the heartbeat of our brand. This bold, iconic shade embodies the spirit of innovation, precision, and performance that defines everything we do.</p>
+					<p>Whether on the road, at the worksite, or under the hood — Sinister Blue is a symbol of excellence you can trust.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- ══ BRAND STORY: CUSTOMER FOCUSED ══ -->
+		<div class="sd-story-panel sd-reveal">
+			<div class="sd-story-panel__img">
+				<img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg"
+				     alt="Sinister Diesel customer support team"
+				     loading="lazy">
+			</div>
+			<div class="sd-story-panel__body">
+				<div class="sd-story-panel__body-inner">
+					<div class="sd-section-tag">Our Team</div>
+					<div class="sd-story-panel__divider"></div>
+					<h2>Customer <span>Focused</span></h2>
+					<p>Our dedicated team is always just a call or text away — ready to help with any question, order, or performance upgrade.</p>
+					<p>With a 4.8-star rating from over 20,000 customer reviews, our dedication to top-tier service speaks for itself. Your success is our success.</p>
+				</div>
+			</div>
+		</div>
+
+		<section class="o-layout">
+			<div class="o-layout__item">
+				<mvt:item name="hdft" param="footer" />
+			</div>
+		</section>
+	</main>
+
+	<mvt:item name="hdft" param="global_footer" />
+
+	<!-- ══ HERO CAROUSEL INIT ══ -->
+	<script>
+	(function() {
+		function run($) {
+			if (!$.fn.slick) return;
+			setTimeout(function() {
+				$('.sd-hero .sd-hero-slides').slick({
+					autoplay: true,
+					autoplaySpeed: 5500,
+					dots: true,
+					arrows: true,
+					fade: true,
+					cssEase: 'ease-in-out',
+					speed: 800,
+					pauseOnHover: true,
+					infinite: true,
+					adaptiveHeight: false,
+					waitForAnimate: false
+				});
+			}, 0);
+		}
+		if (typeof jQuery !== 'undefined') {
+			jQuery(document).ready(function($) { run($); });
+		} else {
+			document.addEventListener('DOMContentLoaded', function() {
+				if (typeof jQuery !== 'undefined') jQuery(document).ready(function($) { run($); });
+			});
+		}
+	})();
+	</script>
+
+	<!-- ══ REVIEW CAROUSEL INIT ══ -->
+	<script>
+	(function() {
+		function run($) {
+			if (!$.fn.slick) return;
+			setTimeout(function() {
+				$('.sd-review-carousel').slick({
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					autoplay: true,
+					autoplaySpeed: 4000,
+					dots: false,
+					arrows: true,
+					infinite: true,
+					speed: 500,
+					pauseOnHover: true,
+					waitForAnimate: false,
+					responsive: [
+						{ breakpoint: 1024, settings: { slidesToShow: 2 } },
+						{ breakpoint: 640,  settings: { slidesToShow: 1 } }
+					]
+				});
+			}, 0);
+		}
+		if (typeof jQuery !== 'undefined') {
+			jQuery(document).ready(function($) { run($); });
+		} else {
+			document.addEventListener('DOMContentLoaded', function() {
+				if (typeof jQuery !== 'undefined') jQuery(document).ready(function($) { run($); });
+			});
+		}
+	})();
+	</script>
+
+	<!-- ══ SCROLL REVEAL ══ -->
+	<script>
+	(function() {
+		var els = document.querySelectorAll('.sd-reveal');
+		if (!els.length) return;
+		if (!('IntersectionObserver' in window)) {
+			els.forEach(function(el) { el.classList.add('is-visible'); });
+			return;
+		}
+		var observer = new IntersectionObserver(function(entries) {
+			entries.forEach(function(entry) {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.1 });
+		els.forEach(function(el) { observer.observe(el); });
+	})();
+	</script>
+
+</body>
+</html>

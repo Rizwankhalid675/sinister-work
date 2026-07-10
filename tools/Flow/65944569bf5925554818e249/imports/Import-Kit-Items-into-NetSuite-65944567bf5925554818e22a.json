@@ -1,0 +1,58 @@
+{
+  "_id": "65944567bf5925554818e22a",
+  "name": "Import Kit Items into NetSuite",
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "distributed": true,
+  "apiIdentifier": "i65725aaab",
+  "ignoreExisting": false,
+  "ignoreMissing": false,
+  "oneToMany": false,
+  "lookups": [],
+  "netsuite_da": {
+    "restletVersion": "suiteapp2.0",
+    "operation": "update",
+    "recordType": "kititem",
+    "internalIdLookup": {
+      "expression": "[\"internalid\",\"is\",\"{{{id}}}\"]"
+    },
+    "lookups": [],
+    "mapping": {
+      "fields": [
+        {
+          "extract": "created_id",
+          "generate": "custitem_hb_miva_product_id",
+          "internalId": false
+        }
+      ],
+      "lists": []
+    }
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "rules": [
+        "empty",
+        [
+          "string",
+          [
+            "extract",
+            "miva_product_id"
+          ]
+        ]
+      ],
+      "version": "1"
+    },
+    "rules": [
+      "empty",
+      [
+        "string",
+        [
+          "extract",
+          "miva_product_id"
+        ]
+      ]
+    ],
+    "version": "1"
+  },
+  "adaptorType": "NetSuiteDistributedImport"
+}

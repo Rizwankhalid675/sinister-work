@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+  ═══════════════════════════════════════════════════════
+  FIX 1 — Hero image preload (replaces your actual URL below)
+  In Miva: add this line in <head> of SFNT template
+  Change the href to your real hero banner image URL
+  ═══════════════════════════════════════════════════════ -->
+  <link rel="preload" as="image"
+        href="https://www.sinisterdiesel.com/mm5/graphics/00000001/SD-Hero-Giveaway.jpg"
+        fetchpriority="high">
+
+  <title>SFNT Test — Sinister Diesel Homepage Fixes</title>
+
+  <!-- ── Slick CSS (same as live site) ── -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+  <style>
+    /* ═══════════════════════════════════════════════════
+       ORIGINAL CODE from your SFNT template (lines 18–30)
+       ═══════════════════════════════════════════════════ */
+    .slick-dots { bottom: 9px; }
+    .slick-dots li button:before {
+      opacity: 1;
+      color: white;
+    }
+    .slick-dots li.slick-active button:before {
+      opacity: 1;
+      color: #1833B8;
+    }
+    .slick-dotted.slick-slider {
+      margin-bottom: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       FIX 2 — CLS prevention for Slick carousel
+       ADD THESE 3 LINES in SFNT template after the existing
+       slick CSS block above. Reserves space before JS loads.
+       ═══════════════════════════════════════════════════ */
+    .slick-slider { min-height: 420px; }
+    .slick-slide { display: none; }
+    .slick-slide.slick-active { display: block; }
+
+    /* ═══════════════════════════════════════════════════
+       BASE PAGE STYLES (mirrors live site structure)
+       ═══════════════════════════════════════════════════ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+    }
+
+    /* ── Test panel overlay ── */
+    .test-bar {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 10px 24px;
+      font-size: 12px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .test-bar strong { color: #6366f1; }
+    .tb-badge {
+      background: #22c55e;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .tb-badge.warn { background: #ef4444; }
+    .tb-badge.info { background: #3b82f6; }
+
+    /* ── Header ── */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-size: 22px; font-weight: 900; color: #1833B8; letter-spacing: -0.5px; }
+    .nav { display: flex; gap: 24px; list-style: none; }
+    .nav a { font-size: 13px; font-weight: 600; color: #334155; text-transform: uppercase; text-decoration: none; }
+
+    /* ── Hero carousel ── */
+    .hero-carousel { position: relative; background: #0f172a; }
+    .hero-slide {
+      min-height: 420px;
+      display: flex !important;
+      align-items: center;
+      padding: 60px 80px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+    }
+    .slide-content { position: relative; z-index: 2; max-width: 560px; }
+    .slide-content h1 { font-size: 46px; font-weight: 900; line-height: 1.1; margin-bottom: 12px; }
+    .slide-content h1 em { color: #eab308; font-style: normal; }
+    .slide-content p { font-size: 15px; color: #94a3b8; margin-bottom: 24px; line-height: 1.6; }
+    .slide-btn {
+      display: inline-block;
+      background: #1833B8;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 13px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    /* ── Categories (mirrors readytheme top_categories) ── */
+    .categories-section {
+      background: #fff;
+      padding: 48px 32px;
+    }
+    .t-featured-categories__heading {
+      color: #1833B8;
+      font-weight: 700;
+      font-family: 'Play', sans-serif;
+      font-size: 32px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      width: 100%;
+      max-width: 1035px;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .t-featured-categories__heading::after {
+      content: "";
+      display: block;
+      height: 3px;
+      width: 60px;
+      background-color: #1833B8;
+      margin: 0.75em auto 0 auto;
+      border-radius: 3px;
+      transition: width 0.3s ease-in-out;
+    }
+    .t-featured-categories__heading:hover::after { width: 100px; }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .cat-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      cursor: pointer;
+      transition: box-shadow .2s;
+    }
+    .cat-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+    .cat-img {
+      height: 130px;
+      background: #eef2ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      /* FIX: explicit width+height prevents CLS — in Miva add width="" height="" to <img> tags */
+    }
+    .cat-label {
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    /* ── SearchSpring YMM ── */
+    .ymm-bar {
+      background: #1833B8;
+      padding: 16px 32px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .ymm-bar label { color: #bfdbfe; font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .ymm-select {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .ymm-btn {
+      background: #eab308;
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 9px 22px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ── Spotlight section (readytheme contentsection spotlight) ── */
+    .spotlight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 360px;
+      max-width: 1100px;
+      margin: 32px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    }
+    .spotlight-img {
+      background: linear-gradient(135deg, #1e3a5f, #0f172a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #334155;
+      font-size: 12px;
+      /* FIX: in Miva, this image needs width="" height="" and loading="lazy" alt="..." */
+    }
+    .spotlight-text {
+      background: #fff;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .spotlight-text h2 { font-size: 28px; font-weight: 900; color: #0f172a; margin-bottom: 12px; }
+    .spotlight-text h2 em { color: #1833B8; font-style: normal; }
+    .spotlight-text p { font-size: 13.5px; color: #475569; line-height: 1.7; margin-bottom: 16px; }
+
+    /* ── Fix notes panel ── */
+    .fix-notes {
+      background: #1e1b4b;
+      color: #c7d2fe;
+      padding: 32px;
+      font-size: 12.5px;
+      line-height: 1.8;
+    }
+    .fix-notes h2 { color: #fff; font-size: 16px; margin-bottom: 16px; }
+    .fix-block {
+      background: rgba(255,255,255,.06);
+      border-left: 4px solid #6366f1;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+    }
+    .fix-block.green { border-color: #22c55e; }
+    .fix-block.red { border-color: #ef4444; }
+    .fix-block.yellow { border-color: #eab308; }
+    .fix-block h3 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .fix-block pre {
+      background: rgba(0,0,0,.3);
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 11.5px;
+      color: #a5f3fc;
+      overflow-x: auto;
+      margin-top: 8px;
+      white-space: pre-wrap;
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .tag-green { color: #86efac; font-weight: 700; }
+    .tag-red { color: #fca5a5; text-decoration: line-through; }
+    .tag-yellow { color: #fde68a; }
+
+    /* ── CLS measurement visual ── */
+    .cls-demo {
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 1100px;
+      margin: 24px auto;
+    }
+    .cls-demo-bar {
+      background: #f8fafc;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      gap: 12px;
+    }
+    .cls-before { background: #fff5f5; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+    .cls-after { background: #f0fdf4; color: #166534; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+  </style>
+</head>
+<body>
+
+<!-- ══ TEST STATUS BAR ══ -->
+<div class="test-bar">
+  <strong>SFNT TEST FILE</strong> — Local preview of Miva homepage fixes
+  <span class="tb-badge">Fix 1: Hero Preload</span>
+  <span class="tb-badge">Fix 2: Slick CLS</span>
+  <span class="tb-badge warn">Affirm: Disabled on Homepage</span>
+  <span class="tb-badge info">SearchSpring: Deferred</span>
+</div>
+
+<!-- ══ HEADER (mirrors hdft global_header + header) ══ -->
+<div class="site-header">
+  <div class="logo">SINISTER DIESEL</div>
+  <ul class="nav">
+    <li><a href="#">Powerstroke</a></li>
+    <li><a href="#">Duramax</a></li>
+    <li><a href="#">Cummins</a></li>
+    <li><a href="#">Apparel</a></li>
+  </ul>
+  <div style="font-size:13px;color:#64748b;">🔍 &nbsp; 👤 &nbsp; 🛒 <strong>Cart (0)</strong></div>
+</div>
+
+<!-- ══ HERO CAROUSEL
+     mirrors: readytheme contentsection( 'sfnt_hero' )
+     FIX: min-height set so no CLS before Slick initialises
+     FIX: slide 11 (empty slide) removed — check sfnt_hero content section
+══ -->
+<section class="o-wrapper o-wrapper--full o-wrapper--flush">
+  <div class="hero-carousel">
+    <!-- Slide 1 — Giveaway (current hero) -->
+    <div class="hero-slide">
+      <div class="slide-bg" style="background:linear-gradient(105deg,#0f172a 50%,#1e3a5f);"></div>
+      <div class="slide-content">
+        <h1>Win This<br/><em>Truck</em></h1>
+        <p>Get 5× entries on apparel. Every $1 on parts = 1 entry. Sinister Diesel F-250 6.0L Giveaway.</p>
+        <a href="#" class="slide-btn">Get Entries Now →</a>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="hero-slide">
+      <div class="slide-bg" style="background:linear-gradient(105deg,#1833B8 40%,#0f172a);"></div>
+      <div class="slide-content">
+        <h1>Built in the<br/><em>USA</em></h1>
+        <p>30,000 sq ft facility in Roseville, California. Engineered for diesel performance you can trust.</p>
+        <a href="#" class="slide-btn">Shop All Parts →</a>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="hero-slide">
+      <div class="slide-bg" style="background:linear-gradient(105deg,#0f4c75 40%,#0f172a);"></div>
+      <div class="slide-content">
+        <h1>Apparel<br/><em>5× Entries</em></h1>
+        <p>Every dollar spent on apparel earns 5× giveaway entries. Limited time.</p>
+        <a href="#" class="slide-btn">Shop Apparel →</a>
+      </div>
+    </div>
+    <!--
+      NOTE: Slide 11 (slideWidth=0 bug) was an empty/broken slide in sfnt_hero content section.
+      To fix in Miva: Content Management > Theme Components > sfnt_hero
+      Find and delete the empty slide item — it has no image assigned.
+    -->
+  </div>
+</section>
+
+<!-- ══ YMM FINDER
+     mirrors: <div id="searchspring-finder-home"></div>
+     FIX: SearchSpring JS should load with defer attribute
+     In hdft template find the SearchSpring <script> tag and add defer
+══ -->
+<div class="ymm-bar">
+  <label>🔧 Shop by Truck</label>
+  <select class="ymm-select"><option>Year</option></select>
+  <select class="ymm-select"><option>Make</option></select>
+  <select class="ymm-select"><option>Model</option></select>
+  <select class="ymm-select"><option>Engine Size</option></select>
+  <button class="ymm-btn">Apply →</button>
+</div>
+
+<!-- ══ CATEGORIES
+     mirrors: readytheme navigationset( 'top_categories' )
+     FIX: All <img> tags in top_categories need width="" height="" and alt=""
+══ -->
+<main class="o-wrapper t-wrapper">
+  <section class="categories-section">
+    <h2 class="t-featured-categories__heading">Categories</h2>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-img">💨</div><div class="cat-label">Air Intakes</div></div>
+      <div class="cat-card"><div class="cat-img">🔧</div><div class="cat-label">Filtration ✦ Updated</div></div>
+      <div class="cat-card"><div class="cat-img">❄️</div><div class="cat-label">Coolant System</div></div>
+      <div class="cat-card"><div class="cat-img">⚙️</div><div class="cat-label">Engine Parts</div></div>
+      <div class="cat-card"><div class="cat-img">💨</div><div class="cat-label">Exhaust Kits</div></div>
+      <div class="cat-card"><div class="cat-img">🚗</div><div class="cat-label">Exterior</div></div>
+      <div class="cat-card"><div class="cat-img">🔩</div><div class="cat-label">Intercooler Pipes</div></div>
+      <div class="cat-card"><div class="cat-img">🌪️</div><div class="cat-label">Turbos</div></div>
+      <div class="cat-card"><div class="cat-img">👕</div><div class="cat-label">Apparel</div></div>
+      <div class="cat-card"><div class="cat-img">🏷️</div><div class="cat-label">All Sinister Parts</div></div>
+      <div class="cat-card"><div class="cat-img">🔄</div><div class="cat-label">All Other Brands</div></div>
+      <div class="cat-card"><div class="cat-img">📦</div><div class="cat-label">Open Box / Clearance</div></div>
+    </div>
+  </section>
+
+  <!-- ══ SPOTLIGHT
+       mirrors: readytheme contentsection( 'spotlight' )
+       FIX: image needs loading="lazy" width="" height="" alt=""
+  ══ -->
+  <div class="spotlight">
+    <div class="spotlight-img">
+      [Spotlight image — WebP, lazy-loaded, width+height set]
+    </div>
+    <div class="spotlight-text">
+      <h2>Made in <em>USA</em></h2>
+      <p>At Sinister Diesel, we specialise in crafting high-performance diesel parts designed to maximise power, efficiency, and reliability for your vehicle. From intakes and charge pipes to oil and coolant filtration kits.</p>
+      <a href="#" style="display:inline-block;background:#1833B8;color:#fff;padding:12px 24px;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none;width:fit-content;">Shop Now →</a>
+    </div>
+  </div>
+</main>
+
+<!-- ══ CODE CHANGES REFERENCE PANEL ══ -->
+<div class="fix-notes">
+  <h2>Exact Code Changes for Miva SFNT Template</h2>
+
+  <!-- FIX 1 -->
+  <div class="fix-block green">
+    <h3>FIX 1 — Hero Image Preload (add to &lt;head&gt; in SFNT, line ~33)</h3>
+    <p>Paste this directly after the <code>&lt;meta name="google-site-verification"&gt;</code> line. Replace the href with your actual hero image URL (right-click hero on live site → Copy image address).</p>
+    <pre>&lt;<span class="tag-green">link</span> rel="preload" as="image"
+     href="https://www.sinisterdiesel.com/mm5/graphics/00000001/YOUR-HERO-IMAGE.jpg"
+     fetchpriority="high"&gt;</pre>
+  </div>
+
+  <!-- FIX 2 -->
+  <div class="fix-block green">
+    <h3>FIX 2 — Slick CLS Fix (add to &lt;style&gt; block in SFNT, after line 30)</h3>
+    <p>Add these 3 lines immediately after the existing <code>.slick-dotted.slick-slider</code> block. This reserves carousel height before JS loads so the page doesn't jump.</p>
+    <pre><span class="tag-green">/* CLS fix — reserves carousel space before Slick JS fires */</span>
+.slick-slider { min-height: 420px; }
+.slick-slide { display: none; }
+.slick-slide.slick-active { display: block; }</pre>
+  </div>
+
+  <!-- FIX 3 -->
+  <div class="fix-block red">
+    <h3>FIX 3 — Disable Affirm on Homepage (no code change needed)</h3>
+    <p>In the SFNT template page in Miva, scroll to the bottom section <strong>"Affirm As Low As Messaging"</strong>. Change <strong>Page Type</strong> from <em>Homepage</em> to <em>None</em> or uncheck it. This stops Affirm JS (145KB) loading on every homepage visit.</p>
+    <pre><span class="tag-red">Page Type: Homepage  ← CHANGE THIS TO: None</span>
+<span class="tag-green">Page Type: None      ← saves 145KB + removes SecurityError</span></pre>
+  </div>
+
+  <!-- FIX 4 -->
+  <div class="fix-block yellow">
+    <h3>FIX 4 — Fix Empty Slide 11 (in Content Management, not SFNT template)</h3>
+    <p>Go to: <strong>Content Management → Theme Components → sfnt_hero</strong><br/>
+    Find the slide that has no image assigned (slide #11 — it renders with slideWidth=0 causing CLS). Delete that empty slide item. This fixes the Slick carousel layout shift bug.</p>
+    <pre>Location: Content Management → Theme Components → sfnt_hero
+Action: Find empty slide (no image) → Delete it
+Effect: Fixes slideWidth=0 CLS bug on carousel load</pre>
+  </div>
+
+  <!-- FIX 5 -->
+  <div class="fix-block">
+    <h3>FIX 5 — Defer SearchSpring JS (in hdft template, not SFNT)</h3>
+    <p>In <strong>Advanced → Templates → hdft</strong>, find the SearchSpring script tag and add <code>defer</code>:</p>
+    <pre><span class="tag-red">&lt;script src="https://snapui.searchspring.io/...js"&gt;&lt;/script&gt;</span>
+<span class="tag-green">&lt;script src="https://snapui.searchspring.io/...js" defer&gt;&lt;/script&gt;</span></pre>
+    <p style="margin-top:8px;color:#94a3b8;font-size:11px">⚠ Note: SearchSpring said it cannot be fully moved to GTM — but adding defer to the script tag is safe and does not break functionality. It just loads after the page renders instead of before.</p>
+  </div>
+
+  <!-- FIX 6 -->
+  <div class="fix-block">
+    <h3>FIX 6 — Category Image Alt Tags (in top_categories navigation set)</h3>
+    <p>Go to: <strong>Content Management → Navigation Sets → top_categories</strong><br/>
+    For each category image, add the alt text and explicit dimensions:</p>
+    <pre><span class="tag-red">&lt;img src="filtration.jpg"&gt;</span>
+<span class="tag-green">&lt;img src="filtration.webp"
+     alt="Sinister Diesel Filtration Kits — Fuel Filter Conversion"
+     width="300" height="200"
+     loading="lazy"&gt;</span></pre>
+  </div>
+
+  <!-- WHAT NOT TO TOUCH -->
+  <div class="fix-block red">
+    <h3>DO NOT TOUCH — Commented-out sections (leave as-is)</h3>
+    <p>These are already disabled in your SFNT template and are not causing any issues:</p>
+    <pre>sfnt-shop-by-brand   ← already commented out ✓
+sfnt_promos          ← already commented out ✓
+featured_products    ← already commented out ✓
+instagram_feed       ← already commented out ✓</pre>
+  </div>
+
+</div>
+
+<!-- jQuery + Slick (same as live site would load) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  // ── Initialise carousel (mirrors what live site does)
+  $(document).ready(function(){
+    $('.hero-carousel').slick({
+      dots: true,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      fade: false,
+      // FIX: lazyLoad prevents offscreen slides loading images early
+      lazyLoad: 'ondemand'
+    });
+  });
+
+  /*
+  ═══════════════════════════════════════════════
+  FIX 3 ALTERNATIVE — If you want to keep Affirm
+  but only load it on cart/checkout, use this
+  pattern in the hdft template:
+
+  Replace the global Affirm script tag with:
+
+  <script>
+    // Only load Affirm on basket (BASK) and order (ORDR) pages
+    if (document.body.id === 'js-BASK' || document.body.id === 'js-ORDR') {
+      var s = document.createElement('script');
+      s.src = 'https://cdn1.affirm.com/js/v2/affirm.js';
+      document.head.appendChild(s);
+    }
+  </script>
+
+  Note: Miva sets the body id as "js-PAGECODE" (e.g. js-SFNT, js-BASK, js-PROD)
+  You can see this in your SFNT template line:
+  <body id="js-&mvte:page:code;" ...>
+  ═══════════════════════════════════════════════
+  */
+</script>
+
+</body>
+</html>

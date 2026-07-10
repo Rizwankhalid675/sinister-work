@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sinister Diesel — Homepage Revamp v2 (Brand Accurate)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap">
+  <style>
+    /* ═══════════════════════════════════
+       RESET
+    ═══════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #1a1a2e;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ═══════════════════════════════════
+       BRAND TOKENS
+       (exact match to sinisterdiesel.com)
+    ═══════════════════════════════════ */
+    :root {
+      --sd-blue:    #1833B8;   /* primary brand blue */
+      --sd-blue-h:  #1228a0;   /* hover */
+      --sd-blue-l:  #e8ecfb;   /* light tint */
+      --sd-dark:    #0d0f1a;   /* near-black */
+      --sd-navy:    #0a0c1e;   /* footer / deepest */
+      --sd-gold:    #F5C518;   /* star / accent */
+      --sd-red:     #d63031;   /* sale badge */
+      --sd-text:    #3d3d55;
+      --sd-muted:   #888899;
+      --sd-border:  #e2e4f0;
+      --sd-bg:      #f7f8fc;
+      --sd-white:   #ffffff;
+      --sd-radius:  10px;
+      --sd-max:     1280px;
+      --ease:       0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ═══════════════════════════════════
+       TOP PROMO STRIP
+    ═══════════════════════════════════ */
+    .promo {
+      background: var(--sd-dark);
+      color: rgba(255,255,255,0.88);
+      text-align: center;
+      padding: 9px 20px;
+      font-size: 12.5px;
+      letter-spacing: 0.2px;
+      line-height: 1.5;
+    }
+    .promo strong { color: var(--sd-gold); }
+    .promo-stars { color: var(--sd-gold); letter-spacing: 1px; margin: 0 4px; }
+    .promo a { color: #fff; text-decoration: underline; margin-left: 6px; font-weight: 600; }
+
+    /* ═══════════════════════════════════
+       HEADER
+    ═══════════════════════════════════ */
+    .site-header {
+      background: var(--sd-blue);
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      box-shadow: 0 2px 16px rgba(24,51,184,0.35);
+    }
+    .header-inner {
+      max-width: var(--sd-max);
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Logo */
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .header-logo img {
+      height: 46px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .logo-placeholder {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.25);
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      line-height: 1.1;
+    }
+    .logo-text small {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 3px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      margin-top: 1px;
+    }
+
+    /* Main nav links */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      justify-content: center;
+    }
+    .header-nav a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 16px;
+      color: rgba(255,255,255,0.9);
+      font-size: 13.5px;
+      font-weight: 600;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: background var(--ease), color var(--ease);
+      position: relative;
+    }
+    .header-nav a:hover {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+    .header-nav a svg { width: 12px; height: 12px; opacity: 0.65; }
+
+    /* Help Center CTA */
+    .nav-help {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px !important;
+      border: 1.5px solid rgba(255,255,255,0.55) !important;
+      border-radius: 20px !important;
+    }
+    .nav-help:hover { border-color: #fff !important; background: rgba(255,255,255,0.15) !important; }
+    .nav-help svg { width: 14px; height: 14px; opacity: 1 !important; }
+
+    /* Icon buttons */
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .icon-btn {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.85);
+      transition: background var(--ease), color var(--ease);
+      position: relative;
+    }
+    .icon-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+    .icon-btn svg { width: 20px; height: 20px; }
+    .cart-badge {
+      position: absolute;
+      top: 4px; right: 4px;
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      background: var(--sd-red);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid var(--sd-blue);
+    }
+
+    /* ═══════════════════════════════════
+       MEGA MENU (POWERSTROKE hover)
+    ═══════════════════════════════════ */
+    .nav-item-wrap {
+      position: relative;
+    }
+    .nav-item-wrap:hover .mega-menu { display: flex; }
+    .mega-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 840px;
+      background: #fff;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+      padding: 0;
+      z-index: 400;
+      overflow: hidden;
+    }
+    .mega-left {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--sd-blue);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mega-left img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .mega-left-placeholder {
+      width: 100%;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      font-style: italic;
+    }
+    .mega-cols {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      padding: 20px 24px;
+    }
+    .mega-col-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--sd-blue);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--sd-border);
+    }
+    .mega-links { display: flex; flex-direction: column; gap: 6px; }
+    .mega-links a {
+      font-size: 13px;
+      color: var(--sd-text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 0;
+      transition: color var(--ease);
+    }
+    .mega-links a::before {
+      content: '';
+      display: block;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--sd-blue);
+      flex-shrink: 0;
+      opacity: 0.4;
+      transition: opacity var(--ease);
+    }
+    .mega-links a:hover { color: var(--sd-blue); }
+    .mega-links a:hover::before { opacity: 1; }
+    .mega-shop-all {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--sd-blue);
+      text-decoration: underline;
+    }
+
+    /* ═══════════════════════════════════
+       HERO BANNER
+    ═══════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 520px;
+      overflow: hidden;
+      background: #050812;
+    }
+    .hero-slides { position: absolute; inset: 0; }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(5,8,18,0.82) 0%, rgba(5,8,18,0.5) 50%, rgba(5,8,18,0.15) 100%);
+    }
+
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+    }
+    .hero-content-inner {
+      max-width: var(--sd-max);
+      margin: 0 auto;
+      padding: 0 60px;
+      width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(245,197,24,0.15);
+      border: 1px solid rgba(245,197,24,0.4);
+      color: var(--sd-gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sd-gold); }
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+      max-width: 580px;
+    }
+    .hero-title .accent { color: var(--sd-gold); display: block; }
+    .hero-subtitle {
+      font-size: 16px;
+      color: rgba(255,255,255,0.72);
+      max-width: 420px;
+      line-height: 1.65;
+      margin-bottom: 34px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border: 2px solid transparent;
+      transition: all var(--ease);
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--sd-blue);
+      color: #fff;
+      border-color: var(--sd-blue);
+      box-shadow: 0 4px 20px rgba(24,51,184,0.45);
+    }
+    .btn-primary:hover {
+      background: var(--sd-blue-h);
+      border-color: var(--sd-blue-h);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(24,51,184,0.55);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255,255,255,0.5);
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+    .btn svg { width: 16px; height: 16px; }
+
+    /* Hero controls */
+    .hero-controls {
+      position: absolute;
+      bottom: 28px;
+      left: 0; right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .hero-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    .hero-dot.active { width: 28px; border-radius: 4px; background: var(--sd-gold); }
+
+    /* ═══════════════════════════════════
+       TRUST BAR
+    ═══════════════════════════════════ */
+    .trust-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--sd-border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .trust-inner {
+      max-width: var(--sd-max);
+      margin: 0 auto;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 0;
+    }
+    .trust-item-icon {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--sd-blue-l);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-item-icon svg { width: 18px; height: 18px; color: var(--sd-blue); }
+    .trust-item-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--sd-dark); }
+    .trust-item-text span { font-size: 12px; color: var(--sd-muted); }
+
+    .trust-divider {
+      width: 1px;
+      height: 36px;
+      background: var(--sd-border);
+    }
+
+    /* ═══════════════════════════════════
+       TRUCK FINDER
+    ═══════════════════════════════════ */
+    .finder {
+      background: var(--sd-bg);
+      border-bottom: 1px solid var(--sd-border);
+      padding: 20px 28px;
+    }
+    .finder-inner {
+      max-width: var(--sd-max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .finder-label-wrap {
+      flex-shrink: 0;
+      margin-right: 4px;
+    }
+    .finder-label-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--sd-dark);
+      line-height: 1;
+    }
+    .finder-label-sub { font-size: 11px; color: var(--sd-muted); margin-top: 2px; }
+    .finder-divider {
+      width: 1px; height: 40px;
+      background: var(--sd-border);
+      flex-shrink: 0;
+      margin-right: 4px;
+    }
+    .finder-select-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 130px;
+    }
+    .finder-select-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--sd-muted);
+    }
+    .finder-select {
+      height: 42px;
+      padding: 0 32px 0 12px;
+      border: 1.5px solid var(--sd-border);
+      border-radius: 8px;
+      background: #fff;
+      font-size: 13.5px;
+      color: var(--sd-dark);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      outline: none;
+      transition: border-color var(--ease);
+      cursor: pointer;
+    }
+    .finder-select:focus { border-color: var(--sd-blue); }
+    .finder-apply {
+      height: 42px;
+      padding: 0 24px;
+      background: var(--sd-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      transition: background var(--ease), transform var(--ease);
+      align-self: flex-end;
+      flex-shrink: 0;
+    }
+    .finder-apply:hover { background: var(--sd-blue-h); transform: translateY(-1px); }
+
+    /* ═══════════════════════════════════
+       SECTION HEADER
+    ═══════════════════════════════════ */
+    .section-wrap {
+      max-width: var(--sd-max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      gap: 16px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--sd-blue);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 18px; height: 2.5px;
+      background: var(--sd-blue);
+      border-radius: 2px;
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--sd-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+    .section-all {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--sd-blue);
+      white-space: nowrap;
+      transition: gap var(--ease);
+    }
+    .section-all:hover { gap: 10px; }
+    .section-all svg { width: 15px; height: 15px; }
+
+    /* ═══════════════════════════════════
+       CATEGORY GRID
+       (matches the actual 4x3 grid on site)
+    ═══════════════════════════════════ */
+    .categories { padding: 48px 0; }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .cat-card {
+      border-radius: var(--sd-radius);
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--sd-border);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+      display: block;
+      text-decoration: none;
+    }
+    .cat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px rgba(24,51,184,0.13);
+      border-color: rgba(24,51,184,0.25);
+    }
+    .cat-card__img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+      background: var(--sd-bg);
+    }
+    .cat-card__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .cat-card:hover .cat-card__img img { transform: scale(1.07); }
+    .cat-card__label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(10,12,30,0.75), transparent);
+      padding: 28px 12px 10px;
+    }
+    .cat-card__name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+    .cat-card__count {
+      font-size: 11px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+    }
+    .cat-badge {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: var(--sd-blue);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .cat-badge--new { background: #16a34a; }
+    .cat-badge--sale { background: var(--sd-red); }
+
+    /* ═══════════════════════════════════
+       REVIEWS SECTION
+    ═══════════════════════════════════ */
+    .reviews-section {
+      background: var(--sd-bg);
+      padding: 52px 0;
+    }
+    .reviews-hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .reviews-score-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .reviews-big-score {
+      font-family: 'Oswald', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--sd-dark);
+      line-height: 1;
+    }
+    .reviews-stars-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .stars { color: var(--sd-gold); font-size: 18px; letter-spacing: 2px; }
+    .reviews-count-text { font-size: 13px; color: var(--sd-muted); }
+    .reviews-platform { font-size: 11px; color: var(--sd-muted); margin-top: 2px; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .review-card {
+      background: #fff;
+      border: 1px solid var(--sd-border);
+      border-radius: var(--sd-radius);
+      padding: 22px 20px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+      transition: transform var(--ease), box-shadow var(--ease);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(24,51,184,0.08);
+      border-color: rgba(24,51,184,0.18);
+    }
+    .review-quote {
+      position: absolute;
+      top: 16px; right: 16px;
+      font-size: 56px;
+      line-height: 1;
+      color: rgba(24,51,184,0.06);
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+    .review-top {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 12px;
+    }
+    .review-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--sd-blue);
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0;
+    }
+    .review-name { font-weight: 700; font-size: 14px; color: var(--sd-dark); }
+    .review-meta { font-size: 11px; color: var(--sd-muted); margin-top: 2px; }
+    .review-verified { color: var(--sd-blue); font-weight: 600; }
+    .review-stars { color: var(--sd-gold); font-size: 13px; letter-spacing: 1px; margin-bottom: 10px; }
+    .review-text {
+      font-size: 13.5px;
+      color: var(--sd-text);
+      line-height: 1.68;
+      flex: 1;
+    }
+    .review-date { font-size: 11px; color: #ccc; margin-top: 12px; }
+    .reviews-cta { text-align: center; }
+
+    /* ═══════════════════════════════════
+       BRAND STORY — SPLIT SECTIONS
+    ═══════════════════════════════════ */
+    .brand-split {
+      display: flex;
+      min-height: 440px;
+    }
+    .brand-split--reverse { flex-direction: row-reverse; }
+    .brand-split__media {
+      flex: 0 0 48%;
+      max-width: 48%;
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-split__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .brand-split:hover .brand-split__media img { transform: scale(1.04); }
+    .brand-split__media-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(24,51,184,0.25), rgba(5,8,18,0.3));
+    }
+    .brand-split__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 56px 60px;
+      background: #fff;
+    }
+    .brand-split--reverse .brand-split__body { background: var(--sd-bg); }
+    .brand-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--sd-blue);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-eyebrow::before {
+      content: '';
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--sd-blue);
+      border-radius: 2px;
+    }
+    .brand-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--sd-dark);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      position: relative;
+      padding-bottom: 18px;
+    }
+    .brand-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 40px; height: 3px;
+      background: var(--sd-gold);
+      border-radius: 2px;
+    }
+    .brand-text {
+      font-size: 14.5px;
+      color: var(--sd-text);
+      line-height: 1.78;
+      margin-top: 18px;
+    }
+    .brand-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .brand-stat-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--sd-blue);
+    }
+    .brand-stat-label {
+      font-size: 11px;
+      color: var(--sd-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* ═══════════════════════════════════
+       EMAIL SIGNUP
+    ═══════════════════════════════════ */
+    .email-section {
+      background: var(--sd-blue);
+      padding: 48px 28px;
+      text-align: center;
+    }
+    .email-section h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .email-section p { color: rgba(255,255,255,0.75); font-size: 14px; margin-bottom: 20px; }
+    .email-form {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    .email-input {
+      flex: 1;
+      height: 46px;
+      padding: 0 16px;
+      border: none;
+      border-radius: 8px 0 0 8px;
+      font-size: 14px;
+      outline: none;
+    }
+    .email-submit {
+      height: 46px;
+      padding: 0 22px;
+      background: var(--sd-dark);
+      color: #fff;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--ease);
+      white-space: nowrap;
+    }
+    .email-submit:hover { background: #1a1a2e; }
+
+    /* ═══════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════ */
+    .site-footer { background: var(--sd-navy); color: rgba(255,255,255,0.6); }
+    .footer-main {
+      max-width: var(--sd-max);
+      margin: 0 auto;
+      padding: 56px 28px 40px;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 44px;
+    }
+    .footer-logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
+    .footer-logo span { color: var(--sd-blue); }
+    .footer-desc { font-size: 13.5px; line-height: 1.72; margin-bottom: 20px; }
+    .footer-socials { display: flex; gap: 8px; }
+    .footer-social {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.55);
+      transition: background var(--ease), color var(--ease);
+      cursor: pointer;
+    }
+    .footer-social:hover { background: var(--sd-blue); color: #fff; }
+    .footer-social svg { width: 15px; height: 15px; }
+    .footer-col-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      transition: color var(--ease);
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-contact {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .footer-contact svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; }
+    .footer-hours {
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-top: 10px;
+    }
+    .footer-hours strong { color: rgba(255,255,255,0.8); display: block; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 18px 28px;
+    }
+    .footer-bottom-inner {
+      max-width: var(--sd-max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-copy { font-size: 12px; }
+    .footer-payment { display: flex; gap: 8px; align-items: center; }
+    .payment-icon {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ═══════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ═══════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .header-nav { display: none; }
+      .hero-title { font-size: 44px; }
+      .hero-content-inner { padding: 0 32px; }
+      .brand-split { flex-direction: column; }
+      .brand-split--reverse { flex-direction: column; }
+      .brand-split__media { flex: unset; max-width: 100%; height: 280px; }
+      .brand-split__body { padding: 36px 28px; }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .hero { height: auto; min-height: 320px; }
+      .hero-slide img { height: 380px; }
+      .hero-title { font-size: 32px; }
+      .cat-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .trust-divider { display: none; }
+      .finder-inner { gap: 10px; }
+      .footer-main { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ PROMO STRIP ═══ -->
+  <div class="promo">
+    Trusted by Diesel Owners Since 2009 &nbsp;•&nbsp;
+    <span class="promo-stars">★★★★★</span>
+    <strong>4.8</strong> (20,000+ Verified Reviews)
+  </div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="#" class="header-logo logo-placeholder">
+        <div class="logo-icon">SD</div>
+        <div class="logo-text">
+          Sinister Diesel
+          <small>Performance Parts</small>
+        </div>
+      </a>
+
+      <!-- Nav -->
+      <nav class="header-nav">
+        <div class="nav-item-wrap">
+          <a href="#">
+            Powerstroke
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <!-- MEGA MENU DEMO -->
+          <div class="mega-menu">
+            <div class="mega-left">
+              <div class="mega-left-placeholder">Ford F-250 / F-350</div>
+            </div>
+            <div class="mega-cols">
+              <div>
+                <div class="mega-col-title">Air & Fuel</div>
+                <div class="mega-links">
+                  <a href="#">Air Intakes & Parts</a>
+                  <a href="#">Fuel System</a>
+                  <a href="#">Injectors</a>
+                  <a href="#">Intercoolers & Pipes</a>
+                  <a href="#">Turbos</a>
+                </div>
+              </div>
+              <div>
+                <div class="mega-col-title">Engine & EGR</div>
+                <div class="mega-links">
+                  <a href="#">Engine Parts</a>
+                  <a href="#">EGR Coolers</a>
+                  <a href="#">Coolant & Oil Filtration</a>
+                  <a href="#">Exhaust Tips</a>
+                  <a href="#">Braking System</a>
+                </div>
+              </div>
+              <div>
+                <div class="mega-col-title">Accessories</div>
+                <div class="mega-links">
+                  <a href="#">Gauges & Pods</a>
+                  <a href="#">Interior Accessories</a>
+                  <a href="#">Exterior Accessories</a>
+                  <a href="#">Tuners & Programmers</a>
+                  <a href="#" class="mega-shop-all">Shop All Powerstroke →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#">Duramax
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <a href="#">Cummins
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <a href="#">Apparel</a>
+        <a href="#" class="nav-help">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          Help Center
+        </a>
+      </nav>
+
+      <!-- Icons -->
+      <div class="header-icons">
+        <button class="icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+        <button class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+        <button class="icon-btn" aria-label="Cart, 0 items">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span class="cart-badge">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ═══ HERO BANNER ═══ -->
+  <section class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active">
+        <img
+          src="https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg"
+          alt="Sinister Diesel — Built to Perform, Engineered to Last"
+          loading="eager"
+        >
+        <div class="hero-slide-overlay"></div>
+      </div>
+      <div class="hero-slide">
+        <img
+          src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg"
+          alt="Sinister Blue — The Color of Performance"
+          loading="lazy"
+        >
+        <div class="hero-slide-overlay"></div>
+      </div>
+      <div class="hero-slide">
+        <img
+          src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg"
+          alt="American Quality Diesel Parts"
+          loading="lazy"
+        >
+        <div class="hero-slide-overlay"></div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-content-inner">
+        <div class="hero-tag">Experience Diesel Done Right</div>
+        <h1 class="hero-title">
+          Built to Perform
+          <span class="accent">Engineered to Last</span>
+        </h1>
+        <p class="hero-subtitle">Premium diesel performance parts for Power Stroke, Duramax & Cummins. Proudly American since 2008.</p>
+        <div class="hero-btns">
+          <a href="#finder" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Shop by Truck
+          </a>
+          <a href="#categories" class="btn btn-outline">Browse All Parts</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-controls">
+      <button class="hero-dot active" data-idx="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-idx="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" data-idx="2" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- ═══ TRUST BAR ═══ -->
+  <div class="trust-bar">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <div class="trust-item-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <div class="trust-item-text">
+          <strong>20,000+ Reviews</strong>
+          <span>4.8★ Shopper Approved</span>
+        </div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <div class="trust-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="trust-item-text">
+          <strong>Made in the USA</strong>
+          <span>Roseville, California</span>
+        </div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <div class="trust-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <div class="trust-item-text">
+          <strong>Free Shipping</strong>
+          <span>On orders over $99</span>
+        </div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <div class="trust-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.15h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 5.34 5.34l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.5l-.08 1.42z"/>
+          </svg>
+        </div>
+        <div class="trust-item-text">
+          <strong>Expert Support</strong>
+          <span>(916) 772-9255</span>
+        </div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <div class="trust-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <div class="trust-item-text">
+          <strong>Trusted Since 2008</strong>
+          <span>17+ Years of Excellence</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TRUCK FINDER ═══ -->
+  <div class="finder" id="finder">
+    <div class="finder-inner">
+      <div class="finder-label-wrap">
+        <div class="finder-label-title">Shop by<br>Truck</div>
+        <div class="finder-label-sub">Find your fit</div>
+      </div>
+      <div class="finder-divider"></div>
+      <div class="finder-select-wrap">
+        <label class="finder-select-label">Year</label>
+        <select class="finder-select">
+          <option value="">Year</option>
+          <option>2024</option><option>2023</option><option>2022</option>
+          <option>2021</option><option>2020</option><option>2019</option>
+          <option>2018</option><option>2017</option><option>2016</option>
+          <option>2015</option><option>2014</option><option>2013</option>
+        </select>
+      </div>
+      <div class="finder-select-wrap">
+        <label class="finder-select-label">Make</label>
+        <select class="finder-select">
+          <option value="">Make</option>
+          <option>Ford</option>
+          <option>Chevy / GMC</option>
+          <option>Dodge / Ram</option>
+        </select>
+      </div>
+      <div class="finder-select-wrap">
+        <label class="finder-select-label">Model</label>
+        <select class="finder-select">
+          <option value="">Model</option>
+          <option>F-250 Super Duty</option>
+          <option>F-350 Super Duty</option>
+          <option>2500 HD</option>
+          <option>3500 HD</option>
+        </select>
+      </div>
+      <div class="finder-select-wrap">
+        <label class="finder-select-label">Engine Size</label>
+        <select class="finder-select">
+          <option value="">Engine Size</option>
+          <option>6.7L Power Stroke</option>
+          <option>6.6L Duramax LML</option>
+          <option>6.6L Duramax L5P</option>
+          <option>6.7L Cummins</option>
+          <option>5.9L Cummins</option>
+        </select>
+      </div>
+      <button class="finder-apply">Apply</button>
+    </div>
+  </div>
+
+  <!-- ═══ CATEGORIES ═══ -->
+  <section class="categories reveal" id="categories">
+    <div class="section-wrap">
+      <div class="section-head" style="padding-top:48px">
+        <div>
+          <div class="section-label">Browse</div>
+          <h2 class="section-title">Categories</h2>
+        </div>
+        <a href="#" class="section-all">
+          Shop All
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="cat-grid" style="padding-bottom:48px">
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg" alt="Air Intakes">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Air Intakes</div>
+              <div class="cat-card__count">84+ Products</div>
+            </div>
+            <span class="cat-badge">Popular</span>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg" alt="Filtration">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Filtration</div>
+              <div class="cat-card__count">62+ Products</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg" alt="Coolant System">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Coolant System</div>
+              <div class="cat-card__count">38+ Products</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg" alt="Engine Parts">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Engine Parts</div>
+              <div class="cat-card__count">215+ Products</div>
+            </div>
+            <span class="cat-badge cat-badge--new">New</span>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg" alt="Exhaust Kits">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Exhaust Kits</div>
+              <div class="cat-card__count">54+ Products</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg" alt="Exterior">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Exterior</div>
+              <div class="cat-card__count">41+ Products</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg" alt="Intercooler Pipes">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Intercooler Pipes</div>
+              <div class="cat-card__count">63+ Products</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg" alt="Turbos">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Turbos</div>
+              <div class="cat-card__count">29+ Products</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg" alt="Apparel">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Apparel</div>
+              <div class="cat-card__count">38+ Products</div>
+            </div>
+            <span class="cat-badge cat-badge--sale">Sale</span>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg" alt="All Sinister Parts">
+            <div class="cat-card__label">
+              <div class="cat-card__name">All Sinister Parts</div>
+              <div class="cat-card__count">500+ Products</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg" alt="All Other Brands">
+            <div class="cat-card__label">
+              <div class="cat-card__name">All Other Brands</div>
+              <div class="cat-card__count">300+ Products</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="cat-card">
+          <div class="cat-card__img">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg" alt="Clearance">
+            <div class="cat-card__label">
+              <div class="cat-card__name">Open Box / Clearance</div>
+              <div class="cat-card__count">Limited Stock</div>
+            </div>
+            <span class="cat-badge cat-badge--sale">Sale</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ REVIEWS ═══ -->
+  <section class="reviews-section reveal">
+    <div class="section-wrap">
+      <div class="reviews-hero">
+        <div class="section-label" style="justify-content:center">Customer Reviews</div>
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="reviews-score-row">
+          <div class="reviews-big-score">4.8</div>
+          <div class="reviews-stars-row">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="reviews-count-text">20,000+ Verified Reviews</div>
+            <div class="reviews-platform">via Shopper Approved</div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-top">
+            <div class="review-avatar">L</div>
+            <div>
+              <div class="review-name">Laurie H.</div>
+              <div class="review-meta"><span class="review-verified">&#10003; Verified Buyer</span></div>
+            </div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">I totally appreciate Brian taking the time to call me to discuss my questions. You do not see that level of customer service anymore. It is so refreshing. Thank you!!</p>
+          <div class="review-date">Sep 17, 2024</div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-top">
+            <div class="review-avatar" style="background:#374fc0">S</div>
+            <div>
+              <div class="review-name">Shadow976</div>
+              <div class="review-meta">&#128205; WA</div>
+            </div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">Website was easy to navigate. Item shipped immediately and I received delivery a day early. Coolant filtration system is well made. Install was quick because of the awesome instructions included. Well worth the money.</p>
+          <div class="review-date">Sep 28, 2021</div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-top">
+            <div class="review-avatar" style="background:#2d44a8">A</div>
+            <div>
+              <div class="review-name">Angel C.</div>
+              <div class="review-meta"><span class="review-verified">&#10003; Verified Buyer</span></div>
+            </div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">Great customer service! Not only did I get a superior product, I got it in 3 days. Highly recommend becoming a Sinister Diesel VIP.</p>
+          <div class="review-date">Jun 24, 2021</div>
+        </div>
+      </div>
+      <div class="reviews-cta">
+        <a href="https://www.shopperapproved.com/reviews/sinisterdiesel.com/" target="_blank" class="btn btn-primary" style="display:inline-flex">
+          See All 20,000+ Reviews on Shopper Approved &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BRAND: AMERICAN QUALITY ═══ -->
+  <section class="brand-split reveal">
+    <div class="brand-split__media">
+      <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg" alt="American quality diesel parts made in Roseville California">
+      <div class="brand-split__media-overlay"></div>
+    </div>
+    <div class="brand-split__body">
+      <div class="brand-eyebrow">Our Promise</div>
+      <h2 class="brand-title">American Quality</h2>
+      <p class="brand-text">At Sinister Diesel, we specialize in crafting high-performance diesel parts designed to maximize power, efficiency, and reliability for your vehicle. From intakes and charge pipes to oil and coolant filtration kits, rebuild components, and engine bay upgrades.</p>
+      <p class="brand-text">Many of our parts are proudly designed and manufactured in the USA — ensuring durability and precision that aftermarket competitors simply can't match.</p>
+      <div class="brand-stats">
+        <div>
+          <div class="brand-stat-num">17+</div>
+          <div class="brand-stat-label">Years in Business</div>
+        </div>
+        <div>
+          <div class="brand-stat-num">20K+</div>
+          <div class="brand-stat-label">Happy Customers</div>
+        </div>
+        <div>
+          <div class="brand-stat-num">4.8★</div>
+          <div class="brand-stat-label">Avg Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BRAND: SINISTER BLUE ═══ -->
+  <section class="brand-split brand-split--reverse reveal">
+    <div class="brand-split__media">
+      <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg" alt="Sinister Blue — the brand color">
+      <div class="brand-split__media-overlay"></div>
+    </div>
+    <div class="brand-split__body">
+      <div class="brand-eyebrow">The Brand</div>
+      <h2 class="brand-title">Sinister Blue</h2>
+      <p class="brand-text">Sinister Blue isn't just a color — it's the heartbeat of our brand. This bold, iconic shade embodies the spirit of innovation, precision, and performance that defines everything we do at Sinister Diesel.</p>
+      <p class="brand-text">Whether on the road, at the worksite, or under the hood — Sinister Blue is a symbol of excellence you can trust.</p>
+    </div>
+  </section>
+
+  <!-- ═══ BRAND: CUSTOMER FOCUSED ═══ -->
+  <section class="brand-split reveal">
+    <div class="brand-split__media">
+      <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg" alt="Sinister Diesel customer support team">
+      <div class="brand-split__media-overlay"></div>
+    </div>
+    <div class="brand-split__body">
+      <div class="brand-eyebrow">Our Team</div>
+      <h2 class="brand-title">Customer Focused</h2>
+      <p class="brand-text">Our dedicated team is always just a call or text away — ready to help with any question, order, or performance upgrade. We believe exceptional products deserve exceptional support.</p>
+      <p class="brand-text">With an unmatched 4.8-star rating from over 20,000 customers, our commitment to top-tier service speaks for itself.</p>
+      <a href="tel:9167729255" class="btn btn-primary" style="display:inline-flex;margin-top:24px;align-self:flex-start">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.15h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 5.34 5.34l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.5l-.08 1.42z"/>
+        </svg>
+        Call (916) 772-9255
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ EMAIL SIGNUP ═══ -->
+  <div class="email-section">
+    <h2>Subscribe to Our Emails</h2>
+    <p>Get product updates, promotions, and tips from the team at Sinister Diesel.</p>
+    <div class="email-form">
+      <input class="email-input" type="email" placeholder="ENTER YOUR EMAIL">
+      <button class="email-submit">Subscribe</button>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div>
+        <div class="footer-logo">Sinister<span>Diesel</span></div>
+        <p class="footer-desc">High-performance diesel parts for Ford Power Stroke, Chevy Duramax, and Dodge Cummins. Proudly built in the USA since 2008.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a0c1e"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="3" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Sinister Diesel Blog</a>
+          <a href="#">Clearance</a>
+          <a href="#">Careers</a>
+          <a href="#">Customer Reviews</a>
+          <a href="#">Return/Exchange</a>
+          <a href="#">Race Parts Notice</a>
+          <a href="#">Site Map</a>
+          <a href="#">Vendor Compliance</a>
+          <a href="#">Sponsor Application</a>
+          <a href="#">Install Instructions</a>
+          <a href="#">Shipping Policies</a>
+          <a href="#">Warranty Policy</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Help Center</div>
+        <div class="footer-links">
+          <a href="#">Missing / Damaged Parts</a>
+          <a href="#">Returns/Exchanges</a>
+          <a href="#">Order Tracking</a>
+          <a href="#">Sales Inquiry</a>
+          <a href="#">Parts Tech Support</a>
+          <a href="#">Warranty Inquires</a>
+          <a href="#">Shipping Protection</a>
+          <a href="#">Become a Dealer</a>
+        </div>
+        <div class="footer-hours">
+          <strong>Hours</strong>
+          Monday – Friday: 8am – 5pm PST<br>
+          Saturday: Closed<br>
+          Sunday: Closed
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="#">Authorized Re-sellers</a>
+          <a href="#">Become a Dealer</a>
+          <a href="#">Identifying Genuine Sinister Parts</a>
+          <a href="#">Learn About Sinister Blue</a>
+          <a href="#">Sinister Inquiries</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Core Returns</a>
+          <a href="#">FAQs</a>
+          <a href="#">Sales/Promo Details</a>
+          <a href="#">Military Discount</a>
+          <a href="#">How To Use Rewards</a>
+          <a href="#">Join Sinister Insider</a>
+        </div>
+        <div class="footer-contact" style="margin-top:16px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.15h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 5.34 5.34l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.5l-.08 1.42z"/></svg>
+          (916) 772-9255
+        </div>
+        <div class="footer-contact">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          2025 Opportunity Dr, Roseville CA 95678
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">&copy; 2026 Sinister Mfg. Co., Inc. All rights reserved.</p>
+        <div class="footer-payment">
+          <span class="payment-icon">VISA</span>
+          <span class="payment-icon">MC</span>
+          <span class="payment-icon">AMEX</span>
+          <span class="payment-icon">Discover</span>
+          <span class="payment-icon">PayPal</span>
+          <span class="payment-icon">Apple Pay</span>
+          <span class="payment-icon">Affirm</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Hero slideshow
+    (function() {
+      var slides = document.querySelectorAll('.hero-slide');
+      var dots = document.querySelectorAll('.hero-dot');
+      var current = 0;
+      function go(n) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (n + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+      dots.forEach(function(d, i) { d.addEventListener('click', function() { go(i); clearInterval(timer); timer = setInterval(function() { go(current + 1); }, 5000); }); });
+      var timer = setInterval(function() { go(current + 1); }, 5000);
+    })();
+
+    // Scroll reveal
+    (function() {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(function(e) { e.classList.add('in'); }); return; }
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      els.forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>

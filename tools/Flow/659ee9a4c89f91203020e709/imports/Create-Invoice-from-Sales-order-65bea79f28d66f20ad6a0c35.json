@@ -1,0 +1,45 @@
+{
+  "_id": "65bea79f28d66f20ad6a0c35",
+  "name": "Create Invoice from Sales order",
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "distributed": true,
+  "apiIdentifier": "i427800a31",
+  "ignoreExisting": true,
+  "ignoreMissing": false,
+  "oneToMany": false,
+  "lookups": [],
+  "aiDescription": {
+    "summary": "This explanation describes an import process called \"Create Invoice from Sales order.\" It is a distributed import, meaning it is processed in multiple batches for faster import. The import ignores existing data in the destination application to avoid creating duplicate records. However, if any required data is missing, it will result in an error. The import uses the NetSuiteDistributedImport adaptor type and specifically imports data into the \"invoice\" record type in NetSuite. It performs the \"add\" operation to create new records. The import includes a lookup and mapping to determine if records already exist and how the data should be mapped to the destination fields.",
+    "detailed": "This import is named \"Create Invoice from Sales order\" and it is a distributed import, which means it will be processed in multiple batches for faster import.\n\nThe import is configured to ignore existing data in the destination application, which means it will not create duplicate records.\n\nThe import is not set to ignore missing data, so if any required data is missing, it will result in an error.\n\nThe import is using the NetSuiteDistributedImport adaptor type, indicating that it is importing data into NetSuite.\n\nThe import is specifically importing data into the \"invoice\" record type in NetSuite.\n\nThe import is using the \"add\" operation, which means it will create new records in NetSuite.\n\nThe import has a lookup defined using the \"internalIdLookup.expression\" field. This lookup is used to determine if a record already exists in NetSuite based on the value of the \"externalid\" field.\n\nThe import has a mapping defined, which specifies how the data from the source application should be mapped to the fields in the destination application.\n\nThe mapping includes three fields: \"celigo_nlobjTransformId\", \"trandate\", and \"externalid\". The values for these fields are extracted from the source application.\n\nOverall, this import is creating new invoice records in NetSuite based on data from the source application. It is using a lookup to check if the records already exist and is mapping the extracted values to the corresponding fields in NetSuite."
+  },
+  "netsuite_da": {
+    "restletVersion": "suiteapp2.0",
+    "operation": "add",
+    "recordType": "invoice",
+    "internalIdLookup": {
+      "expression": "[\"externalid\",\"is\",\"MIVA_INV_{{[HB | Miva Order ID]}}\"]"
+    },
+    "lookups": [],
+    "mapping": {
+      "fields": [
+        {
+          "generate": "celigo_nlobjTransformId",
+          "extract": "salesOrderID",
+          "internalId": false
+        },
+        {
+          "extract": "Date",
+          "generate": "trandate",
+          "internalId": false
+        },
+        {
+          "generate": "externalid",
+          "extract": "MIVA_INV_{{[HB | Miva Order ID]}}",
+          "internalId": false
+        }
+      ],
+      "lists": []
+    }
+  },
+  "adaptorType": "NetSuiteDistributedImport"
+}

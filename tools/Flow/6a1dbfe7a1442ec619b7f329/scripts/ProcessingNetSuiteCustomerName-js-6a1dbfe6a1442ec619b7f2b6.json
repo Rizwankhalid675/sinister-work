@@ -1,0 +1,10 @@
+{
+  "_id": "6a1dbfe6a1442ec619b7f2b6",
+  "lastModified": "2026-06-01T17:22:46.253Z",
+  "createdAt": "2026-06-01T17:22:46.023Z",
+  "name": "ProcessingNetSuiteCustomerName.js",
+  "description": "Data Normalization for customer name.",
+  "_sourceId": "65944566bf5925554818e215",
+  "sandbox": false,
+  "postResponseHookToProcessOnChildRecord": false
+}

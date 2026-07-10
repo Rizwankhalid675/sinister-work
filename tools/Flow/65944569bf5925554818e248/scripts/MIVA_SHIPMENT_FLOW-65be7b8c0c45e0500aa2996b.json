@@ -1,0 +1,8 @@
+{
+  "_id": "65be7b8c0c45e0500aa2996b",
+  "lastModified": "2024-02-03T17:49:17.862Z",
+  "createdAt": "2024-02-03T17:44:44.316Z",
+  "name": "MIVA_SHIPMENT_FLOW",
+  "sandbox": false,
+  "postResponseHookToProcessOnChildRecord": false
+}

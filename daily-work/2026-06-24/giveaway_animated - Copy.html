@@ -1,0 +1,1805 @@
+<!-- ===============================
+     SINISTER DIESEL GIVEAWAY — ANIMATED EDITION
+     =============================== -->
+
+<mvt:item name="html_profile" />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="&mvte:global:basehref;">
+
+  <mvt:if expr="NOT ISNULL l.settings:page:title">
+    <title>&mvt:page:title;</title>
+  <mvt:else>
+    <title>&mvt:page:name; | &mvt:store:name;</title>
+  </mvt:if>
+
+  <mvt:if expr="g.useDevResources EQ 1">
+    <mvt:item name="head" param="css_list_dev" />
+  <mvt:else>
+    <mvt:item name="head" param="css_list" />
+  </mvt:if>
+  <mvt:item name="head" param="head_tag" />
+
+  <style>
+    /* ── HIDE PLATFORM CHROME ── */
+    .newyears-2025 .o-layout__item.t-expanded-block__item,
+    .newyears-2025 h1.c-heading-delta.u-text-bold.u-color-primary,
+    .newyears-2025 .c-keyline { display:none !important; }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:       #050810;
+      --panel:    #0b1120;
+      --panel-2:  #0e1630;
+      --text:     #e8eeff;
+      --muted:    #8898b8;
+      --line:     #1a2540;
+      --accent:   #1e3aff;
+      --accent-2: #4f6fff;
+      --gold:     #f5c842;
+      --gold-2:   #ffe07a;
+      --white:    #ffffff;
+      --shadow:   0 24px 60px rgba(0,0,0,.5);
+    }
+
+    /* ── BASE ── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    /* ── PARTICLE CANVAS ── */
+    #sd-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    #giveaway-landing {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(16px,3vw,32px) clamp(32px,4vw,56px);
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-size: clamp(28px,3.5vw,44px);
+      text-align: center;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: .5px;
+      color: #eef2ff;
+    }
+
+    .section-subtitle {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary, .btn-secondary {
+      appearance: none;
+      border: 0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: .04em;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 0 rgba(30,58,255,0);
+      animation: pulse-btn 2.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse-btn {
+      0%, 100% { box-shadow: 0 0 20px rgba(30,58,255,.35), 0 8px 20px rgba(30,58,255,.2); }
+      50%       { box-shadow: 0 0 40px rgba(30,58,255,.7), 0 12px 32px rgba(30,58,255,.4); }
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.18) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform .5s ease;
+    }
+
+    .btn-primary:hover::after { transform: translateX(100%); }
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(147,162,255,.4);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-2);
+      background: rgba(255,255,255,.04);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(.9);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* stagger children */
+    .stagger > * { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+    .stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay: .05s; }
+    .stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay: .15s; }
+    .stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay: .25s; }
+    .stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay: .35s; }
+    .stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay: .45s; }
+    .stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay: .55s; }
+    .stagger.visible > *:nth-child(7) { opacity:1; transform:none; transition-delay: .65s; }
+    .stagger.visible > *:nth-child(n+8) { opacity:1; transform:none; transition-delay: .75s; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: 0;
+      margin-top: 0;
+    }
+
+    .hero-art {
+      position: relative;
+      left: 50%;
+      right: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    .hero-art img { display: block; width: 100%; height: auto; }
+    .hero-img-mobile { display: none; }
+
+    @media (max-width: 768px) {
+      .hero-img-desktop { display: none; }
+      .hero-img-mobile  { display: block; }
+    }
+
+    /* ── COUNTDOWN BANNER ── */
+    .countdown-banner {
+      position: relative;
+      left: 50%;
+      right: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background: linear-gradient(90deg, #060c1e 0%, #0b1630 50%, #060c1e 100%);
+      border-top: 1px solid rgba(255,200,50,.18);
+      border-bottom: 1px solid rgba(255,200,50,.18);
+      padding: 18px 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .countdown-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(245,200,66,.07) 0%, transparent 70%);
+    }
+
+    .countdown-eyebrow {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .countdown-units {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(8px,2vw,24px);
+      flex-wrap: wrap;
+    }
+
+    .cu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 64px;
+    }
+
+    .cu-num {
+      font-size: clamp(32px,5vw,56px);
+      font-weight: 900;
+      line-height: 1;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      transition: transform .15s ease;
+    }
+
+    .cu-num.tick {
+      transform: translateY(-4px);
+    }
+
+    .cu-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .cu-sep {
+      font-size: clamp(28px,4vw,44px);
+      font-weight: 900;
+      color: rgba(245,200,66,.4);
+      align-self: flex-start;
+      margin-top: 4px;
+      animation: blink-sep 1s step-end infinite;
+    }
+
+    @keyframes blink-sep { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    .countdown-cta-row {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .countdown-cta-row .btn-primary,
+    .countdown-cta-row .btn-secondary {
+      min-height: 50px;
+      padding: 0 26px;
+      font-size: 15px;
+    }
+
+    @media (max-width: 640px) {
+      .countdown-cta-row { flex-direction: column; align-items: center; }
+      .countdown-cta-row .btn-primary,
+      .countdown-cta-row .btn-secondary { width: min(300px,100%); }
+    }
+
+    /* ── HOW TO ENTER ── */
+    .how-it-works { padding-top: clamp(48px,6vw,72px); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 22px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .step-card {
+      background: linear-gradient(160deg, #0f1a30, #0b1220);
+      border: 1px solid #1b2740;
+      border-radius: 20px;
+      padding: 28px 26px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(30,58,255,.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .step-num {
+      width: 54px;
+      height: 54px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(160deg, #3555ff, #1731ca);
+      color: #fff;
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 0 0 6px rgba(30,58,255,.12), 0 10px 28px rgba(30,58,255,.35);
+      flex-shrink: 0;
+    }
+
+    .step-card h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .step-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .steps { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    /* ── HOW-TO IMAGES ── */
+    .howto-desktop { text-align: center; margin-top: 20px; }
+    .howto-mobile  { display: none; text-align: center; margin-top: 20px; }
+
+    @media (max-width: 768px) {
+      .howto-desktop { display: none !important; }
+      .howto-mobile  { display: block !important; }
+    }
+
+    /* ── CAROUSELS ── */
+    .carousel-section { margin-top: clamp(48px,6vw,80px); }
+
+    .bf-carousel {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+    }
+
+    .nav {
+      appearance: none;
+      border: 0;
+      background: #0f172a;
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      font-size: 24px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,.35);
+      z-index: 2;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .nav:hover { background: var(--accent); transform: scale(1.08); }
+    .nav:disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
+
+    @media (max-width: 720px) { .nav { display: none; } }
+
+    .bf-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 24%;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 8px 4px 12px;
+      scrollbar-width: none;
+      align-items: stretch;
+    }
+
+    .bf-track::-webkit-scrollbar { display: none; }
+
+    @media (max-width: 1199px) { .bf-track { grid-auto-columns: 32%; } }
+    @media (max-width: 1024px) { .bf-track { grid-auto-columns: 48%; } }
+    @media (max-width: 640px)  { .bf-track { grid-auto-columns: 78%; } }
+
+    .prod-card {
+      background: #fff;
+      color: #0f172a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(0,0,0,.12);
+      scroll-snap-align: center;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .prod-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 48px rgba(0,0,0,.22);
+    }
+
+    .prod-media {
+      height: 240px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 14px;
+    }
+
+    .prod-media img {
+      width: 100%; height: 100%;
+      object-fit: contain; display: block;
+    }
+
+    .disc-badge {
+      position: absolute;
+      left: 12px; top: 12px;
+      border-radius: 999px;
+      padding: 7px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(10,18,40,.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(147,162,255,.4);
+      box-shadow: 0 0 18px rgba(30,58,255,.3);
+      color: #eaf0ff;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      line-height: 1;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .disc-badge::before {
+      content: "✦";
+      opacity: .9;
+      transform: translateY(-1px);
+    }
+
+    .prod-body {
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .prod-name {
+      font-size: 14px;
+      margin: 0;
+      line-height: 1.3;
+      min-height: 2.6em;
+      max-height: 2.6em;
+      overflow: hidden;
+    }
+
+    .prod-name a {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .prod-sku { font-size: 11px; color: #6b7280; }
+
+    .prod-price {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .prod-price .sale {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .prod-btn {
+      margin-top: auto;
+      height: 40px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      text-decoration: none;
+      transition: background .2s ease, transform .15s ease;
+    }
+
+    .prod-btn:hover {
+      background: var(--accent-2);
+      transform: translateY(-1px);
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      border: 0;
+      background: #2d3a56;
+      cursor: pointer;
+      transition: width .2s ease, background .2s ease;
+    }
+
+    .dot[aria-selected="true"] {
+      background: var(--accent);
+      width: 22px;
+    }
+
+    /* ── PRIZE SECTION ── */
+    .prize-section { margin-top: clamp(56px,7vw,88px); }
+
+    .prize-wrap {
+      background: linear-gradient(160deg, #0f1a2b, #0a1220);
+      border: 1px solid #1a2a42;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.55);
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: stretch;
+      position: relative;
+    }
+
+    /* shimmer sweep on prize */
+    .prize-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(105deg, transparent 35%, rgba(255,220,80,.04) 50%, transparent 65%);
+      animation: prize-shimmer 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes prize-shimmer {
+      0%   { transform: translateX(-100%) skewX(-10deg); }
+      100% { transform: translateX(200%)  skewX(-10deg); }
+    }
+
+    .prize-media { min-height: 100%; background: #06101c; }
+
+    /* gallery */
+    .prize-gallery { position: relative; height: 100%; display: flex; flex-direction: column; }
+
+    .gallery-stage {
+      position: relative;
+      flex: 1;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .gallery-stage img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: opacity .4s ease;
+    }
+
+    .gallery-stage img.fading { opacity: 0; }
+
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 48px; height: 48px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(0,0,0,.5);
+      color: #fff;
+      font-size: 30px;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(6px);
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .gallery-arrow:hover { background: var(--accent); transform: translateY(-50%) scale(1.1); }
+    .gallery-arrow.prev { left: 12px; }
+    .gallery-arrow.next { right: 12px; }
+
+    .gallery-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 8px;
+      padding: 10px;
+      background: #09111d;
+      border-top: 1px solid #18253f;
+    }
+
+    .thumb {
+      border: 2px solid transparent;
+      padding: 0; margin: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+      cursor: pointer;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    .thumb:hover { transform: scale(1.04); }
+    .thumb.is-active { border-color: var(--gold); }
+
+    .thumb img { width: 100%; height: 76px; object-fit: cover; display: block; }
+
+    @media (min-width: 981px) {
+      .gallery-stage { min-height: 420px; }
+      .thumb img { height: 100px; }
+    }
+
+    @media (max-width: 980px) {
+      .prize-wrap { grid-template-columns: 1fr; }
+      .gallery-stage { min-height: 0; aspect-ratio: 16/9; }
+      .gallery-stage img { object-fit: contain; background: #000; }
+      .gallery-thumbs { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .gallery-thumbs { grid-template-columns: repeat(4, minmax(0,1fr)); }
+      .thumb img { height: 64px; }
+      .gallery-arrow { width: 40px; height: 40px; font-size: 24px; }
+    }
+
+    .prize-content {
+      padding: clamp(22px,3vw,38px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .prize-kicker {
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 10px;
+    }
+
+    .prize-content h3 {
+      margin: 0 0 14px;
+      font-size: clamp(26px,3vw,40px);
+      line-height: 1.05;
+      font-weight: 900;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .prize-copy {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0 0 18px;
+    }
+
+    .prize-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      margin: 0 0 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .prize-list li {
+      position: relative;
+      padding-left: 18px;
+      color: #dde8ff;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .prize-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: .55em;
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(245,200,66,.18);
+    }
+
+    .prize-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    @media (max-width: 640px) {
+      .prize-list { grid-template-columns: 1fr; }
+    }
+
+    /* ── ENTRY COUNTER ── */
+    .entry-counter-section {
+      margin-top: clamp(48px,6vw,80px);
+    }
+
+    .entry-counter-inner {
+      background: linear-gradient(160deg, #0b1630, #060e20);
+      border: 1px solid rgba(245,200,66,.2);
+      border-radius: 20px;
+      padding: clamp(24px,3vw,40px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(245,200,66,.06);
+    }
+
+    .entry-counter-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(ellipse at 50% 0%, rgba(245,200,66,.08), transparent 60%);
+      pointer-events: none;
+    }
+
+    .ec-label {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .ec-num {
+      font-size: clamp(48px,8vw,96px);
+      font-weight: 900;
+      line-height: 1;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 0 40px rgba(245,200,66,.35);
+    }
+
+    .ec-sub {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .ec-cta {
+      margin-top: 22px;
+    }
+
+    /* ── KLAVIYO EMBED ── */
+    .klaviyo-signup {
+      margin-top: clamp(48px,6vw,80px);
+    }
+
+    .klaviyo-signup-inner {
+      background: linear-gradient(160deg, #0f1a2b, #0a1220);
+      border: 1px solid #1a2a42;
+      border-radius: 20px;
+      padding: clamp(22px,3vw,36px);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .klaviyo-signup-inner { padding: 18px 14px; }
+    }
+
+    /* ── CATEGORIES ── */
+    .shop-cat { margin-top: clamp(48px,6vw,80px); margin-bottom: clamp(48px,6vw,80px); }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .cat-card {
+      display: block;
+      position: relative;
+      background: #0a0c14;
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .cat-card img {
+      width: 100%; height: 240px;
+      object-fit: cover; display: block;
+      transition: transform .4s ease;
+    }
+
+    .cat-card:hover img { transform: scale(1.06); }
+
+    .cat-card .label {
+      position: absolute;
+      left: 12px; right: 12px; bottom: 12px;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: .5px;
+      text-align: center;
+      transition: background .2s ease;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 48px rgba(0,0,0,.7), 0 8px 20px rgba(30,58,255,.3);
+      border-color: var(--accent-2);
+    }
+
+    .cat-card:hover .label { background: var(--accent-2); }
+
+    @media (max-width: 1000px) { .cat-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+    @media (max-width: 640px) {
+      .cat-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+      .cat-card img { height: 170px; }
+      .cat-card .label { font-size: 12px; padding: 8px 10px; }
+    }
+
+    /* ── TRUST CARDS ── */
+    .trust-section { margin-top: clamp(24px,4vw,48px); }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .trust-card {
+      background: linear-gradient(160deg, #0f1a2b, #0b1220);
+      border: 1px solid #1b2740;
+      border-radius: 16px;
+      padding: 18px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .trust-card h3 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .trust-card p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .trust-card p a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,.3);
+    }
+
+    @media (max-width: 980px) { .trust-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+    @media (max-width: 640px) {
+      .trust-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+      .trust-card { padding: 14px 12px; }
+      .trust-card h3 { font-size: 12px; }
+      .trust-card p  { font-size: 12px; }
+    }
+
+    /* ── FAQ ── */
+    #faq { margin-top: clamp(48px,6vw,80px); }
+
+    #faq .shell {
+      background: linear-gradient(160deg, #0f1a2b, #0c1526);
+      border: 1px solid #1b2740;
+      box-shadow: var(--shadow);
+      border-radius: 18px;
+      padding: clamp(18px,2.8vw,34px);
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    #faq .split {
+      display: grid;
+      grid-template-columns: 340px minmax(0,1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    #faq .left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    #faq .left h2 {
+      margin: 0 0 18px;
+      font-size: clamp(32px,4vw,50px);
+      line-height: .95;
+      font-weight: 900;
+      color: #f3f6ff;
+      letter-spacing: .2px;
+      text-transform: uppercase;
+    }
+
+    #faq .brand { margin-top: 18px; }
+    #faq .brand img { display: block; width: 100%; max-width: 260px; height: auto; }
+
+    #faq .list {
+      background: #0b1630;
+      border: 1px solid #1c2740;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    #faq .faq-item { border-bottom: 1px solid #1f2a44; }
+    #faq .faq-item:last-child { border-bottom: 0; }
+
+    #faq .faq-item > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      color: #e1e8fb;
+      font-weight: 800;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    #faq .faq-item > summary::-webkit-details-marker { display: none; }
+
+    #faq .faq-item > summary::after {
+      content: "+";
+      color: #8ea2c7;
+      font-weight: 900;
+      font-size: 22px;
+      transition: transform .2s ease, color .2s ease;
+    }
+
+    #faq .faq-item[open] > summary::after {
+      content: "−";
+      color: var(--accent-2);
+    }
+
+    #faq .faq-item .answer {
+      padding: 0 20px 18px;
+      color: #b8c6e0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    #faq > h2 { display: none; }
+
+    @media (max-width: 979px) {
+      #faq .split { grid-template-columns: 1fr; gap: 20px; }
+      #faq .left { align-items: center; text-align: center; }
+      #faq .brand { margin-top: 8px; }
+      #faq .brand img { max-width: 200px; margin: 0 auto; }
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta { margin-top: clamp(48px,6vw,80px); }
+
+    .final-cta-box {
+      background:
+        radial-gradient(circle at top right, rgba(30,58,255,.18), transparent 40%),
+        radial-gradient(circle at bottom left, rgba(245,200,66,.08), transparent 40%),
+        linear-gradient(160deg, #0f1a2b, #0a1220);
+      border: 1px solid #1a2741;
+      border-radius: 20px;
+      padding: clamp(24px,3vw,40px);
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.025) 50%, transparent 60%);
+      animation: prize-shimmer 4s ease-in-out infinite 1s;
+      pointer-events: none;
+    }
+
+    .final-cta-box h2 {
+      margin: 0 0 10px;
+      font-size: clamp(28px,3.5vw,44px);
+      text-transform: uppercase;
+      line-height: 1.05;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .final-cta-box p {
+      margin: 0 auto 22px;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .final-cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .final-cta-actions .btn-primary,
+    .final-cta-actions .btn-secondary {
+      min-height: 54px;
+      padding: 0 30px;
+      font-size: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .final-cta-actions { flex-direction: column; align-items: center; }
+      .final-cta-actions .btn-primary,
+      .final-cta-actions .btn-secondary { width: min(300px,100%); }
+    }
+
+    /* ── LEGAL ── */
+    .legal-disclaimer {
+      margin: 14px 0;
+      color: #ffffff;
+      font-size: 11px;
+      line-height: 1.5;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body class="single-column newyears-2025">
+  <mvt:item name="hdft" param="global_header" />
+  <mvt:item name="hdft" param="header" />
+
+  <!-- floating particles -->
+  <canvas id="sd-canvas"></canvas>
+
+  <main id="giveaway-landing" class="container">
+
+    <!-- ── HERO ── -->
+    <section class="hero" aria-label="Giveaway hero">
+      <div class="hero-art reveal">
+        <span class="hero-img-desktop">
+          <a href="https://sinisterdiesel.com/giveaway-rule.html" target="_self">
+            <img
+              src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Desktop%20Banner-50X.jpg"
+              alt="Get 50X entries on all apparel and enter the Sinister Diesel truck giveaway"
+              loading="eager">
+          </a>
+        </span>
+        <span class="hero-img-mobile">
+          <a href="https://sinisterdiesel.com/giveaway-rule.html" target="_self">
+            <img
+              src="https://sinisterdiesel.com/mm5/graphics/00000001/8/MOBILE%20Banner-50X.jpg"
+              alt="Get 50X entries on all apparel and enter the Sinister Diesel truck giveaway"
+              loading="eager">
+          </a>
+        </span>
+      </div>
+    </section>
+
+    <!-- ── COUNTDOWN BANNER ── -->
+    <section class="countdown-banner" aria-label="Giveaway countdown">
+      <div class="countdown-eyebrow">⚡ Giveaway ends in</div>
+      <div class="countdown-units" id="cd-units">
+        <div class="cu"><div class="cu-num" id="cd-days">00</div><div class="cu-label">Days</div></div>
+        <div class="cu-sep">:</div>
+        <div class="cu"><div class="cu-num" id="cd-hours">00</div><div class="cu-label">Hours</div></div>
+        <div class="cu-sep">:</div>
+        <div class="cu"><div class="cu-num" id="cd-mins">00</div><div class="cu-label">Mins</div></div>
+        <div class="cu-sep">:</div>
+        <div class="cu"><div class="cu-num" id="cd-secs">00</div><div class="cu-label">Secs</div></div>
+      </div>
+      <div class="countdown-cta-row">
+        <a class="btn-primary" href="https://sinisterdiesel.com/sinister-diesel.html">Shop &amp; Enter Now</a>
+        <a class="btn-secondary" href="https://sinisterdiesel.com/rules">See Official Rules</a>
+      </div>
+    </section>
+
+    <!-- ── HOW TO ENTER ── -->
+    <section class="how-it-works" aria-labelledby="how-it-works-title">
+      <h2 id="how-it-works-title" class="section-title reveal">How To Enter</h2>
+
+      <div class="howto-desktop reveal">
+        <mvt:item name="readytheme" param="image( 'howto' )" />
+      </div>
+      <div class="howto-mobile reveal">
+        <mvt:item name="readytheme" param="image( 'howtomob' )" />
+      </div>
+    </section>
+
+    <!-- ── PRODUCTS CAROUSEL 1 ── -->
+    <section class="carousel-section" id="bf-carousel" aria-label="Shop Now and Enter To Win">
+      <h2 class="section-title reveal">Shop Now and Enter To Win</h2>
+      <p class="section-subtitle reveal">Every $1 you spend earns you <strong style="color:#fff;">1 entry</strong> toward winning the truck.</p>
+
+      <div class="bf-carousel reveal">
+        <button class="nav prev" type="button" aria-label="Previous products">‹</button>
+        <div class="bf-track" id="bf-track" role="list" aria-live="polite">
+
+          <article class="prod-card" role="listitem" data-price="298.99" data-entries="XX">
+            <a class="prod-media" href="https://sinisterdiesel.com/mm5/merchant.mvc?Screen=PROD&Product_Code=SD-FF-6_7P-11">
+              <img src="/mm5/graphics/00000001/8/6.7 Fuel Filter_3.jpg" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/mm5/merchant.mvc?Screen=PROD&Product_Code=SD-FF-6_7P-11">Fuel Filter Conversion Kit for 2011-2025 Ford Powerstroke 6.7L</a></h3>
+              <div class="prod-sku">SKU: SD-FF-6.7P-11</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/mm5/merchant.mvc?Screen=PROD&Product_Code=SD-FF-6_7P-11">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="149.99">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-cat-fuel-filter-adapter-for-2001-2016-gm-duramax-66l.html">
+              <img src="/mm5/graphics/00000001/7/_DSC4308.jpg" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-cat-fuel-filter-adapter-for-2001-2016-gm-duramax-66l.html">CAT Fuel Filter Adapter for 01-16 Duramax 6.6</a></h3>
+              <div class="prod-sku">SKU: SD-CAT-DMAX</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-cat-fuel-filter-adapter-for-2001-2016-gm-duramax-66l.html">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="186.99">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-dual-wall-exhaust-tip-w-angle-cut-4-to-6-black.html">
+              <img src="/mm5/graphics/00000001/product_images/RAW144811535_718x480.jpeg" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-dual-wall-exhaust-tip-w-angle-cut-4-to-6-black.html">Dual Wall Exhaust Tip W/ Angle Cut 4" to 6" Black</a></h3>
+              <div class="prod-sku">SKU: SD-ETAC46B</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-dual-wall-exhaust-tip-w-angle-cut-4-to-6-black.html">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="129.99">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-blue-spring-kit-with-adjustable-billet-spring-housing-for-2003-2007-ford-powerstroke-60l.html">
+              <img src="/mm5/graphics/00000001/6/_DSC1839.jpg" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-blue-spring-kit-with-adjustable-billet-spring-housing-for-2003-2007-ford-powerstroke-60l.html">Blue Spring Kit with Adjustable Billet Spring Housing for 2003-2007 Ford Powerstroke</a></h3>
+              <div class="prod-sku">SKU: SD-FUELBLK-6.0-ADJ</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-blue-spring-kit-with-adjustable-billet-spring-housing-for-2003-2007-ford-powerstroke-60l.html">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="369.99">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-cold-side-charge-pipe-for-2011-2016-ford-powerstroke-67l.html">
+              <img src="/mm5/graphics/00000001/7/_DSC3659_720x480.webp" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-cold-side-charge-pipe-for-2011-2016-ford-powerstroke-67l.html">Cold Side Charge Pipe for 2011-2016 Ford Powerstroke 6.7L</a></h3>
+              <div class="prod-sku">SKU: SD-INTRPIPE-6.7P-COLD-11</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-cold-side-charge-pipe-for-2011-2016-ford-powerstroke-67l.html">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="309.99">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-cold-air-intake-for-1999-2003-ford-powerstroke-73l.html">
+              <img src="/mm5/graphics/00000001/6/_DSC1345.jpg" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-cold-air-intake-for-1999-2003-ford-powerstroke-73l.html">Cold Air Intake for 1999.5-2003 Ford Powerstroke 7.3L</a></h3>
+              <div class="prod-sku">SKU: SD-CAI-7.3</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-cold-air-intake-for-1999-2003-ford-powerstroke-73l.html">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="934.99">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-oil-filter-coolant-filtration-system-for-2003-2007-ford-powerstroke-60l.html">
+              <img src="/mm5/graphics/00000001/6/_DSC1628.jpg" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-oil-filter-coolant-filtration-system-for-2003-2007-ford-powerstroke-60l.html">Oil Filter &amp; Coolant Filtration System for 2003-2007 Ford Powerstroke 6.0L</a></h3>
+              <div class="prod-sku">SKU: SD-EOF-CF-6.0</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-oil-filter-coolant-filtration-system-for-2003-2007-ford-powerstroke-60l.html">Shop Now</a>
+            </div>
+          </article>
+
+        </div>
+        <button class="nav next" type="button" aria-label="Next products">›</button>
+      </div>
+      <div class="carousel-dots" id="dots-1" role="tablist" aria-label="Product carousel"></div>
+    </section>
+
+    <!-- ── ENTRY COUNTER ── -->
+    <section class="entry-counter-section reveal-scale" aria-label="Entry multiplier">
+      <div class="entry-counter-inner">
+        <div class="ec-label">🏆 Total entries awarded so far</div>
+        <div class="ec-num" id="ec-num">0</div>
+        <div class="ec-sub">Keep shopping to climb the leaderboard — more purchases = more chances to win.</div>
+        <div class="ec-cta">
+          <a class="btn-primary" href="https://sinisterdiesel.com/sinister-diesel.html" style="font-size:16px;min-height:52px;padding:0 32px;">Get More Entries</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRODUCTS CAROUSEL 2 — APPAREL ── -->
+    <section class="carousel-section" id="bf-carousel-2" aria-label="Earn 50x with Apparel">
+      <h2 class="section-title reveal">Earn 50× Entries with Apparel</h2>
+      <p class="section-subtitle reveal">Apparel purchases earn <strong style="color:#fff;">50 entries</strong> for every $1 spent!</p>
+
+      <div class="bf-carousel reveal">
+        <button class="nav prev" type="button" aria-label="Previous products">‹</button>
+        <div class="bf-track" id="bf-track-2" role="list" aria-live="polite">
+
+          <article class="prod-card" role="listitem" data-price="27.99" data-entries-rate="50">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-t-shirt-black-t-shirt-w-blue-line-logo.html">
+              <img src="/mm5/graphics/00000001/product_images/RAW144810153_640x480.jpeg" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-t-shirt-black-t-shirt-w-blue-line-logo.html">Blue Line T-Shirt</a></h3>
+              <div class="prod-sku">SDA-T-SHIRT-BLUE-LINE</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-t-shirt-black-t-shirt-w-blue-line-logo.html">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="49.99" data-entries-rate="50">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-logo-hoodie.html">
+              <img src="/mm5/graphics/00000001/8/SD-1_786x456.png" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-logo-hoodie.html">Logo Hoodie</a></h3>
+              <div class="prod-sku">SDA-hoodie-logo</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-logo-hoodie.html">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="27.99" data-entries-rate="50">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-boost-line-t-shirt.html">
+              <img src="/mm5/graphics/00000001/8/SDA-TS-BOOST-WEB%202%20(1)_640x480.png" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-boost-line-t-shirt.html">Boost T-Shirt</a></h3>
+              <div class="prod-sku">SDA-TS-BOOST</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-boost-line-t-shirt.html">Shop Now</a>
+            </div>
+          </article>
+
+          <article class="prod-card" role="listitem" data-price="49.99" data-entries-rate="50">
+            <a class="prod-media" href="https://sinisterdiesel.com/sinister-diesel-hoodie.html">
+              <img src="/mm5/graphics/00000001/8/TRUCK-1_786x457.png" alt="">
+              <div class="disc-badge" aria-hidden="true"></div>
+            </a>
+            <div class="prod-body">
+              <h3 class="prod-name"><a href="https://sinisterdiesel.com/sinister-diesel-hoodie.html">Sinister Diesel Alumiduty Hoodie</a></h3>
+              <div class="prod-sku">SDA-Hoodie-SIX7</div>
+              <div class="prod-price"><span class="sale"></span></div>
+              <a class="prod-btn" href="https://sinisterdiesel.com/sinister-diesel-hoodie.html">Shop Now</a>
+            </div>
+          </article>
+
+        </div>
+        <button class="nav next" type="button" aria-label="Next products">›</button>
+      </div>
+      <div class="carousel-dots" id="dots-2" role="tablist" aria-label="Apparel carousel"></div>
+    </section>
+
+    <!-- ── PRIZE SECTION ── -->
+    <section class="prize-section" aria-labelledby="prize-title">
+      <h2 id="prize-title" class="section-title reveal">What You Could Win</h2>
+
+      <div class="prize-wrap reveal">
+        <div class="prize-media">
+          <div class="prize-gallery" id="prize-gallery">
+            <button class="gallery-arrow prev" type="button" aria-label="Previous image">‹</button>
+            <div class="gallery-stage">
+              <img id="prize-gallery-main" src="/mm5/graphics/00000001/8/6.0.jpg" alt="Giveaway truck">
+            </div>
+            <button class="gallery-arrow next" type="button" aria-label="Next image">›</button>
+            <div class="gallery-thumbs" aria-label="Prize gallery thumbnails">
+              <button class="thumb is-active" type="button" data-image="/mm5/graphics/00000001/8/6.0.jpg"><img src="/mm5/graphics/00000001/8/6.0.jpg" alt="Truck image 1"></button>
+              <button class="thumb" type="button" data-image="/mm5/graphics/00000001/8/Engine Bay 3.jpg"><img src="/mm5/graphics/00000001/8/Engine Bay 3.jpg" alt="Truck image 2"></button>
+              <button class="thumb" type="button" data-image="/mm5/graphics/00000001/8/Engine (1).jpg"><img src="/mm5/graphics/00000001/8/Engine (1).jpg" alt="Truck image 3"></button>
+              <button class="thumb" type="button" data-image="/mm5/graphics/00000001/8/Wheel.jpg"><img src="/mm5/graphics/00000001/8/Wheel image 4"></button>
+              <button class="thumb" type="button" data-image="/mm5/graphics/00000001/8/Interior.jpg"><img src="/mm5/graphics/00000001/8/Interior.jpg" alt="Interior image 5"></button>
+              <button class="thumb" type="button" data-image="/mm5/graphics/00000001/8/Under.jpg"><img src="/mm5/graphics/00000001/8/Under.jpg" alt="Truck image 6"></button>
+              <button class="thumb" type="button" data-image="/mm5/graphics/00000001/8/Shocks.jpg"><img src="/mm5/graphics/00000001/8/Shocks.jpg" alt="Truck image 7"></button>
+              <button class="thumb" type="button" data-image="/mm5/graphics/00000001/8/Bed Cover.jpg"><img src="/mm5/graphics/00000001/8/Bed Cover.jpg" alt="Truck image 8"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prize-content">
+          <div class="prize-kicker">★ Grand Prize Giveaway</div>
+          <h3>6.0L F-250 Giveaway Truck</h3>
+          <p class="prize-copy">Fully Loaded with Sinister Diesel Products!</p>
+          <ul class="prize-list">
+            <li>Custom-built 6.0L F-250 prize truck</li>
+            <li>24×14 JTX Rims</li>
+            <li>Featured Sinister Diesel upgrades</li>
+            <li>Powder Coated Suspension</li>
+            <li>Built Transmission</li>
+            <li>Gloss White Wrap</li>
+          </ul>
+          <div class="prize-actions">
+            <a class="btn-primary" href="https://sinisterdiesel.com/sinister-diesel.html">Shop Now</a>
+            <a class="btn-secondary" href="https://sinisterdiesel.com/rules">View Official Rules</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── KLAVIYO FORM ── -->
+    <section class="klaviyo-signup reveal" aria-labelledby="klaviyo-signup-title">
+      <div class="klaviyo-signup-inner">
+        <div class="klaviyo-form-Xm9dvg"></div>
+      </div>
+    </section>
+
+    <!-- ── TRUST / RULES ── -->
+    <section class="trust-section" aria-labelledby="trust-title">
+      <h2 id="trust-title" class="section-title reveal">Sweepstakes Details</h2>
+      <div class="trust-grid stagger">
+        <article class="trust-card">
+          <h3>Official Rules</h3>
+          <p>View the complete sweepstakes rules including entry methods, eligibility, prize details, and terms. <a href="https://sinisterdiesel.com/rules">Read official rules</a></p>
+        </article>
+        <article class="trust-card">
+          <h3>No Purchase Necessary</h3>
+          <p>No purchase or payment of any kind is necessary to enter or win. A free alternate method of entry is available as described in the official rules.</p>
+        </article>
+        <article class="trust-card">
+          <h3>Winner Selection</h3>
+          <p>One winner will be randomly selected from all eligible entries after the promotion closes and must complete verification before the prize is awarded.</p>
+        </article>
+        <article class="trust-card">
+          <h3>Eligibility</h3>
+          <p>Open to legal residents of eligible U.S. states who are at least 18 at the time of entry. Void where prohibited. See <a href="https://sinisterdiesel.com/rules">official rules</a> for details.</p>
+        </article>
+      </div>
+    </section>
+
+    <br>
+    <p class="legal-disclaimer">* * * LIMIT OF 4,000 PURCHASE ENTRIES PER PERSON/EMAIL ADDRESS. * * * NO PURCHASE OR PAYMENT OF ANY KIND IS NECESSARY TO ENTER OR WIN. PURCHASE OR PAYMENT DOES NOT IMPROVE YOUR CHANCE OF WINNING. The Sinister Diesel Truck Sweepstakes is open to residents of the 48 contiguous US States &amp; DC (excluding AK &amp; HI), age of majority +. Void elsewhere &amp; where prohibited. Ends 06/30/2026. Vehicle winner must pick up from Sacramento, CA, USA. Subject to Official Rules at <a href="https://certified.promotrust.com/SinisterDiesel/TruckSweepstakes/rules.pdf">bit.ly/TruckSweeps</a></p>
+
+    <!-- ── FAQ ── -->
+    <section id="faq" class="faq reveal" aria-label="Giveaway FAQs">
+      <h2>Frequently Asked Questions</h2>
+      <div class="shell">
+        <div class="split">
+          <aside class="left">
+            <div><h2>Frequently Asked Questions</h2></div>
+            <div class="brand" aria-label="Sinister Diesel">
+              <mvt:item name="readytheme" param="image( 'stklogo1' )" />
+            </div>
+          </aside>
+          <div class="list" role="list">
+            <details class="faq-item" role="listitem">
+              <summary><span>When does the giveaway end?</span></summary>
+              <div class="answer"><p>The giveaway runs through 6-30-2026 at 11:59pm PST. Check the official rules for the closing time and any eligibility restrictions.</p></div>
+            </details>
+            <details class="faq-item" role="listitem">
+              <summary><span>How do I get entries?</span></summary>
+              <div class="answer"><p>Eligible purchases during the promotion earn entries automatically. See Official Rules for No Purchase necessary entries.</p></div>
+            </details>
+            <details class="faq-item" role="listitem">
+              <summary><span>Is there a no purchase necessary option?</span></summary>
+              <div class="answer"><p>Yes. The official rules include a free alternate method of entry. See Official Rules for full details.</p></div>
+            </details>
+            <details class="faq-item" role="listitem">
+              <summary><span>How is the winner chosen?</span></summary>
+              <div class="answer"><p>The winner is selected after the promotion closes, then verified according to the official rules before being announced.</p></div>
+            </details>
+            <details class="faq-item" role="listitem">
+              <summary><span>How are entries calculated?</span></summary>
+              <div class="answer"><p>Entries are automatically calculated based on purchase value and tracked internally.</p></div>
+            </details>
+            <details class="faq-item" role="listitem">
+              <summary><span>Can I check my individual entry count?</span></summary>
+              <div class="answer"><p>No. All entries are automatically tracked internally but are not displayed to individual customers.</p></div>
+            </details>
+            <details class="faq-item" role="listitem">
+              <summary><span>Do previous orders count toward the giveaway?</span></summary>
+              <div class="answer"><p>No. Any order with a purchase date before March 12th 2026 does not give any entries to our giveaway.</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FINAL CTA ── -->
+    <section class="final-cta reveal" aria-labelledby="final-cta-title">
+      <div class="final-cta-box">
+        <h2 id="final-cta-title">Ready To Enter?</h2>
+        <p>Shop eligible products, build your order, and lock in your entries before the giveaway closes.</p>
+        <div class="final-cta-actions">
+          <a class="btn-primary" href="https://sinisterdiesel.com/sinister-diesel.html">Shop Now</a>
+          <a class="btn-secondary" href="https://sinisterdiesel.com/rules">See Official Rules</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="o-layout">
+    <div class="o-layout__item">
+      <mvt:item name="hdft" param="footer" />
+    </div>
+  </section>
+  <mvt:item name="hdft" param="global_footer" />
+
+  <script>
+  /* ═══════════════════════════════════════════
+     PARTICLE CANVAS — floating blue/gold sparks
+  ═══════════════════════════════════════════ */
+  (function () {
+    var canvas = document.getElementById('sd-canvas');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var W, H;
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    var COLORS = [
+      'rgba(30,58,255,',   // blue
+      'rgba(79,111,255,',  // light blue
+      'rgba(245,200,66,',  // gold
+      'rgba(255,224,122,', // light gold
+      'rgba(180,200,255,'  // icy blue
+    ];
+
+    function spawn() {
+      var c = COLORS[Math.floor(Math.random() * COLORS.length)];
+      return {
+        x: Math.random() * W,
+        y: H + Math.random() * 60,
+        r: Math.random() * 2 + .5,
+        speed: Math.random() * .6 + .25,
+        drift: (Math.random() - .5) * .4,
+        alpha: Math.random() * .6 + .15,
+        fade: Math.random() * .004 + .001,
+        color: c
+      };
+    }
+
+    for (var i = 0; i < 80; i++) {
+      var p = spawn();
+      p.y = Math.random() * H; // start scattered
+      particles.push(p);
+    }
+
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = particles.length - 1; i >= 0; i--) {
+        var p = particles[i];
+        p.y -= p.speed;
+        p.x += p.drift;
+        p.alpha -= p.fade;
+
+        if (p.alpha <= 0 || p.y < -10) {
+          particles[i] = spawn();
+          continue;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + p.alpha + ')';
+        ctx.fill();
+      }
+      requestAnimationFrame(frame);
+    }
+
+    frame();
+
+    // keep ~80 particles
+    setInterval(function () {
+      while (particles.length < 80) particles.push(spawn());
+    }, 500);
+  })();
+
+  /* ═══════════════════════════════════════════
+     COUNTDOWN TIMER  — ends 2026-06-30 23:59:59 PST
+  ═══════════════════════════════════════════ */
+  (function () {
+    var END = new Date('2026-06-30T23:59:59-08:00').getTime();
+    var els = {
+      d: document.getElementById('cd-days'),
+      h: document.getElementById('cd-hours'),
+      m: document.getElementById('cd-mins'),
+      s: document.getElementById('cd-secs')
+    };
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function tick(el, val) {
+      var str = pad(val);
+      if (el.textContent !== str) {
+        el.classList.add('tick');
+        setTimeout(function () { el.classList.remove('tick'); }, 150);
+        el.textContent = str;
+      }
+    }
+
+    function update() {
+      var now  = Date.now();
+      var diff = Math.max(0, END - now);
+      var s    = Math.floor(diff / 1000);
+      var m    = Math.floor(s / 60);
+      var h    = Math.floor(m / 60);
+      var d    = Math.floor(h / 24);
+
+      tick(els.d, d);
+      tick(els.h, h % 24);
+      tick(els.m, m % 60);
+      tick(els.s, s % 60);
+    }
+
+    update();
+    setInterval(update, 1000);
+  })();
+
+  /* ═══════════════════════════════════════════
+     SCROLL REVEAL — IntersectionObserver
+  ═══════════════════════════════════════════ */
+  (function () {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll(
+      '.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger'
+    ).forEach(function (el) { io.observe(el); });
+  })();
+
+  /* ═══════════════════════════════════════════
+     ENTRY COUNT-UP ANIMATION
+  ═══════════════════════════════════════════ */
+  (function () {
+    var el = document.getElementById('ec-num');
+    if (!el) return;
+
+    var TARGET = 2847394; // sample total — update as needed
+    var duration = 2200;
+    var started = false;
+
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting || started) return;
+      started = true;
+      io.disconnect();
+
+      var start = performance.now();
+      function step(now) {
+        var t = Math.min(1, (now - start) / duration);
+        var ease = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(TARGET * ease).toLocaleString();
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }, { threshold: .3 });
+
+    io.observe(el.closest('.entry-counter-section') || el);
+  })();
+
+  /* ═══════════════════════════════════════════
+     PRODUCT CAROUSELS
+  ═══════════════════════════════════════════ */
+  (function () {
+    function initCarousel(sectionId, trackId, dotsId, entryRate) {
+      var section = document.getElementById(sectionId);
+      var track   = document.getElementById(trackId);
+      var dotsC   = document.getElementById(dotsId);
+      if (!section || !track || !dotsC) return;
+
+      var prev  = section.querySelector('.nav.prev');
+      var next  = section.querySelector('.nav.next');
+      var cards = Array.from(track.children);
+      var nf    = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+      dotsC.innerHTML = '';
+      cards.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.className = 'dot';
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        b.addEventListener('click', function () {
+          track.scrollTo({ left: cards[i].offsetLeft, behavior: 'smooth' });
+        });
+        dotsC.appendChild(b);
+      });
+
+      function updateState() {
+        var maxL = track.scrollWidth - track.clientWidth - 1;
+        if (prev) prev.disabled = track.scrollLeft <= 1;
+        if (next) next.disabled = track.scrollLeft >= maxL;
+
+        var center = track.scrollLeft + track.clientWidth / 2;
+        var best = 0, bestD = Infinity;
+        cards.forEach(function (c, i) {
+          var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
+          if (d < bestD) { bestD = d; best = i; }
+        });
+        Array.from(dotsC.children).forEach(function (d, i) {
+          d.setAttribute('aria-selected', i === best ? 'true' : 'false');
+        });
+      }
+
+      function step() { return Math.max(220, Math.round(track.clientWidth * .9)); }
+
+      if (prev) prev.addEventListener('click', function (e) { e.preventDefault(); track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      if (next) next.addEventListener('click', function (e) { e.preventDefault(); track.scrollBy({ left:  step(), behavior: 'smooth' }); });
+
+      track.addEventListener('scroll', function () { requestAnimationFrame(updateState); }, { passive: true });
+      window.addEventListener('resize', function () { requestAnimationFrame(updateState); });
+
+      cards.forEach(function (card) {
+        var price = parseFloat(card.getAttribute('data-price') || '0');
+        var rate  = parseFloat(card.getAttribute('data-entries-rate') || entryRate || '1');
+
+        var priceEl = card.querySelector('.sale');
+        if (priceEl && price) priceEl.textContent = nf.format(price);
+
+        var entries = Math.round(price * rate);
+        var badge   = card.querySelector('.disc-badge');
+        if (badge) { badge.textContent = entries.toLocaleString() + ' ENTRIES'; }
+      });
+
+      updateState();
+    }
+
+    try {
+      initCarousel('bf-carousel',   'bf-track',   'dots-1', 1);
+      initCarousel('bf-carousel-2', 'bf-track-2', 'dots-2', 50);
+    } catch (e) { console.error('Carousel init error', e); }
+  })();
+
+  /* ═══════════════════════════════════════════
+     PRIZE GALLERY
+  ═══════════════════════════════════════════ */
+  (function () {
+    var gallery = document.getElementById('prize-gallery');
+    if (!gallery) return;
+
+    var mainImg = document.getElementById('prize-gallery-main');
+    var thumbs  = Array.from(gallery.querySelectorAll('.thumb'));
+    var prev    = gallery.querySelector('.gallery-arrow.prev');
+    var next    = gallery.querySelector('.gallery-arrow.next');
+    var cur     = 0;
+
+    function setImage(idx) {
+      if (idx < 0) idx = thumbs.length - 1;
+      if (idx >= thumbs.length) idx = 0;
+      cur = idx;
+
+      mainImg.classList.add('fading');
+      setTimeout(function () {
+        mainImg.src = thumbs[idx].getAttribute('data-image');
+        mainImg.classList.remove('fading');
+      }, 200);
+
+      thumbs.forEach(function (t, i) { t.classList.toggle('is-active', i === idx); });
+    }
+
+    thumbs.forEach(function (t, i) { t.addEventListener('click', function () { setImage(i); }); });
+    if (prev) prev.addEventListener('click', function () { setImage(cur - 1); });
+    if (next) next.addEventListener('click', function () { setImage(cur + 1); });
+
+    // auto-advance every 5s
+    setInterval(function () { setImage(cur + 1); }, 5000);
+
+    setImage(0);
+  })();
+  </script>
+
+</body>
+</html>

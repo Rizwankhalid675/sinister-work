@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.7 Fuel Filter Conversion Kit — Sinister Diesel</title>
+<meta name="description" content="Upgrade your 6.7 Powerstroke with Sinister Diesel's Fuel Filter Conversion Kit. Superior filtration, easy install, made in the USA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap">
+
+<style>
+/* ═══════════════════════════════════════════
+   RESET & VARIABLES
+   ═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:   #1833B8;
+  --navy:   #0f1260;
+  --gold:   #FFD700;
+  --dark:   #111114;
+  --darker: #0a0a0c;
+  --text:   #c8cad8;
+  --white:  #ffffff;
+  --glass:  rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: auto; }
+
+body {
+  background: var(--darker);
+  color: var(--white);
+  font-family: 'Play', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+   ═══════════════════════════════════════════ */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(255,215,0,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease, border-color 0.3s;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+  width: 60px; height: 60px;
+  border-color: var(--gold);
+}
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════ */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 60px);
+  background: rgba(10, 10, 12, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transform: translateY(-100%);
+  transition: transform 0.6s ease;
+}
+#navbar.visible { transform: translateY(0); }
+
+.nav-logo img { height: 36px; display: block; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Play', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 4px;
+  cursor: none;
+  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.nav-cta:hover { background: #2244dd; transform: translateY(-1px); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   PROGRESS BAR
+   ═══════════════════════════════════════════ */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--gold));
+  z-index: 1001;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ═══════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════ */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--darker);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(24,51,184,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 70%, rgba(255,215,0,0.06) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero-title {
+  font-size: clamp(36px, 6vw, 88px);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  max-width: 900px;
+  padding: 0 24px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, var(--blue) 0%, #4a6cf7 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--text);
+  text-align: center;
+  max-width: 540px;
+  padding: 0 24px;
+  line-height: 1.7;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 15px 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 40px rgba(24,51,184,0.4);
+}
+.btn-primary:hover {
+  background: #2244dd;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(24,51,184,0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  cursor: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.6);
+  transform: translateY(-2px);
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+}
+.hero-scroll-hint span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.scroll-mouse {
+  width: 22px; height: 34px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 11px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+.scroll-mouse::before {
+  content: '';
+  width: 3px; height: 6px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.3; transform: translateY(6px); }
+}
+
+/* ═══════════════════════════════════════════
+   PINNED SCROLL SECTIONS
+   ═══════════════════════════════════════════ */
+.pin-wrap {
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION: PROBLEM/SOLUTION
+   ═══════════════════════════════════════════ */
+.section-dark {
+  background: var(--darker);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+}
+.section-light-dark {
+  background: #13131a;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+}
+
+.two-col {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: center;
+  width: 100%;
+}
+.two-col.reverse { direction: rtl; }
+.two-col.reverse > * { direction: ltr; }
+
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+.section-heading {
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.section-heading .accent { color: var(--gold); }
+.section-body {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.section-body:last-child { margin-bottom: 0; }
+
+/* gold underline decoration */
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-top: 14px;
+}
+
+/* Image card */
+.img-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+}
+.img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.img-card:hover img { transform: scale(1.04); }
+.img-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 40%;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+}
+
+/* ═══════════════════════════════════════════
+   FEATURE BULLETS
+   ═══════════════════════════════════════════ */
+.feature-list {
+  list-style: none;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+.feature-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-top: 6px;
+}
+
+/* ═══════════════════════════════════════════
+   STATS STRIP
+   ═══════════════════════════════════════════ */
+.stats-section {
+  background: linear-gradient(135deg, var(--navy) 0%, #0d1570 100%);
+  padding: clamp(60px, 8vh, 100px) clamp(20px, 5vw, 80px);
+  position: relative;
+  overflow: hidden;
+}
+.stats-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.stats-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  position: relative;
+}
+.stat-item { text-align: center; }
+.stat-number {
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+.stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.stat-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.1);
+  align-self: stretch;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-divider { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS — HORIZONTAL PIN SCROLL
+   ═══════════════════════════════════════════ */
+.hiw-outer {
+  overflow: hidden;
+  background: var(--darker);
+}
+.hiw-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hiw-track {
+  display: flex;
+  gap: 0;
+  will-change: transform;
+}
+.hiw-panel {
+  flex-shrink: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 100px);
+  position: relative;
+}
+
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--blue);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(24,51,184,0.5);
+}
+
+.hiw-content {
+  max-width: 680px;
+  text-align: center;
+}
+.hiw-icon {
+  width: 80px; height: 80px;
+  margin: 0 auto 28px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hiw-icon svg { width: 40px; height: 40px; }
+.hiw-step-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.hiw-title {
+  font-size: clamp(26px, 3.5vw, 48px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.hiw-desc {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.75;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════
+   ENGINE COMPATIBILITY GRID
+   ═══════════════════════════════════════════ */
+.compat-section {
+  background: #13131a;
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+}
+.compat-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.section-header .section-heading::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.engine-group { margin-bottom: 48px; }
+.engine-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+.engine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.engine-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  cursor: none;
+  text-decoration: none;
+  color: var(--white);
+  display: block;
+}
+.engine-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(24,51,184,0.25);
+}
+.engine-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.engine-card-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+}
+.engine-card-arrow {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--blue);
+  text-transform: uppercase;
+  transition: letter-spacing 0.2s;
+}
+.engine-card:hover .engine-card-arrow { letter-spacing: 2px; }
+
+/* ═══════════════════════════════════════════
+   MARQUEE
+   ═══════════════════════════════════════════ */
+.marquee-wrap {
+  background: var(--navy);
+  padding: 16px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: marqueeScroll 18s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.marquee-track span::before {
+  content: '★';
+  color: var(--gold);
+  font-size: 8px;
+}
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════════════
+   REVIEWS
+   ═══════════════════════════════════════════ */
+.reviews-section {
+  background: var(--darker);
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+}
+.reviews-grid {
+  max-width: 1180px;
+  margin: 56px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.review-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color 0.25s, transform 0.25s;
+  border-bottom: 3px solid transparent;
+}
+.review-card:hover {
+  border-color: rgba(24,51,184,0.4);
+  border-bottom-color: var(--gold);
+  transform: translateY(-4px);
+}
+.review-stars { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-bottom: 12px; }
+.review-text { font-size: 13.5px; color: var(--text); line-height: 1.7; margin-bottom: 16px; }
+.review-author { display: flex; align-items: center; gap: 10px; }
+.review-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+  flex-shrink: 0;
+}
+.review-name { font-size: 13px; font-weight: 700; }
+.review-verified { font-size: 10px; color: #5b8df7; letter-spacing: 0.5px; margin-top: 2px; }
+
+@media (max-width: 900px) {
+  .reviews-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 580px) {
+  .reviews-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════
+   CTA SECTION
+   ═══════════════════════════════════════════ */
+.cta-section {
+  background: linear-gradient(135deg, #0a0e4a 0%, var(--navy) 50%, #0d1a6e 100%);
+  padding: clamp(80px, 12vh, 140px) clamp(20px, 5vw, 80px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%);
+}
+.cta-title {
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  position: relative;
+}
+.cta-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 40px;
+  position: relative;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+.cta-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 4px;
+  cursor: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 50px rgba(255,215,0,0.3);
+}
+.btn-gold:hover {
+  background: #ffe033;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 50px rgba(255,215,0,0.5);
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+footer {
+  background: #07070a;
+  padding: 40px clamp(20px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer img { height: 28px; }
+footer p { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 0.5px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL UTILITY
+   ═══════════════════════════════════════════ */
+.sr {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.sr.sr--left  { transform: translateX(-32px); }
+.sr.sr--right { transform: translateX(32px); }
+.sr.sr--scale { transform: scale(0.94); }
+.sr.in { opacity: 1 !important; transform: translate(0,0) scale(1) !important; }
+
+/* stagger children */
+.sr-group .sr:nth-child(1) { transition-delay: 0s; }
+.sr-group .sr:nth-child(2) { transition-delay: 0.1s; }
+.sr-group .sr:nth-child(3) { transition-delay: 0.2s; }
+.sr-group .sr:nth-child(4) { transition-delay: 0.3s; }
+
+/* ═══════════════════════════════════════════
+   MOBILE RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .two-col.reverse { direction: ltr; }
+
+  .hiw-panel { padding: 40px 20px; }
+  .hiw-title { font-size: 26px; }
+
+  .footer-links { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/SD_Logo_white_Small.png" alt="Sinister Diesel" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span style="display:none;font-size:16px;font-weight:700;letter-spacing:2px;">SINISTER DIESEL</span>
+  </div>
+  <nav class="nav-links">
+    <a href="https://sinisterdiesel.com/powerstroke.html">Powerstroke</a>
+    <a href="https://sinisterdiesel.com/duramax.html">Duramax</a>
+    <a href="https://sinisterdiesel.com/cummins.html">Cummins</a>
+  </nav>
+  <a href="#shop" class="nav-cta">Shop Now</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow" id="hero-eyebrow">6.7 Powerstroke Upgrade</div>
+  <h1 class="hero-title" id="hero-title">
+    Fuel Filter<br><span>Conversion Kit</span>
+  </h1>
+  <p class="hero-sub" id="hero-sub">
+    Stop clogging. Stop failing. The Sinister Diesel 6.7 Fuel Filter Conversion Kit eliminates Ford's known fuel filter housing weaknesses — for good.
+  </p>
+  <div class="hero-actions" id="hero-actions">
+    <a href="https://sinisterdiesel.com/fuel-filter-conversion-kit.html" class="btn-primary">
+      Shop the Kit
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#why" class="btn-secondary">Learn More</a>
+  </div>
+  <div class="hero-scroll-hint" id="hero-scroll">
+    <div class="scroll-mouse"></div>
+    <span>Scroll to Explore</span>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Made in the USA</span><span>6.7 Powerstroke</span><span>Direct Replacement</span><span>Superior Filtration</span>
+    <span>Easy Install</span><span>Sinister Diesel</span><span>Trusted Since 2008</span><span>20,000+ Reviews</span>
+    <span>Made in the USA</span><span>6.7 Powerstroke</span><span>Direct Replacement</span><span>Superior Filtration</span>
+    <span>Easy Install</span><span>Sinister Diesel</span><span>Trusted Since 2008</span><span>20,000+ Reviews</span>
+  </div>
+</div>
+
+<!-- ═══ THE PROBLEM ═══ -->
+<section id="why" class="section-dark">
+  <div class="two-col">
+    <div class="sr sr--left">
+      <span class="section-eyebrow">The Problem</span>
+      <h2 class="section-heading">Ford's OEM Housing <span class="accent">Fails.</span></h2>
+      <p class="section-body">The factory 6.7 Powerstroke fuel filter housing is notorious for cracking, leaking, and causing dangerous fuel fires. It's a known design flaw that Ford has never properly addressed.</p>
+      <p class="section-body">Every mile you run on the stock housing is a risk — to your engine, your truck, and your safety.</p>
+      <ul class="feature-list">
+        <li>Plastic construction cracks under heat cycling</li>
+        <li>Filter head leaks leading to fuel fires</li>
+        <li>Expensive OEM replacements that fail again</li>
+        <li>Clogged filters starving your injectors</li>
+      </ul>
+    </div>
+    <div class="sr sr--right">
+      <div class="img-card">
+        <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg"
+             alt="OEM Fuel Filter Housing Failure on 6.7 Powerstroke"
+             loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE SOLUTION ═══ -->
+<section class="section-light-dark">
+  <div class="two-col reverse">
+    <div class="sr sr--right">
+      <span class="section-eyebrow">The Sinister Solution</span>
+      <h2 class="section-heading">Engineered to <span class="accent">Outlast</span> OEM</h2>
+      <p class="section-body">Our 6.7 Fuel Filter Conversion Kit replaces the entire problematic housing with a CNC-machined billet aluminum assembly that's built to handle real-world diesel demands.</p>
+      <p class="section-body">Sinister Blue anodized finish. Direct bolt-on fitment. No modifications. No compromises.</p>
+      <ul class="feature-list">
+        <li>6061 billet aluminum — zero plastic failure points</li>
+        <li>Eliminates the notorious fuel fire risk</li>
+        <li>Works with standard filter sizes — no proprietary parts</li>
+        <li>Precision CNC machined in the USA</li>
+        <li>Converts to a reliable, long-life filtration system</li>
+      </ul>
+    </div>
+    <div class="sr sr--left">
+      <div class="img-card">
+        <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg"
+             alt="Sinister Diesel 6.7 Fuel Filter Conversion Kit - Billet Aluminum"
+             loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="stats-section">
+  <div class="stats-inner sr-group">
+    <div class="stat-item sr">
+      <div class="stat-number" data-target="99">0</div>
+      <div class="stat-label">Filtration Efficiency %</div>
+    </div>
+    <div class="stat-item sr">
+      <div class="stat-number" data-target="6061">0</div>
+      <div class="stat-label">Billet Aluminum Grade</div>
+    </div>
+    <div class="stat-item sr">
+      <div class="stat-number" data-target="25">0</div>
+      <div class="stat-label">Min Install Time</div>
+    </div>
+    <div class="stat-item sr">
+      <div class="stat-number" data-target="2008">0</div>
+      <div class="stat-label">Trusted Since</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS — Horizontal Scroll ═══ -->
+<div class="hiw-outer" id="hiw-outer">
+  <div class="hiw-sticky" id="hiw-sticky">
+    <div class="hiw-track" id="hiw-track">
+
+      <!-- Panel 0: Intro -->
+      <div class="hiw-panel">
+        <div class="hiw-content">
+          <p class="hiw-step-label">How It Works</p>
+          <h2 class="hiw-title">Install in<br>3 Simple Steps</h2>
+          <p class="hiw-desc">No shop. No special tools. Our bolt-on conversion kit is designed for the home mechanic. Follow the detailed instructions included and you'll be running clean fuel in under 30 minutes.</p>
+        </div>
+      </div>
+
+      <!-- Panel 1 -->
+      <div class="hiw-panel">
+        <div class="hiw-content">
+          <div class="hiw-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="1.5">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <div class="step-badge">1</div>
+          <p class="hiw-step-label">Step One</p>
+          <h2 class="hiw-title">Remove the<br>OEM Housing</h2>
+          <p class="hiw-desc">Drain the fuel system and remove the factory filter housing. It only takes a few minutes with basic hand tools. No specialty equipment required.</p>
+        </div>
+      </div>
+
+      <!-- Panel 2 -->
+      <div class="hiw-panel">
+        <div class="hiw-content">
+          <div class="hiw-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="step-badge">2</div>
+          <p class="hiw-step-label">Step Two</p>
+          <h2 class="hiw-title">Bolt On the<br>SD Conversion Kit</h2>
+          <p class="hiw-desc">The Sinister Diesel housing drops in using the factory mounting points. Direct bolt-on — no drilling, no cutting, no modifications needed.</p>
+        </div>
+      </div>
+
+      <!-- Panel 3 -->
+      <div class="hiw-panel">
+        <div class="hiw-content">
+          <div class="hiw-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="1.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div class="step-badge">3</div>
+          <p class="hiw-step-label">Step Three</p>
+          <h2 class="hiw-title">Install Filter &amp;<br>Hit the Road</h2>
+          <p class="hiw-desc">Install a standard filter, prime the system, and you're done. No dealer. No diagnostic tools. Clean fuel and peace of mind — every time you turn the key.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ENGINE COMPATIBILITY ═══ -->
+<section id="shop" class="compat-section">
+  <div class="compat-inner">
+    <div class="section-header sr">
+      <span class="section-eyebrow" style="display:block;text-align:center;margin-bottom:12px;">Find Your Fit</span>
+      <h2 class="section-heading" style="text-align:center;">Engine Compatibility</h2>
+      <p style="color:var(--text);font-size:15px;margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;">
+        Select your engine to find the exact Fuel Filter Conversion Kit for your 6.7 Powerstroke.
+      </p>
+    </div>
+
+    <div class="engine-group sr">
+      <div class="engine-group-label">Ford Powerstroke</div>
+      <div class="engine-grid">
+        <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+fuel+filter+2011+2012+2013+2014+2015+2016" class="engine-card">
+          <div class="engine-card-title">2011–2016 6.7L</div>
+          <div class="engine-card-sub">Ford F-250 / F-350 / F-450</div>
+          <span class="engine-card-arrow">Shop Now →</span>
+        </a>
+        <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+fuel+filter+2017+2018+2019" class="engine-card">
+          <div class="engine-card-title">2017–2019 6.7L</div>
+          <div class="engine-card-sub">Ford F-250 / F-350 / F-450</div>
+          <span class="engine-card-arrow">Shop Now →</span>
+        </a>
+        <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+fuel+filter+2020+2021+2022" class="engine-card">
+          <div class="engine-card-title">2020–2022 6.7L</div>
+          <div class="engine-card-sub">Ford F-250 / F-350 / F-450</div>
+          <span class="engine-card-arrow">Shop Now →</span>
+        </a>
+        <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+fuel+filter+2023+2024" class="engine-card">
+          <div class="engine-card-title">2023–2024 6.7L</div>
+          <div class="engine-card-sub">Ford F-250 / F-350 / F-450</div>
+          <span class="engine-card-arrow">Shop Now →</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ═══ -->
+<section class="reviews-section">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div class="section-header sr">
+      <span class="section-eyebrow" style="display:block;text-align:center;margin-bottom:12px;">Customer Reviews</span>
+      <h2 class="section-heading" style="text-align:center;">What Diesel Owners Say</h2>
+    </div>
+    <div class="reviews-grid sr-group">
+      <div class="review-card sr">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Had a fuel fire scare with my stock housing. Switched to Sinister's kit and couldn't be happier. Bolted right in, looks amazing, and gives me total peace of mind."</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Marcus T.</div>
+            <div class="review-verified">✓ Verified Buyer · TX</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card sr">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Install took me about 20 minutes in my driveway. The instructions were clear and everything lined up perfectly. This is the upgrade every 6.7 owner needs."</p>
+        <div class="review-author">
+          <div class="review-avatar">D</div>
+          <div>
+            <div class="review-name">Derek W.</div>
+            <div class="review-verified">✓ Verified Buyer · CO</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card sr">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Quality is night and day vs the OEM plastic housing. The billet aluminum feels bomber. Sinister Diesel never lets me down — been buying from them for 6 years."</p>
+        <div class="review-author">
+          <div class="review-avatar">J</div>
+          <div>
+            <div class="review-name">Jason R.</div>
+            <div class="review-verified">✓ Verified Buyer · AZ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section">
+  <h2 class="cta-title sr">Stop Running on<br><span style="color:var(--gold)">OEM Risk.</span></h2>
+  <p class="cta-sub sr">Join thousands of 6.7 Powerstroke owners who've already made the switch. Your engine deserves better than a plastic housing.</p>
+  <div class="cta-actions sr">
+    <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+fuel+filter+conversion+kit" class="btn-gold">
+      Shop the Kit
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="https://sinisterdiesel.com" class="btn-secondary">Browse All Products</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/SD_Logo_white_Small.png" alt="Sinister Diesel" onerror="this.style.display='none'">
+  <p>© 2024 Sinister Diesel. All Rights Reserved.</p>
+  <div class="footer-links">
+    <a href="https://sinisterdiesel.com/return-policy.html">Returns</a>
+    <a href="https://sinisterdiesel.com/warranty.html">Warranty</a>
+    <a href="https://sinisterdiesel.com/contact-us.html">Contact</a>
+  </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Custom Cursor ── */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+  ring.style.left   = rx + 'px';
+  ring.style.top    = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+/* ── Progress Bar ── */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  bar.style.width = (p * 100) + '%';
+});
+
+/* ── Navbar ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('visible', window.scrollY > 80);
+}, { passive: true });
+
+/* ── Hero Entrance ── */
+gsap.timeline({ delay: 0.2 })
+  .to('#hero-eyebrow',  { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
+  .to('#hero-title',    { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+  .to('#hero-sub',      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+  .to('#hero-actions',  { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+  .to('#hero-scroll',   { opacity: 1,       duration: 0.6, ease: 'power2.out' }, '-=0.2');
+
+/* ── Horizontal How It Works ── */
+const hiwOuter = document.getElementById('hiw-outer');
+const hiwTrack = document.getElementById('hiw-track');
+const panels   = hiwTrack.querySelectorAll('.hiw-panel');
+const totalSlide = (panels.length - 1) * window.innerWidth;
+
+gsap.to(hiwTrack, {
+  x: -totalSlide,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: hiwOuter,
+    pin: true,
+    scrub: 1,
+    start: 'top top',
+    end: () => '+=' + (totalSlide + window.innerHeight),
+    anticipatePin: 1,
+  }
+});
+
+/* ── Scroll Reveal (IntersectionObserver) ── */
+const srEls = document.querySelectorAll('.sr');
+const srObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      srObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+srEls.forEach(el => srObs.observe(el));
+
+/* ── Counter Animation ── */
+function animCounter(el, target, suffix) {
+  const start = performance.now();
+  const dur = 1800;
+  function tick(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target) + (suffix || '');
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+const statNums = document.querySelectorAll('.stat-number[data-target]');
+const statObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const target = parseInt(e.target.dataset.target);
+      const suffix = e.target.dataset.suffix || '';
+      animCounter(e.target, target, suffix);
+      statObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+statNums.forEach(el => statObs.observe(el));
+
+/* ── Parallax on hero grid ── */
+gsap.to('.hero-grid', {
+  yPercent: 30,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: true,
+  }
+});
+
+/* ── Reduced motion ── */
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.sr').forEach(el => el.classList.add('in'));
+}
+</script>
+
+</body>
+</html>

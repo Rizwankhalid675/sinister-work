@@ -1,0 +1,16 @@
+{
+  "name": "sinister-netsuite-sync",
+  "version": "1.0.0",
+  "description": "Miva to NetSuite integration - replaces Celigo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3",
+    "oauth-1.0a": "^2.2.6",
+    "crypto-js": "^4.2.0"
+  }
+}

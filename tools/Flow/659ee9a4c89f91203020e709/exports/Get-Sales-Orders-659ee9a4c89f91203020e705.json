@@ -1,0 +1,216 @@
+{
+  "_id": "659ee9a4c89f91203020e705",
+  "name": "Get Sales Orders",
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "apiIdentifier": "e88be394cd",
+  "asynchronous": true,
+  "oneToMany": false,
+  "mockOutput": {
+    "page_of_records": [
+      {
+        "record": {
+          "id": "87259",
+          "recordType": "salesorder",
+          "salesOrderID": "87259",
+          "Date Created": "2/2/2024 12:08 pm",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4198",
+          "customerID": "225782",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "304.98",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644078",
+          "HB | Miva Order Total": "304.98",
+          "NS Order Total": "304.98",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=87259&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "87258",
+          "recordType": "salesorder",
+          "salesOrderID": "87258",
+          "Date Created": "2/2/2024 12:08 pm",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4197",
+          "customerID": "225781",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "50.45",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644076",
+          "HB | Miva Order Total": "50.45",
+          "NS Order Total": "50.45",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=87258&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "87256",
+          "recordType": "salesorder",
+          "salesOrderID": "87256",
+          "Date Created": "2/2/2024 12:08 pm",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4195",
+          "customerID": "225779",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "236.63",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644073",
+          "HB | Miva Order Total": "236.63",
+          "NS Order Total": "236.63",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=87256&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "87140",
+          "recordType": "salesorder",
+          "salesOrderID": "87140",
+          "Date Created": "2/2/2024 11:09 am",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4190",
+          "customerID": "225777",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "99.99",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644068",
+          "HB | Miva Order Total": "99.99",
+          "NS Order Total": "99.99",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=87140&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "87139",
+          "recordType": "salesorder",
+          "salesOrderID": "87139",
+          "Date Created": "2/2/2024 11:09 am",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4189",
+          "customerID": "225776",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "376.12",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644067",
+          "HB | Miva Order Total": "376.12",
+          "NS Order Total": "376.12",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=87139&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "87138",
+          "recordType": "salesorder",
+          "salesOrderID": "87138",
+          "Date Created": "2/2/2024 11:09 am",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4188",
+          "customerID": "209172",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "228.12",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644066",
+          "HB | Miva Order Total": "228.12",
+          "NS Order Total": "228.12",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=87138&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "87136",
+          "recordType": "salesorder",
+          "salesOrderID": "87136",
+          "Date Created": "2/2/2024 11:09 am",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4186",
+          "customerID": "225774",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "114.49",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644062",
+          "HB | Miva Order Total": "114.49",
+          "NS Order Total": "114.49",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=87136&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "86810",
+          "recordType": "salesorder",
+          "salesOrderID": "86810",
+          "Date Created": "2/2/2024 10:16 am",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4179",
+          "customerID": "225673",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "138.70",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644061",
+          "HB | Miva Order Total": "138.70",
+          "NS Order Total": "138.70",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=86810&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "86599",
+          "recordType": "salesorder",
+          "salesOrderID": "86599",
+          "Date Created": "2/2/2024 9:20 am",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4169",
+          "customerID": "225480",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "43.90",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644052",
+          "HB | Miva Order Total": "43.90",
+          "NS Order Total": "43.90",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=86599&compid=4284657"
+        }
+      },
+      {
+        "record": {
+          "id": "86595",
+          "recordType": "salesorder",
+          "salesOrderID": "86595",
+          "Date Created": "2/2/2024 9:20 am",
+          "Date": "2/2/2024",
+          "Document Number": "SO#4165",
+          "customerID": "225477",
+          "Amount (Transaction Tax Total)": "",
+          "paymentAmount": "433.40",
+          "Applying Transaction": "",
+          "HB | Miva Order ID": "2644044",
+          "HB | Miva Order Total": "433.40",
+          "NS Order Total": "433.40",
+          "dataURI": "https://4284657.app.netsuite.com/app/accounting/transactions/salesord.nl?id=86595&compid=4284657"
+        }
+      }
+    ]
+  },
+  "aiDescription": {
+    "summary": "The \"Get Sales Orders\" export retrieves sales order data from NetSuite using a RESTlet and a saved search. It exports all search rows as individual records and returns detailed search results. The export is associated with a specific connection, but the connection details are not provided. The export has additional parameters such as skipGrouping and statsOnly, which control the grouping and validation of records and the level of detail in the search results. There is also a markExportedBatchSize parameter that determines the number of records exported in one batch for the \"Export type Once\" operation.",
+    "detailed": "The export is named \"Get Sales Orders\" and it is of type \"NetSuiteExport\". This means that it retrieves data from a NetSuite application.\n\nThe export uses a RESTlet to retrieve the data. The RESTlet is configured with the following parameters:\n- The record type is set to \"salesorder\", indicating that the export will retrieve sales order data from NetSuite.\n- The searchId is set to \"1845\", which means that the export will use a saved search in NetSuite to retrieve the data. The saved search should be sorted by internal ID to group consecutive search rows with the same internal ID into individual records.\n- The useSS2Restlets parameter is set to false, indicating that the export will use the SuiteScript 1.0 version of the RESTlet.\n- The restletVersion is set to \"suitebundle\", which means that the RESTlet is part of a SuiteBundle.\n\nThe export also has the following additional parameters:\n- The skipGrouping parameter is set to true, which means that the default grouping and validation based on internal ID will be turned off. All search rows will be exported as individual records.\n- The statsOnly parameter is set to false, which means that the export will return detailed search results instead of just high-level stats.\n\nThe export is associated with a specific connection, which is not specified in the provided JSON representation.\n\nAdditionally, there is a markExportedBatchSize parameter, which is not specified in the JSON representation. This parameter determines the number of records to export in one batch for the \"Export type Once\" operation. The default value is 100, but it can be adjusted to a value between 1 and 100.\n\nIn summary, this export retrieves sales order data from NetSuite using a RESTlet and a saved search. It exports all search rows as individual records and returns detailed search results.",
+    "generatedOn": null
+  },
+  "netsuite": {
+    "type": "restlet",
+    "skipGrouping": true,
+    "statsOnly": false,
+    "restlet": {
+      "recordType": "salesorder",
+      "searchId": "1845",
+      "useSS2Restlets": false,
+      "restletVersion": "suitebundle",
+      "markExportedBatchSize": 100,
+      "columns": [],
+      "criteria": []
+    },
+    "distributed": {
+      "executionContext": [],
+      "executionType": []
+    }
+  },
+  "adaptorType": "NetSuiteExport"
+}

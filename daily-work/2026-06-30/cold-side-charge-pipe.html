@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.7 Cold Side Charge Pipe — Sinister Diesel</title>
+<meta name="description" content="Upgrade your 6.7 Powerstroke with Sinister Diesel's Cold Side Charge Pipe. Increased airflow, billet aluminum, direct bolt-on fitment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:   #1833B8;
+  --navy:   #0f1260;
+  --gold:   #FFD700;
+  --dark:   #111114;
+  --darker: #0a0a0c;
+  --text:   #c8cad8;
+  --white:  #ffffff;
+  --glass:  rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: auto; }
+body {
+  background: var(--darker);
+  color: var(--white);
+  font-family: 'Play', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Cursor ── */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(255,215,0,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease, border-color 0.3s;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+  width: 60px; height: 60px;
+  border-color: var(--gold);
+}
+
+/* ── Progress ── */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--gold));
+  z-index: 1001;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ── Navbar ── */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 60px);
+  background: rgba(10, 10, 12, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transform: translateY(-100%);
+  transition: transform 0.6s ease;
+}
+#navbar.visible { transform: translateY(0); }
+.nav-logo img { height: 36px; display: block; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Play', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 4px;
+  cursor: none;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: #2244dd; transform: translateY(-1px); }
+@media (max-width: 768px) { .nav-links { display: none; } }
+
+/* ══════════════════════════════
+   HERO — SPLIT LAYOUT
+══════════════════════════════ */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  background: var(--darker);
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(100px, 12vh, 140px) clamp(32px, 5vw, 80px) clamp(60px, 8vh, 100px);
+  position: relative;
+  z-index: 2;
+}
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+.hero-right-img {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, var(--darker) 0%, transparent 30%),
+    url('https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg') center/cover no-repeat;
+  transform: scale(1.08);
+  transition: transform 8s ease;
+}
+.hero-right-img.loaded { transform: scale(1); }
+
+.hero-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--darker) 0%, rgba(10,10,12,0.3) 100%);
+}
+
+.hero-bg-glow {
+  position: absolute;
+  top: 30%; left: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(24,51,184,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.hero-title {
+  font-size: clamp(36px, 4.5vw, 72px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.hero-title .accent {
+  background: linear-gradient(135deg, #4a6cf7, var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.75;
+  max-width: 420px;
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.25);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateX(-20px);
+  width: fit-content;
+}
+.hero-badge svg { width: 12px; height: 12px; fill: var(--gold); }
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: clamp(32px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+}
+.hero-scroll-hint span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.scroll-line {
+  width: 40px; height: 1px;
+  background: rgba(255,255,255,0.2);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--gold);
+  animation: lineSweep 1.8s ease-in-out infinite;
+}
+@keyframes lineSweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding-top: 120px; }
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 40px rgba(24,51,184,0.4);
+}
+.btn-primary:hover {
+  background: #2244dd;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(24,51,184,0.6);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 4px;
+  cursor: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+.btn-gold {
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 4px;
+  cursor: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 50px rgba(255,215,0,0.3);
+}
+.btn-gold:hover { background: #ffe033; transform: translateY(-3px); box-shadow: 0 12px 50px rgba(255,215,0,0.5); }
+
+/* ══════════════════════════════
+   MARQUEE
+══════════════════════════════ */
+.marquee-wrap {
+  background: var(--navy);
+  padding: 16px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: marqueeScroll 20s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.marquee-track span::before { content: '★'; color: var(--gold); font-size: 8px; }
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ══════════════════════════════
+   PERFORMANCE NUMBERS — BIG IMPACT
+══════════════════════════════ */
+.perf-section {
+  background: var(--dark);
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+  position: relative;
+  overflow: hidden;
+}
+.perf-section::before {
+  content: 'PERFORMANCE';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(80px, 12vw, 180px);
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: rgba(255,255,255,0.018);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.perf-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+.perf-stat { text-align: center; padding: 40px 20px; }
+.perf-num {
+  font-size: clamp(56px, 7vw, 100px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 10px;
+}
+.perf-num.gold { color: var(--gold); }
+.perf-num.blue { color: #5b8df7; }
+.perf-num.white { color: var(--white); }
+.perf-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.5;
+}
+.perf-divider {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.12), transparent);
+}
+
+@media (max-width: 768px) {
+  .perf-inner { grid-template-columns: 1fr 1fr; gap: 0; }
+  .perf-divider { display: none; }
+  .perf-stat { padding: 28px 12px; }
+}
+
+/* ══════════════════════════════
+   FEATURES — SPLIT SCROLL PANELS
+══════════════════════════════ */
+.features-container {
+  position: relative;
+}
+.feature-panel {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+}
+.feature-panel:nth-child(odd)  { background: var(--darker); }
+.feature-panel:nth-child(even) { background: #13131a; }
+
+.fp-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: center;
+  width: 100%;
+}
+.fp-inner.reverse { direction: rtl; }
+.fp-inner.reverse > * { direction: ltr; }
+
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: block;
+}
+.section-heading {
+  font-size: clamp(26px, 3vw, 48px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.section-heading .accent { color: var(--gold); }
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 40px; height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-top: 14px;
+}
+.section-body {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.feature-list {
+  list-style: none;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+.feature-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-top: 6px;
+}
+
+/* Product visual card */
+.product-visual {
+  position: relative;
+}
+.product-img-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  background: #0f0f14;
+  position: relative;
+}
+.product-img-card img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.product-img-card:hover img { transform: scale(1.04); }
+
+/* floating badge */
+.float-badge {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  background: var(--gold);
+  color: var(--dark);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(255,215,0,0.35);
+  z-index: 2;
+}
+.float-badge strong { display: block; font-size: 22px; letter-spacing: -0.5px; }
+
+@media (max-width: 768px) {
+  .fp-inner { grid-template-columns: 1fr; gap: 36px; }
+  .fp-inner.reverse { direction: ltr; }
+  .float-badge { bottom: 12px; right: 12px; }
+}
+
+/* ══════════════════════════════
+   OEM vs SD COMPARISON
+══════════════════════════════ */
+.compare-section {
+  background: var(--dark);
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+}
+.compare-inner { max-width: 900px; margin: 0 auto; }
+.compare-header { text-align: center; margin-bottom: 48px; }
+
+.compare-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.compare-col {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.compare-col-head {
+  padding: 16px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.compare-col-head.oem { background: rgba(239,68,68,0.12); color: #f87171; }
+.compare-col-head.sd  { background: rgba(24,51,184,0.2); color: #7b9ef7; }
+.compare-col-body { background: var(--glass); padding: 8px 0; }
+.compare-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  font-size: 13.5px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.4;
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-row .icon-bad  { color: #f87171; font-size: 14px; flex-shrink: 0; }
+.compare-row .icon-good { color: #4ade80; font-size: 14px; flex-shrink: 0; }
+
+@media (max-width: 640px) {
+  .compare-table { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════
+   HOW IT WORKS — PINNED PANELS
+══════════════════════════════ */
+.hiw-outer {
+  overflow: hidden;
+  background: var(--navy);
+}
+.hiw-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hiw-track {
+  display: flex;
+  will-change: transform;
+}
+.hiw-panel {
+  flex-shrink: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 100px);
+  position: relative;
+}
+
+.step-num {
+  font-size: clamp(100px, 15vw, 200px);
+  font-weight: 700;
+  color: rgba(255,255,255,0.04);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -8px;
+}
+.hiw-content { max-width: 620px; text-align: center; position: relative; z-index: 1; }
+.hiw-step-badge {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 40px rgba(24,51,184,0.5);
+}
+.hiw-step-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.hiw-title {
+  font-size: clamp(26px, 3.5vw, 50px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.hiw-desc {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.75;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════
+   ENGINE GRID
+══════════════════════════════ */
+.compat-section {
+  background: #13131a;
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+}
+.compat-inner { max-width: 1180px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-header .section-heading::after { margin: 14px auto 0; }
+
+.engine-group { margin-bottom: 48px; }
+.engine-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+.engine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.engine-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  cursor: none;
+  text-decoration: none;
+  color: var(--white);
+  display: block;
+}
+.engine-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(24,51,184,0.25);
+}
+.engine-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.engine-card-sub { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+.engine-card-arrow {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--blue);
+  text-transform: uppercase;
+  transition: letter-spacing 0.2s;
+}
+.engine-card:hover .engine-card-arrow { letter-spacing: 2px; }
+
+/* ══════════════════════════════
+   REVIEWS
+══════════════════════════════ */
+.reviews-section {
+  background: var(--darker);
+  padding: clamp(80px, 10vh, 120px) clamp(20px, 5vw, 80px);
+}
+.reviews-grid {
+  max-width: 1180px;
+  margin: 56px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.review-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color 0.25s, transform 0.25s;
+  border-bottom: 3px solid transparent;
+}
+.review-card:hover {
+  border-color: rgba(24,51,184,0.4);
+  border-bottom-color: var(--gold);
+  transform: translateY(-4px);
+}
+.review-stars { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-bottom: 12px; }
+.review-text { font-size: 13.5px; color: var(--text); line-height: 1.7; margin-bottom: 16px; }
+.review-author { display: flex; align-items: center; gap: 10px; }
+.review-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+  flex-shrink: 0;
+}
+.review-name { font-size: 13px; font-weight: 700; }
+.review-verified { font-size: 10px; color: #5b8df7; letter-spacing: 0.5px; margin-top: 2px; }
+@media (max-width: 900px) { .reviews-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px)  { .reviews-grid { grid-template-columns: 1fr; } }
+
+/* ══════════════════════════════
+   CTA
+══════════════════════════════ */
+.cta-section {
+  background: linear-gradient(135deg, #0a0e4a 0%, var(--navy) 50%, #0d1a6e 100%);
+  padding: clamp(80px, 12vh, 140px) clamp(20px, 5vw, 80px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%);
+}
+.cta-title {
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  position: relative;
+}
+.cta-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 40px;
+  position: relative;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* ── Footer ── */
+footer {
+  background: #07070a;
+  padding: 40px clamp(20px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer img { height: 28px; }
+footer p { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 0.5px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+@media (max-width: 768px) { .footer-links { display: none; } }
+
+/* ── Scroll Reveal ── */
+.sr {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.sr.sr--left  { transform: translateX(-32px); }
+.sr.sr--right { transform: translateX(32px); }
+.sr.sr--scale { transform: scale(0.94); }
+.sr.in { opacity: 1 !important; transform: translate(0,0) scale(1) !important; }
+.sr-group .sr:nth-child(1) { transition-delay: 0s; }
+.sr-group .sr:nth-child(2) { transition-delay: 0.1s; }
+.sr-group .sr:nth-child(3) { transition-delay: 0.2s; }
+.sr-group .sr:nth-child(4) { transition-delay: 0.3s; }
+</style>
+</head>
+
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div id="progress-bar"></div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/SD_Logo_white_Small.png" alt="Sinister Diesel" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span style="display:none;font-size:16px;font-weight:700;letter-spacing:2px;">SINISTER DIESEL</span>
+  </div>
+  <nav class="nav-links">
+    <a href="https://sinisterdiesel.com/powerstroke.html">Powerstroke</a>
+    <a href="https://sinisterdiesel.com/duramax.html">Duramax</a>
+    <a href="https://sinisterdiesel.com/cummins.html">Cummins</a>
+  </nav>
+  <a href="#shop" class="nav-cta">Shop Now</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-bg-glow"></div>
+
+    <div class="hero-badge" id="hero-badge">
+      <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      New for 6.7 Powerstroke
+    </div>
+
+    <div class="hero-eyebrow" id="hero-eyebrow">Sinister Diesel Performance</div>
+    <h1 class="hero-title" id="hero-title">
+      Cold Side<br><span class="accent">Charge Pipe</span>
+    </h1>
+    <p class="hero-sub" id="hero-sub">
+      More airflow. Less restriction. The Sinister Diesel 6.7 Cold Side Charge Pipe is precision-engineered from aerospace-grade aluminum to maximize boost pressure and throttle response.
+    </p>
+    <div class="hero-actions" id="hero-actions">
+      <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+cold+side+charge+pipe" class="btn-primary">
+        Shop the Pipe
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#features" class="btn-ghost">See Features</a>
+    </div>
+    <div class="hero-scroll-hint" id="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-img" id="hero-img"></div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>6.7 Powerstroke</span><span>Billet Aluminum</span><span>+15% Airflow</span><span>Direct Bolt-On</span>
+    <span>Made in USA</span><span>Sinister Blue</span><span>3.5" Diameter</span><span>60 PSI Rated</span>
+    <span>6.7 Powerstroke</span><span>Billet Aluminum</span><span>+15% Airflow</span><span>Direct Bolt-On</span>
+    <span>Made in USA</span><span>Sinister Blue</span><span>3.5" Diameter</span><span>60 PSI Rated</span>
+  </div>
+</div>
+
+<!-- ═══ PERFORMANCE NUMBERS ═══ -->
+<section class="perf-section">
+  <div class="perf-inner sr-group">
+    <div class="perf-stat sr">
+      <div class="perf-num gold" data-target="15">0</div>
+      <div class="perf-label">% More<br>Airflow</div>
+    </div>
+    <div class="perf-divider"></div>
+    <div class="perf-stat sr">
+      <div class="perf-num blue" data-target="35" data-suffix='"'>0</div>
+      <div class="perf-label">Internal<br>Diameter</div>
+    </div>
+    <div class="perf-divider"></div>
+    <div class="perf-stat sr">
+      <div class="perf-num white" data-target="60">0</div>
+      <div class="perf-label">PSI Boost<br>Rated</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<div id="features" class="features-container">
+
+  <!-- Feature 1: Airflow -->
+  <div class="feature-panel">
+    <div class="fp-inner">
+      <div class="sr sr--left">
+        <span class="section-eyebrow">Engineered for Power</span>
+        <h2 class="section-heading">Maximum<br><span class="accent">Airflow</span></h2>
+        <p class="section-body">The factory cold side pipe is a chokepoint. Its undersized diameter and rough interior create turbulence that robs your turbo of efficiency and kills throttle response.</p>
+        <p class="section-body">Our 3.5" mandrel-bent aluminum pipe eliminates restriction with a smooth, consistent bore from turbo to intercooler — every cubic inch of air flows freely.</p>
+        <ul class="feature-list">
+          <li>Optimized internal diameter reduces turbulence</li>
+          <li>Smooth mandrel-bent radius — no kinks, no restrictions</li>
+          <li>15% more airflow than stock OEM pipe</li>
+          <li>Improved turbo spool and throttle response</li>
+        </ul>
+      </div>
+      <div class="sr sr--right">
+        <div class="product-visual">
+          <div class="product-img-card">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg"
+                 alt="Sinister Diesel Cold Side Charge Pipe - Airflow Design"
+                 loading="lazy">
+          </div>
+          <div class="float-badge">
+            <strong>+15%</strong>
+            More Airflow
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 2: Construction -->
+  <div class="feature-panel">
+    <div class="fp-inner reverse">
+      <div class="sr sr--right">
+        <span class="section-eyebrow">Built Sinister Tough</span>
+        <h2 class="section-heading">Aerospace<br><span class="accent">Aluminum</span></h2>
+        <p class="section-body">Forget the factory plastic and thin-wall tubing. Our cold side pipe is CNC-machined from aerospace-grade 6061-T6 aluminum — the same material used in aircraft and performance racing.</p>
+        <p class="section-body">Finished in Sinister Blue anodize for corrosion resistance and that unmistakeable look under your hood.</p>
+        <ul class="feature-list">
+          <li>6061-T6 aerospace aluminum — zero plastic failure points</li>
+          <li>Reinforced silicone couplers with stainless T-bolt clamps</li>
+          <li>Sinister Blue anodized finish — corrosion resistant</li>
+          <li>CNC precision machined for leak-free fitment</li>
+          <li>Heat resistant to 300°F continuous</li>
+        </ul>
+      </div>
+      <div class="sr sr--left">
+        <div class="product-visual">
+          <div class="product-img-card">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg"
+                 alt="Sinister Diesel Billet Aluminum Cold Side Charge Pipe"
+                 loading="lazy">
+          </div>
+          <div class="float-badge" style="left:-16px;right:auto;">
+            <strong>6061</strong>
+            Aircraft Alloy
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 3: Fitment -->
+  <div class="feature-panel">
+    <div class="fp-inner">
+      <div class="sr sr--left">
+        <span class="section-eyebrow">Bolt-On Simplicity</span>
+        <h2 class="section-heading">Direct Fit.<br><span class="accent">No Mods.</span></h2>
+        <p class="section-body">Precision engineered to match the factory mounting points on your 6.7 Powerstroke. No drilling. No cutting. No fabrication. It drops right in where the stock pipe lived.</p>
+        <p class="section-body">Everything you need is in the box — pipe, couplers, clamps, and detailed instructions. You'll be done in under an hour.</p>
+        <ul class="feature-list">
+          <li>Factory mounting points — zero modifications</li>
+          <li>Complete kit includes couplers, clamps, and hardware</li>
+          <li>Detailed installation instructions included</li>
+          <li>Compatible with stock and aftermarket intercoolers</li>
+        </ul>
+      </div>
+      <div class="sr sr--right">
+        <div class="product-visual">
+          <div class="product-img-card">
+            <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg"
+                 alt="Sinister Diesel Cold Side Charge Pipe Installation"
+                 loading="lazy">
+          </div>
+          <div class="float-badge">
+            <strong>&lt;1HR</strong>
+            Install Time
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ OEM vs SINISTER ═══ -->
+<section class="compare-section">
+  <div class="compare-inner">
+    <div class="compare-header sr">
+      <span class="section-eyebrow" style="display:block;text-align:center;margin-bottom:12px;">Side by Side</span>
+      <h2 class="section-heading" style="text-align:center;">OEM vs. Sinister Diesel</h2>
+      <p style="color:var(--text);font-size:14px;margin-top:12px;line-height:1.7;max-width:460px;margin-left:auto;margin-right:auto;">
+        The stock cold side pipe was designed to meet a budget — not a performance standard. See the difference.
+      </p>
+    </div>
+
+    <div class="compare-table sr-group">
+      <div class="compare-col sr">
+        <div class="compare-col-head oem">✗ &nbsp;OEM Stock Pipe</div>
+        <div class="compare-col-body">
+          <div class="compare-row"><span class="icon-bad">✗</span> Undersized diameter — restricts airflow</div>
+          <div class="compare-row"><span class="icon-bad">✗</span> Thin-wall construction cracks under boost</div>
+          <div class="compare-row"><span class="icon-bad">✗</span> Rough interior creates turbulence</div>
+          <div class="compare-row"><span class="icon-bad">✗</span> OEM couplers slip under high boost pressure</div>
+          <div class="compare-row"><span class="icon-bad">✗</span> Plastic fittings prone to heat failure</div>
+          <div class="compare-row"><span class="icon-bad">✗</span> No corrosion resistance</div>
+        </div>
+      </div>
+      <div class="compare-col sr">
+        <div class="compare-col-head sd">✓ &nbsp;Sinister Diesel</div>
+        <div class="compare-col-body">
+          <div class="compare-row"><span class="icon-good">✓</span> 3.5" optimized bore — +15% airflow</div>
+          <div class="compare-row"><span class="icon-good">✓</span> 6061-T6 aircraft aluminum — lifetime durability</div>
+          <div class="compare-row"><span class="icon-good">✓</span> Mandrel-bent smooth interior for laminar flow</div>
+          <div class="compare-row"><span class="icon-good">✓</span> Reinforced silicone couplers rated to 60 PSI</div>
+          <div class="compare-row"><span class="icon-good">✓</span> No plastic — zero heat failure points</div>
+          <div class="compare-row"><span class="icon-good">✓</span> Anodized finish resists rust and corrosion</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS — Horizontal Pin ═══ -->
+<div class="hiw-outer" id="hiw-outer">
+  <div class="hiw-sticky">
+    <div class="hiw-track" id="hiw-track">
+
+      <div class="hiw-panel">
+        <div class="step-num">0</div>
+        <div class="hiw-content">
+          <p class="hiw-step-label">Installation</p>
+          <h2 class="hiw-title">Done in 3 Steps.<br>No Shop Required.</h2>
+          <p class="hiw-desc">Our bolt-on cold side charge pipe is engineered for a clean, hassle-free install. Basic hand tools, your driveway, and under an hour of your time.</p>
+        </div>
+      </div>
+
+      <div class="hiw-panel">
+        <div class="step-num">1</div>
+        <div class="hiw-content">
+          <div class="hiw-step-badge">1</div>
+          <p class="hiw-step-label">Step One</p>
+          <h2 class="hiw-title">Remove the<br>Stock Pipe</h2>
+          <p class="hiw-desc">Loosen the OEM couplers and slide out the factory cold side pipe. No cutting, no drilling — it's a simple disconnect from turbo outlet to intercooler inlet.</p>
+        </div>
+      </div>
+
+      <div class="hiw-panel">
+        <div class="step-num">2</div>
+        <div class="hiw-content">
+          <div class="hiw-step-badge">2</div>
+          <p class="hiw-step-label">Step Two</p>
+          <h2 class="hiw-title">Slide In the<br>SD Charge Pipe</h2>
+          <p class="hiw-desc">The Sinister Diesel pipe routes exactly where the stock pipe did. Slip on the included silicone couplers and position the pipe to the factory mounting bracket.</p>
+        </div>
+      </div>
+
+      <div class="hiw-panel">
+        <div class="step-num">3</div>
+        <div class="hiw-content">
+          <div class="hiw-step-badge">3</div>
+          <p class="hiw-step-label">Step Three</p>
+          <h2 class="hiw-title">Torque, Start<br>&amp; Feel the Difference</h2>
+          <p class="hiw-desc">Tighten the T-bolt clamps to spec, start your truck, and feel the improved throttle response immediately. No tune required — it works right out of the box.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ENGINE COMPATIBILITY ═══ -->
+<section id="shop" class="compat-section">
+  <div class="compat-inner">
+    <div class="section-header sr">
+      <span class="section-eyebrow" style="display:block;text-align:center;margin-bottom:12px;">Find Your Fit</span>
+      <h2 class="section-heading" style="text-align:center;">Engine Compatibility</h2>
+      <p style="color:var(--text);font-size:15px;margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;">
+        Select your year range to find the exact Cold Side Charge Pipe for your 6.7 Powerstroke.
+      </p>
+    </div>
+
+    <div class="engine-group sr">
+      <div class="engine-group-label">Ford Powerstroke 6.7L</div>
+      <div class="engine-grid">
+        <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+cold+side+charge+pipe+2011+2016" class="engine-card">
+          <div class="engine-card-title">2011–2016 6.7L</div>
+          <div class="engine-card-sub">Ford F-250 / F-350 / F-450</div>
+          <span class="engine-card-arrow">Shop Now →</span>
+        </a>
+        <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+cold+side+charge+pipe+2017+2019" class="engine-card">
+          <div class="engine-card-title">2017–2019 6.7L</div>
+          <div class="engine-card-sub">Ford F-250 / F-350 / F-450</div>
+          <span class="engine-card-arrow">Shop Now →</span>
+        </a>
+        <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+cold+side+charge+pipe+2020+2022" class="engine-card">
+          <div class="engine-card-title">2020–2022 6.7L</div>
+          <div class="engine-card-sub">Ford F-250 / F-350 / F-450</div>
+          <span class="engine-card-arrow">Shop Now →</span>
+        </a>
+        <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+cold+side+charge+pipe+2023+2024" class="engine-card">
+          <div class="engine-card-title">2023–2024 6.7L</div>
+          <div class="engine-card-sub">Ford F-250 / F-350 / F-450</div>
+          <span class="engine-card-arrow">Shop Now →</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ═══ -->
+<section class="reviews-section">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div class="section-header sr">
+      <span class="section-eyebrow" style="display:block;text-align:center;margin-bottom:12px;">Customer Reviews</span>
+      <h2 class="section-heading" style="text-align:center;">Diesel Owners Love It</h2>
+    </div>
+    <div class="reviews-grid sr-group">
+      <div class="review-card sr">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Installed this on my 2019 F-350 and the difference in throttle response was immediate. The pipe looks incredible and the fitment was perfect. 10/10 would buy again."</p>
+        <div class="review-author">
+          <div class="review-avatar">T</div>
+          <div>
+            <div class="review-name">Tyler M.</div>
+            <div class="review-verified">✓ Verified Buyer · TX</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card sr">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Quality is absolutely outstanding. The Sinister Blue anodize looks sick in the engine bay. Took me 45 minutes including cleanup. Way better than stock."</p>
+        <div class="review-author">
+          <div class="review-avatar">B</div>
+          <div>
+            <div class="review-name">Brandon K.</div>
+            <div class="review-verified">✓ Verified Buyer · MT</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card sr">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The stock pipe on my 6.7 had a crack in it. This replacement is night and day — heavy duty, beautiful, and my EGTs dropped noticeably after install."</p>
+        <div class="review-author">
+          <div class="review-avatar">C</div>
+          <div>
+            <div class="review-name">Chris W.</div>
+            <div class="review-verified">✓ Verified Buyer · ID</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section">
+  <h2 class="cta-title sr">Unleash Your<br><span style="color:var(--gold)">6.7 Powerstroke.</span></h2>
+  <p class="cta-sub sr">More airflow. More response. More performance. Bolt it on this weekend.</p>
+  <div class="cta-actions sr">
+    <a href="https://sinisterdiesel.com/search.mvc?Search=6.7+cold+side+charge+pipe" class="btn-gold">
+      Shop the Charge Pipe
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="https://sinisterdiesel.com" class="btn-ghost">Browse All Products</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/SD_Logo_white_Small.png" alt="Sinister Diesel" onerror="this.style.display='none'">
+  <p>© 2024 Sinister Diesel. All Rights Reserved.</p>
+  <div class="footer-links">
+    <a href="https://sinisterdiesel.com/return-policy.html">Returns</a>
+    <a href="https://sinisterdiesel.com/warranty.html">Warranty</a>
+    <a href="https://sinisterdiesel.com/contact-us.html">Contact</a>
+  </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Cursor ── */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+  ring.style.left   = rx + 'px';
+  ring.style.top    = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+/* ── Progress Bar ── */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  bar.style.width = (p * 100) + '%';
+}, { passive: true });
+
+/* ── Navbar ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('visible', window.scrollY > 80);
+}, { passive: true });
+
+/* ── Hero Entrance ── */
+gsap.timeline({ delay: 0.15 })
+  .to('#hero-badge',   { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' })
+  .to('#hero-eyebrow', { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
+  .to('#hero-title',   { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+  .to('#hero-sub',     { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+  .to('#hero-actions', { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+  .to('#hero-scroll',  { opacity: 1,        duration: 0.5, ease: 'power2.out' }, '-=0.2');
+
+/* Hero image Ken Burns on load */
+setTimeout(() => {
+  document.getElementById('hero-img').classList.add('loaded');
+}, 100);
+
+/* ── Horizontal HIW ── */
+const hiwTrack = document.getElementById('hiw-track');
+const panels   = hiwTrack.querySelectorAll('.hiw-panel');
+const totalSlide = (panels.length - 1) * window.innerWidth;
+
+gsap.to(hiwTrack, {
+  x: -totalSlide,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: document.getElementById('hiw-outer'),
+    pin: true,
+    scrub: 1,
+    start: 'top top',
+    end: () => '+=' + (totalSlide + window.innerHeight),
+    anticipatePin: 1,
+  }
+});
+
+/* ── Scroll Reveal ── */
+const srEls = document.querySelectorAll('.sr');
+const srObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      srObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+srEls.forEach(el => srObs.observe(el));
+
+/* ── Counter Animation ── */
+function animCounter(el, target, suffix) {
+  const start = performance.now();
+  const dur = 1800;
+  function tick(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target) + (suffix || '');
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+const statEls = document.querySelectorAll('.perf-num[data-target]');
+const statObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const target = parseInt(e.target.dataset.target);
+      const suffix = e.target.dataset.suffix || '';
+      animCounter(e.target, target, suffix);
+      statObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+statEls.forEach(el => statObs.observe(el));
+
+/* ── Reduced Motion ── */
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.sr').forEach(el => el.classList.add('in'));
+}
+</script>
+
+</body>
+</html>

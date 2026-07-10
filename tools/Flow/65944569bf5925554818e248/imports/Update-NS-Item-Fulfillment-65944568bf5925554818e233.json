@@ -1,0 +1,56 @@
+{
+  "_id": "65944568bf5925554818e233",
+  "name": "Update NS Item Fulfillment",
+  "description": "Update item shipments in NetSuite using the internal ID as the lookup identifier.",
+  "responseTransform": {
+    "type": "expression",
+    "expression": {
+      "version": "1"
+    }
+  },
+  "_connectionId": "6594453f4f7cab7c220b187a",
+  "distributed": true,
+  "apiIdentifier": "i54007d097",
+  "ignoreExisting": false,
+  "ignoreMissing": false,
+  "oneToMany": false,
+  "lookups": [],
+  "aiDescription": {
+    "summary": "The \"Update NS Item Fulfillment\" import is used to update item shipments in NetSuite using the internal ID as the lookup identifier. It is configured to use the NetSuiteDistributedImport adaptor type, allowing for faster imports by splitting the data into multiple batches. The import updates records in the \"itemfulfillment\" record type and has a responseTransform field that specifies an expression to transform the response data. It does not ignore existing or missing data, and does not create multiple records from a single parent record. It has specific field mappings defined and does not use SS2 Restlets for NetSuite integration.",
+    "detailed": "This import is named \"Update NS Item Fulfillment\" and its purpose is to update item shipments in NetSuite using the internal ID as the lookup identifier. \n\nThe import is configured to use the NetSuiteDistributedImport adaptor type, which enables distributed import, allowing for faster imports by splitting the data into multiple batches. \n\nThe import is set to update records in the \"itemfulfillment\" record type in NetSuite. \n\nThe import has a responseTransform field that specifies an expression to transform the response data. In this case, the expression is set to {\"version\": \"1\"}.\n\nThe import has the \"ignoreExisting\" field set to false, which means it will not ignore existing data when importing. \n\nThe import has the \"ignoreMissing\" field set to false, which means it will not ignore missing data when updating existing records. \n\nThe import has the \"oneToMany\" field set to false, which means it will not create multiple records from a single parent record. \n\nThe import has a \"mapping\" field that specifies the field mappings for the import. In this case, there is one field mapping defined for the \"custbody_miva_shipment_id\" field. \n\nThe import has a \"filter\" field that specifies an expression to filter the data being imported. In this case, there are no filter rules defined. \n\nThe import does not have any lookup fields defined. \n\nThe import does not use SS2 Restlets for NetSuite integration. \n\nOverall, this import is designed to update item shipments in NetSuite using the internal ID as the lookup identifier, with specific field mappings and response transformation. It is not configured to ignore existing or missing data, and it does not create multiple records from a single parent record.",
+    "generatedOn": null
+  },
+  "netsuite_da": {
+    "useSS2Restlets": false,
+    "restletVersion": "suitebundle",
+    "operation": "update",
+    "recordType": "itemfulfillment",
+    "internalIdLookup": {
+      "expression": "[\"internalid\",\"is\",\"{{{[Internal ID]}}}\"]"
+    },
+    "lookups": [],
+    "mapping": {
+      "fields": [
+        {
+          "generate": "custbody_miva_shipment_id",
+          "extract": "['Miva Shipment ID']",
+          "internalId": false,
+          "immutable": false,
+          "discardIfEmpty": true,
+          "dataType": "string"
+        }
+      ],
+      "lists": []
+    }
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "rules": [],
+      "version": "1"
+    },
+    "rules": [],
+    "version": "1"
+  },
+  "adaptorType": "NetSuiteDistributedImport"
+}

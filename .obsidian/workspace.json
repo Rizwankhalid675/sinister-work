@@ -1,0 +1,228 @@
+{
+  "main": {
+    "id": "ecd902067dfab6da",
+    "type": "split",
+    "children": [
+      {
+        "id": "984702b046fe7367",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3a38e8959a280da7",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3ebadd645ae77da3",
+    "type": "split",
+    "children": [
+      {
+        "id": "dd97acc3cf3846e0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "682fe642d1122d05",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "ce8894efc221501a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "9f7432d1a89825c2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c6e89fdbf09c352d",
+    "type": "split",
+    "children": [
+      {
+        "id": "1316eca3dcd3aa2e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1ff071780a6352fd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "72aa008a258e4e95",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "53bfef1ba40cc2d3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a8e615f9cc2986bc",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "c8ae36a3a345b9f3",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3a38e8959a280da7",
+  "lastOpenFiles": [
+    "daily-work/_index.md",
+    "_Overview/🏠 Work Home.md",
+    "docs/_index.md",
+    "website-revamp/_index.md",
+    "integrations/_index.md",
+    "_Overview/Website Revamp.md",
+    "_Overview/Tools.md",
+    "_Overview/Integrations.md",
+    "_Overview/Docs & Assets.md",
+    "_Overview/Daily Work.md",
+    "_Overview",
+    "integrations/README.md",
+    "sinister-revamp/DOCUMENTATION.md",
+    "integrations/netsuite-monday-integration/monday-scripts/monday-set-status-column.js",
+    "integrations/netsuite-monday-integration/monday-scripts/monday-set-due-date.js",
+    "integrations/netsuite-monday-integration/monday-scripts/monday-push-tasks.js",
+    "integrations/netsuite-monday-integration/monday-scripts/monday-delete-item.js",
+    "integrations/netsuite-monday-integration/monday-scripts/monday-create-parent-task.js",
+    "integrations/netsuite-monday-integration/monday-scripts/monday-add-task-with-subitems.js",
+    "integrations/netsuite-monday-integration/_index.md",
+    "integrations/netsuite-monday-integration/README.md",
+    "integrations/netsuite-monday-integration/monday-scripts",
+    "integrations/netsuite-monday-integration",
+    "website-revamp/revamp-ctgy-scratch.css",
+    "docs/Website-Audit-and-Improvement-Plan.md",
+    "assets/images/Generated image 2.png",
+    "assets/images/Generated image 1.png",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/references/tailwind-customization.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/references/shadcn-components.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/references/tailwind-responsive.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/references/tailwind-utilities.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/references/shadcn-theming.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/references/shadcn-accessibility.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/slides/references/copywriting-formulas.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/ui-styling/references/canvas-design-system.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/design-system/references/states-and-variants.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/design-system/references/tailwind-integration.md",
+    "tools/ui-ux-pro-max-skill/cli/assets/skills/slides/references/slide-strategies.md",
+    "tools/9router-master/cli/src/cli/tray/icon.png",
+    "tools/9router-master/public/providers/youcom.png",
+    "tools/9router-master/public/providers/xiaomi-tokenplan.png",
+    "tools/9router-master/public/providers/xiaomi-mimo.png",
+    "tools/9router-master/public/providers/xai.png",
+    "tools/9router-master/public/providers/voyage-ai.png",
+    "tools/9router-master/public/providers/volcengine-ark.png",
+    "tools/9router-master/public/providers/vertex.png"
+  ]
+}

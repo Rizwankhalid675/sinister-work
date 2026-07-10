@@ -1,0 +1,19 @@
+# Credentials — never commit
+.env
+
+# Tracking files
+logs/synced_orders.json
+logs/synced_invoices.json
+logs/synced_customers.json
+logs/sync.log
+logs/pm2-*.log
+
+# Dependencies
+node_modules/
+
+# Windows Service daemon files
+daemon/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,15 @@
+{
+  "_id": "6594453f4f7cab7c220b187a",
+  "type": "netsuite",
+  "name": "NetSuite Connection [Production]",
+  "netsuite": {
+    "wsdlVersion": "latest",
+    "concurrencyLevel": 20,
+    "targetConcurrencyLevel": 20
+  },
+  "microServices": {
+    "disableRdbms": false,
+    "disableFile": false,
+    "disableNsFile": false
+  }
+}

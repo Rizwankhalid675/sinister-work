@@ -1,0 +1,136 @@
+{
+  "_id": "65944569bf5925554818e24a",
+  "name": "Update Miva Product ID",
+  "schedule": "? 5 */1 ? * *",
+  "timezone": "America/Los_Angeles",
+  "pageGenerators": [
+    {
+      "_exportId": "65944566bf5925554818e220",
+      "skipRetries": false
+    }
+  ],
+  "free": false,
+  "_templateId": "5f1ac5a4116d2e48aca1081d",
+  "_flowGroupingId": "651b038e67478b630fc19389",
+  "autoResolveMatchingTraceKeys": true,
+  "routers": [
+    {
+      "name": "",
+      "branches": [
+        {
+          "name": "",
+          "pageProcessors": [
+            {
+              "type": "export",
+              "_exportId": "65944566bf5925554818e21e",
+              "responseMapping": {
+                "fields": [
+                  {
+                    "extract": "data[0].record_type",
+                    "generate": "record_type"
+                  }
+                ],
+                "lists": []
+              }
+            }
+          ],
+          "nextRouterId": "QUbE2s7p0OP"
+        }
+      ],
+      "id": "pywceAs0VVz"
+    },
+    {
+      "name": "",
+      "routeRecordsTo": "first_matching_branch",
+      "routeRecordsUsing": "input_filters",
+      "branches": [
+        {
+          "name": "Assembly Items",
+          "inputFilter": {
+            "rules": [
+              "equals",
+              [
+                "string",
+                [
+                  "extract",
+                  "record_type"
+                ]
+              ],
+              "Assembly"
+            ]
+          },
+          "pageProcessors": [
+            {
+              "type": "import",
+              "_importId": "65944568bf5925554818e237",
+              "responseMapping": {
+                "fields": [],
+                "lists": []
+              }
+            }
+          ]
+        },
+        {
+          "name": "Inventory Items",
+          "inputFilter": {
+            "rules": [
+              "equals",
+              [
+                "string",
+                [
+                  "extract",
+                  "record_type"
+                ]
+              ],
+              "Inventory Item"
+            ]
+          },
+          "pageProcessors": [
+            {
+              "type": "import",
+              "_importId": "65944568bf5925554818e239",
+              "responseMapping": {
+                "fields": [],
+                "lists": []
+              }
+            }
+          ]
+        },
+        {
+          "name": "Kits",
+          "inputFilter": {
+            "rules": [
+              "equals",
+              [
+                "string",
+                [
+                  "extract",
+                  "record_type"
+                ]
+              ],
+              "Kit"
+            ]
+          },
+          "pageProcessors": [
+            {
+              "type": "import",
+              "_importId": "65944568bf5925554818e23b",
+              "responseMapping": {
+                "fields": [],
+                "lists": []
+              }
+            }
+          ]
+        }
+      ],
+      "script": {
+        "function": "branching"
+      },
+      "id": "QUbE2s7p0OP"
+    }
+  ],
+  "aiDescription": {
+    "summary": "The \"Update Miva Product ID\" flow runs every hour at 5 minutes past the hour in the America/Los_Angeles timezone. It exports data from the Miva application using the Miva assistant and makes a POST request to the \"/json.mvc\" endpoint. The response is expected to be in JSON format. The flow then branches the data based on the record type and updates corresponding records in NetSuite using the NetSuite Distributed Import adaptor. The import updates existing records in NetSuite based on a lookup using the \"sku\" field and maps certain fields from the source data to fields in NetSuite.",
+    "detailed": "This flow is named \"Update Miva Product ID\" and is scheduled to run every hour at 5 minutes past the hour in the America/Los_Angeles timezone.\n\nThe flow consists of a single source (export) called \"Exporting Miva Products\". This source is configured to export data from the Miva application using the Miva assistant. The export is performed by making a POST request to the \"/json.mvc\" endpoint with a specific payload. The response from the export is expected to be in JSON format.\n\nThe flow then has a single router, which is a branching mechanism that directs the data to different branches based on certain conditions. In this case, the router has three branches: \"Assembly Items\", \"Inventory Items\", and \"Kits\". Each branch is associated with a specific record type based on the \"record_type\" field extracted from the source data.\n\nEach branch has a single destination (import) that updates records in the corresponding record type in NetSuite. The import is performed using the NetSuite Distributed Import adaptor. The import is configured to update existing records in NetSuite based on a lookup using the \"sku\" field. The import also maps certain fields from the source data to fields in NetSuite.\n\nOverall, this flow exports data from the Miva application, branches the data based on the record type, and updates corresponding records in NetSuite based on the extracted data."
+  }
+}

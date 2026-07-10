@@ -1,0 +1,21 @@
+{
+  "userIgnoreFilters": [
+    "sinister-revamp/",
+    "website-revamp/sinister-revamp/",
+    "integrations/sinister-netsuite-sync/",
+    "integrations/sinister-netsuite-sync-linux/",
+    "integrations/tiktok-netsuite-sync/",
+    "integrations/netsuite-monday-integration/monday-scripts/",
+    "tools/",
+    "daily-work/2026-07-01/",
+    "daily-work/2026-07-25/",
+    "daily-work/2026-07-29/",
+    "node_modules/",
+    "%USERPROFILE%/",
+    "CLAUDE.md",
+    "docs/Website-Audit-and-Improvement-Plan.md",
+    ".claude/",
+    ".agents/",
+    "Prototype.md"
+  ]
+}

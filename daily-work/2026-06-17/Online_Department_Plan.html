@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Online Department Work Plan – June 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;font-size:13px;color:#0f172a;background:#f8fafc;line-height:1.6}
+
+/* ── COVER ── */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  background:#0f172a;color:#fff;text-align:center;padding:64px 48px;page-break-after:always;
+}
+.cover-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#6366f1;font-weight:700;margin-bottom:18px}
+.cover h1{font-size:40px;font-weight:800;line-height:1.15;margin-bottom:10px}
+.cover h1 em{color:#6366f1;font-style:normal}
+.cover .sub{font-size:13px;color:#64748b;margin-bottom:48px}
+.cover-stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+.cstat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:18px 22px;min-width:110px;text-align:center}
+.cstat .cv{font-size:28px;font-weight:800;line-height:1;margin-bottom:4px}
+.cstat .cl{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#64748b}
+.c-red{color:#ef4444}.c-orange{color:#f97316}.c-yellow{color:#eab308}
+.c-green{color:#22c55e}.c-purple{color:#a78bfa}.c-blue{color:#60a5fa}
+.cover-bar{width:48px;height:3px;background:#6366f1;margin:0 auto 28px;border-radius:2px}
+.cover-meta{font-size:11px;color:#334155;line-height:2.2}
+.cover-meta strong{color:#475569}
+
+/* ── LAYOUT ── */
+.page{max-width:980px;margin:0 auto;padding:50px 60px;page-break-after:always;background:#fff}
+.page:last-child{page-break-after:avoid}
+.sec{font-size:9.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#6366f1;margin-bottom:5px}
+h2{font-size:21px;font-weight:800;color:#0f172a;margin-bottom:4px}
+.rule{height:3px;background:linear-gradient(90deg,#6366f1,#818cf8,transparent);border-radius:2px;margin-bottom:24px}
+p{margin-bottom:10px;color:#475569;font-size:12.5px}
+h3{font-size:13px;font-weight:700;color:#0f172a;margin:20px 0 10px}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.8px;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.b-red{background:#fee2e2;color:#991b1b}
+.b-orange{background:#ffedd5;color:#9a3412}
+.b-yellow{background:#fef9c3;color:#854d0e}
+.b-green{background:#dcfce7;color:#166534}
+.b-blue{background:#dbeafe;color:#1e40af}
+.b-purple{background:#ede9fe;color:#5b21b6}
+.b-gray{background:#f1f5f9;color:#475569}
+.b-teal{background:#ccfbf1;color:#134e4a}
+
+/* ── TASK CARDS ── */
+.task-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.task{border-radius:10px;padding:14px 18px;border-left:5px solid;background:#fff;
+  border:1px solid #f1f5f9;border-left-width:5px;display:grid;
+  grid-template-columns:1fr auto;gap:8px;align-items:start}
+.task.urgent{border-left-color:#ef4444;background:#fff5f5}
+.task.high{border-left-color:#f97316;background:#fffbf7}
+.task.medium{border-left-color:#eab308;background:#fefce8}
+.task.low{border-left-color:#6366f1;background:#f5f3ff}
+.task.done{border-left-color:#22c55e;background:#f0fdf4}
+.task.waiting{border-left-color:#64748b;background:#f8fafc}
+.task-left{}
+.task-title{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:4px}
+.task-meta{font-size:11px;color:#64748b;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:5px}
+.task-meta span{display:flex;align-items:center;gap:3px}
+.task-note{font-size:11.5px;color:#475569;margin-top:4px;line-height:1.5}
+.task-badges{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;align-items:flex-start;min-width:120px}
+
+/* ── SECTION HEADER BAND ── */
+.band{border-radius:10px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.band-purple{background:linear-gradient(135deg,#4f46e5,#6366f1);color:#fff}
+.band-red{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff}
+.band-blue{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff}
+.band-teal{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff}
+.band-gray{background:linear-gradient(135deg,#334155,#475569);color:#fff}
+.band-icon{font-size:22px}
+.band-text h3{font-size:14px;font-weight:800;margin:0 0 2px;color:#fff}
+.band-text p{font-size:11px;color:rgba(255,255,255,0.75);margin:0}
+
+/* ── TABLES ── */
+.tbl{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:12px}
+.tbl th{background:#0f172a;color:#f8fafc;font-size:9px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;padding:9px 12px;text-align:left}
+.tbl td{padding:9px 12px;border-bottom:1px solid #f1f5f9;vertical-align:middle;color:#334155}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:#fafafa}
+.tbl td strong{color:#0f172a}
+
+/* ── SUMMARY CARDS ── */
+.sum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.sum-card{border-radius:10px;padding:16px;text-align:center;border:1px solid #e2e8f0}
+.sum-card .snum{font-size:30px;font-weight:800;line-height:1;margin-bottom:4px}
+.sum-card .slabel{font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#94a3b8}
+
+/* ── CALLOUT ── */
+.callout{background:#0f172a;color:#fff;border-radius:12px;padding:20px 24px;margin-bottom:20px}
+.callout h3{font-size:14px;font-weight:700;margin-bottom:6px}
+.callout p{color:#94a3b8;font-size:12px;margin:0;line-height:1.7}
+.callout.info{background:#1e1b4b}
+.callout.warn{background:#431407}
+
+/* ── MILESTONE ── */
+.timeline{display:flex;flex-direction:column;gap:0;margin-bottom:20px;position:relative}
+.timeline::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:2px;background:#e2e8f0}
+.tl-item{display:flex;gap:16px;align-items:flex-start;padding:0 0 20px 0}
+.tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;flex-shrink:0;position:relative;z-index:1;border:3px solid #fff}
+.dot-red{background:#ef4444;color:#fff}
+.dot-orange{background:#f97316;color:#fff}
+.dot-yellow{background:#eab308;color:#fff}
+.dot-purple{background:#6366f1;color:#fff}
+.dot-gray{background:#94a3b8;color:#fff}
+.tl-content{flex:1;padding-top:4px}
+.tl-date{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#94a3b8;margin-bottom:3px}
+.tl-title{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:4px}
+.tl-items{font-size:11.5px;color:#475569}
+.tl-items ul{padding-left:16px}
+.tl-items ul li{margin-bottom:2px}
+
+/* ── HIGHLIGHT ── */
+.highlight-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.hl{border-radius:10px;padding:16px 18px;border-top:3px solid}
+.hl-purple{border-color:#6366f1;background:#f5f3ff}
+.hl-red{border-color:#ef4444;background:#fff5f5}
+.hl-orange{border-color:#f97316;background:#fff7ed}
+.hl-blue{border-color:#3b82f6;background:#eff6ff}
+.hl-green{border-color:#22c55e;background:#f0fdf4}
+.hl-teal{border-color:#14b8a6;background:#f0fdfa}
+.hl h4{font-size:12px;font-weight:700;color:#0f172a;margin-bottom:6px}
+.hl p{font-size:11.5px;color:#64748b;margin:0}
+.hl ul{padding-left:15px;margin-top:4px}
+.hl ul li{font-size:11.5px;color:#64748b;margin-bottom:2px}
+
+/* ── FOOTER ── */
+.pf{margin-top:36px;padding-top:12px;border-top:1px solid #f1f5f9;
+  display:flex;justify-content:space-between;font-size:9.5px;color:#cbd5e1}
+
+@media print{
+  body{background:#fff;font-size:12px}
+  .page{padding:38px 48px;box-shadow:none}
+  .cover{min-height:100vh}
+  @page{margin:0;size:A4}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Online Department · monday.com Export · June 17, 2026</div>
+  <h1>Sinister Diesel<br/><em>Online Department Work Plan</em></h1>
+  <p class="sub">sinisterdiesel.com &amp; mkmcustoms.com &nbsp;·&nbsp; Prepared by Rizwan Khalid</p>
+
+  <div class="cover-stats">
+    <div class="cstat"><div class="cv c-red">3</div><div class="cl">Overdue / Today</div></div>
+    <div class="cstat"><div class="cv c-orange">6</div><div class="cl">This Week</div></div>
+    <div class="cstat"><div class="cv c-yellow">3</div><div class="cl">Next Week</div></div>
+    <div class="cstat"><div class="cv c-purple">14</div><div class="cl">Future Dev</div></div>
+    <div class="cstat"><div class="cv c-blue">3</div><div class="cl">GD Proposals</div></div>
+    <div class="cstat"><div class="cv c-green">1</div><div class="cl">Assigned to Me</div></div>
+  </div>
+
+  <div class="cover-bar"></div>
+  <div class="cover-meta">
+    <strong>Source:</strong> Online_Department monday.com board export &nbsp;·&nbsp; 113 rows · 2 sheets<br/>
+    <strong>Platforms:</strong> sinisterdiesel.com (Miva Merchant) &nbsp;·&nbsp; Amazon &nbsp;·&nbsp; eBay<br/>
+    <strong>Date:</strong> June 17, 2026 &nbsp;·&nbsp; <strong>Dev Partner:</strong> Glendale Designs (GD)
+  </div>
+</div>
+
+<!-- ═══════════════════ PAGE 1 – OVERVIEW -->
+<div class="page">
+  <div class="sec">Section 01</div>
+  <h2>Department Overview</h2>
+  <div class="rule"></div>
+
+  <p>The Online Department board tracks all website tasks, backorder notifications, platform updates, and development projects across sinisterdiesel.com, mkmcustoms.com, Amazon, and eBay. The board is divided into three groups: <strong>Current Focus</strong>, <strong>Future Development</strong>, and <strong>GD Proposed Updates</strong> (quotes from Glendale Designs, the dev partner).</p>
+
+  <div class="sum-grid">
+    <div class="sum-card">
+      <div class="snum" style="color:#ef4444">15</div>
+      <div class="slabel">Current Focus Items</div>
+    </div>
+    <div class="sum-card">
+      <div class="snum" style="color:#6366f1">14</div>
+      <div class="slabel">Future Dev Items</div>
+    </div>
+    <div class="sum-card">
+      <div class="snum" style="color:#3b82f6">3</div>
+      <div class="slabel">GD Proposals Pending</div>
+    </div>
+    <div class="sum-card">
+      <div class="snum" style="color:#22c55e">29+</div>
+      <div class="slabel">Backorder SKUs Active</div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <h3>My Tasks on This Board</h3>
+    <p>
+      Two items are directly tied to my first day: <strong>"Build your Own Branch"</strong> (assigned to Rizwan Khalid, due June 17) and <strong>"Document Site speed and health check from today 6/17/26"</strong> (tagged @Rizwan Khalid by Brian George). The site speed and health documentation work has been completed — see the Lighthouse + GTmetrix audit report. The "Build your Own Branch" task needs clarification from Brian or Nicholas on scope.
+    </p>
+  </div>
+
+  <h3>Key People on the Board</h3>
+  <table class="tbl">
+    <thead><tr><th>Name</th><th>Role / Focus</th><th>Active Tasks</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Brian George</strong></td><td>Primary owner of current focus items — website updates, backorder notifications, product ops</td><td>10+</td></tr>
+      <tr><td><strong>Nicholas Willmon</strong></td><td>SEO, PPC, website front-end changes, Shopper Approved</td><td>4</td></tr>
+      <tr><td><strong>Jordy Gorozpe</strong></td><td>Platform integrations, Miva, vendor coordination, eBay</td><td>3</td></tr>
+      <tr><td><strong>Will Percy</strong></td><td>Inventory, Amazon listings, coolant filter SKU transition</td><td>2</td></tr>
+      <tr><td><strong>Dee Yamamoto</strong></td><td>Video production (Battery Hold Down video pending)</td><td>1</td></tr>
+      <tr><td><strong>Rizwan Khalid</strong></td><td>Site speed/health audit (complete) + Build your Own Branch</td><td>2</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Platforms in Scope</h3>
+  <div class="highlight-row">
+    <div class="hl hl-purple">
+      <h4>sinisterdiesel.com (Miva Merchant)</h4>
+      <p>Primary e-commerce site. Most tasks target this platform — product pages, backorder banners, checkout improvements, category images, landing pages.</p>
+    </div>
+    <div class="hl hl-orange">
+      <h4>Amazon</h4>
+      <p>Active task: change tombstone-style coolant filter kits to round by SKU. Glendale not involved — handled by Brian + Will Percy.</p>
+    </div>
+    <div class="hl hl-blue">
+      <h4>Google Merchant / PPC</h4>
+      <p>Website API migration to Google Merchant in progress (waiting on Glendale). Microsoft PPC company search ongoing.</p>
+    </div>
+    <div class="hl hl-teal">
+      <h4>eBay</h4>
+      <p>Backorder inventory zeroed out for affected SKUs. Full sales audit (YTD cost vs revenue) is a future dev item.</p>
+    </div>
+  </div>
+
+  <div class="pf"><span>Sinister Diesel · Online Department Plan · June 2026</span><span>1</span></div>
+</div>
+
+<!-- ═══════════════════ PAGE 2 – CURRENT FOCUS TIMELINE -->
+<div class="page">
+  <div class="sec">Section 02</div>
+  <h2>Current Focus — By Due Date</h2>
+  <div class="rule"></div>
+
+  <p>All active tasks from the <strong>Current Focus</strong> section of the board, ordered by deadline. Items past due or due today are flagged.</p>
+
+  <div class="timeline">
+    <!-- TODAY -->
+    <div class="tl-item">
+      <div class="tl-dot dot-red">!</div>
+      <div class="tl-content">
+        <div class="tl-date">June 17, 2026 — Today</div>
+        <div class="tl-title">2 items due today</div>
+        <div class="tl-items">
+          <ul>
+            <li><strong>Build your Own Branch</strong> — Assigned to <strong>Rizwan Khalid</strong>. Added June 16 by Brian George. Scope to be clarified.</li>
+            <li><strong>Document Site Speed &amp; Health Check from 6/17/26</strong> — Brian George / @Rizwan Khalid. <span class="badge b-green">In Progress</span> — Lighthouse + GTmetrix audit completed.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNE 18 -->
+    <div class="tl-item">
+      <div class="tl-dot dot-orange">18</div>
+      <div class="tl-content">
+        <div class="tl-date">June 18, 2026 — Tomorrow</div>
+        <div class="tl-title">1 item due</div>
+        <div class="tl-items">
+          <ul>
+            <li><strong>Add "Ship My Order Separate or Together" checkbox</strong> — Hot &amp; Cold side 6.7 Charge Pipe kits. Brian George. Allows customer to choose split or combined shipment at checkout.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNE 19 -->
+    <div class="tl-item">
+      <div class="tl-dot dot-orange">19</div>
+      <div class="tl-content">
+        <div class="tl-date">June 19, 2026</div>
+        <div class="tl-title">3 items due</div>
+        <div class="tl-items">
+          <ul>
+            <li><strong>Add Battery Hold Down Video to product page</strong> — Nicholas Willmon. Video not yet finished (Dee Yamamoto confirmed as of Apr 2). Needs video before publishing.</li>
+            <li><strong>Update Filtration Category image</strong> — Replace current image with new Fuel Filter Housing photo. Brian George.</li>
+            <li><strong>Build landing page for Prime Day Sale</strong> — Brian George. Added June 15 — deadline is tight.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNE 24 -->
+    <div class="tl-item">
+      <div class="tl-dot dot-yellow">24</div>
+      <div class="tl-content">
+        <div class="tl-date">June 24, 2026</div>
+        <div class="tl-title">1 item due</div>
+        <div class="tl-items">
+          <ul>
+            <li><strong>Migrate Website API to Google Merchant</strong> — Brian George. <span class="badge b-yellow">Waiting on Glendale</span>. Status: blocked externally.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNE 25 -->
+    <div class="tl-item">
+      <div class="tl-dot dot-yellow">25</div>
+      <div class="tl-content">
+        <div class="tl-date">June 25, 2026</div>
+        <div class="tl-title">1 item due</div>
+        <div class="tl-items">
+          <ul>
+            <li><strong>Add videos to corresponding product pages</strong> — Brian George. Work from the YouTube library board. Reference: sinisterdiesel monday boards/18392807534.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNE 29 -->
+    <div class="tl-item">
+      <div class="tl-dot dot-yellow">29</div>
+      <div class="tl-content">
+        <div class="tl-date">June 29, 2026</div>
+        <div class="tl-title">1 item due — Backorder Removal</div>
+        <div class="tl-items">
+          <strong>Remove Backorder Notification (6/29 batch)</strong> — Brian George. 17 SKUs to have B/O notice removed:
+          <ul style="margin-top:5px">
+            <li>SD-CAI-6.7P-11-DRY, SD-CAI-6.7P-20, SD-CAI-LLY, SD-CAI-6.7P-11, SD-CAI-6.7P-17</li>
+            <li>SD-INTRPIPE-7.3-COLD, SD-INTRPIPE-7.3-KIT, SD-INTRPIPE-7.3-IE-KIT, SD-INTEL-7.3-BK</li>
+            <li>SD-BK-6.0, SD-BK-7.3, SD-BK-6.0-HOT, SD-6.7PIPH11-01-20, SD-6.7PIPK17-01-20</li>
+            <li>SD-INTRPIPE-5.9C-03-KIT, SD-INTRPIPE-5.9C-IE-KIT, BK3335S</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNE 30 -->
+    <div class="tl-item">
+      <div class="tl-dot dot-yellow">30</div>
+      <div class="tl-content">
+        <div class="tl-date">June 30, 2026</div>
+        <div class="tl-title">1 item due</div>
+        <div class="tl-items">
+          <ul>
+            <li><strong>Add Extra Fuel Filter add-on pop-up when added to cart</strong> — Brian George. Upsell pop-up for fuel filter when relevant products added to cart. Will show as separate line item.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JULY 6 -->
+    <div class="tl-item">
+      <div class="tl-dot dot-purple">7/6</div>
+      <div class="tl-content">
+        <div class="tl-date">July 6, 2026 (moved from June 15)</div>
+        <div class="tl-title">1 item — Backorder Removal (moved)</div>
+        <div class="tl-items">
+          <strong>Remove Backorder Notification (moved batch)</strong> — 12 SKUs. Updated ETA to 7/9 per Jordy (safe estimate):
+          <ul style="margin-top:5px">
+            <li>SD-6.7PIPH11-01-20, SD-INTRPIPE-6.7P-HOT-23, SDG-INTRPIPE-6.7P-HOT-23</li>
+            <li>SD-6.7PIPK17-01-20, SD-6.7PIPK11-01-20, SD-6.7PIPH11-GRY</li>
+            <li>SDG-6.7PIPK11-01-20, SDG-6.7PIPK17-01-20, SD-INTRPIPE-6.4-KIT</li>
+            <li>SD-INTRPIPE-6.4-COLD, SD-INTRPIPE-LML-HOT, SD-INTRPIPE-LML-IE-KIT</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- JULY 16 -->
+    <div class="tl-item">
+      <div class="tl-dot dot-gray">7/16</div>
+      <div class="tl-content">
+        <div class="tl-date">July 16, 2026</div>
+        <div class="tl-title">1 item due</div>
+        <div class="tl-items">
+          <ul>
+            <li><strong>Make the Careers page a higher quality SEO page</strong> — Nicholas Willmon. Improve job listing page for organic employment search traffic. Added Dec 9, 2025.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ONGOING -->
+    <div class="tl-item">
+      <div class="tl-dot dot-gray">~</div>
+      <div class="tl-content">
+        <div class="tl-date">No firm date — Ongoing</div>
+        <div class="tl-title">2 items</div>
+        <div class="tl-items">
+          <ul>
+            <li><strong>Miva needs update</strong> — Jordy Gorozpe. Miva now charging for running an outdated version. Glendale to test in sandbox then schedule live update. (Contract renewal includes this.)</li>
+            <li><strong>ETAC Back Order Notification</strong> — 6 ETAC SKUs (SD-ETAC57B, SD-ETAC45B, etc.) — notices live on website. No removal date yet.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pf"><span>Sinister Diesel · Online Department Plan · June 2026</span><span>2</span></div>
+</div>
+
+<!-- ═══════════════════ PAGE 3 – FUTURE DEVELOPMENT -->
+<div class="page">
+  <div class="sec">Section 03</div>
+  <h2>Future Development Backlog</h2>
+  <div class="rule"></div>
+
+  <p>Items in the <strong>Future Development</strong> section — not yet scheduled but approved for pursuit. Organized by category.</p>
+
+  <div class="band band-blue">
+    <div class="band-icon">🛒</div>
+    <div class="band-text">
+      <h3>Checkout &amp; Conversion</h3>
+      <p>High-impact items that directly affect purchase completion rate</p>
+    </div>
+  </div>
+
+  <div class="task-grid">
+    <div class="task high">
+      <div class="task-left">
+        <div class="task-title">Checkout Rebuild</div>
+        <div class="task-meta">
+          <span>👤 Nicholas Willmon</span>
+          <span>📅 Was due Mar 31, 2026</span>
+          <span>🌐 Website</span>
+        </div>
+        <div class="task-note">Full checkout overhaul including: Guest checkout / Sign In to checkout, PayPal + Apple Pay + Affirm at checkout, post-purchase add-on pop-up, "Continue Shopping" button in cart, revamped add-to-cart (XDP style), Google address auto-populate, saved card info. Currently waiting on Miva quote. Working with Glendale.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-orange">High Priority</span><span class="badge b-gray">Glendale</span></div>
+    </div>
+
+    <div class="task medium">
+      <div class="task-left">
+        <div class="task-title">Get Credit Cards to Auto-Populate (MivaPay Vault)</div>
+        <div class="task-meta"><span>👤 Taylor Smith / Brian George</span></div>
+        <div class="task-note">Customers can select previously used card (CVV still required). Also enables correct subscription billing. Requires MivaPay Vault — additional Miva service. Taylor opened support ticket Aug 2025. Glendale recommended as implementation partner. Could also solve the long-running Subscription CVV issue.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-yellow">Med Priority</span><span class="badge b-gray">Needs Quote</span></div>
+    </div>
+
+    <div class="task medium">
+      <div class="task-left">
+        <div class="task-title">Add Subscription Feature</div>
+        <div class="task-meta"><span>👤 Jordy Gorozpe / Taylor Smith</span><span>⚠ Status: Issue</span></div>
+        <div class="task-note">Long-standing item since Oct 2022. CVV requirement with Braintree prevents stored card charges. Glendale quoted $1,650–$3,300 for custom workflow. MivaPay Vault may resolve the underlying CVV issue. Brian knows a company that may be able to help. Best candidates: replacement filters, Rev-X.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-red">Blocked</span><span class="badge b-gray">GD $1,650–$3,300</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">Add "Get it By Date" on Product Pages</div>
+        <div class="task-meta"><span>👤 Michael Mitchell / Brian George</span></div>
+        <div class="task-note">Show estimated delivery date based on live NetSuite inventory. Requires Miva–NetSuite direct integration (would remove Celigo). Low priority per Michael. Glendale to quote.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-blue">Low Priority</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">Post-Purchase / Estimated Ship Time Plugin</div>
+        <div class="task-meta"><span>👤 Jordy Gorozpe</span></div>
+        <div class="task-note">3rd-party or plugin showing estimated ship time on product pages. To be workshopped in online meeting.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-blue">Low Priority</span></div>
+    </div>
+  </div>
+
+  <div class="band band-teal">
+    <div class="band-icon">🔍</div>
+    <div class="band-text">
+      <h3>SEO, Content &amp; Marketing</h3>
+      <p>Organic search, PPC, and content improvements</p>
+    </div>
+  </div>
+
+  <div class="task-grid">
+    <div class="task high">
+      <div class="task-left">
+        <div class="task-title">Find Company for Microsoft (Bing) PPC</div>
+        <div class="task-meta"><span>👤 Nicholas Willmon</span><span>📅 Was due Mar 9, 2026</span></div>
+        <div class="task-note">Hedges Company (previous vendor) ruled out — Full Moon Digital ruled out (damaged Google Ads). Candidates: Digital Throttle, Logical Position. Need to interview and select.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-red">Overdue</span></div>
+    </div>
+
+    <div class="task medium">
+      <div class="task-left">
+        <div class="task-title">Find Merge Data for PPC (Google / Meta)</div>
+        <div class="task-meta"><span>👤 Nicholas Willmon</span></div>
+        <div class="task-note">Look into Google Looker Studio for consolidated PPC reporting. Jordy shared a previous Logical Position Looker Studio template as a starting point.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-yellow">Med Priority</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">Discuss Improvements for Google AI Recommendation</div>
+        <div class="task-meta"><span>👤 Michael Mitchell / Brian George / Katie Mitchell</span></div>
+        <div class="task-note">Improve product page technical specs (alloy types, PSI tolerances, O-ring materials) so Google AI recommends SD parts over competitors. Update product pages with Technical Specifications tab. Fix BBB/Yelp gaps. Leverage shop testimonials with long-term usage data.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-blue">Low Priority</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">Add Shopper Approved Review Count Widget to Header</div>
+        <div class="task-meta"><span>👤 Brian George</span><span>📅 Was due May 15, 2026</span></div>
+        <div class="task-note">Shopper Approved widget ready but custom text (replacing "Free Shipping" with "Diesel Performance Experts Since 2009") is in BETA with no ETA. Brian paused for 60 days (from Feb 18). YMM section collapse on mobile — SearchSpring item, pending answer from their tech team.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-yellow">On Hold</span><span class="badge b-gray">60-day pause</span></div>
+    </div>
+  </div>
+
+  <div class="pf"><span>Sinister Diesel · Online Department Plan · June 2026</span><span>3</span></div>
+</div>
+
+<!-- ═══════════════════ PAGE 4 – FUTURE DEV (continued) + GD PROPOSALS -->
+<div class="page">
+  <div class="sec">Section 04</div>
+  <h2>Future Development (cont.) &amp; Glendale Proposals</h2>
+  <div class="rule"></div>
+
+  <div class="band band-gray">
+    <div class="band-icon">🛠</div>
+    <div class="band-text">
+      <h3>Product &amp; Platform Updates</h3>
+      <p>Inventory, pricing, URL fixes, and platform-specific tasks</p>
+    </div>
+  </div>
+
+  <div class="task-grid">
+    <div class="task high">
+      <div class="task-left">
+        <div class="task-title">Fix Wrong URL Link Structure — Radiator Pipe</div>
+        <div class="task-meta"><span>👤 Jordy Gorozpe</span><span>🌐 sinisterdiesel.com</span></div>
+        <div class="task-note">URL reads "2003-2007" but product is actually for 2010–2018 models. Instructions also show 03-07 content — Dee to update. URL may not be changeable without breaking SEO. Flagged by Jordy May 19, 2026.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-red">SEO Risk</span></div>
+    </div>
+
+    <div class="task medium">
+      <div class="task-left">
+        <div class="task-title">Change Tombstone Coolant Filter Kits to Round on Amazon</div>
+        <div class="task-meta"><span>👤 Brian George / Will Percy</span><span>📅 Was due Apr 3, 2026</span></div>
+        <div class="task-note">Will Percy's checklist: complete SKU list, add monthly usage, update bracket inventory, redesign missing brackets, take photos, update BOMs in NetSuite + build sheets, plan discontinuation, update Amazon/eBay/SD/WD listings. Running low on old style — good time to transition.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-orange">Amazon + SD</span></div>
+    </div>
+
+    <div class="task medium">
+      <div class="task-left">
+        <div class="task-title">Add F450 / F550 Fitment to Most 6.0 Parts</div>
+        <div class="task-meta"><span>👤 Brian George</span><span>📅 Was due Apr 15, 2026</span></div>
+        <div class="task-note">Expand vehicle fitment data on 6.0L product listings to include F450 and F550 variants. Website update.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-yellow">Med Priority</span></div>
+    </div>
+
+    <div class="task medium">
+      <div class="task-left">
+        <div class="task-title">EGR Cooler Blue Option Pricing Fix</div>
+        <div class="task-meta"><span>👤 Nicholas Willmon / Jordy Gorozpe</span></div>
+        <div class="task-note">Blue coating costs $43 but upgrade option was only $20 (losing $23/unit). Nicholas temporarily raised upgrade to $30 (both now $459.99). Proper fix: complete product cost evaluation for all colour variants. Michael wants to wait until bigger movers are addressed first.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-orange">Pricing</span><span class="badge b-gray">Temp Fix Live</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">New Site Search (Replace / Improve Miva Search)</div>
+        <div class="task-meta"><span>👤 Online Team</span></div>
+        <div class="task-note">Eliminate "no results found" experiences and improve search intuitiveness. Possibly replace or augment current SearchSpring integration.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-blue">Future</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">Backorder Availability Notifications (Long Lead Time)</div>
+        <div class="task-meta"><span>👤 Nicholas Willmon / Brian George</span></div>
+        <div class="task-note">Weekly manual process: when item goes on extended B/O, Brian/Nick add disclaimer and ETA note to product page. Can't be automated without live NetSuite inventory feed. Reduces customer cancellations. Also apply to eBay FBM listings (zero out inventory for affected SKUs).</div>
+      </div>
+      <div class="task-badges"><span class="badge b-blue">Process</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">Full eBay Sales Audit (Sales vs. Cost YTD)</div>
+        <div class="task-meta"><span>👤 Jordy Gorozpe</span></div>
+        <div class="task-note">YTD SKU data assembled. Full cost-vs-revenue analysis to determine eBay profitability per SKU. Last 6 months file shared internally.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-blue">eBay</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">AI Voice Prompt for VOIP System</div>
+        <div class="task-meta"><span>👤 Jordy Gorozpe</span></div>
+        <div class="task-note">Replace Mood Media with a clean custom AI intro for the phone system. Research and implementation required.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-gray">Low Priority</span></div>
+    </div>
+
+    <div class="task low">
+      <div class="task-left">
+        <div class="task-title">Add SD-CS-6.0-RC-BLUE (Round EGR Cooler in Blue)</div>
+        <div class="task-meta"><span>👤 Brian George / Will Percy</span></div>
+        <div class="task-note">Need a round EGR cooler sample to send for blue powder coating. Will Percy ordering in very small batches — need one unit to start. Determine workflow for future colour product additions.</div>
+      </div>
+      <div class="task-badges"><span class="badge b-gray">Low Priority</span></div>
+    </div>
+  </div>
+
+  <!-- GD PROPOSALS -->
+  <div class="band band-purple" style="margin-top:8px">
+    <div class="band-icon">💼</div>
+    <div class="band-text">
+      <h3>Glendale Designs — Pending Proposals</h3>
+      <p>Quoted development work not yet approved or in progress</p>
+    </div>
+  </div>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>Project</th><th>Quote</th><th>Status</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Cumulative Layout Shift — Megamenu Fix</strong></td>
+        <td><strong>$165–$330</strong></td>
+        <td><span class="badge b-yellow">Not Started</span></td>
+        <td>Fixes CLS on the navigation megamenu — directly relevant to our CLS = 0.27 CWV failure</td>
+      </tr>
+      <tr>
+        <td><strong>Cookie Consent Feature</strong></td>
+        <td>TBD (3rd-party required)</td>
+        <td><span class="badge b-yellow">Not Started</span></td>
+        <td>Required for compliance with GDPR/CCPA. Jordy flagged in Nov 2024. 45 third-party cookies currently on site.</td>
+      </tr>
+      <tr>
+        <td><strong>Attributes Solution for Miva</strong> (NetSuite option auto-update)</td>
+        <td>TBD</td>
+        <td><span class="badge b-yellow">Not Started</span></td>
+        <td>Product options currently pull into NetSuite as text notes. Needs to auto-map to SKUs. Insane Labs said it must be all-or-nothing.</td>
+      </tr>
+      <tr>
+        <td><strong>Switch Framework to Shadows</strong></td>
+        <td>Quote in Dec 2024</td>
+        <td><span class="badge b-gray">Deferred</span></td>
+        <td>Framework modernisation. No active timeline.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <h3>Already Completed GD Work (Moving Scripts into GTM)</h3>
+    <p>
+      The $495–$895 GTM migration project (Glendale Designs) is largely complete: GA4, Facebook Pixel, Listrak (removed), Searchspring, Crazy Egg, Livehelp, and Zinrelo are all updated. <strong>Affirm</strong> and <strong>Zinrelo</strong> cannot be moved to GTM as they are controlled within Miva modules. Klaviyo module was found to be out of date — Glendale verified with Klaviyo support notes.
+    </p>
+  </div>
+
+  <div class="pf"><span>Sinister Diesel · Online Department Plan · June 2026</span><span>4</span></div>
+</div>
+
+<!-- ═══════════════════ PAGE 5 – MY FOCUS -->
+<div class="page">
+  <div class="sec">Section 05</div>
+  <h2>My Work Plan — Rizwan Khalid</h2>
+  <div class="rule"></div>
+
+  <p>Based on the board data and the site audit work already completed on day one, here is my prioritised plan of action.</p>
+
+  <div class="callout">
+    <h3>Already Completed — Day 1</h3>
+    <p>
+      Completed the full site health and speed documentation task assigned by Brian George. Delivered: GTmetrix (2 runs + HAR waterfall), Google CrUX real-user data, Lighthouse Mobile (score: 28) and Desktop (score: 77) reports, browser console error analysis. Findings packaged into a structured audit report.
+    </p>
+  </div>
+
+  <h3>Immediate Actions (This Week)</h3>
+  <table class="tbl">
+    <thead>
+      <tr><th>#</th><th>Task</th><th>Context</th><th>Due</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td><strong>Clarify "Build your Own Branch" scope</strong></td>
+        <td>Assigned to me on the board. Need to confirm with Brian or Nicholas what this entails — likely a product configurator or bundle builder feature.</td>
+        <td><span class="badge b-red">Today</span></td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td><strong>Familiarise with Miva Merchant backend</strong></td>
+        <td>All active tasks (backorder banners, category images, product pages, videos) are managed through Miva. Getting access and orientation is essential.</td>
+        <td><span class="badge b-orange">This week</span></td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td><strong>Review backorder SKU list &amp; current notices</strong></td>
+        <td>Two B/O removal batches due June 29 and July 6. Good to understand the current state of live backorder notifications so I can assist Brian when dates arrive.</td>
+        <td><span class="badge b-orange">This week</span></td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td><strong>Review Prime Day landing page brief</strong></td>
+        <td>Brian added this June 15 with a June 19 due date. Tight deadline — confirm if scope and assets are ready.</td>
+        <td><span class="badge b-red">June 19</span></td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td><strong>Get access to Monday.com board</strong></td>
+        <td>I'm already visible on the board (item assigned to me). Ensure I can view all groups and update task statuses directly.</td>
+        <td><span class="badge b-orange">This week</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>How the Site Audit Connects to the Board</h3>
+  <div class="highlight-row">
+    <div class="hl hl-purple">
+      <h4>CLS Megamenu Fix → GD Proposal ($165–$330)</h4>
+      <p>The audit found CLS = 0.27 (failing CWV). The board has a pending Glendale quote for the megamenu CLS fix. This is likely a contributing cause. Recommending it be approved and scheduled.</p>
+    </div>
+    <div class="hl hl-red">
+      <h4>Affirm SecurityError → Checkout Rebuild Task</h4>
+      <p>Console shows Affirm throwing errors on every load. The board has a Checkout Rebuild task (waiting on Miva quote) that includes Affirm at checkout. The current Affirm integration is broken for most users.</p>
+    </div>
+    <div class="hl hl-orange">
+      <h4>45 Third-Party Cookies → Cookie Consent Proposal</h4>
+      <p>Lighthouse flagged 45 third-party cookies (Best Practices: 50/100). The board has a GD proposal for a cookie consent feature. This is a legal compliance risk — should be prioritised.</p>
+    </div>
+    <div class="hl hl-blue">
+      <h4>Moving Scripts to GTM → Mostly Done</h4>
+      <p>The audit found 35 external domains and 68 script requests. The GTM migration is mostly complete per the board. Remaining gains come from deferring reCAPTCHA (375 KB), Affirm (145 KB), and Zinrelo (118 KB).</p>
+    </div>
+    <div class="hl hl-green">
+      <h4>Image Alt Tags → Fixes Both SEO (77) and A11y (88)</h4>
+      <p>Lighthouse flags missing alt tags on images as failures in both SEO and Accessibility. Single fix improves two scores simultaneously — quick win with no Glendale involvement needed.</p>
+    </div>
+    <div class="hl hl-teal">
+      <h4>Miva Update → Needed Before Any Dev Work</h4>
+      <p>Miva is now charging for outdated version. Board confirms: Glendale to sandbox-test then schedule live update. This should happen before new features are added to avoid compatibility issues.</p>
+    </div>
+  </div>
+
+  <div class="pf"><span>Sinister Diesel · Online Department Plan · June 2026</span><span>5</span></div>
+</div>
+
+</body>
+</html>

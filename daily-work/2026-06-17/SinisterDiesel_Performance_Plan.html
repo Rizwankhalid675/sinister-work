@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sinister Diesel – Site Audit Report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;font-size:13px;color:#0f172a;background:#fff;line-height:1.6}
+
+/* ── COVER ── */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  background:#0f172a;color:#fff;text-align:center;padding:64px 48px;page-break-after:always;
+}
+.cover-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#f97316;
+  font-weight:700;margin-bottom:20px}
+.cover h1{font-size:42px;font-weight:800;line-height:1.1;margin-bottom:12px}
+.cover h1 em{color:#f97316;font-style:normal}
+.cover .url{font-size:13px;color:#64748b;margin-bottom:48px;font-weight:400}
+.cover-scores{display:flex;gap:0;margin-bottom:48px;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08)}
+.score-col{padding:24px 32px;min-width:160px;text-align:center}
+.score-col+.score-col{border-left:1px solid rgba(255,255,255,0.08)}
+.sc-mob{background:#1e293b}.sc-desk{background:#162032}
+.score-col .device{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#64748b;
+  font-weight:600;margin-bottom:16px}
+.score-row{display:flex;gap:20px;justify-content:center}
+.s-item{text-align:center}
+.s-item .sval{font-size:28px;font-weight:800;line-height:1}
+.s-item .slab{font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+.red{color:#ef4444}.orange{color:#f97316}.green{color:#22c55e}.amber{color:#eab308}
+.cover-line{width:48px;height:3px;background:#f97316;margin:0 auto 28px;border-radius:2px}
+.cover-meta{font-size:11px;color:#334155;line-height:2.1}
+.cover-meta strong{color:#475569}
+.fail-tag{display:inline-flex;align-items:center;gap:6px;background:#450a0a;color:#fca5a5;
+  border:1px solid #7f1d1d;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:6px 14px;border-radius:20px;margin-bottom:24px}
+
+/* ── PAGES ── */
+.page{max-width:960px;margin:0 auto;padding:56px 64px;page-break-after:always}
+.page:last-child{page-break-after:avoid}
+.sec{font-size:9.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:#f97316;margin-bottom:5px}
+h2{font-size:22px;font-weight:800;color:#0f172a;margin-bottom:4px}
+.rule{height:3px;background:linear-gradient(90deg,#f97316,#fb923c,transparent);
+  border-radius:2px;margin-bottom:26px}
+p{margin-bottom:12px;color:#475569;font-size:12.5px}
+
+/* ── COMPARISON GRID ── */
+.compare-wrap{display:grid;grid-template-columns:200px 1fr 1fr;gap:0;
+  border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:26px}
+.compare-wrap .ch{background:#f8fafc;font-size:9px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1.5px;color:#94a3b8;padding:10px 16px}
+.compare-wrap .ch.mob-h{background:#1e293b;color:#94a3b8;text-align:center}
+.compare-wrap .ch.desk-h{background:#162032;color:#94a3b8;text-align:center}
+.compare-wrap .cr{padding:11px 16px;border-top:1px solid #f1f5f9;font-size:12.5px;
+  color:#334155;display:flex;align-items:center}
+.compare-wrap .cr.metric-label{font-weight:600;color:#0f172a;background:#fafafa}
+.compare-wrap .cr.val{justify-content:center;font-weight:700;font-size:14px}
+.compare-wrap .cr.mob-val{background:#f8fafc}
+.compare-wrap .cr.desk-val{background:#f0f9ff}
+.diff-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;
+  border-radius:4px;margin-left:6px}
+.db-better{background:#dcfce7;color:#166534}
+.db-worse{background:#fee2e2;color:#991b1b}
+
+/* ── SCORE CARDS ── */
+.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
+.sc-card{border-radius:12px;padding:18px 16px;text-align:center;border:1px solid #e2e8f0}
+.sc-card .sc-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  color:#94a3b8;margin-bottom:10px}
+.sc-card .sc-pair{display:flex;gap:8px;justify-content:center;align-items:baseline}
+.sc-card .sc-val{font-size:26px;font-weight:800;line-height:1}
+.sc-card .sc-sub{font-size:10px;color:#94a3b8;margin-top:4px}
+.mob-col{background:#f8fafc}.desk-col{background:#f0f9ff}
+
+/* ── TABLES ── */
+.tbl{width:100%;border-collapse:collapse;margin-bottom:22px;font-size:12px}
+.tbl th{background:#0f172a;color:#f1f5f9;font-size:9px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;padding:10px 14px;text-align:left}
+.tbl td{padding:10px 14px;border-bottom:1px solid #f1f5f9;vertical-align:middle;color:#334155}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:#fafafa}
+.tbl td strong{color:#0f172a}
+
+/* ── BADGES ── */
+.badge{display:inline-block;font-size:8.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.8px;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.b-crit{background:#fee2e2;color:#991b1b}
+.b-high{background:#ffedd5;color:#9a3412}
+.b-med{background:#fef9c3;color:#854d0e}
+.b-low{background:#dbeafe;color:#1e40af}
+.b-pass{background:#dcfce7;color:#166534}
+.b-fail{background:#fee2e2;color:#991b1b}
+.b-warn{background:#fef9c3;color:#854d0e}
+.b-info{background:#e0f2fe;color:#075985}
+
+/* ── SAVINGS BLOCKS ── */
+.savings-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.sav-card{background:#f8fafc;border-radius:10px;padding:16px 18px;border-left:4px solid}
+.sv-red{border-color:#ef4444}.sv-orange{border-color:#f97316}.sv-blue{border-color:#3b82f6}
+.sv-purple{border-color:#8b5cf6}.sv-teal{border-color:#14b8a6}.sv-green{border-color:#22c55e}
+.sav-card .sav-n{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  color:#94a3b8;margin-bottom:6px}
+.sav-card .sav-v{font-size:20px;font-weight:800;color:#0f172a;margin-bottom:2px}
+.sav-card .sav-d{font-size:11px;color:#64748b}
+
+/* ── TWO COL ── */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.box{background:#f8fafc;border-radius:10px;padding:16px 18px;border-top:3px solid}
+.bx-red{border-color:#ef4444}.bx-orange{border-color:#f97316}.bx-blue{border-color:#3b82f6}
+.bx-green{border-color:#22c55e}.bx-purple{border-color:#8b5cf6}.bx-amber{border-color:#eab308}
+.box h4{font-size:12px;font-weight:700;color:#0f172a;margin-bottom:7px}
+.box p{font-size:11.5px;color:#64748b;margin:0}
+.box ul{padding-left:16px;margin-top:4px}
+.box ul li{font-size:11.5px;color:#64748b;margin-bottom:3px}
+.box ul li strong{color:#334155}
+
+/* ── CALLOUT ── */
+.callout{background:#0f172a;color:#fff;border-radius:12px;padding:22px 28px;margin-bottom:20px}
+.callout h3{font-size:15px;font-weight:700;margin-bottom:8px}
+.callout p{color:#94a3b8;font-size:12px;margin:0;line-height:1.7}
+
+/* ── ACTION TABLE ── */
+.act-num{width:28px;height:28px;border-radius:50%;background:#f97316;color:#fff;
+  font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+/* ── FOOTER ── */
+.pf{margin-top:40px;padding-top:14px;border-top:1px solid #f1f5f9;
+  display:flex;justify-content:space-between;font-size:9.5px;color:#cbd5e1}
+
+/* ── PRINT ── */
+@media print{
+  body{font-size:12px}
+  .cover{min-height:100vh;page-break-after:always}
+  .page{padding:40px 48px}
+  @page{margin:0;size:A4}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ COVER -->
+<div class="cover">
+  <div class="cover-label">Website Audit Report · June 17, 2026</div>
+  <h1>Sinister Diesel<br/><em>Site Performance Audit</em></h1>
+  <p class="url">sinisterdiesel.com &nbsp;·&nbsp; Lighthouse 13.2.0 &nbsp;·&nbsp; GTmetrix &nbsp;·&nbsp; CrUX Real-User Data &nbsp;·&nbsp; HAR Analysis</p>
+
+  <div class="fail-tag">⚠ Core Web Vitals: FAILING in Google Search</div>
+
+  <div class="cover-scores">
+    <div class="score-col sc-mob">
+      <div class="device">Mobile</div>
+      <div class="score-row">
+        <div class="s-item"><div class="sval red">28</div><div class="slab">Perf</div></div>
+        <div class="s-item"><div class="sval amber">88</div><div class="slab">A11y</div></div>
+        <div class="s-item"><div class="sval orange">50</div><div class="slab">BP</div></div>
+        <div class="s-item"><div class="sval orange">77</div><div class="slab">SEO</div></div>
+      </div>
+    </div>
+    <div class="score-col sc-desk">
+      <div class="device">Desktop</div>
+      <div class="score-row">
+        <div class="s-item"><div class="sval orange">77</div><div class="slab">Perf</div></div>
+        <div class="s-item"><div class="sval amber">88</div><div class="slab">A11y</div></div>
+        <div class="s-item"><div class="sval orange">50</div><div class="slab">BP</div></div>
+        <div class="s-item"><div class="sval orange">77</div><div class="slab">SEO</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-line"></div>
+  <div class="cover-meta">
+    <strong>Prepared by:</strong> Rizwan Khalid &nbsp;·&nbsp; rizwan.khalid675@gmail.com<br/>
+    <strong>Date:</strong> June 17, 2026 &nbsp;·&nbsp;
+    <strong>Platform:</strong> Miva Merchant &nbsp;·&nbsp;
+    <strong>CDN:</strong> Cloudflare (HTTP/3 + Brotli active)<br/>
+    <strong>Tools:</strong> Lighthouse 13.2.0 · GTmetrix · Chrome DevTools HAR · Google CrUX
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ PAGE 1 – SCORE OVERVIEW -->
+<div class="page">
+  <div class="sec">Section 01</div>
+  <h2>Score Overview</h2>
+  <div class="rule"></div>
+
+  <p>Lighthouse was run under two conditions: <strong>Mobile</strong> (emulated Moto G Power, Slow 4G throttling) and <strong>Desktop</strong> (custom throttling). The gap between the two reveals how severely unoptimised the mobile experience is — the primary audience for most e-commerce traffic.</p>
+
+  <!-- comparison table -->
+  <div class="compare-wrap">
+    <div class="ch">Metric</div>
+    <div class="ch mob-h">Mobile (Slow 4G)</div>
+    <div class="ch desk-h">Desktop</div>
+
+    <div class="cr metric-label">Performance Score</div>
+    <div class="cr val mob-val"><span class="red">28 / 100</span></div>
+    <div class="cr val desk-val"><span class="orange">77 / 100</span></div>
+
+    <div class="cr metric-label">Accessibility</div>
+    <div class="cr val mob-val"><span class="amber">88 / 100</span></div>
+    <div class="cr val desk-val"><span class="amber">88 / 100</span></div>
+
+    <div class="cr metric-label">Best Practices</div>
+    <div class="cr val mob-val"><span class="orange">50 / 100</span></div>
+    <div class="cr val desk-val"><span class="orange">50 / 100</span></div>
+
+    <div class="cr metric-label">SEO</div>
+    <div class="cr val mob-val"><span class="orange">77 / 100</span></div>
+    <div class="cr val desk-val"><span class="orange">77 / 100</span></div>
+
+    <div class="cr metric-label">First Contentful Paint (FCP)</div>
+    <div class="cr val mob-val"><span class="orange">2.1 s</span></div>
+    <div class="cr val desk-val"><span class="green">0.8 s</span></div>
+
+    <div class="cr metric-label">Largest Contentful Paint (LCP)</div>
+    <div class="cr val mob-val"><span class="red">7.2 s</span></div>
+    <div class="cr val desk-val"><span class="orange">2.2 s</span></div>
+
+    <div class="cr metric-label">Total Blocking Time (TBT)</div>
+    <div class="cr val mob-val"><span class="red">3,120 ms</span></div>
+    <div class="cr val desk-val"><span class="orange">200 ms</span></div>
+
+    <div class="cr metric-label">Cumulative Layout Shift (CLS)</div>
+    <div class="cr val mob-val"><span class="red">0.255</span></div>
+    <div class="cr val desk-val"><span class="green">0</span></div>
+
+    <div class="cr metric-label">Speed Index</div>
+    <div class="cr val mob-val"><span class="orange">5.4 s</span></div>
+    <div class="cr val desk-val"><span class="orange">2.2 s</span></div>
+
+    <div class="cr metric-label">Main-Thread Work</div>
+    <div class="cr val mob-val"><span class="red">10.0 s</span></div>
+    <div class="cr val desk-val"><span class="orange">2.8 s</span></div>
+
+    <div class="cr metric-label">Long Tasks Found</div>
+    <div class="cr val mob-val"><span class="red">20 tasks</span></div>
+    <div class="cr val desk-val"><span class="orange">6 tasks</span></div>
+
+    <div class="cr metric-label">Total Network Payload</div>
+    <div class="cr val mob-val"><span class="orange">4,582 KiB</span></div>
+    <div class="cr val desk-val"><span class="red">6,143 KiB</span></div>
+  </div>
+
+  <div class="two">
+    <div class="box bx-red">
+      <h4>Mobile Performance: 28 — Critical</h4>
+      <p>A score of 28 means the site fails on nearly every mobile metric. Mobile users on 4G experience a 7.2s LCP and 3,120ms of JavaScript blocking — more than 3 full seconds where the page appears frozen. Over 60% of web traffic is mobile.</p>
+    </div>
+    <div class="box bx-blue">
+      <h4>Desktop Performance: 77 — Needs Work</h4>
+      <p>Desktop performs significantly better but still has room to improve, particularly LCP (2.2s) and TBT (200ms). Image delivery and cache savings of 2,858 KiB remain unaddressed on both devices.</p>
+    </div>
+  </div>
+
+  <div class="pf"><span>sinisterdiesel.com · Site Audit · June 2026</span><span>1</span></div>
+</div>
+
+<!-- ═══════════════════════════════════ PAGE 2 – REAL USER DATA + SAVINGS -->
+<div class="page">
+  <div class="sec">Section 02</div>
+  <h2>Real-User Data &amp; Estimated Savings</h2>
+  <div class="rule"></div>
+
+  <p>Google CrUX data reflects actual Chrome user experiences over the last 28 days (May 11 – Jun 13, 2026). This data directly determines whether the site qualifies for Google's ranking boost from Core Web Vitals.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>Core Web Vital</th><th>Real-User Value</th><th>Lab Value</th><th>Target</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CLS — Cumulative Layout Shift</strong></td>
+        <td><strong class="red">0.27</strong></td>
+        <td>0.255 (mobile) · 0 (desktop)</td>
+        <td>&lt; 0.1</td>
+        <td><span class="badge b-fail">FAIL</span></td>
+      </tr>
+      <tr>
+        <td><strong>TTFB — Time to First Byte</strong></td>
+        <td><strong class="orange">1.2 s</strong></td>
+        <td>1.1 s</td>
+        <td>&lt; 0.8 s</td>
+        <td><span class="badge b-warn">Needs Work</span></td>
+      </tr>
+      <tr>
+        <td><strong>LCP — Largest Contentful Paint</strong></td>
+        <td><strong class="green">1.7 s</strong></td>
+        <td>7.2 s (mob) · 2.2 s (desk)</td>
+        <td>&lt; 2.5 s</td>
+        <td><span class="badge b-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>INP — Interaction to Next Paint</strong></td>
+        <td><strong class="green">79 ms</strong></td>
+        <td>—</td>
+        <td>&lt; 200 ms</td>
+        <td><span class="badge b-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>FCP — First Contentful Paint</strong></td>
+        <td><strong class="green">1.5 s</strong></td>
+        <td>2.1 s (mob) · 0.8 s (desk)</td>
+        <td>&lt; 1.8 s</td>
+        <td><span class="badge b-pass">PASS</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-bottom:20px">CLS is the only failing Core Web Vital — but one failure causes the <strong>entire CWV assessment to fail</strong>, removing the site from Google's ranking eligibility for the CWV signal.</p>
+
+  <h3 style="font-size:14px;font-weight:700;margin-bottom:14px;color:#0f172a">Estimated Savings Identified by Lighthouse</h3>
+
+  <div class="savings-row">
+    <div class="sav-card sv-red">
+      <div class="sav-n">Unused JavaScript</div>
+      <div class="sav-v">5,250 KiB</div>
+      <div class="sav-d">Mobile saving — largest single opportunity</div>
+    </div>
+    <div class="sav-card sv-orange">
+      <div class="sav-n">Image Delivery</div>
+      <div class="sav-v">1,199 KiB</div>
+      <div class="sav-d">Mobile · format + sizing</div>
+    </div>
+    <div class="sav-card sv-orange">
+      <div class="sav-n">Image Delivery</div>
+      <div class="sav-v">2,258 KiB</div>
+      <div class="sav-d">Desktop · format + sizing</div>
+    </div>
+    <div class="sav-card sv-blue">
+      <div class="sav-n">Cache Lifetimes</div>
+      <div class="sav-v">2,232 KiB</div>
+      <div class="sav-d">Mobile returning visitors</div>
+    </div>
+    <div class="sav-card sv-blue">
+      <div class="sav-n">Cache Lifetimes</div>
+      <div class="sav-v">2,858 KiB</div>
+      <div class="sav-d">Desktop returning visitors</div>
+    </div>
+    <div class="sav-card sv-purple">
+      <div class="sav-n">Render-Blocking</div>
+      <div class="sav-v">810 ms</div>
+      <div class="sav-d">Mobile · scripts blocking render</div>
+    </div>
+    <div class="sav-card sv-teal">
+      <div class="sav-n">Render-Blocking</div>
+      <div class="sav-v">490 ms</div>
+      <div class="sav-d">Desktop · scripts blocking render</div>
+    </div>
+    <div class="sav-card sv-orange">
+      <div class="sav-n">Unused CSS</div>
+      <div class="sav-v">246 KiB</div>
+      <div class="sav-d">Both devices</div>
+    </div>
+    <div class="sav-card sv-green">
+      <div class="sav-n">Legacy JavaScript</div>
+      <div class="sav-v">62 KiB</div>
+      <div class="sav-d">Modern browsers don't need this</div>
+    </div>
+  </div>
+
+  <div class="pf"><span>sinisterdiesel.com · Site Audit · June 2026</span><span>2</span></div>
+</div>
+
+<!-- ═══════════════════════════════════ PAGE 3 – DIAGNOSTICS -->
+<div class="page">
+  <div class="sec">Section 03</div>
+  <h2>Diagnostics — Performance Issues</h2>
+  <div class="rule"></div>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>Issue</th><th>Mobile</th><th>Desktop</th><th>Priority</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Minimize main-thread work</strong><br/><span style="color:#94a3b8;font-size:11px">JS execution monopolising the CPU</span></td>
+        <td><span class="red">10.0 s</span></td>
+        <td><span class="orange">2.8 s</span></td>
+        <td><span class="badge b-crit">Critical</span></td>
+      </tr>
+      <tr>
+        <td><strong>Reduce JavaScript execution time</strong><br/><span style="color:#94a3b8;font-size:11px">Scripts running too long on load</span></td>
+        <td><span class="red">5.6 s</span></td>
+        <td>—</td>
+        <td><span class="badge b-crit">Critical</span></td>
+      </tr>
+      <tr>
+        <td><strong>Reduce unused JavaScript</strong><br/><span style="color:#94a3b8;font-size:11px">Dead code loaded but never executed</span></td>
+        <td><span class="red">5,250 KiB</span></td>
+        <td><span class="red">5,241 KiB</span></td>
+        <td><span class="badge b-crit">Critical</span></td>
+      </tr>
+      <tr>
+        <td><strong>Avoid long main-thread tasks</strong><br/><span style="color:#94a3b8;font-size:11px">Tasks &gt;50ms block user interaction</span></td>
+        <td><span class="red">20 tasks</span></td>
+        <td><span class="orange">6 tasks</span></td>
+        <td><span class="badge b-high">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Improve image delivery</strong><br/><span style="color:#94a3b8;font-size:11px">Oversized, wrong format, no lazy load</span></td>
+        <td><span class="orange">1,199 KiB</span></td>
+        <td><span class="red">2,258 KiB</span></td>
+        <td><span class="badge b-high">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Use efficient cache lifetimes</strong><br/><span style="color:#94a3b8;font-size:11px">Images &amp; JS cached for only 1 day</span></td>
+        <td><span class="orange">2,232 KiB</span></td>
+        <td><span class="orange">2,858 KiB</span></td>
+        <td><span class="badge b-high">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Render-blocking requests</strong><br/><span style="color:#94a3b8;font-size:11px">Scripts &amp; fonts delaying first paint</span></td>
+        <td><span class="red">810 ms</span></td>
+        <td><span class="orange">490 ms</span></td>
+        <td><span class="badge b-high">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Image elements missing width &amp; height</strong><br/><span style="color:#94a3b8;font-size:11px">Root cause of CLS = 0.27 real users</span></td>
+        <td><span class="red">Present</span></td>
+        <td><span class="orange">Present</span></td>
+        <td><span class="badge b-high">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Reduce unused CSS</strong><br/><span style="color:#94a3b8;font-size:11px">Shipped but never applied</span></td>
+        <td><span class="orange">246 KiB</span></td>
+        <td><span class="orange">246 KiB</span></td>
+        <td><span class="badge b-med">Medium</span></td>
+      </tr>
+      <tr>
+        <td><strong>Minify CSS &amp; JavaScript</strong><br/><span style="color:#94a3b8;font-size:11px">Unminified source files in production</span></td>
+        <td>CSS 22 KiB · JS 50 KiB</td>
+        <td>CSS 22 KiB · JS 50 KiB</td>
+        <td><span class="badge b-med">Medium</span></td>
+      </tr>
+      <tr>
+        <td><strong>Font display optimisation</strong><br/><span style="color:#94a3b8;font-size:11px">Fonts blocking text rendering</span></td>
+        <td><span class="orange">30 ms</span></td>
+        <td><span class="orange">100 ms</span></td>
+        <td><span class="badge b-med">Medium</span></td>
+      </tr>
+      <tr>
+        <td><strong>Legacy JavaScript</strong><br/><span style="color:#94a3b8;font-size:11px">Transpiled for old browsers unnecessarily</span></td>
+        <td><span class="orange">62 KiB</span></td>
+        <td><span class="orange">62 KiB</span></td>
+        <td><span class="badge b-med">Medium</span></td>
+      </tr>
+      <tr>
+        <td><strong>Back/forward cache blocked</strong><br/><span style="color:#94a3b8;font-size:11px">Browser can't restore pages instantly</span></td>
+        <td>1 failure reason</td>
+        <td>1 failure reason</td>
+        <td><span class="badge b-med">Medium</span></td>
+      </tr>
+      <tr>
+        <td><strong>Non-composited animations</strong><br/><span style="color:#94a3b8;font-size:11px">Animations triggering layout reflows</span></td>
+        <td>4 elements</td>
+        <td>4 elements</td>
+        <td><span class="badge b-low">Low</span></td>
+      </tr>
+      <tr>
+        <td><strong>Excessive preconnect hints</strong><br/><span style="color:#94a3b8;font-size:11px">More than 4 found — wastes connections</span></td>
+        <td>Present</td>
+        <td>Present</td>
+        <td><span class="badge b-low">Low</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pf"><span>sinisterdiesel.com · Site Audit · June 2026</span><span>3</span></div>
+</div>
+
+<!-- ═══════════════════════════════════ PAGE 4 – ACCESSIBILITY, SEO, BEST PRACTICES -->
+<div class="page">
+  <div class="sec">Section 04</div>
+  <h2>Accessibility · SEO · Best Practices</h2>
+  <div class="rule"></div>
+
+  <p>These scores are <strong>identical on both mobile and desktop</strong>, confirming these are structural issues in the HTML/template layer rather than device-specific problems.</p>
+
+  <!-- Accessibility -->
+  <h3 style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:12px">
+    Accessibility &nbsp;<span style="color:#eab308;font-weight:800">88 / 100</span>
+  </h3>
+  <table class="tbl" style="margin-bottom:20px">
+    <thead>
+      <tr><th>Category</th><th>Issue</th><th>Impact</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Names &amp; Labels</td>
+        <td><strong>Images missing <code>alt</code> attributes</strong></td>
+        <td>Screen readers can't describe images · Also hurts SEO image indexing</td>
+      </tr>
+      <tr>
+        <td>Names &amp; Labels</td>
+        <td><strong>Links do not have a discernible name</strong></td>
+        <td>Icon-only links are unreadable by assistive technology</td>
+      </tr>
+      <tr>
+        <td>Contrast</td>
+        <td><strong>Insufficient colour contrast ratio</strong></td>
+        <td>Text is hard to read for users with visual impairments</td>
+      </tr>
+      <tr>
+        <td>Navigation</td>
+        <td><strong>Heading elements not in descending order</strong></td>
+        <td>Breaks page structure for screen readers and SEO crawlers</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SEO -->
+  <h3 style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:12px">
+    SEO &nbsp;<span style="color:#f97316;font-weight:800">77 / 100</span>
+  </h3>
+  <table class="tbl" style="margin-bottom:20px">
+    <thead>
+      <tr><th>Category</th><th>Issue</th><th>Impact</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Content</td>
+        <td><strong>Homepage missing meta description</strong></td>
+        <td>Google shows auto-generated snippets in search results — missed conversion opportunity</td>
+      </tr>
+      <tr>
+        <td>Content</td>
+        <td><strong>Images missing <code>alt</code> attributes</strong></td>
+        <td>Google cannot index image content — reduces visibility in image search</td>
+      </tr>
+      <tr>
+        <td>Crawling</td>
+        <td><strong>Links are not crawlable</strong></td>
+        <td>Some links use JavaScript navigation — Google crawler may not follow them</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Best Practices -->
+  <h3 style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:12px">
+    Best Practices &nbsp;<span style="color:#f97316;font-weight:800">50 / 100</span>
+  </h3>
+  <table class="tbl" style="margin-bottom:20px">
+    <thead>
+      <tr><th>Category</th><th>Issue</th><th>Severity</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>General</td>
+        <td><strong>45 third-party cookies detected</strong></td>
+        <td><span class="badge b-crit">Critical</span> — Chrome is deprecating 3P cookies; Affirm BNPL already broken</td>
+      </tr>
+      <tr>
+        <td>General</td>
+        <td><strong>3 deprecated APIs in use</strong></td>
+        <td><span class="badge b-high">High</span> — will break in future browser updates</td>
+      </tr>
+      <tr>
+        <td>General</td>
+        <td><strong>Browser errors logged to console</strong></td>
+        <td><span class="badge b-high">High</span> — Affirm SecurityError + srcset parse errors on every load</td>
+      </tr>
+      <tr>
+        <td>General</td>
+        <td><strong>Missing source maps for first-party JS</strong></td>
+        <td><span class="badge b-med">Medium</span> — makes debugging production issues very difficult</td>
+      </tr>
+      <tr>
+        <td>UX</td>
+        <td><strong>Images displayed with incorrect aspect ratio</strong></td>
+        <td><span class="badge b-med">Medium</span> — images appear stretched or squashed</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td><strong>No Content Security Policy (CSP)</strong></td>
+        <td><span class="badge b-low">Low</span> — site is not protected against XSS injection attacks</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pf"><span>sinisterdiesel.com · Site Audit · June 2026</span><span>4</span></div>
+</div>
+
+<!-- ═══════════════════════════════════ PAGE 5 – CONSOLE ERRORS + HAR FINDINGS -->
+<div class="page">
+  <div class="sec">Section 05</div>
+  <h2>Console Errors &amp; Network Findings</h2>
+  <div class="rule"></div>
+
+  <p>The browser DevTools console was captured during a live session. These errors fire on <strong>every single page load</strong> and contribute directly to TBT, CLS, and the Best Practices score of 50.</p>
+
+  <table class="tbl" style="margin-bottom:22px">
+    <thead>
+      <tr><th>Type</th><th>Error</th><th>Root Cause</th><th>Fix</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge b-fail">Error</span></td>
+        <td><strong>Affirm SecurityError</strong><br/><code style="font-size:10px;color:#64748b">Failed to set cookie — document sandboxed, lacks allow-same-origin</code></td>
+        <td>Affirm uses a sandboxed iframe to set cookies. Modern browsers block this.</td>
+        <td>Update Affirm to latest SDK; load only on product/checkout pages</td>
+      </tr>
+      <tr>
+        <td><span class="badge b-warn">Warning</span></td>
+        <td><strong>Affirm: Third-party cookies not available</strong></td>
+        <td>Chrome's 3P cookie deprecation. Affirm BNPL widget is non-functional for most users.</td>
+        <td>Upgrade Affirm integration to cookie-free mode or evaluate alternative</td>
+      </tr>
+      <tr>
+        <td><span class="badge b-warn">Warning</span></td>
+        <td><strong>Dropped srcset candidate</strong> (×4)<br/><code style="font-size:10px;color:#64748b">graphics/00000001/8/GA — unknown descriptor</code></td>
+        <td>srcset attributes on multiple images are malformed — missing size descriptor (e.g. <code>800w</code>). Browser falls back to full-size image.</td>
+        <td>Fix srcset syntax: <code>img.jpg 800w, img@2x.jpg 1600w</code></td>
+      </tr>
+      <tr>
+        <td><span class="badge b-fail">Error</span></td>
+        <td><strong>Invalid slide dimensions</strong><br/><code style="font-size:10px;color:#64748b">index: 11 slideWidth: 0</code></td>
+        <td>Slick carousel slide #11 calculates a width of 0. Slider is broken and triggers repeated layout recalculations — a direct CLS contributor.</td>
+        <td>Audit carousel initialisation; ensure all slides have defined dimensions before JS runs</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:12px">Top 10 Largest Resources (HAR Waterfall)</h3>
+  <table class="tbl">
+    <thead>
+      <tr><th>Size</th><th>Resource</th><th>Type</th><th>Issue</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong class="red">971 KB</strong></td><td>ShopSocially S3 image (third-party)</td><td>PNG</td><td>Uncompressed external image — no WebP, no CDN edge caching</td></tr>
+      <tr><td><strong class="red">752 KB</strong></td><td>FathersDayDesktop.jpg</td><td>JPEG</td><td>Hero banner — not WebP, cached only 1 day</td></tr>
+      <tr><td><strong class="red">525 KB</strong></td><td>GA FORD Desktop1.jpg</td><td>JPEG</td><td>Promo image — not WebP, no responsive srcset</td></tr>
+      <tr><td><strong class="orange">375 KB</strong></td><td>Google reCAPTCHA JS</td><td>Script</td><td>Loaded on every page — should only load on forms</td></tr>
+      <tr><td><strong class="orange">189 KB</strong></td><td>/72ai/ (AI/tracking script)</td><td>Script</td><td>Loaded synchronously — blocks render</td></tr>
+      <tr><td><strong class="orange">174 KB</strong></td><td>Screenshot 2025-02-21 090619_upscaled.jpg</td><td>JPEG</td><td>Raw desktop screenshot used as a web asset — needs proper export</td></tr>
+      <tr><td><strong class="orange">150 KB</strong></td><td>Google Tag Manager (gtm.js)</td><td>Script</td><td>Firing 35+ third-party tags on page load</td></tr>
+      <tr><td><strong class="orange">145 KB</strong></td><td>Affirm BNPL (affirm.js)</td><td>Script</td><td>Broken due to cookie issues — still loading 145 KB for no benefit</td></tr>
+      <tr><td><strong class="amber">136 KB</strong></td><td>Facebook Pixel</td><td>Script</td><td>Fires immediately — can be deferred to after load</td></tr>
+      <tr><td><strong class="amber">118 KB</strong></td><td>Zinrelo Loyalty JS</td><td>Script</td><td>Loads synchronously — can be deferred via IntersectionObserver</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pf"><span>sinisterdiesel.com · Site Audit · June 2026</span><span>5</span></div>
+</div>
+
+<!-- ═══════════════════════════════════ PAGE 6 – ACTION PLAN -->
+<div class="page">
+  <div class="sec">Section 06</div>
+  <h2>Recommended Action Plan</h2>
+  <div class="rule"></div>
+
+  <p>Ordered by impact-to-effort ratio. Items marked <span class="badge b-pass">Quick Win</span> can be completed in under a day each with measurable, immediate results.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>#</th><th>Action</th><th>Fixes</th><th>Est. Saving</th><th>Effort</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td><strong>Add width &amp; height to all &lt;img&gt; tags</strong><br/><span style="color:#94a3b8;font-size:11px">Reserve layout space before images load</span></td>
+        <td>CLS 0.27 → &lt;0.1 · CWV PASS</td>
+        <td>CWV ranking signal</td>
+        <td><span class="badge b-pass">Quick Win</span></td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td><strong>Fix broken srcset attributes on 4+ images</strong><br/><span style="color:#94a3b8;font-size:11px">Add missing size descriptors (e.g. 800w)</span></td>
+        <td>Console errors gone · correct image variant loads</td>
+        <td>~400 KB per mobile load</td>
+        <td><span class="badge b-pass">Quick Win</span></td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td><strong>Convert JPEG hero images to WebP</strong><br/><span style="color:#94a3b8;font-size:11px">FathersDayDesktop (752 KB) + GA FORD (525 KB)</span></td>
+        <td>LCP · page weight</td>
+        <td>~850 KB saved</td>
+        <td><span class="badge b-pass">Quick Win</span></td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td><strong>Replace raw screenshot image</strong><br/><span style="color:#94a3b8;font-size:11px">Screenshot 2025-02-21 090619_upscaled.jpg (174 KB)</span></td>
+        <td>Page weight · professionalism</td>
+        <td>~150 KB saved</td>
+        <td><span class="badge b-pass">Quick Win</span></td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td><strong>Extend cache headers on images &amp; JS</strong><br/><span style="color:#94a3b8;font-size:11px">Change /mm5/graphics/ from max-age=1 day to 1 year</span></td>
+        <td>Return visitor load time</td>
+        <td>2,858 KiB saved</td>
+        <td><span class="badge b-pass">Quick Win</span></td>
+      </tr>
+      <tr>
+        <td><strong>6</strong></td>
+        <td><strong>Add meta description to homepage</strong><br/><span style="color:#94a3b8;font-size:11px">Missing entirely — hurts click-through rate in Google</span></td>
+        <td>SEO score · CTR</td>
+        <td>SEO improvement</td>
+        <td><span class="badge b-pass">Quick Win</span></td>
+      </tr>
+      <tr>
+        <td><strong>7</strong></td>
+        <td><strong>Add alt attributes to all images</strong><br/><span style="color:#94a3b8;font-size:11px">Fixes accessibility (88→90+) and SEO simultaneously</span></td>
+        <td>Accessibility · SEO · image indexing</td>
+        <td>A11y + SEO score</td>
+        <td><span class="badge b-pass">Quick Win</span></td>
+      </tr>
+      <tr>
+        <td><strong>8</strong></td>
+        <td><strong>Enable Cloudflare page caching</strong><br/><span style="color:#94a3b8;font-size:11px">Currently: cf-cache-status: DYNAMIC on all pages</span></td>
+        <td>TTFB 1.2s → &lt;0.3s</td>
+        <td>TTFB · CWV</td>
+        <td><span class="badge b-info">1–2 days</span></td>
+      </tr>
+      <tr>
+        <td><strong>9</strong></td>
+        <td><strong>Fix Affirm BNPL integration</strong><br/><span style="color:#94a3b8;font-size:11px">SecurityError on every load; widget non-functional for most users</span></td>
+        <td>Console errors · Best Practices score · TBT</td>
+        <td>145 KB if deferred</td>
+        <td><span class="badge b-info">1–2 days</span></td>
+      </tr>
+      <tr>
+        <td><strong>10</strong></td>
+        <td><strong>Defer non-critical third-party scripts</strong><br/><span style="color:#94a3b8;font-size:11px">reCAPTCHA (375 KB), Zinrelo (118 KB), Facebook Pixel (136 KB)</span></td>
+        <td>TBT 3,120ms → &lt;1,000ms mobile</td>
+        <td>~629 KB deferred</td>
+        <td><span class="badge b-med">Sprint</span></td>
+      </tr>
+      <tr>
+        <td><strong>11</strong></td>
+        <td><strong>Audit &amp; remove unused JavaScript (5,250 KiB)</strong><br/><span style="color:#94a3b8;font-size:11px">Largest single saving — dead code shipped to every visitor</span></td>
+        <td>Mobile performance · TBT · main thread</td>
+        <td>Up to 5,250 KiB</td>
+        <td><span class="badge b-warn">Mid-term</span></td>
+      </tr>
+      <tr>
+        <td><strong>12</strong></td>
+        <td><strong>Fix carousel slide #11 (slideWidth = 0)</strong><br/><span style="color:#94a3b8;font-size:11px">Broken Slick carousel causing layout recalculations</span></td>
+        <td>CLS · console errors</td>
+        <td>CLS reduction</td>
+        <td><span class="badge b-info">1 day</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <h3>Summary</h3>
+    <p>
+      The site scores <strong>28/100 on mobile</strong> and <strong>77/100 on desktop</strong> — a 49-point gap that reflects heavy JavaScript execution (10 seconds of main-thread work on mobile), unoptimised images, and 35 third-party script domains. Google's Core Web Vitals assessment is currently <strong>failing</strong> due to a CLS of 0.27, which is directly traceable to missing image dimensions and a broken carousel. The first 7 actions in this plan are low-effort quick wins that alone are expected to move the mobile score from 28 to 45+, resolve the CWV failure, and improve both SEO and Accessibility scores.
+    </p>
+  </div>
+
+  <div class="pf"><span>sinisterdiesel.com · Site Audit · June 2026</span><span>6</span></div>
+</div>
+
+</body>
+</html>

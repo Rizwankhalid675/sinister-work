@@ -1,0 +1,585 @@
+<!-- ----------------------------------------------
+     SINISTER DIESEL — SFNT v2 PAGE-LEVEL TEST CONTENT
+     Paste this into the page Content box when testing custom page Header/Footer boxes
+     DO NOT include <html>, <head>, or <body> tags — Miva handles those.
+     All CSS lives in global-revamp-v2.css (CSS Resource, Global=ON).
+     SEO meta / Schema JSON-LD is added via Miva's Page Settings and
+     the Global Header template.
+---------------------------------------------- -->
+<!-- (CSS moved to global-revamp-v2.css — Section 13: SFNT Homepage) -->
+
+
+
+
+<!-- -- PARTICLE CANVAS -- -->
+<canvas id="sd-canvas" aria-hidden="true"></canvas>
+
+<div id="sd-wrap">
+
+	<!-- PROMO BAR -->
+	<div class="promo-bar" role="banner">
+		Trusted by Diesel Owners Since 2008 &nbsp;·&nbsp; <strong>? 4.8</strong> &nbsp;(20,000+ Verified Reviews)
+		<a href="https://sinisterdiesel.com/sinister-diesel.html">Shop All Parts &rarr;</a>
+	</div>
+
+
+	<!-- -- HERO -- -->
+	<section class="hero" id="hero" aria-label="Hero — Sinister Diesel Performance Parts">
+
+		<div class="hero-geo" aria-hidden="true">
+			<div class="geo-circle-1"></div>
+			<div class="geo-circle-2"></div>
+			<div class="geo-circle-3"></div>
+		</div>
+		<div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+		<div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+		<div class="hero-orb hero-orb-3" aria-hidden="true"></div>
+		<div class="hero-dots-bg" aria-hidden="true"></div>
+
+		<div class="hero-content">
+			<!-- Left -->
+			<div>
+				<div class="hero-badge">
+					<span class="badge-dot" aria-hidden="true"></span>
+					Experience Diesel Done Right
+				</div>
+				<h1 class="hero-title">
+					Built to Perform<br>
+					<span class="accent">Engineered to Last</span>
+				</h1>
+				<p class="hero-sub">Premium diesel performance parts for Power Stroke, Duramax &amp; Cummins — proudly built in the USA since 2008.</p>
+				<div class="hero-ctas">
+					<a href="https://sinisterdiesel.com/sinister-diesel.html" class="btn btn-primary">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+						Shop All Parts
+					</a>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=powerstroke" class="btn btn-outline">Browse Powerstroke</a>
+				</div>
+
+				<!-- -- MIVA QUICK SEARCH -- -->
+				<div class="sd-search-wrap">
+					<div class="sd-search-label">Search Parts — Year, Make, Model, or Part Name</div>
+					<form class="sd-search-form" method="get" action="&mvte:urls:SRCH:rr;" role="search">
+						<div class="sd-search-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+						</div>
+						<label for="sd-hero-search" class="vh">Search parts</label>
+						<input
+							id="sd-hero-search"
+							class="sd-search-input"
+							type="search"
+							name="Search"
+							placeholder="e.g. 6.7 Powerstroke EGR cooler..."
+							autocomplete="off"
+							required
+						>
+						<button class="sd-search-btn" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+
+			<!-- Right — 3D browser frame with live banner carousel -->
+			<div class="hero-right">
+
+				<svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
+					<defs>
+						<linearGradient id="ringGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+							<stop offset="0%"   stop-color="#1833B8"/>
+							<stop offset="100%" stop-color="#5b7dff"/>
+						</linearGradient>
+					</defs>
+				</svg>
+
+				<div class="device-wrap" id="device-wrap">
+
+					<div class="device-badge" aria-hidden="true">
+						<span class="device-badge-dot"></span>
+						20,000+ Verified Reviews
+					</div>
+
+					<div class="device-rating" aria-label="4.8 star rating from 20,000+ reviews">
+						<div class="dr-ring">
+							<svg viewBox="0 0 50 50" aria-hidden="true">
+								<circle class="dr-track" cx="25" cy="25" r="20"/>
+								<circle class="dr-fill" id="dr-fill" cx="25" cy="25" r="20"/>
+							</svg>
+							<div class="dr-center">
+								<div class="dr-num">4.8</div>
+								<div class="dr-sub">/ 5</div>
+							</div>
+						</div>
+						<div>
+							<div class="dr-info-big">20K<span>+</span></div>
+							<div class="dr-info-stars">?????</div>
+							<div class="dr-info-label">Verified Reviews</div>
+						</div>
+					</div>
+
+					<div class="browser-shell">
+						<div class="browser-bar">
+							<div class="browser-dots">
+								<div class="browser-dot bd-red"></div>
+								<div class="browser-dot bd-amber"></div>
+								<div class="browser-dot bd-green"></div>
+							</div>
+							<div class="browser-url">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+								<span class="browser-url-text" id="bv-url-text"><strong>Shop Parts</strong> — Powerstroke · Duramax · Cummins</span>
+							</div>
+						</div>
+
+						<!-- --- BANNER VIEWPORT — swap this div with Miva banner tag below ---
+						     To implement in Miva:
+						     Replace <div class="browser-viewport"> ... </div>
+						     with:
+						     <div class="browser-viewport">
+						       <mvt:item name="readytheme" param="contentsection( 'sfnt_banners' )" />
+						     </div>
+						     The existing Miva banner content section already contains the slides.
+						     The .bv-link, .bv-cta, .bv-hover-overlay classes should be added to
+						     the banner template itself once the design is approved.
+						--- -->
+						<div class="browser-viewport">
+
+							<div class="bv-slide active" id="bv0">
+								<a href="https://sinisterdiesel.com/sinister-diesel.html" class="bv-link" aria-label="Shop Sinister Diesel Parts">
+									<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg" alt="Shop Sinister Diesel performance parts — Powerstroke, Duramax, Cummins" loading="eager" width="620" height="420">
+									<div class="bv-overlay"></div>
+									<div class="bv-hover-overlay"></div>
+									<div class="bv-text">
+										<div class="bv-tag">New Arrivals</div>
+										<div class="bv-title">Shop Sinister<br>Diesel Parts</div>
+										<div class="bv-sub">Powerstroke · Duramax · Cummins</div>
+									</div>
+									<div class="bv-cta">Shop Now <span class="bv-cta-arrow">?</span></div>
+								</a>
+							</div>
+
+							<div class="bv-slide" id="bv1">
+								<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=sinister-blue" class="bv-link" aria-label="Learn about Sinister Blue performance parts">
+									<img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg" alt="Sinister Blue — the iconic color of Sinister Diesel performance" loading="lazy" width="620" height="420">
+									<div class="bv-overlay"></div>
+									<div class="bv-hover-overlay"></div>
+									<div class="bv-text">
+										<div class="bv-tag">Iconic Color</div>
+										<div class="bv-title">Sinister Blue<br>Performance</div>
+										<div class="bv-sub">The color of power — since 2008</div>
+									</div>
+									<div class="bv-cta">Learn More <span class="bv-cta-arrow">?</span></div>
+								</a>
+							</div>
+
+							<div class="bv-slide" id="bv2">
+								<a href="https://sinisterdiesel.com/about-us.html" class="bv-link" aria-label="American-made diesel parts built in Roseville California">
+									<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg" alt="American quality diesel parts engineered and manufactured in Roseville, CA" loading="lazy" width="620" height="420">
+									<div class="bv-overlay"></div>
+									<div class="bv-hover-overlay"></div>
+									<div class="bv-text">
+										<div class="bv-tag">Made in USA</div>
+										<div class="bv-title">American Quality<br>Engineered to Last</div>
+										<div class="bv-sub">Premium parts · Roseville, CA</div>
+									</div>
+									<div class="bv-cta">Our Story <span class="bv-cta-arrow">?</span></div>
+								</a>
+							</div>
+
+							<div class="bv-dots" role="tablist" aria-label="Banner slides">
+								<button class="bv-dot active" data-bv="0" aria-label="Slide 1 — Shop Parts"></button>
+								<button class="bv-dot"        data-bv="1" aria-label="Slide 2 — Sinister Blue"></button>
+								<button class="bv-dot"        data-bv="2" aria-label="Slide 3 — Made in USA"></button>
+							</div>
+
+						</div><!-- /.browser-viewport -->
+
+						<div class="browser-stats">
+							<div class="bstat">
+								<div class="bstat-icon" style="background:var(--blue-light)">
+									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--blue)" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+								</div>
+								<div>
+									<div class="bstat-num">17+ Yrs</div>
+									<div class="bstat-label">In Business</div>
+								</div>
+							</div>
+							<div class="bstat">
+								<div class="bstat-icon" style="background:#fff8e6">
+									<svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold)" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								</div>
+								<div>
+									<div class="bstat-num">4.8 ?</div>
+									<div class="bstat-label">Shopper Approved</div>
+								</div>
+							</div>
+							<div class="bstat">
+								<div class="bstat-icon" style="background:#e8fff2">
+									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#16a34a" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+								</div>
+								<div>
+									<div class="bstat-num">USA Made</div>
+									<div class="bstat-label">Roseville, CA</div>
+								</div>
+							</div>
+						</div>
+
+					</div><!-- /.browser-shell -->
+				</div><!-- /.device-wrap -->
+			</div><!-- /.hero-right -->
+		</div>
+
+		<div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--text-muted);font-size:9px;letter-spacing:3px;text-transform:uppercase;animation:scrollBob 2.2s ease-in-out infinite" aria-hidden="true">
+			Scroll
+			<div style="width:1px;height:32px;background:linear-gradient(to bottom,var(--text-muted),transparent)"></div>
+		</div>
+	</section>
+
+	<!-- -- TRUST BAR -- -->
+	<div class="trust-bar" aria-label="Trust signals">
+		<div class="trust-inner">
+			<div class="trust-item reveal">
+				<div class="trust-icon"><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--blue)" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+				<div class="trust-label"><strong>20,000+ Reviews</strong><span>4.8? Shopper Approved</span></div>
+			</div>
+			<div class="trust-sep" aria-hidden="true"></div>
+			<div class="trust-item reveal">
+				<div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--blue)" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+				<div class="trust-label"><strong>Made in the USA</strong><span>Roseville, California</span></div>
+			</div>
+			<div class="trust-sep" aria-hidden="true"></div>
+			<div class="trust-item reveal">
+				<div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--blue)" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+				<div class="trust-label"><strong>Fast Order Processing</strong><span>Same-day dispatch available</span></div>
+			</div>
+			<div class="trust-sep" aria-hidden="true"></div>
+			<div class="trust-item reveal">
+				<div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--blue)" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.15h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 5.34 5.34l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.5l-.08 1.42z"/></svg></div>
+				<div class="trust-label"><strong>Expert Support</strong><span>(916) 772-9255</span></div>
+			</div>
+			<div class="trust-sep" aria-hidden="true"></div>
+			<div class="trust-item reveal">
+				<div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--blue)" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+				<div class="trust-label"><strong>Trusted Since 2008</strong><span>17+ Years of Excellence</span></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- -- MIVA TRUCK FINDER -- -->
+	<div class="finder-shell">
+		<form class="finder-form" data-miva-finder method="get" action="&mvte:urls:SRCH:rr;" role="search" aria-label="Shop by your truck">
+			<input type="hidden" name="Search" value="">
+		
+			<div class="finder-label">
+				<span>Shop by</span>
+				<strong>Your Truck</strong>
+			</div>
+		
+			<div class="finder-sep"></div>
+		
+			<div class="finder-field">
+				<label for="finder-year">Year</label>
+				<select class="finder-select" id="finder-year" name="Year">
+					<option value="">Year</option>
+					<option>2026</option>
+					<option>2025</option>
+					<option>2024</option>
+					<option>2023</option>
+					<option>2022</option>
+					<option>2021</option>
+					<option>2020</option>
+					<option>2019</option>
+					<option>2018</option>
+					<option>2017</option>
+					<option>2016</option>
+					<option>2015</option>
+					<option>2014</option>
+					<option>2013</option>
+					<option>2012</option>
+					<option>2011</option>
+					<option>2010</option>
+				</select>
+			</div>
+		
+			<div class="finder-field">
+				<label for="finder-make">Make</label>
+				<select class="finder-select" id="finder-make" name="Make">
+					<option value="">Make</option>
+					<option>Ford</option>
+					<option>Chevy GMC</option>
+					<option>Dodge Ram</option>
+				</select>
+			</div>
+		
+			<div class="finder-field">
+				<label for="finder-model">Model</label>
+				<select class="finder-select" id="finder-model" name="Model">
+					<option value="">Model</option>
+					<option>F-250 Super Duty</option>
+					<option>F-350 Super Duty</option>
+					<option>Silverado 2500 HD</option>
+					<option>Silverado 3500 HD</option>
+					<option>Sierra 2500 HD</option>
+					<option>Sierra 3500 HD</option>
+					<option>Ram 2500</option>
+					<option>Ram 3500</option>
+				</select>
+			</div>
+		
+			<div class="finder-field">
+				<label for="finder-engine">Engine</label>
+				<select class="finder-select" id="finder-engine" name="Engine">
+					<option value="">Engine Size</option>
+					<option>7.3L Powerstroke</option>
+					<option>6.0L Powerstroke</option>
+					<option>6.4L Powerstroke</option>
+					<option>6.7L Powerstroke</option>
+					<option>6.6L Duramax</option>
+					<option>5.9L Cummins</option>
+					<option>6.7L Cummins</option>
+				</select>
+			</div>
+		
+			<button class="finder-apply" type="submit">Apply</button>
+		</form>
+		
+	</div>
+
+	<!-- -- COUNTER RIBBON -- -->
+	<div class="counter-ribbon" aria-label="Company statistics">
+		<div class="counter-grid">
+			<div class="counter-item">
+				<div class="counter-num" data-target="20000" data-suffix="K+">0</div>
+				<div class="counter-label">Verified Reviews</div>
+			</div>
+			<div class="counter-item">
+				<div class="counter-num" data-target="17" data-suffix="+">0</div>
+				<div class="counter-label">Years in Business</div>
+			</div>
+			<div class="counter-item">
+				<div class="counter-num" data-target="500" data-suffix="+">0</div>
+				<div class="counter-label">Products Available</div>
+			</div>
+			<div class="counter-item">
+				<div class="counter-num" data-target="48" data-suffix="HR">0</div>
+				<div class="counter-label">Avg. Order Processing</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- -- MAIN CONTENT -- -->
+	<main class="o-wrapper t-wrapper">
+
+		<!-- CATEGORIES -->
+		<section class="section section--white" id="categories" aria-labelledby="cat-heading">
+			<div class="wrap">
+				<div class="sec-row">
+					<div>
+						<p class="sec-eyebrow">Shop by Category</p>
+						<h2 class="sec-title" id="cat-heading">Find Your Parts</h2>
+					</div>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html" class="sec-link">
+						View All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+					</a>
+				</div>
+
+				<div class="cat-grid reveal">
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=powerstroke" class="cat-card cb-1">
+						<div class="cat-img" style="background-image:url('https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg')"></div>
+						<div class="cat-glass">
+							<div class="cat-name">Powerstroke</div>
+							<div class="cat-count">Ford 6.0 · 6.4 · 6.7L</div>
+						</div>
+						<div class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
+					</a>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=duramax" class="cat-card cb-2">
+						<div class="cat-img" style="background-image:url('https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg')"></div>
+						<div class="cat-glass">
+							<div class="cat-name">Duramax</div>
+							<div class="cat-count">GM 6.6L LB7 · LLY · LBZ · LMM · LML</div>
+						</div>
+						<div class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
+					</a>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=cummins" class="cat-card cb-3">
+						<div class="cat-img" style="background-image:url('https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg')"></div>
+						<div class="cat-glass">
+							<div class="cat-name">Cummins</div>
+							<div class="cat-count">Ram 2500/3500 5.9L · 6.7L</div>
+						</div>
+						<div class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
+					</a>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=egr-coolers" class="cat-card cb-4">
+						<span class="cat-badge cat-badge--new">Popular</span>
+						<div class="cat-img" style="background-image:url('https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg')"></div>
+						<div class="cat-glass">
+							<div class="cat-name">EGR Coolers</div>
+							<div class="cat-count">All makes &amp; models</div>
+						</div>
+						<div class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
+					</a>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=air-intakes" class="cat-card cb-5">
+						<div class="cat-img" style="background-image:url('https://sinisterdiesel.com/mm5/graphics/00000001/8/SD%20PARTS%201_DESKTOP.jpg')"></div>
+						<div class="cat-glass">
+							<div class="cat-name">Air Intakes</div>
+							<div class="cat-count">Cold air &amp; performance</div>
+						</div>
+						<div class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
+					</a>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=coolant-filtration" class="cat-card cb-6">
+						<div class="cat-img" style="background-image:url('https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg')"></div>
+						<div class="cat-glass">
+							<div class="cat-name">Coolant Filtration</div>
+							<div class="cat-count">Protect your cooling system</div>
+						</div>
+						<div class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
+					</a>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=charge-pipes" class="cat-card cb-7">
+						<div class="cat-img" style="background-image:url('https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg')"></div>
+						<div class="cat-glass">
+							<div class="cat-name">Charge Pipes</div>
+							<div class="cat-count">Cold &amp; hot side intercooler</div>
+						</div>
+						<div class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
+					</a>
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=oil-filtration" class="cat-card cb-8">
+						<div class="cat-img" style="background-image:url('https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg')"></div>
+						<div class="cat-glass">
+							<div class="cat-name">Oil Filtration</div>
+							<div class="cat-count">Bypass &amp; full-flow systems</div>
+						</div>
+						<div class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- REVIEWS -->
+		<section class="section section--light" aria-labelledby="reviews-heading">
+			<div class="wrap">
+				<div style="text-align:center">
+					<p class="sec-eyebrow" style="justify-content:center">Customer Reviews</p>
+					<h2 class="sec-title" id="reviews-heading">What Diesel Owners Say</h2>
+				</div>
+				<div class="review-score-wrap reveal">
+					<div>
+						<div class="score-big">4.8</div>
+					</div>
+					<div>
+						<div class="score-stars">?????</div>
+						<div class="score-meta">Based on 20,000+ verified reviews</div>
+						<div class="score-meta"><a href="https://www.shopperapproved.com/reviews/sinisterdiesel.com/" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600">Shopper Approved ?</a></div>
+					</div>
+				</div>
+				<div class="reviews-grid">
+					<div class="review-card reveal">
+						<div class="rv-top">
+							<div class="rv-avatar">L</div>
+							<div>
+								<div class="rv-name">Laurie H.</div>
+								<div class="rv-meta rv-verified">? Verified Buyer</div>
+							</div>
+						</div>
+						<div class="rv-stars">?????</div>
+						<p class="rv-text">I totally appreciate Brian taking the time to call me to discuss my questions. You do not see that level of customer service anymore. So refreshing!</p>
+						<div class="rv-date">Sep 17, 2024</div>
+					</div>
+					<div class="review-card reveal">
+						<div class="rv-top">
+							<div class="rv-avatar">S</div>
+							<div>
+								<div class="rv-name">Shane P.</div>
+								<div class="rv-meta rv-verified">? Verified Buyer</div>
+							</div>
+						</div>
+						<div class="rv-stars">?????</div>
+						<p class="rv-text">Super easy to find what I'm looking for. Never disappointed with Sinister. The parts fit perfectly and install was a breeze.</p>
+						<div class="rv-date">Oct 12, 2024</div>
+					</div>
+					<div class="review-card reveal">
+						<div class="rv-top">
+							<div class="rv-avatar" style="background:#16a34a">R</div>
+							<div>
+								<div class="rv-name">Roger U.</div>
+								<div class="rv-meta">?? CA</div>
+							</div>
+						</div>
+						<div class="rv-stars">?????</div>
+						<p class="rv-text">Had it up and running in 25 minutes. Everything fit like a glove and worked exactly how the detailed instructions said. Great product!</p>
+						<div class="rv-date">Jun 17, 2024</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- BRAND SPLIT — American Quality -->
+		<div class="brand-split reveal">
+			<div class="brand-media">
+				<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/6.6_DEGAS_00-5.jpg"
+				     alt="American quality diesel parts engineered and manufactured in Roseville, California"
+				     loading="lazy" width="800" height="600">
+				<div class="brand-media-overlay" aria-hidden="true"></div>
+			</div>
+			<div class="brand-body">
+				<p class="brand-eyebrow">Built in the USA</p>
+				<h2 class="brand-title">American Quality</h2>
+				<p class="brand-text">At Sinister Diesel, we specialize in crafting high-performance diesel parts designed to maximize power, efficiency, and reliability. From EGR coolers and air intakes to charge pipes, coolant filtration kits, and engine bay upgrades — our products are engineered to meet the demands of diesel enthusiasts and professionals alike.</p>
+				<p class="brand-text">Many of our parts are proudly designed and manufactured in the USA, ensuring durability and precision. Built tough. Built to perform.</p>
+				<div style="margin-top:24px">
+					<a href="https://sinisterdiesel.com/about-us.html" class="btn btn-primary">Our Story &rarr;</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- BRAND SPLIT — Sinister Blue -->
+		<div class="brand-split brand-split--rev reveal">
+			<div class="brand-media">
+				<img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/Screenshot%202025-02-21%20090619_upscdayl_2x_ultramix-balanced-4x.jpg"
+				     alt="Sinister Blue — the signature performance color of Sinister Diesel"
+				     loading="lazy" width="800" height="600">
+				<div class="brand-media-overlay" aria-hidden="true"></div>
+			</div>
+			<div class="brand-body">
+				<p class="brand-eyebrow">Iconic Brand Color</p>
+				<h2 class="brand-title">Sinister Blue</h2>
+				<p class="brand-text">Sinister Blue isn't just a color — it's the heartbeat of our brand. This bold, iconic shade embodies the spirit of innovation, precision, and performance that defines everything we do at Sinister Diesel.</p>
+				<p class="brand-text">Whether on the road, at the worksite, or under the hood — Sinister Blue is a symbol of excellence you can trust.</p>
+				<div style="margin-top:24px">
+					<a href="https://sinisterdiesel.com/sinister-diesel.html?Category_Code=sinister-blue" class="btn btn-primary">Shop Sinister Blue &rarr;</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- BRAND SPLIT — Customer Focused -->
+		<div class="brand-split reveal">
+			<div class="brand-media">
+				<img src="https://sinisterdiesel.com/mm5/graphics/00000001/7/_DSC6568.jpg"
+				     alt="Sinister Diesel expert support team — call (916) 772-9255"
+				     loading="lazy" width="800" height="600">
+				<div class="brand-media-overlay" aria-hidden="true"></div>
+			</div>
+			<div class="brand-body">
+				<p class="brand-eyebrow">Here for You</p>
+				<h2 class="brand-title">Customer Focused</h2>
+				<p class="brand-text">At Sinister Diesel, we believe exceptional products deserve exceptional support. Our dedicated team is always just a call or text away — ready to help with any question, order, or performance upgrade.</p>
+				<p class="brand-text">With an unmatched 4.8-star rating from over 20,000 customer reviews, our dedication to top-tier service speaks for itself. Your success is our success.</p>
+				<div style="margin-top:24px">
+					<a href="https://sinisterdiesel.com/contact-us.html" class="btn btn-primary">Contact Us &rarr;</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- EMAIL SIGNUP -->
+		<section class="email-sec" aria-labelledby="email-heading">
+			<h2 id="email-heading">Stay in the Loop</h2>
+			<p>Get exclusive deals, new product launches, and diesel tips straight to your inbox.</p>
+			<form class="email-form" action="https://sinisterdiesel.com/subscribe.html" method="post" novalidate aria-label="Email signup form">
+				<label for="email-input" class="vh">Email address</label>
+				<input class="email-input" id="email-input" type="email" name="email" placeholder="Your email address" required autocomplete="email">
+				<button class="email-submit" type="submit">Subscribe</button>
+			</form>
+		</section>
+
+
+	</main><!-- /main -->
+
+</div><!-- /#sd-wrap -->
+
+
+<!-- JavaScript moved to global-revamp-v2.js. Add it as a branch JS resource in Miva. -->

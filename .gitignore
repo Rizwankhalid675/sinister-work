@@ -29,17 +29,6 @@ node_modules/
 .agents/
 .claude/
 
-# Obsidian vault UI/app state (machine-local; the .md notes are still tracked)
-.obsidian/
-
-# Large scratch / data artifacts (not source)
-assets/
-daily-work/
-tools/
-docs/feeds/
-docs/checklists/*.pdf
-Prototype.md
-
 # Windows
 Thumbs.db
 desktop.ini

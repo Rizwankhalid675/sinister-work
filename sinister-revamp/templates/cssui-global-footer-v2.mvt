@@ -1,10 +1,12 @@
 <mvt:comment>
-	Footer Experience V2 — additive, inactive. Real Miva constructs reused
+	Footer Experience V2 — active, live on site. Real Miva constructs reused
 	verbatim from cssui-global-footer.mvt: navigationset('links_resources'/
-	'help_center'/'links_help'), contentsection('store_hours'/'site_copyright'),
-	social_* flags, &mvt:global:store:*; fields. Build Log cards below use
-	placeholder content pending real content/blog Miva integration in a later
-	milestone — not fabricated as final copy.
+	'help_center'/'links_help'), contentsection('site_copyright'),
+	&mvt:global:store:*; fields (phone/address/city/state/zip — all dynamic,
+	no hardcoded values). Build Log cards below use placeholder content/images
+	pending real blog/content Miva integration in a later milestone — flagged,
+	not fabricated as final copy. All 4 cards currently link to the same
+	NEWS landing URL until individual post records exist.
 </mvt:comment>
 
 <footer class="sd2-v2-footer">
@@ -76,7 +78,7 @@
 				<mvt:item name="readytheme" param="contentsection( 'site_copyright' )" />
 			</div>
 			<div class="sd2-v2-footer__contact">
-				<a href="tel:19167729253">(916) 772-9253</a>
+				<a href="tel:+1&mvte:global:store:phone;">&mvt:global:store:phone;</a>
 				<span>&middot;</span>
 				<span>&mvt:global:store:address;, &mvt:global:store:city; &mvt:global:store:state; &mvt:global:store:zip;</span>
 			</div>

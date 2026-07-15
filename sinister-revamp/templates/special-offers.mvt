@@ -11,6 +11,17 @@
 	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
 	<mvt:item name="head" param="head_tag" />
 </head>
+
+<mvt:comment>
+	Real Miva category codes -- resolves live category image + URL for each offer card.
+	NOTE: No matching Miva category code was found in the codebase for "Clearance/Scratch & Dent".
+	That card's image remains a placeholder until Brian confirms the correct category code (or
+	provides a dedicated image asset). Do not guess a code here.
+</mvt:comment>
+<mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954746_ford_powerstroke', l.settings:sd2_offer_powerstroke)" />
+<mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954952_gm_duramax', l.settings:sd2_offer_duramax)" />
+<mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954540_dodge_cummins', l.settings:sd2_offer_cummins)" />
+
 <body>
 	<mvt:item name="hdft" param="global_header" />
 	<mvt:item name="hdft" param="header" />
@@ -35,6 +46,7 @@
 
 				<article class="sd2-v2-offer-card">
 					<div class="sd2-v2-offer-card__media">
+						<mvt:comment>PLACEHOLDER -- no confirmed Miva category code for Clearance/Scratch &amp; Dent. Needs Brian to supply the code or asset.</mvt:comment>
 						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Clearance and scratch and dent parts" loading="lazy" decoding="async">
 						<span class="sd2-v2-offer-card__badge">Clearance</span>
 					</div>
@@ -47,7 +59,11 @@
 
 				<article class="sd2-v2-offer-card">
 					<div class="sd2-v2-offer-card__media">
-						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Powerstroke performance bundles" loading="lazy" decoding="async">
+						<mvt:if expr="NOT ISNULL l.settings:sd2_offer_powerstroke:image">
+							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;&mvt:sd2_offer_powerstroke:image;" alt="Powerstroke performance bundles" loading="lazy" decoding="async">
+						<mvt:else>
+							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Powerstroke performance bundles" loading="lazy" decoding="async">
+						</mvt:if>
 						<span class="sd2-v2-offer-card__badge">Bundle</span>
 					</div>
 					<div class="sd2-v2-offer-card__body">
@@ -59,7 +75,11 @@
 
 				<article class="sd2-v2-offer-card">
 					<div class="sd2-v2-offer-card__media">
-						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Duramax performance bundles" loading="lazy" decoding="async">
+						<mvt:if expr="NOT ISNULL l.settings:sd2_offer_duramax:image">
+							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;&mvt:sd2_offer_duramax:image;" alt="Duramax performance bundles" loading="lazy" decoding="async">
+						<mvt:else>
+							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Duramax performance bundles" loading="lazy" decoding="async">
+						</mvt:if>
 						<span class="sd2-v2-offer-card__badge">Bundle</span>
 					</div>
 					<div class="sd2-v2-offer-card__body">
@@ -71,7 +91,11 @@
 
 				<article class="sd2-v2-offer-card">
 					<div class="sd2-v2-offer-card__media">
-						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Cummins performance bundles" loading="lazy" decoding="async">
+						<mvt:if expr="NOT ISNULL l.settings:sd2_offer_cummins:image">
+							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;&mvt:sd2_offer_cummins:image;" alt="Cummins performance bundles" loading="lazy" decoding="async">
+						<mvt:else>
+							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Cummins performance bundles" loading="lazy" decoding="async">
+						</mvt:if>
 						<span class="sd2-v2-offer-card__badge">Bundle</span>
 					</div>
 					<div class="sd2-v2-offer-card__body">

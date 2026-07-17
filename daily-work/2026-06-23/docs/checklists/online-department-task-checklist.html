@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Department Task Checklist — Updated Export</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f5f7fb;color:#142033;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.45}
+  .page{max-width:1080px;margin:0 auto;padding:44px 48px 56px}
+  .hero{background:linear-gradient(135deg,#0a1628,#0057b8);color:#fff;border-radius:24px;padding:34px 38px;margin-bottom:28px;box-shadow:0 18px 50px rgba(10,22,40,.18)}
+  .eyebrow{font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#f5c518;margin-bottom:10px}
+  h1{font-size:36px;line-height:1;margin:0 0 12px;letter-spacing:-1.5px}
+  .hero p{margin:0;color:rgba(255,255,255,.78);font-size:14px;max-width:760px}
+  .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 0}
+  .stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:14px}
+  .stat strong{display:block;font-size:24px;line-height:1;color:#fff}
+  .stat span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.58);margin-top:5px;font-weight:800}
+  .section{background:#fff;border:1px solid #e3e8f2;border-radius:20px;padding:26px 28px;margin:18px 0;box-shadow:0 8px 26px rgba(10,22,40,.06)}
+  h2{font-size:21px;line-height:1.1;margin:0 0 6px;color:#0a1628;letter-spacing:-.5px}
+  .section-sub{font-size:13px;color:#64748b;margin:0 0 18px}
+  .task{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:start;padding:13px 0;border-top:1px solid #edf1f7}
+  .task:first-of-type{border-top:0}
+  .check{width:20px;height:20px;border:2px solid #94a3b8;border-radius:6px;margin-top:2px}
+  .name{font-weight:800;color:#111827;font-size:13px}
+  .detail{font-size:11px;color:#64748b;margin-top:4px}
+  .tag{display:inline-block;border-radius:999px;background:#eef6ff;color:#0057b8;border:1px solid #cfe4ff;font-size:9px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;padding:5px 8px;white-space:nowrap}
+  .tag.red{background:#fff1f2;color:#e8002d;border-color:#ffd0d8}
+  .tag.gold{background:#fff9df;color:#9a6b00;border-color:#f7df80}
+  .tag.gray{background:#f1f5f9;color:#475569;border-color:#dbe4ee}
+  .notes{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;margin-top:16px;color:#334155;font-size:12px}
+  .notes strong{color:#0a1628}
+  .link{color:#0057b8;word-break:break-all}
+  .footer{font-size:10px;color:#64748b;text-align:center;margin-top:24px}
+  @media print{body{background:#fff}.page{padding:28px}.section,.hero{break-inside:avoid;box-shadow:none}.task{break-inside:avoid}}
+</style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Updated from Online_Department_1782228646.xlsx</div>
+      <h1>Online Department Task Checklist</h1>
+      <p>Filtered from the latest Monday export. This checklist excludes blank rows, repeated spreadsheet headers, group labels, and exported subitem noise so the team can focus on the actual work.</p>
+      <div class="meta">
+        <div class="stat"><strong>22</strong><span>Actionable rows</span></div>
+        <div class="stat"><strong>5</strong><span>Immediate website</span></div>
+        <div class="stat"><strong>12</strong><span>Future / backlog</span></div>
+        <div class="stat"><strong>5</strong><span>GD / technical</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Immediate website tasks</h2>
+      <p class="section-sub">These are the cleanest “do next” items from the top of the updated export.</p>
+      <div class="task"><div class="check"></div><div><div class="name">Miva needs update</div><div class="detail">Platform: Website · Item ID: 12171317489</div></div><span class="tag red">High</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Add disclaimer to product page</div><div class="detail">Product page: <span class="link">https://sinisterdiesel.com/mm5/merchant.mvc?Screen=PROD&amp;Product_Code=SD-OC-6_7P-11</span> · Item ID: 12341366003</div></div><span class="tag red">High</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Change review count to 20,000+ at header</div><div class="detail">Header trust copy update · Item ID: 12341877631</div></div><span class="tag">Website</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Fix Shopper Approved issue on home page where scrolling reviews are not showing up</div><div class="detail">Home page review widget/display issue · Item ID: 12341762595</div></div><span class="tag red">Bug</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Add a footer link for customers to sign up for emails</div><div class="detail">Footer/email acquisition improvement · Item ID: 12341810358</div></div><span class="tag">CRO</span></div>
+    </section>
+
+    <section class="section">
+      <h2>Future development / backlog</h2>
+      <p class="section-sub">Good planning list. Some need owner confirmation before build work starts.</p>
+      <div class="task"><div class="check"></div><div><div class="name">Find merge data for PPC (Google / Meta)</div><div class="detail">Marketing data task · Item ID: 11251135102</div></div><span class="tag gray">Data</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Add “Get it By Date”</div><div class="detail">Shipping promise / delivery estimate feature · Item ID: 8810924580</div></div><span class="tag gold">Feature</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Add SD-CS-6.0-RC-BLUE</div><div class="detail">Product/SKU addition. Updates mention blue round EGR cooler availability and process questions · Item ID: 6503640388</div></div><span class="tag">Product</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Call for Availability on back-order items</div><div class="detail">Product availability messaging · Item ID: 18314842718</div></div><span class="tag gold">Feature</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Look into third-party plugin that shows estimated ship time</div><div class="detail">Prior update says yes, review options during online meeting · Item ID: 7236116737</div></div><span class="tag gold">Research</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Full eBay audit: sales vs. cost to sell everything YTD</div><div class="detail">Attached Monday file exists in export · Item ID: 7402546572</div></div><span class="tag gray">Audit</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Discuss AI voice prompt for VOIP system</div><div class="detail">Needs discussion / requirements · Item ID: 7993101737</div></div><span class="tag gray">Discuss</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">New Miva search company? Eliminate “no results found” and make search more intuitive</div><div class="detail">Search UX/vendor evaluation · Item ID: 10877560791</div></div><span class="tag gold">Research</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Discuss improvements for Google AI recommendation</div><div class="detail">Recommendation/AI visibility idea · Item ID: 11116587023</div></div><span class="tag gray">Discuss</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">EGR cooler blue option is underpriced</div><div class="detail">Platform: Website · Page: <span class="link">https://sinisterdiesel.com/sinister-diesel-egr-cooler-for-ford-powerstroke-2004-2007-60l.html</span> · Item ID: 11255027963</div></div><span class="tag red">Pricing</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Wrong URL link structure</div><div class="detail">Ram radiator pipe URL says 2003–2007, but product is for 2010–2018 models. Page: <span class="link">https://sinisterdiesel.com/sinister-diesel-radiator-pipe-for-2003-2007-dodgeram-cummins-59l.html</span> · Item ID: 12053661722</div></div><span class="tag red">SEO</span></div>
+    </section>
+
+    <section class="section">
+      <h2>GD proposed / technical work</h2>
+      <p class="section-sub">These look like vendor/technical estimates or platform architecture decisions.</p>
+      <div class="task"><div class="check"></div><div><div class="name">Cumulative Layout Shift with megamenu fix</div><div class="detail">Estimate shown in title: $165–$330 · Item ID: 7402517426</div></div><span class="tag red">CLS</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Review custom workflow for subscriptions</div><div class="detail">Estimate shown in title: $1,650–$3,300 · Item ID: 7506007865</div></div><span class="tag gold">Estimate</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Move scripts into Google Tag Manager</div><div class="detail">Estimate shown in title: $495–$895. Updates mention inline scripts and existing GTM/GA IDs · Item ID: 6874146095</div></div><span class="tag gold">GTM</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Attributes solution for Miva</div><div class="detail">Problem: product options pass to NetSuite as notes. Proposed direction: options should update with corresponding SKUs; likely all-or-nothing implementation · Item ID: 6930623325</div></div><span class="tag gold">Miva</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Switch framework to Shadows</div><div class="detail">Quote expected/mentioned for December · Item ID: 7235928345</div></div><span class="tag gray">Future</span></div>
+      <div class="task"><div class="check"></div><div><div class="name">Add cookie consent feature</div><div class="detail">Privacy/compliance feature · Item ID: 7856749653</div></div><span class="tag gold">Compliance</span></div>
+    </section>
+
+    <section class="section">
+      <h2>Suggested order of attack</h2>
+      <div class="notes">
+        <strong>Start with user-facing fixes:</strong> disclaimer, review count, Shopper Approved widget, footer email signup, pricing correction, and wrong URL structure.
+        <br><br>
+        <strong>Then scope larger builds:</strong> delivery-date messaging, estimated ship-time plugin, Miva search improvements, subscriptions workflow, Miva attributes, GTM/script cleanup, cookie consent, and framework migration.
+      </div>
+    </section>
+
+    <div class="footer">Generated June 23, 2026 from C:\Users\admin\Downloads\Online_Department_1782228646.xlsx</div>
+  </main>
+</body>
+</html>

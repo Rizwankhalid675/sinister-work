@@ -1,0 +1,20 @@
+{
+  "name": "netsuite-monday-integration",
+  "version": "1.0.0",
+  "description": "Syncs NetSuite 'Open Outside Processing POs' report data onto a monday.com board (manufacturing dept).",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "sync": "node -e \"require('./flows/openProcessingPOsToMonday').run().then(()=>process.exit(0)).catch(e=>{console.error(e);process.exit(1)})\"",
+    "dry-run": "node -e \"require('./flows/openProcessingPOsToMonday').run({dryRun:true}).then(()=>process.exit(0)).catch(e=>{console.error(e);process.exit(1)})\"",
+    "report": "node report.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3",
+    "oauth-1.0a": "^2.2.6",
+    "pdfkit": "^0.19.1",
+    "xlsx": "^0.18.5"
+  }
+}

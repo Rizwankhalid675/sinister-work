@@ -206,7 +206,7 @@ export const run = async ({ params, logger, api, connections }) => {
 
 /** @type { ActionOptions } */
 export const options = {
-  returnType: "record",
+  returnType: true,
 };
 
 export const params = {

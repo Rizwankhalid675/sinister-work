@@ -26,8 +26,13 @@
 
 ## 1. Security & Access Audit
 
-### 1.1 OAuth scope reconciliation  ⚠️ FINDING (open)
-Scope declarations disagree between two sources of truth:
+### 1.1 OAuth scope reconciliation  ✅ RESOLVED 2026-07-17
+Both files reduced to least-privilege set (code analysis found no customer/checkout/
+order-edit/listing usage in `api/`): `read_products, write_products, read_orders, write_orders`.
+Original drift is recorded below for history. **Note:** this is a scope *reduction* — verify
+merchants re-consent on next install/update.
+
+Original drift (both sources previously disagreed):
 
 | Scope | `settings.gadget.ts` | `shopify.app.toml` |
 |-------|:---:|:---:|

@@ -82,8 +82,30 @@ must be added to `settings.gadget.ts` if actually needed.
 - **Webhook backlog:** `[ ]` check Gadget webhook queue → `[ ]` confirm HMAC → TODO.
 
 ### 2.3 Deploy / rollback
-- `[ ]` Deploy path: `ggt push` → `revamp-dev` → promote to production. Document exact steps.
-- `[ ]` Rollback: previous Gadget deploy id + how to revert. TODO.
+
+**Deploy path (verified against framework v1.5.0, ggt 3.0.0):**
+- Local dir syncs to `revamp-dev`. App environments: `clone-dont-edit`, `revamp-dev`.
+  There is NO dedicated `production` environment configured for this app.
+- `ggt deploy` builds/validates against the production target and will ABORT if
+  production is unconfigured (it is). Last run aborted on exactly this.
+
+**⚠️ Production not deploy-ready — blockers (cannot be fixed from repo/CLI):**
+1. Missing production Shopify app credentials. The `shopify.app.toml`
+   `client_id = "ff7b9b548cd4be5e0b0d428c1afb7d0e"` is the dev app. Production needs
+   its own Shopify app (Partners dashboard) connected to the prod environment.
+   → Fix in: Gadget dashboard → Settings → Plugins → Shopify → Connect (prod env).
+2. Production missing env vars present in revamp-dev. Only custom var the code needs
+   is `ENSHIELD_API_KEY` (GADGET_* vars are auto-injected per-env, not set manually).
+   → Fix in: Gadget dashboard → Settings → Environment Variables → production.
+   Note: `ggt status --env=production` is blocked by Gadget; prod is dashboard-managed.
+
+**Deploy sequence once prod is configured:**
+- `[ ]` 1. Confirm scope change re-consent impact: reduced to
+  `read_products, write_products, read_orders, write_orders`. Installed merchants
+  re-approve on next load. Communicate before prod deploy.
+- `[ ]` 2. `ggt deploy` (interactive terminal required — aborts non-interactively).
+- `[ ]` Rollback: previous Gadget deploy id + how to revert. TODO (get from dashboard
+  deploy history).
 - `[ ]` Post-deploy smoke test: create test order, confirm Enshield receives it.
 
 ---

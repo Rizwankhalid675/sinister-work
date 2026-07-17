@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Enshield — Website Audit Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --ink:#0a0f14; --ink-soft:#4a5b62; --ink-faint:#8494a0;
+    --navy:#0a1c22; --teal:#0f9e98; --teal-deep:#0b7a75; --teal-tint:#e8f6f5;
+    --line:#e4ecec; --bg-soft:#f5f9f9;
+    --green:#1f9d55; --amber:#c47f17; --red:#d0392b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);line-height:1.55;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h1,h2,h3,h4{font-family:'Calistoga',Georgia,serif;font-weight:400;line-height:1.12;letter-spacing:-.01em}
+
+  .page{width:210mm;min-height:296mm;padding:20mm 18mm;margin:0 auto;background:#fff;
+    position:relative;page-break-after:always;overflow:hidden}
+  .page:last-child{page-break-after:auto}
+
+  /* ---- COVER ---- */
+  .cover{background:linear-gradient(160deg,#0a1c22 0%,#0d2830 55%,#0f353b 100%);color:#fff;
+    display:flex;flex-direction:column;justify-content:space-between}
+  .cover::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;
+    top:-160px;right:-160px;background:radial-gradient(circle,rgba(15,158,152,.4),transparent 70%)}
+  .cover::after{content:"";position:absolute;inset:0;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+    background-size:42px 42px;
+    -webkit-mask-image:radial-gradient(80% 70% at 70% 25%,#000,transparent 75%)}
+  .cover-top,.cover-mid,.cover-bot{position:relative;z-index:2}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Calistoga';font-size:26px}
+  .brand .mark{width:42px;height:42px;display:flex;align-items:center;justify-content:center}
+  .kicker{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+    color:#5fe6dd;border:1px solid rgba(95,230,221,.35);padding:7px 16px;border-radius:999px;margin-bottom:26px}
+  .cover-mid h1{font-size:58px;margin-bottom:20px}
+  .cover-mid h1 em{font-style:normal;color:#5fe6dd}
+  .cover-mid .sub{font-size:17px;color:rgba(255,255,255,.72);max-width:440px}
+  .cover-grade{display:flex;gap:16px;margin-top:38px}
+  .cg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;
+    padding:20px 24px;backdrop-filter:blur(4px)}
+  .cg .big{font-family:'Calistoga';font-size:40px;line-height:1;color:#5fe6dd}
+  .cg .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:8px}
+  .cover-bot{display:flex;justify-content:space-between;align-items:flex-end;font-size:12.5px;
+    color:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.14);padding-top:20px}
+  .cover-bot b{color:#fff;font-weight:600;display:block;font-size:13.5px;margin-bottom:2px}
+
+  /* ---- CONTENT ---- */
+  .rpt-head{display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:2px solid var(--navy);padding-bottom:12px;margin-bottom:6px}
+  .rpt-head .n{font-family:'Calistoga';font-size:13px;color:var(--teal-deep)}
+  .rpt-head .t{font-family:'Calistoga';font-size:12px;color:var(--ink-faint)}
+  .sec-title{font-size:27px;margin:26px 0 6px}
+  .sec-intro{color:var(--ink-soft);font-size:14px;margin-bottom:20px;max-width:600px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-deep)}
+
+  /* score cards */
+  .scores{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 8px}
+  .score{border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+  .score .v{font-family:'Calistoga';font-size:34px;line-height:1}
+  .score .k{font-size:12px;color:var(--ink-soft);margin-top:6px}
+  .score .bar{height:5px;border-radius:3px;background:var(--line);margin-top:12px;overflow:hidden}
+  .score .fill{height:100%;border-radius:3px}
+  .good{color:var(--green)} .bg-good{background:var(--green)}
+  .warn{color:var(--amber)} .bg-warn{background:var(--amber)}
+  .bad{color:var(--red)} .bg-bad{background:var(--red)}
+  .teal{color:var(--teal-deep)} .bg-teal{background:var(--teal-deep)}
+
+  .vitals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+  .vital{background:var(--bg-soft);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .vital .v{font-family:'Calistoga';font-size:26px;line-height:1}
+  .vital .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+  .vital .tag{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:999px;margin-top:9px}
+  .tag-good{background:#e3f5ea;color:var(--green)}
+  .tag-warn{background:#fbf0dd;color:var(--amber)}
+
+  /* callout / findings */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{border:1px solid var(--line);border-radius:14px;padding:18px 20px;break-inside:avoid}
+  .card h3{font-size:17px;margin-bottom:4px;display:flex;align-items:center;gap:9px}
+  .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .card ul{list-style:none;margin-top:10px}
+  .card li{font-size:13px;color:var(--ink-soft);padding-left:18px;position:relative;margin-bottom:8px}
+  .card li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  .card li b{color:var(--ink);font-weight:600}
+
+  .issue-tbl{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  .issue-tbl th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+    padding:8px 10px;border-bottom:1.5px solid var(--line)}
+  .issue-tbl td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  .issue-tbl tr:last-child td{border-bottom:none}
+  .sev{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
+  .sev-ml{background:#eef7dd;color:#6b8017} .sev-lo{background:#e3f5ea;color:var(--green)}
+  .sev-hi{background:#fdeae7;color:var(--red)} .sev-md{background:#fbf0dd;color:var(--amber)}
+  .issue-tbl td b{font-weight:600}
+
+  .bardata{margin-top:6px}
+  .bardata-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:12.5px}
+  .bardata-row .lab{width:120px;flex-shrink:0;color:var(--ink-soft)}
+  .bardata-row .track{flex:1;height:22px;background:var(--bg-soft);border-radius:6px;overflow:hidden;position:relative}
+  .bardata-row .seg{height:100%;display:flex;align-items:center;padding-left:10px;color:#fff;font-weight:600;font-size:11px}
+  .bardata-row .val{width:64px;text-align:right;flex-shrink:0;font-weight:600}
+
+  .rec{counter-reset:rec;margin-top:6px}
+  .rec-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+  .rec-item:last-child{border-bottom:none}
+  .rec-num{counter-increment:rec;flex-shrink:0;width:30px;height:30px;border-radius:8px;
+    background:var(--navy);color:#fff;font-family:'Calistoga';font-size:15px;
+    display:flex;align-items:center;justify-content:center}
+  .rec-num::before{content:counter(rec)}
+  .rec-body b{font-size:14.5px}
+  .rec-body p{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+  .rec-prio{margin-left:auto;flex-shrink:0;align-self:center;font-size:10.5px;font-weight:700;
+    padding:3px 11px;border-radius:999px}
+  .prio-hi{background:#fdeae7;color:var(--red)} .prio-md{background:#fbf0dd;color:var(--amber)}
+  .prio-lo{background:#e3f5ea;color:var(--green)}
+
+  .note{background:var(--teal-tint);border-left:4px solid var(--teal);border-radius:8px;
+    padding:14px 18px;font-size:13px;color:#0a4e4a;margin-top:20px}
+  .note b{color:var(--teal-deep)}
+
+  .pfoot{position:absolute;bottom:12mm;left:18mm;right:18mm;display:flex;justify-content:space-between;
+    font-size:10.5px;color:var(--ink-faint);border-top:1px solid var(--line);padding-top:8px}
+
+  .meta-row{display:flex;gap:26px;flex-wrap:wrap;background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:12px;padding:14px 20px;margin-bottom:8px;font-size:12.5px}
+  .meta-row div b{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700;margin-bottom:3px}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="page cover">
+  <div class="cover-top">
+    <div class="brand">
+      <span class="mark">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3z" fill="#0f9e98" opacity=".2"/>
+          <path d="M12 2L4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3z" stroke="#5fe6dd" stroke-width="1.4"/>
+          <path d="M9 12l2 2 4-4" stroke="#5fe6dd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      Enshield
+    </div>
+  </div>
+
+  <div class="cover-mid">
+    <span class="kicker">Website Audit Report</span>
+    <h1>Performance, SEO &amp;<br><em>Accessibility</em> Review.</h1>
+    <p class="sub">A full technical audit of enshield.com — benchmarking speed, structure, search readiness, and accessibility, with prioritized recommendations.</p>
+    <div class="cover-grade">
+      <div class="cg"><div class="big">A</div><div class="lbl">GTmetrix Grade</div></div>
+      <div class="cg"><div class="big">96%</div><div class="lbl">Performance</div></div>
+      <div class="cg"><div class="big">99%</div><div class="lbl">Structure</div></div>
+    </div>
+  </div>
+
+  <div class="cover-bot">
+    <div><b>Prepared for</b>enshield.com</div>
+    <div><b>Test Location</b>Seattle, WA · Chrome 142 · Lighthouse 12.6.1</div>
+    <div><b>Generated</b>Jul 16, 2026</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — PERFORMANCE ============ -->
+<section class="page">
+  <div class="rpt-head"><span class="n">Enshield — Website Audit</span><span class="t">01 · Performance</span></div>
+
+  <span class="eyebrow">Overview</span>
+  <h2 class="sec-title">Performance &amp; Core Web Vitals</h2>
+  <p class="sec-intro">Measured via GTmetrix (Chrome 142, Lighthouse 12.6.1) from Seattle, WA. The site earns an <b>A grade</b> with strong scores overall — the main opportunities are around JavaScript weight and caching.</p>
+
+  <div class="scores">
+    <div class="score"><div class="v good">96%</div><div class="k">Performance</div>
+      <div class="bar"><div class="fill bg-good" style="width:96%"></div></div></div>
+    <div class="score"><div class="v good">99%</div><div class="k">Structure</div>
+      <div class="bar"><div class="fill bg-good" style="width:99%"></div></div></div>
+    <div class="score"><div class="v good">A</div><div class="k">Overall GTmetrix Grade</div>
+      <div class="bar"><div class="fill bg-good" style="width:95%"></div></div></div>
+  </div>
+
+  <div class="vitals">
+    <div class="vital"><div class="k">Largest Contentful Paint</div><div class="v good">864ms</div>
+      <span class="tag tag-good">Good · &lt; 2.5s</span></div>
+    <div class="vital"><div class="k">Total Blocking Time</div><div class="v good">108ms</div>
+      <span class="tag tag-good">Good · &lt; 200ms</span></div>
+    <div class="vital"><div class="k">Cumulative Layout Shift</div><div class="v warn">0.09</div>
+      <span class="tag tag-warn">Fair · target &lt; 0.1</span></div>
+  </div>
+
+  <span class="eyebrow">Load Timeline</span>
+  <h3 style="font-size:19px;margin:10px 0 12px">Key timing milestones</h3>
+  <div class="bardata">
+    <div class="bardata-row"><span class="lab">TTFB</span>
+      <div class="track"><div class="seg bg-good" style="width:6%">·</div></div><span class="val">97ms</span></div>
+    <div class="bardata-row"><span class="lab">First Contentful Paint</span>
+      <div class="track"><div class="seg bg-good" style="width:18%"></div></div><span class="val">288ms</span></div>
+    <div class="bardata-row"><span class="lab">Largest Contentful Paint</span>
+      <div class="track"><div class="seg bg-teal" style="width:34%"></div></div><span class="val">865ms</span></div>
+    <div class="bardata-row"><span class="lab">Time to Interactive</span>
+      <div class="track"><div class="seg bg-warn" style="width:56%"></div></div><span class="val">5.2s</span></div>
+    <div class="bardata-row"><span class="lab">Fully Loaded</span>
+      <div class="track"><div class="seg bg-bad" style="width:100%"></div></div><span class="val">16.4s</span></div>
+  </div>
+
+  <div class="note" style="margin-top:16px"><b>Read this:</b> The page paints fast (LCP &lt; 900ms) so it <b>feels</b> quick, but full load stretches to 16.4s and interactivity to 5.2s — driven by 51 scripts (46 third-party) totaling 1.34MB of JavaScript. This is the single biggest lever for improvement.</div>
+
+  <div class="pfoot"><span>Enshield Website Audit · Confidential</span><span>Page 2</span></div>
+</section>
+
+<!-- ============ PAGE 3 — PAGE DETAILS + ISSUES ============ -->
+<section class="page">
+  <div class="rpt-head"><span class="n">Enshield — Website Audit</span><span class="t">02 · Page Weight &amp; Issues</span></div>
+
+  <span class="eyebrow">Page Composition</span>
+  <h2 class="sec-title">What the page is made of</h2>
+  <p class="sec-intro">Total page size is <b>1.63MB across 96 requests</b>. JavaScript dominates both size and request count — the clearest optimization target.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Total Page Size — 1.63MB</h3>
+      <div class="bardata" style="margin-top:14px">
+        <div class="bardata-row"><span class="lab">JavaScript</span>
+          <div class="track"><div class="seg bg-bad" style="width:82%">1.34MB</div></div><span class="val">82%</span></div>
+        <div class="bardata-row"><span class="lab">Images</span>
+          <div class="track"><div class="seg bg-warn" style="width:11%"></div></div><span class="val">178KB</span></div>
+        <div class="bardata-row"><span class="lab">Other</span>
+          <div class="track"><div class="seg bg-teal" style="width:7%"></div></div><span class="val">~110KB</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Total Requests — 96</h3>
+      <div class="bardata" style="margin-top:14px">
+        <div class="bardata-row"><span class="lab">JavaScript</span>
+          <div class="track"><div class="seg bg-bad" style="width:66%">65.6%</div></div><span class="val">63</span></div>
+        <div class="bardata-row"><span class="lab">Other</span>
+          <div class="track"><div class="seg bg-warn" style="width:23%">22.9%</div></div><span class="val">22</span></div>
+        <div class="bardata-row"><span class="lab">Images / Fonts</span>
+          <div class="track"><div class="seg bg-teal" style="width:11%"></div></div><span class="val">11</span></div>
+      </div>
+    </div>
+  </div>
+
+  <span class="eyebrow" style="display:block;margin-top:26px">Top Issues — from GTmetrix</span>
+  <h2 class="sec-title" style="margin-top:6px">Audit findings</h2>
+  <table class="issue-tbl">
+    <thead><tr><th>Severity</th><th>Issue</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sev sev-ml">MED-LOW</span></td>
+        <td><b>Serve static assets with an efficient cache policy</b></td>
+        <td>Potential savings of <b>368KB</b> — set long-lived cache headers on static files.</td></tr>
+      <tr><td><span class="sev sev-lo">LOW</span></td>
+        <td><b>Avoid long main-thread tasks</b></td>
+        <td>5 long tasks found — blocks interactivity, contributes to the 5.2s TTI.</td></tr>
+      <tr><td><span class="sev sev-lo">LOW</span></td>
+        <td><b>Use a Content Delivery Network (CDN)</b></td>
+        <td>2 resources could be served from a CDN for faster global delivery.</td></tr>
+      <tr><td><span class="sev sev-lo">LOW</span></td>
+        <td><b>Avoid large layout shifts</b></td>
+        <td>2 layout shifts found — the cause of the 0.09 CLS score.</td></tr>
+      <tr><td><span class="sev sev-lo">LOW</span></td>
+        <td><b>Reduce JavaScript execution time</b></td>
+        <td><b>600ms</b> spent executing JavaScript on the main thread.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>Root cause:</b> The site is built on <b>GoDaddy Website Builder</b>, which injects a large volume of generic third-party scripts. Most performance issues trace back to this — a lighter, purpose-built front end (already prototyped in the Enshield mockup) removes the bulk of them.</div>
+
+  <div class="pfoot"><span>Enshield Website Audit · Confidential</span><span>Page 3</span></div>
+</section>
+
+<!-- ============ PAGE 4 — SEO + ACCESSIBILITY ============ -->
+<section class="page">
+  <div class="rpt-head"><span class="n">Enshield — Website Audit</span><span class="t">03 · SEO &amp; Accessibility</span></div>
+
+  <span class="eyebrow">Search Readiness</span>
+  <h2 class="sec-title">SEO audit</h2>
+  <p class="sec-intro">Analyzed via Chrome DevTools. Fundamentals are solid — metadata and social cards are well configured — with a few structural fixes worth making.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3><span class="dot bg-good"></span>Strengths</h3>
+      <ul>
+        <li><b>Title &amp; description</b> — clear and descriptive meta tags present.</li>
+        <li><b>Open Graph &amp; Twitter cards</b> — correctly implemented for social sharing.</li>
+        <li><b>Canonical URL</b> — present, pointing to the main domain.</li>
+        <li><b>Viewport &amp; lang</b> — mobile viewport and <b>en-US</b> set correctly.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="dot bg-warn"></span>Fix these</h3>
+      <ul>
+        <li><b>Heading hierarchy</b> — jumps H1 → H2 → H4, skipping H3. Break logical order for crawlers.</li>
+        <li><b>Empty image alt</b> — the logo has <b>alt=""</b>; set <b>alt="Enshield Logo"</b>.</li>
+        <li><b>Single H1</b> — good, but feature blocks should be H3 under their H2.</li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="eyebrow" style="display:block;margin-top:26px">Inclusive Design</span>
+  <h2 class="sec-title" style="margin-top:6px">Accessibility audit</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h3><span class="dot bg-good"></span>Working well</h3>
+      <ul>
+        <li><b>&lt;nav&gt; landmark</b> present for primary navigation.</li>
+        <li><b>Icon links labelled</b> — hamburger &amp; cart use aria-label.</li>
+        <li><b>Language declared</b> on the html element.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="dot bg-bad"></span>Needs attention</h3>
+      <ul>
+        <li><b>Missing &lt;main&gt; &amp; &lt;footer&gt;</b> landmarks — hurts screen-reader navigation.</li>
+        <li><b>Unlabelled links</b> — several &lt;a&gt; tags have no text or aria-label.</li>
+        <li><b>Contrast</b> — verify text hits WCAG AA 4.5:1, esp. on light theme (#e5f1f2).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="meta-row" style="margin-top:24px">
+    <div><b>Scripts</b>51 total · 46 external</div>
+    <div><b>Stylesheets</b>0 (inlined)</div>
+    <div><b>Images lazy-loaded</b>0</div>
+    <div><b>DOM interactive</b>93ms</div>
+    <div><b>Generator</b>GoDaddy Website Builder</div>
+  </div>
+
+  <div class="pfoot"><span>Enshield Website Audit · Confidential</span><span>Page 4</span></div>
+</section>
+
+<!-- ============ PAGE 5 — RECOMMENDATIONS ============ -->
+<section class="page">
+  <div class="rpt-head"><span class="n">Enshield — Website Audit</span><span class="t">04 · Action Plan</span></div>
+
+  <span class="eyebrow">Prioritized</span>
+  <h2 class="sec-title">Recommendations &amp; next steps</h2>
+  <p class="sec-intro">Ordered by impact-to-effort. Tackling the top three addresses the majority of the load-time and search issues.</p>
+
+  <div class="rec">
+    <div class="rec-item"><div class="rec-num"></div>
+      <div class="rec-body"><b>Cut JavaScript weight</b><p>Audit the 51 scripts (1.34MB). Remove or consolidate unused third-party GoDaddy scripts — the biggest win for TTI (5.2s) and full load (16.4s).</p></div>
+      <span class="rec-prio prio-hi">HIGH</span></div>
+
+    <div class="rec-item"><div class="rec-num"></div>
+      <div class="rec-body"><b>Set an efficient cache policy</b><p>Add long-lived cache headers to static assets — GTmetrix flags 368KB of savings available immediately.</p></div>
+      <span class="rec-prio prio-hi">HIGH</span></div>
+
+    <div class="rec-item"><div class="rec-num"></div>
+      <div class="rec-body"><b>Add semantic landmarks</b><p>Wrap content in &lt;main&gt; and the base in &lt;footer&gt; for accessibility and SEO structure.</p></div>
+      <span class="rec-prio prio-md">MEDIUM</span></div>
+
+    <div class="rec-item"><div class="rec-num"></div>
+      <div class="rec-body"><b>Fix heading hierarchy</b><p>Change feature H4s to H3 so the outline flows H1 → H2 → H3 without gaps.</p></div>
+      <span class="rec-prio prio-md">MEDIUM</span></div>
+
+    <div class="rec-item"><div class="rec-num"></div>
+      <div class="rec-body"><b>Lazy-load below-fold images</b><p>Add loading="lazy" — currently 0 images use it — to speed initial paint.</p></div>
+      <span class="rec-prio prio-md">MEDIUM</span></div>
+
+    <div class="rec-item"><div class="rec-num"></div>
+      <div class="rec-body"><b>Add descriptive alt text</b><p>Set the logo alt to "Enshield Logo" and label remaining icon-only links.</p></div>
+      <span class="rec-prio prio-lo">LOW</span></div>
+
+    <div class="rec-item"><div class="rec-num"></div>
+      <div class="rec-body"><b>Resolve layout shifts &amp; add a CDN</b><p>Fix the 2 CLS-causing shifts (reserve space for media) and serve static assets via CDN.</p></div>
+      <span class="rec-prio prio-lo">LOW</span></div>
+  </div>
+
+  <div class="note"><b>The strategic takeaway:</b> enshield.com already scores an A on raw metrics — but nearly every remaining issue stems from the GoDaddy builder's script bloat and rigid structure. Migrating to the lightweight, purpose-built front end (the React mockup) resolves the caching, JS-weight, semantic-HTML, and heading issues in one move — while unlocking the premium look and animation the brand deserves.</div>
+
+  <div class="pfoot"><span>Enshield Website Audit · Confidential · Prepared Jul 2026</span><span>Page 5</span></div>
+</section>
+
+</body>
+</html>

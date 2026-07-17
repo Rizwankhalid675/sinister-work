@@ -51,6 +51,10 @@
 				</div>
 				<div class="sd2-v2-garage-form__actions">
 					<button class="sd2-btn sd2-btn--primary sd2-btn--full" type="submit">Save Vehicle</button>
+					<a class="sd2-v2-garage-shop" href="&mvte:urls:SRCH:auto;" data-v2-garage-shop hidden>
+						<span>View Parts for My Truck</span>
+						<small data-v2-garage-shop-label></small>
+					</a>
 				</div>
 			</form>
 

@@ -14,18 +14,23 @@
 		searchOpener.addEventListener('click', function (event) {
 			event.preventDefault();
 			document.documentElement.classList.toggle('has-active-search-preview');
-			document.querySelector('[data-hook="global-search"]').focus();
+			var globalSearch = document.querySelector('[data-hook="global-search"]');
+			if (globalSearch) {
+				globalSearch.focus();
+			}
 		});
 	});
 
 	/**
 	 * Close global search.
 	 */
-	searchCloser.addEventListener('click', function (event) {
-		event.preventDefault();
+	if (searchCloser) {
+		searchCloser.addEventListener('click', function (event) {
+			event.preventDefault();
 
-		document.documentElement.classList.toggle('has-active-search-preview');
-	});
+			document.documentElement.classList.toggle('has-active-search-preview');
+		});
+	}
 
 	/**
 	 * Close global search when the `Esc` key is pressed.

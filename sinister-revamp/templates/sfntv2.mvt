@@ -27,7 +27,7 @@
 	<section class="sd2-v2-home-hero" aria-labelledby="sd2-v2-home-hero-title">
 		<div class="sd2-wrap">
 			<div class="sd2-v2-home-hero__frame">
-				<div class="sd2-v2-home-hero__copy">
+				<div class="sd2-v2-home-hero__copy sd2-reveal" data-reveal="fade-right">
 					<p class="sd2-eyebrow">Diesel Performance, Built With Intent</p>
 					<h1 class="sd2-v2-home-hero__title" id="sd2-v2-home-hero-title">Parts for trucks that work harder than the catalog says they should.</h1>
 					<p class="sd2-body">Shop Powerstroke, Duramax, and Cummins parts through a V2 experience built around fitment, proof, and real garage context.</p>
@@ -36,12 +36,12 @@
 						<a class="sd2-btn sd2-btn--outline" href="&mvte:urls:CTGYENGV2:auto;">Shop Platforms</a>
 					</div>
 				</div>
-				<div class="sd2-v2-home-hero__media" aria-label="Sinister Diesel shop truck placeholder">
+				<div class="sd2-v2-home-hero__media sd2-reveal sd2-tilt sd2-float" data-reveal="fade-left" aria-label="Sinister Diesel shop truck placeholder">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Placeholder Sinister Diesel truck image">
 				</div>
-				<div class="sd2-v2-home-hero__factline">
+				<div class="sd2-v2-home-hero__factline sd2-reveal" data-reveal="fade-up">
 					<span>MADE AND TESTED IN THE USA</span>
-					<span>SINCE 2008</span>
+					<span>SINCE 2009</span>
 					<span>FITMENT-FIRST V2 EXPERIENCE</span>
 				</div>
 			</div>
@@ -50,8 +50,8 @@
 
 	<section class="sd2-v2-perfstrip" aria-label="Sinister Diesel proof points">
 		<div class="sd2-wrap">
-			<div class="sd2-v2-perfstrip__grid">
-				<div class="sd2-v2-perfstrip__item"><span class="sd2-v2-perfstrip__value" data-v2-count-to="2008">2008</span><span class="sd2-v2-perfstrip__label">SINCE</span></div>
+			<div class="sd2-v2-perfstrip__grid sd2-stagger" data-reveal="fade-up">
+				<div class="sd2-v2-perfstrip__item"><span class="sd2-v2-perfstrip__value" data-v2-count-to="2009">2009</span><span class="sd2-v2-perfstrip__label">SINCE</span></div>
 				<div class="sd2-v2-perfstrip__item"><span class="sd2-v2-perfstrip__value">USA</span><span class="sd2-v2-perfstrip__label">DESIGNED AND TESTED</span></div>
 				<div class="sd2-v2-perfstrip__item"><span class="sd2-v2-perfstrip__value">FORD</span><span class="sd2-v2-perfstrip__label">POWERSTROKE</span></div>
 				<div class="sd2-v2-perfstrip__item"><span class="sd2-v2-perfstrip__value">GM</span><span class="sd2-v2-perfstrip__label">DURAMAX</span></div>
@@ -62,20 +62,20 @@
 
 	<section class="sd2-section sd2-v2-home-platforms" aria-labelledby="sd2-v2-platforms-title">
 		<div class="sd2-wrap">
-			<div class="sd2-v2-section-head">
+			<div class="sd2-v2-section-head sd2-reveal" data-reveal="fade-up">
 				<p class="sd2-eyebrow">Shop By Platform</p>
 				<h2 class="sd2-heading-lg" id="sd2-v2-platforms-title">Start with the truck, then narrow the build.</h2>
 			</div>
-			<div class="sd2-v2-platform-grid">
-				<a class="sd2-v2-platform-card sd2-v2-platform-card--large" href="&mvte:urls:CTGYENGV2:auto;">
+			<div class="sd2-v2-platform-grid sd2-stagger">
+				<a class="sd2-v2-platform-card sd2-v2-platform-card--large sd2-tilt" href="&mvte:urls:CTGYENGV2:auto;">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Ford Powerstroke placeholder">
 					<span>Powerstroke</span>
 				</a>
-				<a class="sd2-v2-platform-card" href="&mvte:urls:CTGYENGV2:auto;">
+				<a class="sd2-v2-platform-card sd2-tilt" href="&mvte:urls:CTGYENGV2:auto;">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="GM Duramax placeholder">
 					<span>Duramax</span>
 				</a>
-				<a class="sd2-v2-platform-card" href="&mvte:urls:CTGYENGV2:auto;">
+				<a class="sd2-v2-platform-card sd2-tilt" href="&mvte:urls:CTGYENGV2:auto;">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Ram Cummins placeholder">
 					<span>Cummins</span>
 				</a>
@@ -85,7 +85,7 @@
 
 	<section class="sd2-section--tight sd2-v2-home-garage" aria-labelledby="sd2-v2-garage-title">
 		<div class="sd2-wrap">
-			<div class="sd2-v2-garage-prompt">
+			<div class="sd2-v2-garage-prompt sd2-reveal" data-reveal="fade-up">
 				<div>
 					<p class="sd2-eyebrow">My Garage</p>
 					<h2 class="sd2-heading-lg" id="sd2-v2-garage-title">Save your truck before you shop.</h2>
@@ -98,12 +98,12 @@
 
 	<section class="sd2-section sd2-v2-home-products" aria-labelledby="sd2-v2-products-title">
 		<div class="sd2-wrap">
-			<div class="sd2-v2-section-head">
+			<div class="sd2-v2-section-head sd2-reveal" data-reveal="fade-up">
 				<p class="sd2-eyebrow">Featured Parts</p>
 				<h2 class="sd2-heading-lg" id="sd2-v2-products-title">Placeholder products pending real Miva product binding.</h2>
 			</div>
-			<div class="sd2-v2-product-grid">
-				<article class="sd2-card sd2-v2-product-card sd2-v2-product-card--hero">
+			<div class="sd2-v2-product-grid sd2-stagger">
+				<article class="sd2-card sd2-v2-product-card sd2-v2-product-card--hero sd2-tilt">
 					<a class="sd2-v2-product-card__media" href="&mvte:urls:CTGYLISTV2:auto;">
 						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Placeholder featured Powerstroke part">
 						<span class="sd2-v2-product-card__flag">PLACEHOLDER</span>
@@ -115,11 +115,11 @@
 						<div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="&mvte:urls:CTGYLISTV2:auto;">View</a></div>
 					</div>
 				</article>
-				<article class="sd2-card sd2-v2-product-card">
+				<article class="sd2-card sd2-v2-product-card sd2-tilt">
 					<a class="sd2-v2-product-card__media" href="&mvte:urls:CTGYLISTV2:auto;"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Placeholder filtration product"><span class="sd2-v2-product-card__flag">PLACEHOLDER</span></a>
 					<div class="sd2-v2-product-card__body"><p class="sd2-v2-product-card__platform">Filtration</p><h3 class="sd2-v2-product-card__title"><a href="&mvte:urls:CTGYLISTV2:auto;">Coolant and oil filtration</a></h3><p class="sd2-v2-product-card__note">Real product binding pending.</p><div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="&mvte:urls:CTGYLISTV2:auto;">View</a></div></div>
 				</article>
-				<article class="sd2-card sd2-v2-product-card">
+				<article class="sd2-card sd2-v2-product-card sd2-tilt">
 					<a class="sd2-v2-product-card__media" href="&mvte:urls:CTGYLISTV2:auto;"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="Placeholder turbo product"><span class="sd2-v2-product-card__flag">PLACEHOLDER</span></a>
 					<div class="sd2-v2-product-card__body"><p class="sd2-v2-product-card__platform">Airflow</p><h3 class="sd2-v2-product-card__title"><a href="&mvte:urls:CTGYLISTV2:auto;">Turbo systems</a></h3><p class="sd2-v2-product-card__note">Real product binding pending.</p><div class="sd2-v2-product-card__foot"><span class="sd2-v2-product-card__price">Miva price pending</span><a class="sd2-v2-product-card__link" href="&mvte:urls:CTGYLISTV2:auto;">View</a></div></div>
 				</article>
@@ -129,8 +129,8 @@
 
 	<section class="sd2-section sd2-v2-home-build" aria-labelledby="sd2-v2-build-title">
 		<div class="sd2-wrap">
-			<article class="sd2-v2-build-story">
-				<div class="sd2-v2-build-story__media"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="Placeholder diesel build story"></div>
+			<article class="sd2-v2-build-story sd2-reveal" data-reveal="fade-up">
+				<div class="sd2-v2-build-story__media sd2-tilt"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="Placeholder diesel build story"></div>
 				<div class="sd2-v2-build-story__body">
 					<p class="sd2-eyebrow">Build Story</p>
 					<h2 class="sd2-heading-lg" id="sd2-v2-build-title">Tow rig setup, built around reliability.</h2>
@@ -148,9 +148,9 @@
 
 	<section class="sd2-section--tight sd2-v2-home-trust" aria-labelledby="sd2-v2-trust-title">
 		<div class="sd2-wrap">
-			<div class="sd2-v2-section-head"><p class="sd2-eyebrow">Proof Points</p><h2 class="sd2-heading-lg" id="sd2-v2-trust-title">Specific reasons to trust the build.</h2></div>
-			<div class="sd2-v2-trust-grid">
-				<div><strong>Established 2008</strong><span>Brand history stated in the existing global V2 trust bar.</span></div>
+			<div class="sd2-v2-section-head sd2-reveal" data-reveal="fade-up"><p class="sd2-eyebrow">Proof Points</p><h2 class="sd2-heading-lg" id="sd2-v2-trust-title">Specific reasons to trust the build.</h2></div>
+			<div class="sd2-v2-trust-grid sd2-stagger">
+				<div><strong>Established 2009</strong><span>Brand history stated in the existing global V2 trust bar.</span></div>
 				<div><strong>USA focus</strong><span>Made and tested in the USA messaging carried from approved global layer.</span></div>
 				<div><strong>Miva-safe commerce</strong><span>Basket, checkout, search, account, and URLs remain in Miva.</span></div>
 			</div>
@@ -159,7 +159,7 @@
 
 	<section class="sd2-section sd2-v2-home-content" aria-labelledby="sd2-v2-content-title">
 		<div class="sd2-wrap">
-			<div class="sd2-v2-content-teaser">
+			<div class="sd2-v2-content-teaser sd2-reveal" data-reveal="fade-up">
 				<div><p class="sd2-eyebrow">Learn Before You Buy</p><h2 class="sd2-heading-lg" id="sd2-v2-content-title">Guides, installs, and build notes belong beside the parts.</h2></div>
 				<a class="sd2-btn sd2-btn--outline" href="&mvte:urls:NEWS:auto;">View Guides</a>
 			</div>

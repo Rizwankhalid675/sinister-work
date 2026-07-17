@@ -17,7 +17,7 @@
 
 <main class="sd2-v2-search-page" data-v2-listing-page>
 	<div class="sd2-wrap">
-		<header class="sd2-v2-search-page__head">
+		<header class="sd2-v2-search-page__head sd2-reveal" data-reveal="fade-up">
 			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
 				<a href="&mvte:urls:SFNTV2:auto;">Home</a>
 				<span aria-hidden="true">/</span>
@@ -30,10 +30,16 @@
 				</div>
 				<p class="sd2-v2-search-page__count">&mvte:category_listing:total_prod_count; products</p>
 			</div>
+			<div class="sd2-v3-hero-data" aria-label="Catalog status">
+				<div><span>Products</span><strong>&mvte:category_listing:total_prod_count;</strong></div>
+				<div><span>Catalog</span><strong>Live</strong></div>
+				<div><span>Fitment</span><strong data-v2-fitment-copy>Select your truck</strong></div>
+			</div>
 			<mvt:comment>TODO: register Vehicle Banner V2 in Miva Admin as readytheme contentsection('vehicle_banner') before using mvt:item composition.</mvt:comment>
 		</header>
 
-		<div class="sd2-v2-result-tools">
+		<section class="sd2-v3-commerce-stage" data-sd2-story aria-label="Browse &mvte:category:name;">
+		<div class="sd2-v2-result-tools sd2-reveal" data-reveal="fade-up">
 			<div class="sd2-v2-chips" data-v2-filter-chips><span class="sd2-v2-chip">&mvte:category:name;</span></div>
 			<button class="sd2-v2-filter-trigger" type="button" data-v2-filter-open aria-controls="sd2-v2-listing-filter-sheet" aria-expanded="false">Filters</button>
 			<form class="sd2-v2-sort" method="get" action="&mvte:urls:_self:auto_noparams;">
@@ -93,7 +99,7 @@
 			</aside>
 
 			<div class="sd2-v2-pgrid-wrap">
-				<div class="sd2-v2-pgrid" data-v2-product-grid>
+				<div class="sd2-v2-pgrid sd2-stagger" data-v2-product-grid>
 					<mvt:comment>
 						Verified legacy pattern: category listings render inline product cards
 						inside category_listing:products (see ctgy-category_listing.mvt). No file
@@ -102,7 +108,7 @@
 						to preserve basket/facet/offset business logic exactly.
 					</mvt:comment>
 					<mvt:foreach iterator="product" array="category_listing:products">
-						<article class="sd2-card sd2-v2-product-card">
+						<article class="sd2-card sd2-v2-product-card sd2-tilt">
 							<a class="sd2-v2-product-card__media" href="&mvte:urls:PRODV2:auto;?Product_Code=&mvta:product:code;" data-mm-linktype="product-list-link">
 								<mvt:if expr="NOT ISNULL l.settings:product:thumbnail">
 									<img src="&mvte:product:thumbnail;" alt="&mvte:product:name;" loading="lazy">
@@ -156,7 +162,7 @@
 						</article>
 					</mvt:foreach>
 					<mvt:if expr="miva_array_elements(l.settings:category_listing:products) EQ 0">
-						<section class="sd2-v2-empty-state" aria-label="No products in this category">
+						<section class="sd2-v2-empty-state sd2-reveal" data-reveal="fade-up" aria-label="No products in this category">
 							<h2>No products currently available</h2>
 							<p>This category has no products matching the current filters.</p>
 						</section>
@@ -195,10 +201,11 @@
 				</mvt:if>
 			</div>
 		</section>
+		</section>
 	</div>
 
 	<div class="sd2-v2-filter-sheet-scrim" data-v2-filter-close hidden></div>
-	<aside class="sd2-v2-filter-sheet" id="sd2-v2-listing-filter-sheet" aria-label="Mobile filters" aria-hidden="true" data-v2-filter-sheet>
+	<aside class="sd2-v2-filter-sheet sd2-motion-panel" id="sd2-v2-listing-filter-sheet" aria-label="Mobile filters" aria-hidden="true" data-v2-filter-sheet>
 		<header class="sd2-v2-filter-sheet__head">
 			<h2>Filters</h2>
 			<button class="sd2-icon-btn" type="button" data-v2-filter-close aria-label="Close filters">x</button>

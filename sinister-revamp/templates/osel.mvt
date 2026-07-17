@@ -2,6 +2,24 @@
 	<mvt:item name="customfields" param="Write_Basket( 'helped_with_order', g.Helped_With_Order )" />
 </mvt:if>
 
+<mvt:assign name="l.settings:sd2_special_order_required" value="0" />
+<mvt:foreach iterator="group" array="basket:groups">
+	<mvt:item name="customfields" param="Read_Product_Code(l.settings:group:code, 'availability', l.settings:sd2_availability)" />
+	<mvt:assign name="l.settings:sd2_special_order_text" value="tolower(l.settings:sd2_availability)" />
+	<mvt:foreach iterator="option" array="group:options">
+		<mvt:assign name="l.settings:sd2_special_order_text" value="l.settings:sd2_special_order_text $ ' ' $ tolower(l.settings:option:attr_prompt) $ ' ' $ tolower(l.settings:option:opt_prompt) $ ' ' $ tolower(l.settings:option:data) $ ' ' $ tolower(l.settings:option:data_long)" />
+	</mvt:foreach>
+	<mvt:if expr="('backorder' CIN l.settings:sd2_special_order_text) OR ('special order' CIN l.settings:sd2_special_order_text) OR ('special-order' CIN l.settings:sd2_special_order_text) OR ('made to order' CIN l.settings:sd2_special_order_text) OR ('preorder' CIN l.settings:sd2_special_order_text) OR ('pre-order' CIN l.settings:sd2_special_order_text) OR ('no estimated ship date' CIN l.settings:sd2_special_order_text)">
+		<mvt:assign name="l.settings:sd2_special_order_required" value="1" />
+	</mvt:if>
+</mvt:foreach>
+<mvt:if expr="l.settings:sd2_special_order_required">
+	<mvt:item name="customfields" param="Write_Basket('special_order_required', 'Yes')" />
+<mvt:else>
+	<mvt:item name="customfields" param="Write_Basket('special_order_required', 'No')" />
+	<mvt:item name="customfields" param="Write_Basket('special_order_acknowledged', 'No')" />
+</mvt:if>
+
 <!DOCTYPE html>
 <html>
 <mvt:item name="html_profile" />
@@ -10,6 +28,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex,follow">
 	<base href="&mvt:global:basehref;">
 	<mvt:if expr="NOT ISNULL l.settings:page:title">
 		<title>&mvt:page:title;</title>
@@ -31,10 +50,19 @@
 		<header class="sd2-v2-checkout-hero">
 			<p class="sd2-kicker">Checkout</p>
 			<h1>&mvt:page:name;</h1>
+			<p>Choose delivery with the complete order visible beside you.</p>
+			<div class="sd2-v3-hero-data" aria-label="Checkout status">
+				<div><span>Current step</span><strong>Shipping</strong></div>
+				<div><span>Connection</span><strong>Secure</strong></div>
+				<div><span>Order total</span><strong>&mvt:basket:formatted_total;</strong></div>
+			</div>
 		</header>
 
-		<nav class="sd2-v2-checkout-steps" aria-label="Checkout progress">
-			<mvt:item name="readytheme" param="contentsection( 'checkout_steps' )" />
+		<nav class="sd2-v3-checkout-rail" aria-label="Checkout progress">
+			<span class="is-complete"><i>01</i> Information</span>
+			<span class="is-current"><i>02</i> Shipping</span>
+			<span><i>03</i> Payment</span>
+			<span><i>04</i> Review</span>
 		</nav>
 
 		<mvt:item name="readytheme" param="contentsection( 'messages' )" />
@@ -210,6 +238,18 @@
 										</mvt:foreach>
 									</ul>
 									<mvt:item name="ENSHIELD_opt_in"/>
+									<mvt:if expr="l.settings:sd2_special_order_required">
+										<section class="sd2-order-state sd2-order-state--special" aria-labelledby="sd2-special-order-title">
+											<p class="sd2-kicker">Lead-time acknowledgement</p>
+											<h3 id="sd2-special-order-title">Your order includes a special-order item.</h3>
+											<p>Special-order, made-to-order, preorder, or backordered parts may ship separately and may not have an immediate estimated ship date. We will email updates as they become available.</p>
+											<input type="hidden" name="Special_Order_Required" value="Yes">
+											<label class="sd2-order-state__check">
+												<input type="checkbox" name="Special_Order_Acknowledged" value="Yes" required>
+												<span>I understand the lead-time information and want to continue with this order.</span>
+											</label>
+										</section>
+									</mvt:if>
 									<div class="sd2-v2-account-actions">
 										<button class="sd2-btn sd2-btn--primary sd2-btn--full" type="submit">Continue to Payment</button>
 									</div>

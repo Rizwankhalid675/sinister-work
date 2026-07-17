@@ -47,6 +47,11 @@
 					</mvt:if>
 				</p>
 			</div>
+			<div class="sd2-v3-hero-data" aria-label="Search status">
+				<div><span>Query</span><strong><mvt:if expr="NOT ISNULL g.Search">&mvte:global:Search;<mvt:else>Open search</mvt:if></strong></div>
+				<div><span>Results</span><strong><mvt:if expr="NOT ISNULL g.Search">&mvte:search_product_count;<mvt:else>—</mvt:if></strong></div>
+				<div><span>Coverage</span><strong>All platforms</strong></div>
+			</div>
 			<form class="sd2-v2-search-page__form" method="get" action="&mvte:urls:SRCH:auto;">
 				<label class="sd2-label" for="sd2-v2-search-page-input">Search</label>
 				<div class="sd2-v2-search-page__field-row">
@@ -54,13 +59,12 @@
 					<button class="sd2-btn sd2-btn--primary" type="submit">Search</button>
 				</div>
 			</form>
-			<mvt:comment>TODO: register Vehicle Banner V2 in Miva Admin as readytheme contentsection('vehicle_banner') before using mvt:item composition.</mvt:comment>
 			<mvt:if expr="NOT ISNULL g.Search AND l.settings:search_product_count EQ 0">
-				<p class="sd2-v2-search-page__correction">Suggested correction placeholder: try a platform, engine, or part family.</p>
+				<p class="sd2-v2-search-page__correction">Try a shorter part number, truck platform, engine generation, or product family.</p>
 			</mvt:if>
 		</header>
 
-		<section class="sd2-v2-search-suggestions" aria-label="Search suggestions" data-v2-search-suggestions>
+		<section class="sd2-v2-search-suggestions sd2-v3-search-discovery" aria-label="Search suggestions" data-v2-search-suggestions data-sd2-story>
 			<div class="sd2-v2-search-suggestions__block">
 				<h2 class="sd2-v2-search-suggestions__title">Popular Searches</h2>
 				<div class="sd2-v2-search-suggestions__chips">
@@ -77,9 +81,9 @@
 			<div class="sd2-v2-search-suggestions__block">
 				<h2 class="sd2-v2-search-suggestions__title">Suggested Categories</h2>
 				<div class="sd2-v2-search-suggestions__links">
-					<a href="&mvte:urls:CTGY:auto;">Powerstroke Parts</a>
-					<a href="&mvte:urls:CTGY:auto;">Duramax Parts</a>
-					<a href="&mvte:urls:CTGY:auto;">Cummins Parts</a>
+					<a href="/ford-powerstroke-powerstroke-diesel-truck-parts-online.html">Powerstroke Parts</a>
+					<a href="/shop-gm-duramax-diesel-parts-sinister-diesel.html">Duramax Parts</a>
+					<a href="/dodge-cummins-diesel-performance-parts-sinister-diesel.html">Cummins Parts</a>
 				</div>
 			</div>
 		</section>
@@ -90,17 +94,14 @@
 			<mvt:assign name="l.settings:sd2_srch_layout_class" value="'sd2-v2-search-page__layout sd2-v2-search-page__layout--no-filters'" />
 		</mvt:if>
 		<section class="&mvte:sd2_srch_layout_class;" aria-label="Search products">
-			<aside class="sd2-v2-filter-panel" aria-label="Filters">
-				<div class="sd2-v2-filter-panel__head">
-					<h2>Filters</h2>
-					<a href="&mvte:urls:SRCH:auto;">Clear</a>
-				</div>
-				<mvt:if expr="NOT ISNULL g.Search AND l.settings:search_product_count GT 0">
-					<mvt:item name="facets" />
-				<mvt:else>
-					<p class="sd2-body-sm">Filters appear after a search returns product results.</p>
-				</mvt:if>
-			</aside>
+			<mvt:if expr="NOT ISNULL g.Search AND l.settings:facets:facet_count GT 0">
+				<div class="sd2-v2-filter-sheet-scrim" data-v2-filter-close hidden></div>
+				<aside class="sd2-v2-filter-rail sd2-v2-filter-sheet" data-v2-filter-sheet aria-hidden="true" aria-label="Search filters">
+					<div class="sd2-v2-filter-sheet__head"><div><span>Catalog Control</span><strong>Filter Parts</strong></div><button type="button" data-v2-filter-close aria-label="Close filters">&times;</button></div>
+					<div class="sd2-v2-filter-sheet__body"><mvt:item name="facets" /></div>
+					<div class="sd2-v2-filter-sheet__foot"><button class="sd2-btn sd2-btn--primary sd2-btn--full" type="button" data-v2-filter-close>View Products</button></div>
+				</aside>
+			</mvt:if>
 
 			<div class="sd2-v2-search-page__results">
 				<div class="sd2-v2-result-tools">
@@ -111,6 +112,9 @@
 							<span>Discovery</span>
 						</mvt:if>
 					</div>
+					<mvt:if expr="NOT ISNULL g.Search AND l.settings:facets:facet_count GT 0">
+						<button class="sd2-v2-filter-trigger" type="button" data-v2-filter-open aria-expanded="false"><span>Filter Parts</span><strong>&mvte:facets:facet_count;</strong></button>
+					</mvt:if>
 					<mvt:comment>
 						TODO: Legacy SRCH (srch.mvt / srch-search_results.mvt) has no real Sort_By
 						submission form — only a page-jump <select> inside search_results:page_links.
@@ -143,9 +147,9 @@
 							</div>
 						</div>
 						<div class="sd2-v2-search-empty__grid">
-							<div><h3>Popular Categories</h3><a href="&mvte:urls:CTGY:auto;">Intercoolers &amp; Pipes</a><a href="&mvte:urls:CTGY:auto;">Coolant &amp; Oil Filtration</a><a href="&mvte:urls:CTGY:auto;">Turbos</a></div>
+							<div><h3>Popular Categories</h3><a href="/intercoolers-pipes.html">Intercoolers &amp; Pipes</a><a href="/view-all-filtration-kits.html">Coolant &amp; Oil Filtration</a><a href="/turbos.html">Turbos</a></div>
 							<div><h3>Popular Products</h3><a href="&mvte:urls:SRCH:auto;?Search=charge%20pipe">Charge Pipe Kits</a><a href="&mvte:urls:SRCH:auto;?Search=fuel%20filter">Fuel Filter Kits</a><a href="&mvte:urls:SRCH:auto;?Search=oil%20bypass">Oil Bypass Kits</a></div>
-							<div><h3>Buying Guides</h3><a href="&mvte:urls:NEWS:auto;">Platform Guides</a><a href="&mvte:urls:NEWS:auto;">Install Notes</a><a href="&mvte:urls:NEWS:auto;">Build Stories</a></div>
+							<div><h3>Need Help?</h3><a href="/help-center.html">Help Center</a><a href="/shipping-policies.html">Shipping Policies</a><a href="/return-and-warranty-policies.html">Returns &amp; Warranty</a></div>
 						</div>
 					</section>
 				</mvt:if>

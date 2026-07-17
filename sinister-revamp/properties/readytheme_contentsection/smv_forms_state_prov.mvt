@@ -1,6 +1,5 @@
-<li class="c-form-list__item o-layout__item u-width-4--m form_row">
-	<label class="c-form-label is-required" for="contactState">State/Province</label>
-	<select id="contactState" class="c-form-input c-form-input--large" tabindex="1" type="text" name="contactState" value="&mvte:global:contactState;" required>
+	<label class="sd2-native-form__state"><span>State / province <b aria-hidden="true">*</b></span>
+	<select id="contactState" name="contactState" autocomplete="address-level1" required>
 		<option value="">Choose State or Province</option>
 		<option value="">-- USA --</option>
 			<option value="AL">Alabama</option>
@@ -69,5 +68,4 @@
 			<option value="QC">Quebec</option>
 			<option value="SK">Saskatchewan</option>
 			<option value="YT">Yukon Territory</option>
-		</select>
-</li>
+		</select></label>

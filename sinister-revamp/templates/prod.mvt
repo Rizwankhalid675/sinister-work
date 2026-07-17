@@ -171,10 +171,12 @@ var product_name = "&mvtj:product:name;";
 	<mvt:do name="l.result" file="g.Module_Library_DB" value="CategoryList_Load_Offset_Product_Assigned(l.settings:product:id,0,'','',0,l.null, g.assigned_categories )" />
 	<mvt:assign name="l.settings:assigned_categories" value="''" />
 	<mvt:foreach iterator="category" array="global:assigned_categories">
-		<mvt:if expr="l.settings:assigned_categories">
-			<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ ','" />
+		<mvt:if expr="NOT ('Searchspring' CIN l.settings:category:name)">
+			<mvt:if expr="l.settings:assigned_categories">
+				<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ ','" />
+			</mvt:if>
+			<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ '\"' $ glosub(l.settings:category:name,asciichar(34),asciichar(92) $  asciichar(34)) $ '\"'" />
 		</mvt:if>
-		<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ '\"' $ glosub(l.settings:category:name,asciichar(34),asciichar(92) $  asciichar(34)) $ '\"'" />
 	</mvt:foreach>
 	<mvt:assign name="l.settings:assigned_categories" value="'[' $ l.settings:assigned_categories $ ']'"/>
 <script type="text/javascript">
@@ -332,10 +334,12 @@ var product_name = "&mvtj:product:name;";
 							<mvt:do name="l.result" file="g.Module_Library_DB" value="CategoryList_Load_Offset_Product_Assigned(l.settings:item:product_id,0,'','',0,l.null, g.assigned_categories )" />
 							<mvt:assign name="l.settings:assigned_categories" value="''" />
 							<mvt:foreach iterator="category" array="global:assigned_categories">
-								<mvt:if expr="l.settings:assigned_categories">
-									<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ ','" />
+								<mvt:if expr="NOT ('Searchspring' CIN l.settings:category:name)">
+									<mvt:if expr="l.settings:assigned_categories">
+										<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ ','" />
+									</mvt:if>
+									<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ '\"' $ glosub(l.settings:category:name,asciichar(34),asciichar(92) $  asciichar(34)) $ '\"'" />
 								</mvt:if>
-								<mvt:assign name="l.settings:assigned_categories" value="l.settings:assigned_categories $ '\"' $ glosub(l.settings:category:name,asciichar(34),asciichar(92) $  asciichar(34)) $ '\"'" />
 							</mvt:foreach>
 							<mvt:assign name="l.settings:assigned_categories" value="'[' $ l.settings:assigned_categories $ ']'"/>
 							<mvt:do name="l.success" file="g.Module_Library_DB" value="ProductImage_Load_Type(l.settings:item:id, 1, l.settings:imagetype)" />

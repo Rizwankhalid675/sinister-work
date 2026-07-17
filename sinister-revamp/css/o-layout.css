@@ -111,10 +111,6 @@
 		flex-flow: wrap;
 	}
 
-	#searchspring-finder-home .mm_combination_facet_action_container .mm_combination_facet_action:last-child{
-		margin-left: 0 !important;
-		margin-top: 15px !important;
-	}
 }
 
 .contact-info .first_two{

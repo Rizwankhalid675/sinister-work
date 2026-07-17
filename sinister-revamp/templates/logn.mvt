@@ -21,6 +21,16 @@
 	<main class="sd2-v2-auth" data-v2-auth>
 		<mvt:item name="readytheme" param="contentsection( 'messages' )" />
 		<div class="sd2-v2-auth__grid">
+			<aside class="sd2-v3-auth-story" aria-label="Sinister Diesel account benefits" data-sd2-story>
+				<p class="sd2-eyebrow">Your Build, Remembered</p>
+				<h1>One account.<br>Your whole garage.</h1>
+				<p>Keep your truck context, account details, and order access connected across the Sinister Diesel storefront.</p>
+				<div class="sd2-v3-auth-story__data">
+					<div><span>01</span><strong>Garage context</strong></div>
+					<div><span>02</span><strong>Order access</strong></div>
+					<div><span>03</span><strong>Faster checkout</strong></div>
+				</div>
+			</aside>
 			<section class="sd2-v2-auth__panel">
 				<header class="sd2-v2-account-hero">
 					<p class="sd2-kicker">Account</p>

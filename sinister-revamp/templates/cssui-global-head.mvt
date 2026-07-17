@@ -41,41 +41,6 @@
 	<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"4077389"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
 </mvt:comment>
 
-<mvt:comment>Searchspring Integration — deactivated while native Miva search/category_listing is being built out (subscription being cancelled). Flip back to 'true' to restore instantly.</mvt:comment>
-<mvt:assign name="g.ss_enable" value="'false'" />
-<mvt:assign name="g.ss_site_id" value="'5xnn9v'" />
-<mvt:assign name="g.ss_search_url" value="'shop'" />
-
-<mvt:assign name="g.ss_shopper_config" value="''" />
-<mvt:if expr="g.Basket:cust_id GT 0">
-	<mvt:assign name="g.ss_shopper_config" value="' shopper = { id: \"' $ g.Customer:id $ '\" };'" />
-</mvt:if>
-
-<mvt:assign name="g.ss_defer_config" value="' defer'" />
-<mvt:assign name="g.ss_category_config" value="''" />
-<mvt:if expr="'CTGY' CIN l.settings:page:code">
-	<mvt:assign name="g.ss_defer_config" value="''" />
-
-	<mvt:assign name="g.ss_category" value="''" />
-	<mvt:foreach iterator="cats" array="breadcrumbs:links">
-		<mvt:if expr="POS1 EQ 1">
-			<mvt:assign name="g.ss_category" value="l.settings:cats:name" />
-		<mvt:else>
-			<mvt:assign name="g.ss_category" value="g.ss_category $ '>' $ l.settings:cats:name" />
-		</mvt:if>
-	</mvt:foreach>
-	<mvt:assign name="g.ss_category_encoded" value="encodeattribute(g.ss_category)" />
-
-	<mvt:if expr="l.settings:category:code NE g.ss_search_url">
-		<mvt:assign name="g.ss_category_config" value="'category = { code : \"' $ l.settings:category:code $ '\", name: \"' $ l.settings:category:name $ '\", path: \"' $ g.ss_category_encoded $ '\" }'"/>
-	</mvt:if>
-</mvt:if>
-
-<mvt:comment>
-	Legacy third-party search runtime disabled for revamp_v2. Native Miva category/search
-	rendering now owns product discovery; keep feed templates separate.
-</mvt:comment>
-
 <style>
 
 
@@ -125,16 +90,8 @@ padding-top:2.5rem;
 .t-featured-categories__heading{
 margin-bottom:0.5rem;
 }
-.ss__has-results .x-product-list__figure {
-padding:8px 0;
-
-}
 .x-collapsing-breadcrumbs__group, .x-collapsing-breadcrumbs__list{
 padding-top:2rem;
-}
-.ss__has-results .x-product-list__figure .x-product-list__figure-caption{
-
-	padding-bottom: 8px;
 }
 .first_two > div {
 margin-bottom:10px;
@@ -326,6 +283,135 @@ max-height:100%!important;
 <mvt:comment>MJB, this displays the "close" X for the zinrelo rewards popup</mvt:comment>
 #zrl_ld_close_button div{
 	display:inline-block;
+}
+
+<mvt:comment>
+	SD2 Motion System v1 — global 3D/premium motion layer. Additive, pure CSS + vanilla JS
+	(no framework/build step; Miva .mvt cannot host React/Framer Motion directly). Provides:
+	scroll-reveal (fade+rise), pointer-based 3D card tilt w/ specular highlight, magnetic
+	buttons, parallax hero layers, premium spring/expo easing tokens. Respects
+	prefers-reduced-motion. Engine: sd2-motion.js (loaded in foot).
+</mvt:comment>
+:root{
+	--sd2-ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+	--sd2-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--sd2-ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+	--sd2-dur-fast: 220ms;
+	--sd2-dur-med: 480ms;
+	--sd2-dur-slow: 900ms;
+	--sd2-tilt-max: 14deg;
+	--sd2-perspective: 1400px;
+}
+
+.sd2-reveal{
+	opacity: 0;
+	transform: translate3d(0, 48px, 0) scale(0.98);
+	transition: opacity var(--sd2-dur-slow) var(--sd2-ease-premium),
+				transform var(--sd2-dur-slow) var(--sd2-ease-premium);
+	will-change: opacity, transform;
+}
+.sd2-reveal.is-visible{
+	opacity: 1;
+	transform: translate3d(0, 0, 0) scale(1);
+}
+.sd2-reveal--left{ transform: translate3d(-56px, 24px, 0) rotateY(-8deg); }
+.sd2-reveal--left.is-visible{ transform: translate3d(0,0,0) rotateY(0deg); }
+.sd2-reveal--right{ transform: translate3d(56px, 24px, 0) rotateY(8deg); }
+.sd2-reveal--right.is-visible{ transform: translate3d(0,0,0) rotateY(0deg); }
+.sd2-reveal--zoom{ transform: scale(0.85); }
+.sd2-reveal--zoom.is-visible{ transform: scale(1); }
+
+.sd2-stagger > *{
+	opacity: 0;
+	transform: translate3d(0, 36px, 0);
+	transition: opacity var(--sd2-dur-med) var(--sd2-ease-premium),
+				transform var(--sd2-dur-med) var(--sd2-ease-premium);
+}
+.sd2-stagger.is-visible > *{ opacity: 1; transform: translate3d(0,0,0); }
+.sd2-stagger.is-visible > *:nth-child(1){ transition-delay: 0ms; }
+.sd2-stagger.is-visible > *:nth-child(2){ transition-delay: 70ms; }
+.sd2-stagger.is-visible > *:nth-child(3){ transition-delay: 140ms; }
+.sd2-stagger.is-visible > *:nth-child(4){ transition-delay: 210ms; }
+.sd2-stagger.is-visible > *:nth-child(5){ transition-delay: 280ms; }
+.sd2-stagger.is-visible > *:nth-child(6){ transition-delay: 350ms; }
+.sd2-stagger.is-visible > *:nth-child(n+7){ transition-delay: 400ms; }
+
+.sd2-tilt{
+	perspective: var(--sd2-perspective);
+}
+.sd2-tilt-card{
+	position: relative;
+	transform-style: preserve-3d;
+	transition: transform var(--sd2-dur-fast) var(--sd2-ease-soft),
+				box-shadow var(--sd2-dur-fast) var(--sd2-ease-soft);
+	will-change: transform;
+}
+.sd2-tilt-card::after{
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: radial-gradient(circle at var(--sd2-glow-x, 50%) var(--sd2-glow-y, 50%), rgba(255,255,255,0.35), transparent 60%);
+	opacity: 0;
+	transition: opacity var(--sd2-dur-fast) var(--sd2-ease-soft);
+	pointer-events: none;
+	mix-blend-mode: overlay;
+	z-index: 2;
+}
+.sd2-tilt-card:hover{
+	box-shadow: 0 32px 64px -24px rgba(0,0,0,0.35), 0 12px 24px -12px rgba(0,0,0,0.2);
+}
+.sd2-tilt-card:hover::after{ opacity: 1; }
+.sd2-tilt-card > *{ transform: translateZ(0); }
+.sd2-tilt-card__depth{ transform: translateZ(32px); }
+
+.sd2-magnetic{
+	display: inline-block;
+	transition: transform var(--sd2-dur-fast) var(--sd2-ease-spring);
+	will-change: transform;
+}
+
+.sd2-parallax{ position: relative; overflow: hidden; }
+.sd2-parallax__layer{
+	will-change: transform;
+	transition: transform 60ms linear;
+}
+
+.sd2-float{ animation: sd2FloatY 6s ease-in-out infinite; }
+.sd2-float--slow{ animation-duration: 9s; }
+.sd2-float--delay{ animation-delay: -3s; }
+@keyframes sd2FloatY{
+	0%, 100%{ transform: translateY(0) rotate(0deg); }
+	50%{ transform: translateY(-14px) rotate(0.6deg); }
+}
+
+.sd2-shine{ position: relative; overflow: hidden; }
+.sd2-shine::before{
+	content: "";
+	position: absolute;
+	top: 0; left: -150%;
+	width: 60%; height: 100%;
+	background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+	transform: skewX(-20deg);
+	transition: left 900ms var(--sd2-ease-premium);
+	pointer-events: none;
+	z-index: 3;
+}
+.sd2-shine:hover::before{ left: 150%; }
+
+.sd2-scale-in{ transition: transform var(--sd2-dur-fast) var(--sd2-ease-spring); }
+.sd2-scale-in:hover{ transform: scale(1.035); }
+.sd2-scale-in:active{ transform: scale(0.98); }
+
+@media (prefers-reduced-motion: reduce){
+	.sd2-reveal, .sd2-reveal--left, .sd2-reveal--right, .sd2-reveal--zoom,
+	.sd2-stagger > *, .sd2-tilt-card, .sd2-magnetic, .sd2-parallax__layer,
+	.sd2-float, .sd2-shine::before, .sd2-scale-in{
+		transition: none !important;
+		animation: none !important;
+		transform: none !important;
+		opacity: 1 !important;
+	}
 }
 </style>
 

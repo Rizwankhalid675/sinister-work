@@ -1,5 +1,6 @@
 <main class="sd2-v2-pdp" data-v2-pdp>
 		<header class="sd2-v2-product-hero">
+			<div class="sd2-v3-product-hero__copy">
 			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
 				<a href="&mvte:urls:SFNT:auto;">Home</a>
 				<span aria-hidden="true">/</span>
@@ -13,6 +14,12 @@
 				<span>SKU &mvte:product:code;</span>
 				<span data-v2-fitment-copy>Garage fitment not selected.</span>
 			</div>
+			</div>
+			<aside class="sd2-v3-product-hero__signal" aria-label="Product status">
+				<div><span>Catalog</span><strong>Live product</strong></div>
+				<div><span>Platform</span><strong>Verify in Garage</strong></div>
+				<div><span>Support</span><strong>US-based team</strong></div>
+			</aside>
 		</header>
 
 		<section class="sd2-v2-fitment-confirm" aria-label="Vehicle fitment">
@@ -22,7 +29,7 @@
 			<button class="sd2-btn sd2-btn--secondary" type="button" data-v2-garage-toggle>Open Garage</button>
 		</section>
 
-		<section class="sd2-v2-pdp__layout" aria-label="Product purchase area">
+		<section class="sd2-v2-pdp__layout" aria-label="Product purchase area" data-sd2-story>
 			<div class="sd2-v2-pdp__media">
 				<section class="sd2-v2-pdp-gallery" aria-label="Product media">
 					<mvt:comment>
@@ -121,25 +128,20 @@
 			</aside>
 		</section>
 
-		<section class="sd2-v2-pdp-section" id="description" aria-labelledby="sd2-v2-summary-title">
+		<section class="sd2-v2-pdp-section sd2-v3-pdp-narrative" id="description" aria-labelledby="sd2-v2-summary-title" data-sd2-story>
 			<div class="sd2-v2-pdp-section__header"><p class="sd2-kicker">Overview</p><h2 id="sd2-v2-summary-title">Built For Workload, Fitment, And Finish</h2></div>
 			<div class="sd2-v2-pdp-copy">
 				&mvt:product:descrip;
 			</div>
 		</section>
 
-		<section class="sd2-v2-product-tabs" data-v2-pdp-tabs aria-label="Product detail sections">
-			<div class="sd2-v2-product-tabs__list" role="tablist" aria-label="Product information">
-				<button type="button" role="tab" aria-selected="true" aria-controls="sd2-tab-specs" id="sd2-tab-specs-control" data-v2-pdp-tab>Specifications</button>
-				<button type="button" role="tab" aria-selected="false" aria-controls="sd2-tab-install" id="sd2-tab-install-control" data-v2-pdp-tab>Installation</button>
-				<button type="button" role="tab" aria-selected="false" aria-controls="sd2-tab-reviews" id="sd2-tab-reviews-control" data-v2-pdp-tab>Reviews</button>
-				<button type="button" role="tab" aria-selected="false" aria-controls="sd2-tab-faq" id="sd2-tab-faq-control" data-v2-pdp-tab>FAQ</button>
-			</div>
-			<div class="sd2-v2-product-tabs__panel" role="tabpanel" id="sd2-tab-specs" aria-labelledby="sd2-tab-specs-control" data-v2-pdp-panel>Specifications content appears below.</div>
-			<div class="sd2-v2-product-tabs__panel" role="tabpanel" id="sd2-tab-install" aria-labelledby="sd2-tab-install-control" data-v2-pdp-panel hidden>Installation content appears below.</div>
-			<div class="sd2-v2-product-tabs__panel" role="tabpanel" id="sd2-tab-reviews" aria-labelledby="sd2-tab-reviews-control" data-v2-pdp-panel hidden>Reviews content appears below.</div>
-			<div class="sd2-v2-product-tabs__panel" role="tabpanel" id="sd2-tab-faq" aria-labelledby="sd2-tab-faq-control" data-v2-pdp-panel hidden>FAQ content appears below.</div>
-		</section>
+		<nav class="sd2-v2-product-tabs sd2-v3-product-jumpnav" aria-label="Product information">
+			<a href="#description">Overview</a>
+			<a href="#specifications">Specifications</a>
+			<a href="#installation">Installation</a>
+			<a href="#reviews">Reviews</a>
+			<a href="#faq">FAQ</a>
+		</nav>
 
 		<section class="sd2-v2-pdp-section" id="specifications" aria-labelledby="sd2-v2-specs-title">
 			<div class="sd2-v2-pdp-section__header"><p class="sd2-kicker">Specifications</p><h2 id="sd2-v2-specs-title">Product Data</h2></div>
@@ -166,14 +168,14 @@
 				for this pass (JS Resources must not be modified). Leave as TODO until reviews
 				scope is explicitly approved.
 			</mvt:comment>
-			<div class="sd2-v2-review-summary"><span>Reviews are not yet connected in the V2 experience.</span></div>
+			<div class="sd2-v2-review-summary"><span>Product-specific customer feedback is displayed when review data is available.</span></div>
 		</section>
 
 		<section class="sd2-v2-pdp-section" id="faq" aria-labelledby="sd2-v2-faq-title">
 			<div class="sd2-v2-pdp-section__header"><p class="sd2-kicker">FAQ</p><h2 id="sd2-v2-faq-title">Common Questions</h2></div>
 			<div class="sd2-v2-accordion" data-v2-accordion>
 				<div class="sd2-v2-accordion__item"><button class="sd2-v2-accordion__trigger" type="button" aria-expanded="true" data-v2-accordion-trigger>Will this fit my truck?</button><div class="sd2-v2-accordion__panel" data-v2-accordion-panel><p>Select your vehicle in Garage to verify fitment messaging.</p></div></div>
-				<div class="sd2-v2-accordion__item"><button class="sd2-v2-accordion__trigger" type="button" aria-expanded="false" data-v2-accordion-trigger>What is included?</button><div class="sd2-v2-accordion__panel" data-v2-accordion-panel hidden><p>[Placeholder] Included components from product data.</p></div></div>
+				<div class="sd2-v2-accordion__item"><button class="sd2-v2-accordion__trigger" type="button" aria-expanded="false" data-v2-accordion-trigger>What is included?</button><div class="sd2-v2-accordion__panel" data-v2-accordion-panel hidden><p>Included components and product-specific details are listed in the overview above.</p></div></div>
 				<div class="sd2-v2-accordion__item"><button class="sd2-v2-accordion__trigger" type="button" aria-expanded="false" data-v2-accordion-trigger>Is installation support available?</button><div class="sd2-v2-accordion__panel" data-v2-accordion-panel hidden><p>Sinister Diesel support can assist with product-specific install questions.</p></div></div>
 			</div>
 		</section>

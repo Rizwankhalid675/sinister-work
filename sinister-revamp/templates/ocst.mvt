@@ -99,10 +99,23 @@
 			<header class="sd2-v2-checkout-hero">
 				<p class="sd2-eyebrow">Checkout</p>
 				<h1>&mvt:page:name;</h1>
+				<p>Review your details, choose delivery, and confirm payment in one secure flow.</p>
+				<div class="sd2-v3-hero-data" aria-label="Checkout status">
+					<div><span>Current step</span><strong>Information</strong></div>
+					<div><span>Connection</span><strong>Secure</strong></div>
+					<div><span>Order total</span><strong>&mvt:basket:formatted_total;</strong></div>
+				</div>
 				<mvt:item name="readytheme" param="contentsection( 'messages' )" />
 			</header>
 
-			<div class="sd2-v2-checkout__layout">
+			<nav class="sd2-v3-checkout-rail" aria-label="Checkout progress">
+				<span class="is-current"><i>01</i> Information</span>
+				<span><i>02</i> Shipping</span>
+				<span><i>03</i> Payment</span>
+				<span><i>04</i> Review</span>
+			</nav>
+
+			<div class="sd2-v2-checkout__layout" data-sd2-story>
 				<div class="sd2-v2-checkout__main">
 					<mvt:item name="customer" />
 				</div>
@@ -117,8 +130,5 @@
 	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
 
-	<script src="/mm5/scripts/00000001/sd2-v2-components.js" defer></script>
-	<script src="/scripts/00000001/sd2-v2-components.js" defer></script>
-	<script src="/sd2-v2-components.js" defer></script>
 </body>
 </html>

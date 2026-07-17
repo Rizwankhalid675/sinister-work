@@ -11,7 +11,7 @@
 	<mvt:item name="hdft" param="global_header" />
 	<mvt:item name="hdft" param="header" />
 	<main class="sd2-v2-pdp" data-v2-pdp>
-		<header class="sd2-v2-product-hero">
+		<header class="sd2-v2-product-hero sd2-reveal" data-reveal="fade-up">
 			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
 				<a href="&mvte:urls:SFNTV2:auto;">Home</a>
 				<span aria-hidden="true">/</span>
@@ -27,15 +27,15 @@
 			</div>
 		</header>
 
-		<section class="sd2-v2-fitment-confirm" aria-label="Vehicle fitment">
+		<section class="sd2-v2-fitment-confirm sd2-reveal" data-reveal="fade-up" aria-label="Vehicle fitment">
 			<p class="sd2-kicker">Garage Fitment</p>
 			<h2>Confirm This Part Against Your Build</h2>
 			<p data-v2-fitment-copy>No vehicle selected. Open Garage to verify year, make, model, and engine before ordering.</p>
 			<button class="sd2-btn sd2-btn--secondary" type="button" data-v2-garage-toggle>Open Garage</button>
 		</section>
 
-		<section class="sd2-v2-pdp__layout" aria-label="Product purchase area">
-			<div class="sd2-v2-pdp__media">
+		<section class="sd2-v2-pdp__layout sd2-reveal" data-reveal="fade-up" aria-label="Product purchase area">
+			<div class="sd2-v2-pdp__media sd2-reveal sd2-tilt" data-reveal="fade-right">
 				<section class="sd2-v2-pdp-gallery" aria-label="Product media">
 					<mvt:comment>
 						Real Miva image machine, reused verbatim from prod-product_display.mvt:
@@ -64,7 +64,7 @@
 					</div>
 				</section>
 			</div>
-			<aside class="sd2-v2-buybox" aria-label="Purchase options">
+			<aside class="sd2-v2-buybox sd2-reveal" data-reveal="fade-left" aria-label="Purchase options">
 				<div class="sd2-v2-buybox__header">
 					<p class="sd2-kicker">Product Detail</p>
 					<h2>&mvte:product:name;</h2>

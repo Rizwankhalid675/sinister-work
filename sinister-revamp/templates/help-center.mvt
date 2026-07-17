@@ -12,6 +12,7 @@
 	<mvt:else>
 		<title>&mvt:page:name; | &mvt:store:name;</title>
 	</mvt:if>
+	<meta name="description" content="Get help with Sinister Diesel orders, fitment, installation, returns, warranties, shipping and product support.">
 
 	<mvt:if expr="g.useDevResources EQ 1">
 		<mvt:item name="head" param="css_list_dev" />
@@ -30,12 +31,17 @@
 		<div class="sd2-wrap">
 
 			<header class="sd2-v2-hub-intro">
-				<p class="sd2-eyebrow sd2-v2-hub-intro__eyebrow">Help Center</p>
-				<h1 class="sd2-heading-lg sd2-v2-hub-intro__title">Help Center</h1>
-				<p class="sd2-v2-hub-intro__body">
-					Welcome to Sinister Diesel's Help Center! We're here to assist you with everything you need.
-					Select the option that best fits your inquiry and our expert team will help you quickly resolve any issues.
-				</p>
+				<div class="sd2-v3-help-hero__copy">
+					<p class="sd2-eyebrow sd2-v2-hub-intro__eyebrow">Help Center</p>
+					<h1 class="sd2-heading-lg sd2-v2-hub-intro__title">Support built<br>around the job.</h1>
+					<p class="sd2-v2-hub-intro__body">Choose the path that matches your question. Product, order, installation, warranty, and return support all start here.</p>
+				</div>
+				<aside class="sd2-v3-help-hero__signal" aria-label="Support availability">
+					<span>Customer service</span>
+					<strong>Mon–Fri</strong>
+					<p>7:30 AM–4:30 PM Pacific</p>
+					<i aria-hidden="true"></i>
+				</aside>
 			</header>
 
 			<div class="sd2-v2-help-notices">
@@ -53,8 +59,8 @@
 				</div>
 			</div>
 
-			<div class="sd2-v2-help-grid">
-				<a href="/help-sales-inquiry.html" class="sd2-v2-help-card">
+			<div class="sd2-v2-help-grid" data-sd2-story>
+				<a href="/help-sales-inquiry.html" class="sd2-v2-help-card sd2-reveal sd2-tilt" data-reveal="fade-up">
 					<span class="sd2-v2-help-card__icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16.5v.01M12 13.5c0-1.5 2-1.75 2-3.5a2 2 0 0 0-4 0"/></svg>
 					</span>
@@ -64,7 +70,7 @@
 					</span>
 				</a>
 
-				<a href="/help-check-order-status.html" class="sd2-v2-help-card">
+				<a href="/help-check-order-status.html" class="sd2-v2-help-card sd2-reveal sd2-tilt" data-reveal="fade-up">
 					<span class="sd2-v2-help-card__icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7" width="17" height="13" rx="1.5"/><path d="M8 7V5.5A2.5 2.5 0 0 1 10.5 3h3A2.5 2.5 0 0 1 16 5.5V7M3.5 12h17"/></svg>
 					</span>
@@ -74,7 +80,7 @@
 					</span>
 				</a>
 
-				<a href="/help-sinister-diesel-parts-tech-support.html" class="sd2-v2-help-card">
+				<a href="/help-sinister-diesel-parts-tech-support.html" class="sd2-v2-help-card sd2-reveal sd2-tilt" data-reveal="fade-up">
 					<span class="sd2-v2-help-card__icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><path d="M4 13v4a2 2 0 0 0 2 2h1v-6H5a1 1 0 0 0-1 1Z"/><path d="M20 13v4a2 2 0 0 1-2 2h-1v-6h1a1 1 0 0 1 1 1Z"/><path d="M12 19v1"/></svg>
 					</span>
@@ -84,7 +90,7 @@
 					</span>
 				</a>
 
-				<a href="/help-warranty-inquiry.html" class="sd2-v2-help-card">
+				<a href="/help-warranty-inquiry.html" class="sd2-v2-help-card sd2-reveal sd2-tilt" data-reveal="fade-up">
 					<span class="sd2-v2-help-card__icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 19 6v6c0 4.2-2.9 7.4-7 8.5-4.1-1.1-7-4.3-7-8.5V6l7-2.5Z"/><path d="m9 12 2 2 4-4"/></svg>
 					</span>
@@ -94,7 +100,7 @@
 					</span>
 				</a>
 
-				<a href="/help-online-account-issues.html" class="sd2-v2-help-card">
+				<a href="/help-online-account-issues.html" class="sd2-v2-help-card sd2-reveal sd2-tilt" data-reveal="fade-up">
 					<span class="sd2-v2-help-card__icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h3"/></svg>
 					</span>
@@ -104,7 +110,7 @@
 					</span>
 				</a>
 
-				<a href="/help-shipping-protection-requests.html" class="sd2-v2-help-card">
+				<a href="/help-shipping-protection-requests.html" class="sd2-v2-help-card sd2-reveal sd2-tilt" data-reveal="fade-up">
 					<span class="sd2-v2-help-card__icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 12 4l9 4.5v7L12 20l-9-4.5v-7Z"/><path d="M3 8.5 12 13l9-4.5M12 13v7"/></svg>
 					</span>
@@ -114,7 +120,7 @@
 					</span>
 				</a>
 
-				<a href="/help-returns-exchanges.html" class="sd2-v2-help-card">
+				<a href="/help-returns-exchanges.html" class="sd2-v2-help-card sd2-reveal sd2-tilt" data-reveal="fade-up">
 					<span class="sd2-v2-help-card__icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.5-5.5L20 8"/><path d="M20 4v4h-4"/><path d="M20 12a8 8 0 0 1-13.5 5.5L4 16"/><path d="M4 20v-4h4"/></svg>
 					</span>

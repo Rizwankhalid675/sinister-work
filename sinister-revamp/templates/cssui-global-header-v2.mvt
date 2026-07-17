@@ -12,11 +12,11 @@
 <mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('1209610_merchandise_apparel', l.settings:sd2_mega_apparel)" />
 <mvt:do file="g.Module_Feature_URI_UT" name="l.settings:sd2_mega_apparel:url" value="Store_Category_URL(l.settings:sd2_mega_apparel, NULL)" />
 
-<div class="sd2-v2-hdr-root">
+<div class="sd2-v2-hdr-root sd2-v3-shell" data-sd2-global-shell>
 
-	<div class="sd2-v2-hdr-trust">
+	<div class="sd2-v2-hdr-trust sd2-reveal" data-reveal="fade-down">
 		<div class="sd2-v2-hdr-trust__inner">
-			<span class="sd2-v2-hdr-trust__plate">MADE &amp; TESTED IN THE USA &middot; SINCE 2008</span>
+			<span class="sd2-v2-hdr-trust__plate">MADE &amp; TESTED IN THE USA &middot; SINCE 2009</span>
 			<span class="sd2-v2-hdr-trust__links">
 				<a href="/help-center.html">Help Center</a>
 				<a href="&mvte:urls:ORDH:auto;">Track Order</a>
@@ -26,7 +26,7 @@
 
 	<mvt:item name="readytheme" param="banner( 'header_message' )" />
 
-	<header class="sd2-v2-hdr" data-hook="site-header" data-v2-sticky-header>
+	<header class="sd2-v2-hdr sd2-v3-floating-nav" data-hook="site-header" data-v2-sticky-header>
 		<div class="sd2-v2-hdr__row">
 
 			<button class="sd2-v2-hdr__mobile-toggle" type="button" data-v2-drawer-open aria-label="Open menu" aria-expanded="false">
@@ -204,8 +204,8 @@
 
 <div class="sd2-v2-mega" data-v2-mega>
 
-	<div class="sd2-v2-mega__panel" data-v2-panel="1">
-		<a class="sd2-v2-mega__hero" href="&mvte:sd2_mega_powerstroke:url;">
+	<div class="sd2-v2-mega__panel sd2-reveal" data-reveal="fade-up" data-v2-panel="1">
+		<a class="sd2-v2-mega__hero sd2-tilt" href="&mvte:sd2_mega_powerstroke:url;">
 			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Ford Powerstroke build in the shop">
 			<span class="sd2-v2-mega__hero-cap">
 				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
@@ -255,7 +255,7 @@
 		<div class="sd2-v2-mega__side">
 			<div class="sd2-v2-mega__side-block">
 				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
-				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+				<a class="sd2-v2-mega__guide sd2-tilt" href="&mvte:urls:NEWS:auto;">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
 					<span><span class="sd2-v2-mega__guide-title">6.7 Powerstroke Intercooler Guide</span><span class="sd2-v2-mega__guide-meta">8 min read</span></span>
 				</a>
@@ -267,8 +267,8 @@
 		</div>
 	</div>
 
-	<div class="sd2-v2-mega__panel" data-v2-panel="2">
-		<a class="sd2-v2-mega__hero" href="&mvte:sd2_mega_duramax:url;">
+	<div class="sd2-v2-mega__panel sd2-reveal" data-reveal="fade-up" data-v2-panel="2">
+		<a class="sd2-v2-mega__hero sd2-tilt" href="&mvte:sd2_mega_duramax:url;">
 			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="GM Duramax build in the shop">
 			<span class="sd2-v2-mega__hero-cap">
 				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
@@ -315,7 +315,7 @@
 		<div class="sd2-v2-mega__side">
 			<div class="sd2-v2-mega__side-block">
 				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
-				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+				<a class="sd2-v2-mega__guide sd2-tilt" href="&mvte:urls:NEWS:auto;">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="">
 					<span><span class="sd2-v2-mega__guide-title">Duramax EGR Delete: What to Know</span><span class="sd2-v2-mega__guide-meta">6 min read</span></span>
 				</a>
@@ -327,8 +327,8 @@
 		</div>
 	</div>
 
-	<div class="sd2-v2-mega__panel" data-v2-panel="3">
-		<a class="sd2-v2-mega__hero" href="&mvte:sd2_mega_cummins:url;">
+	<div class="sd2-v2-mega__panel sd2-reveal" data-reveal="fade-up" data-v2-panel="3">
+		<a class="sd2-v2-mega__hero sd2-tilt" href="&mvte:sd2_mega_cummins:url;">
 			<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Dodge Cummins build in the shop">
 			<span class="sd2-v2-mega__hero-cap">
 				<span class="sd2-v2-mega__hero-eyebrow">Shop by Truck</span>
@@ -591,6 +591,10 @@
 					</div>
 					<div class="sd2-v2-garage-form__actions">
 						<button class="sd2-btn sd2-btn--primary sd2-btn--full" type="submit">Save Vehicle</button>
+						<a class="sd2-v2-garage-shop" href="&mvte:urls:SRCH:auto;" data-v2-garage-shop hidden>
+							<span>View Parts for My Truck</span>
+							<small data-v2-garage-shop-label></small>
+						</a>
 					</div>
 				</form>
 

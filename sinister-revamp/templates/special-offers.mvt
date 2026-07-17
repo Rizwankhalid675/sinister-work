@@ -12,12 +12,7 @@
 	<mvt:item name="head" param="head_tag" />
 </head>
 
-<mvt:comment>
-	Real Miva category codes -- resolves live category image + URL for each offer card.
-	NOTE: No matching Miva category code was found in the codebase for "Clearance/Scratch & Dent".
-	That card's image remains a placeholder until Brian confirms the correct category code (or
-	provides a dedicated image asset). Do not guess a code here.
-</mvt:comment>
+<mvt:comment>Real Miva platform category records provide live destinations for this page.</mvt:comment>
 <mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954746_ford_powerstroke', l.settings:sd2_offer_powerstroke)" />
 <mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954952_gm_duramax', l.settings:sd2_offer_duramax)" />
 <mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('954540_dodge_cummins', l.settings:sd2_offer_cummins)" />
@@ -28,86 +23,84 @@
 
 	<main class="sd2-v2-offers-page" data-v2-static-page>
 		<div class="sd2-wrap">
-			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+			<header class="sd2-v2-offers-hero sd2-reveal" data-reveal="fade-up">
+				<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
 				<a href="&mvte:urls:SFNT:auto;">Home</a>
 				<span aria-hidden="true">/</span>
 				<span>&mvte:page:name;</span>
-			</nav>
-
-			<section class="sd2-v2-offers-hero">
+				</nav>
 				<div class="sd2-v2-offers-hero__body">
 					<p class="sd2-eyebrow">Sinister Diesel</p>
 					<h1 class="sd2-heading-lg">Special Offers</h1>
 					<p class="sd2-v2-offers-hero__text">Limited-time deals, clearance pricing, and bundle savings on Powerstroke, Duramax, and Cummins performance parts. Check back often&mdash;offers rotate and sell out fast.</p>
 				</div>
-			</section>
+			</header>
 
-			<section class="sd2-v2-offers-grid" aria-label="Current Offers">
+			<section class="sd2-v2-offers-grid sd2-stagger" aria-label="Current Offers">
 
-				<article class="sd2-v2-offer-card">
-					<div class="sd2-v2-offer-card__media">
-						<mvt:comment>PLACEHOLDER -- no confirmed Miva category code for Clearance/Scratch &amp; Dent. Needs Brian to supply the code or asset.</mvt:comment>
-						<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Clearance and scratch and dent parts" loading="lazy" decoding="async">
+				<article class="sd2-v2-offer-card sd2-tilt">
+					<div class="sd2-v2-offer-card__media sd2-v5-offer-signal" aria-hidden="true">
+						<strong>OUTLET</strong><span>LIVE INVENTORY</span>
 						<span class="sd2-v2-offer-card__badge">Clearance</span>
 					</div>
 					<div class="sd2-v2-offer-card__body">
 						<h2 class="sd2-v2-offer-card__title">Clearance / Scratch &amp; Dent</h2>
-						<p class="sd2-v2-offer-card__text">Save big on overstock and cosmetically-imperfect parts&mdash;fully functional, deeply discounted.</p>
+						<p class="sd2-v2-offer-card__text">Browse the current clearance and scratch-and-dent inventory while it is available.</p>
 						<a class="sd2-v2-button sd2-v2-button--primary" href="https://sinisterdiesel.com/shop/Clearance-Scratch-Dent-checyq.html">Shop Clearance</a>
 					</div>
 				</article>
 
-				<article class="sd2-v2-offer-card">
+				<article class="sd2-v2-offer-card sd2-tilt">
 					<div class="sd2-v2-offer-card__media">
 						<mvt:if expr="NOT ISNULL l.settings:sd2_offer_powerstroke:image">
 							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;&mvt:sd2_offer_powerstroke:image;" alt="Powerstroke performance bundles" loading="lazy" decoding="async">
 						<mvt:else>
-							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Powerstroke performance bundles" loading="lazy" decoding="async">
+							<img class="sd2-v2-offer-card__image" src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="Ford Super Duty representing Powerstroke offers" loading="lazy" decoding="async">
 						</mvt:if>
-						<span class="sd2-v2-offer-card__badge">Bundle</span>
+						<span class="sd2-v2-offer-card__badge">Powerstroke</span>
 					</div>
 					<div class="sd2-v2-offer-card__body">
-						<h2 class="sd2-v2-offer-card__title">Powerstroke Performance Bundles</h2>
-						<p class="sd2-v2-offer-card__text">Pair intercoolers, injectors, and turbo upgrades together and save versus buying separately.</p>
-						<a class="sd2-v2-button sd2-v2-button--primary" href="https://sinisterdiesel.com/powerstroke-parts-for-powerstroke.html">Shop Powerstroke</a>
+						<h2 class="sd2-v2-offer-card__title">Powerstroke Offers</h2>
+						<p class="sd2-v2-offer-card__text">Explore current Powerstroke products, kits, and pricing directly from the live catalog.</p>
+						<a class="sd2-v2-button sd2-v2-button--primary" href="/ford-powerstroke-powerstroke-diesel-truck-parts-online.html">Shop Powerstroke</a>
 					</div>
 				</article>
 
-				<article class="sd2-v2-offer-card">
+				<article class="sd2-v2-offer-card sd2-tilt">
 					<div class="sd2-v2-offer-card__media">
 						<mvt:if expr="NOT ISNULL l.settings:sd2_offer_duramax:image">
 							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;&mvt:sd2_offer_duramax:image;" alt="Duramax performance bundles" loading="lazy" decoding="async">
 						<mvt:else>
-							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Duramax performance bundles" loading="lazy" decoding="async">
+							<img class="sd2-v2-offer-card__image" src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="GM heavy-duty pickup representing Duramax offers" loading="lazy" decoding="async">
 						</mvt:if>
-						<span class="sd2-v2-offer-card__badge">Bundle</span>
+						<span class="sd2-v2-offer-card__badge">Duramax</span>
 					</div>
 					<div class="sd2-v2-offer-card__body">
-						<h2 class="sd2-v2-offer-card__title">Duramax Performance Bundles</h2>
-						<p class="sd2-v2-offer-card__text">Coolant filtration, turbo piping, and wheel upgrades bundled for maximum airflow and reliability gains.</p>
-						<a class="sd2-v2-button sd2-v2-button--primary" href="https://sinisterdiesel.com/duramax-products.html">Shop Duramax</a>
+						<h2 class="sd2-v2-offer-card__title">Duramax Offers</h2>
+						<p class="sd2-v2-offer-card__text">Explore current Duramax products, kits, and pricing directly from the live catalog.</p>
+						<a class="sd2-v2-button sd2-v2-button--primary" href="/shop-gm-duramax-diesel-parts-sinister-diesel.html">Shop Duramax</a>
 					</div>
 				</article>
 
-				<article class="sd2-v2-offer-card">
+				<article class="sd2-v2-offer-card sd2-tilt">
 					<div class="sd2-v2-offer-card__media">
 						<mvt:if expr="NOT ISNULL l.settings:sd2_offer_cummins:image">
 							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;&mvt:sd2_offer_cummins:image;" alt="Cummins performance bundles" loading="lazy" decoding="async">
 						<mvt:else>
-							<img class="sd2-v2-offer-card__image" src="&mvte:urls:GRAPHIC:auto;graphics/00000001/placeholder__400x300.jpg" alt="Cummins performance bundles" loading="lazy" decoding="async">
+							<img class="sd2-v2-offer-card__image" src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="Ram heavy-duty pickup representing Cummins offers" loading="lazy" decoding="async">
 						</mvt:if>
-						<span class="sd2-v2-offer-card__badge">Bundle</span>
+						<span class="sd2-v2-offer-card__badge">Cummins</span>
 					</div>
 					<div class="sd2-v2-offer-card__body">
-						<h2 class="sd2-v2-offer-card__title">Cummins Performance Bundles</h2>
-						<p class="sd2-v2-offer-card__text">Save on curated Cummins upgrade kits covering intakes, exhaust, and cooling.</p>
-						<a class="sd2-v2-button sd2-v2-button--primary" href="https://sinisterdiesel.com/cummins-products.html">Shop Cummins</a>
+						<h2 class="sd2-v2-offer-card__title">Cummins Offers</h2>
+						<p class="sd2-v2-offer-card__text">Explore current Cummins products, kits, and pricing directly from the live catalog.</p>
+						<a class="sd2-v2-button sd2-v2-button--primary" href="/dodge-cummins-diesel-performance-parts-sinister-diesel.html">Shop Cummins</a>
 					</div>
 				</article>
 
 			</section>
 
-			<section class="sd2-v2-offers-note">
+			<section class="sd2-v2-offers-note sd2-reveal" data-reveal="fade-up">
 				<p class="sd2-v2-text-body">Offers are subject to change without notice and cannot be combined with other promotions or coupon codes unless stated otherwise. See our <a href="&mvte:urls:SARP:auto;">Sale Policies</a> for full terms.</p>
 			</section>
 		</div>

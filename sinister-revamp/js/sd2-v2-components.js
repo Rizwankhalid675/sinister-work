@@ -3,16 +3,76 @@
    Shared behavior for inactive V2 header, mega menu, search, garage, and cart.
    ========================================================================== */
 
+/* Retired campaign aliases can remain in email, search, and old footer caches.
+   Recover the known Special Offers screen instead of presenting a 404. */
+(function () {
+	'use strict';
+	var params = new URLSearchParams(window.location.search);
+	if ((params.get('Screen') || '').toLowerCase() !== 'special-offers') { return; }
+	var target = '/scratch-dent.html';
+	var branchKey = params.get('BranchKey');
+	if (branchKey) { target += '?BranchKey=' + encodeURIComponent(branchKey); }
+	window.location.replace(target);
+}());
+
+/* The blog index and article pages share one Miva template. Give each route a
+   stable hook so the index can keep its discovery hero while an article opens
+   directly on the story the customer selected. */
+(function () {
+	'use strict';
+	if (!document.body || !document.body.classList.contains('t-page-blog')) { return; }
+	var path = window.location.pathname.toLowerCase();
+	var isArticle = /^\/blog\/.+\.html\/?$/.test(path);
+	document.body.classList.add(isArticle ? 'sd2-v18-blog-article' : 'sd2-v18-blog-index');
+}());
+
+/* Miva's legacy core dynamically loads theme extensions from theme_path.
+   When a branch asset is present, keep those requests in the same branch so
+   branch-safe null guards and extension updates are actually used. */
+(function () {
+	'use strict';
+	var assetUrl = document.currentScript && document.currentScript.src;
+	var match = assetUrl && assetUrl.match(/\/(b\d+)\//);
+	if (match) {
+		window.theme_path = match[1] + '/themes/colossus/';
+	}
+}());
+
+/* Miva varies between an empty string and a literal zero for an empty basket.
+   Keep the header badge state correct across initial render and AJAX updates. */
+(function () {
+	'use strict';
+	function syncBadge(badge) {
+		var count = parseInt((badge.textContent || '').trim(), 10) || 0;
+		badge.hidden = count < 1;
+		badge.setAttribute('aria-hidden', count < 1 ? 'true' : 'false');
+	}
+	document.querySelectorAll('.sd2-v2-hdr__cart-badge[data-hook="mini-basket-count"]').forEach(function (badge) {
+		syncBadge(badge);
+		new MutationObserver(function () { syncBadge(badge); }).observe(badge, { childList: true, characterData: true, subtree: true });
+	});
+}());
+
 /* Sticky shadow-on-scroll + mobile drawer/accordion. Mega menu, search
    console, garage panel, and cart drawer behaviors each live in their own
    component file and self-register against the trigger attributes above. */
 (function () {
 	'use strict';
+	if (document.body && document.body.id === 'js-PATR' && !window.location.hash) {
+		if ('scrollRestoration' in window.history) { window.history.scrollRestoration = 'manual'; }
+		window.requestAnimationFrame(function () { window.scrollTo(0, 0); });
+	}
 	var header = document.querySelector('[data-v2-sticky-header]');
 	if (header && !header.dataset.v2Ready) {
 		header.dataset.v2Ready = '1';
-		var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 4); };
+		var onScroll = function () {
+			header.classList.toggle('is-scrolled', window.scrollY > 4);
+			var rect = header.getBoundingClientRect();
+			document.documentElement.style.setProperty('--sd2-sticky-clearance', Math.max(0, Math.ceil(rect.bottom + 12)) + 'px');
+		};
 		document.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onScroll, { passive: true });
+		if ('ResizeObserver' in window) { new ResizeObserver(onScroll).observe(header); }
 		onScroll();
 	}
 
@@ -36,6 +96,228 @@
 	}
 })();
 
+/* BEGIN SD2 HELP FORMS */
+(function (root, factory) {
+	'use strict';
+	var api = factory();
+	if (typeof module === 'object' && module.exports) module.exports = api;
+	if (root) root.SD2HelpForms = api;
+}(typeof window !== 'undefined' ? window : null, function () {
+	'use strict';
+
+	function clean(value) { return typeof value === 'string' ? value.trim() : ''; }
+
+	function buildSalesPayload(fields) {
+		fields = fields || {};
+		return {
+			name: clean(fields.name),
+			email: clean(fields.email).toLowerCase(),
+			phone: clean(fields.phone),
+			itemSku: clean(fields.itemSku),
+			question: clean(fields.question),
+			website: clean(fields.website)
+		};
+	}
+
+	function buildHelpPayload(form) {
+		var payload = {};
+		new FormData(form).forEach(function (value, key) {
+			if (typeof value === 'string') payload[key] = clean(value);
+		});
+		if (payload.email) payload.email = payload.email.toLowerCase();
+		return payload;
+	}
+
+	function HelpFormError(message, details) {
+		this.name = 'HelpFormError';
+		this.message = message;
+		this.errors = details && (details.fields || details.errors) ? (details.fields || details.errors) : {};
+		this.requestId = details && (details.reference || details.requestId) ? (details.reference || details.requestId) : '';
+		if (Error.captureStackTrace) Error.captureStackTrace(this, HelpFormError);
+	}
+	HelpFormError.prototype = Object.create(Error.prototype);
+	HelpFormError.prototype.constructor = HelpFormError;
+
+	async function sendSalesInquiry(endpoint, payload, fetchImpl) {
+		fetchImpl = fetchImpl || (typeof fetch === 'function' ? fetch.bind(window) : null);
+		if (!fetchImpl) throw new HelpFormError('We could not send your request right now. Please use the backup form.');
+		try {
+			var response = await fetchImpl(endpoint, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload),
+				credentials: 'same-origin'
+			});
+			var body = {};
+			try { body = await response.json(); } catch (ignore) {}
+			if (!response.ok || !body.ok) {
+				if (!body.message && !Object.keys(body.fields || body.errors || {}).length && response.status !== 400 && response.status !== 422) {
+					throw new HelpFormError('We could not send your request right now. Please use the backup form.');
+				}
+				throw new HelpFormError(body.message || 'Please check the highlighted fields and try again.', body);
+			}
+			return { ok: true, requestId: body.reference || body.requestId || '' };
+		} catch (error) {
+			if (error instanceof HelpFormError) throw error;
+			throw new HelpFormError('We could not send your request right now. Please use the backup form.');
+		}
+	}
+
+	function formValues(form) {
+		// The Miva template names fields contactName/contactEmail/etc. and carries
+		// Miva-only hidden inputs (Form_Action, Store_Code, BranchKey). The deployed
+		// /api/forms/submit endpoint validates name/email/phone/subject/message/source,
+		// so remap here rather than POSTing the raw Miva key names.
+		var raw = buildHelpPayload(form);
+		var payload = {
+			name: clean(raw.contactName),
+			email: clean(raw.contactEmail).toLowerCase(),
+			phone: clean(raw.contactPhone),
+			subject: clean(raw.contactItemSku),
+			message: clean(raw.contactMessage),
+			source: 'sales-inquiry'
+		};
+		// Preserve the honeypot so the server can reject bots.
+		if (raw.website) payload.website = raw.website;
+		return payload;
+	}
+
+	function clearErrors(form) {
+		form.querySelectorAll('[data-field-error]').forEach(function (node) { node.textContent = ''; });
+		form.querySelectorAll('[aria-invalid="true"]').forEach(function (node) { node.removeAttribute('aria-invalid'); });
+	}
+
+	function showFieldErrors(form, errors) {
+		Object.keys(errors || {}).forEach(function (name) {
+			var field = form.elements[name];
+			var message = form.querySelector('[data-field-error="' + name + '"]');
+			if (field) field.setAttribute('aria-invalid', 'true');
+			if (message) message.textContent = errors[name];
+		});
+	}
+
+	function initForm(form) {
+		if (form.dataset.sd2Ready) return;
+		form.dataset.sd2Ready = '1';
+		var endpoint = form.dataset.endpoint || '/api/forms/submit';
+		var submitLabel = form.dataset.submitLabel || 'Send Request';
+		var submit = form.querySelector('[data-help-form-submit]');
+		var status = form.querySelector('[data-help-form-status]');
+		var fields = form.querySelector('[data-help-form-fields]');
+		var success = form.querySelector('[data-help-form-success]');
+		var reference = form.querySelector('[data-help-form-reference]');
+		var fallback = form.querySelector('[data-help-form-fallback]');
+
+		form.addEventListener('submit', async function (event) {
+			event.preventDefault();
+			clearErrors(form);
+			if (!form.checkValidity()) { form.reportValidity(); return; }
+			submit.disabled = true;
+			submit.setAttribute('aria-busy', 'true');
+			submit.textContent = 'Sending request...';
+			status.textContent = 'Sending your request securely.';
+			status.className = 'sd2-help-form__status is-working';
+			if (fallback) fallback.hidden = true;
+
+			try {
+				var result = await sendSalesInquiry(endpoint, formValues(form));
+				form.reset();
+				if (fields) fields.hidden = true;
+				if (success) success.hidden = false;
+				if (reference) reference.textContent = result.requestId || 'Received';
+				status.textContent = '';
+				if (success) success.focus();
+			} catch (error) {
+				showFieldErrors(form, error.errors);
+				status.textContent = error.message;
+				status.className = 'sd2-help-form__status is-error';
+				if (fallback) fallback.hidden = false;
+				var firstInvalid = form.querySelector('[aria-invalid="true"]');
+				if (firstInvalid) firstInvalid.focus();
+			} finally {
+				submit.disabled = false;
+				submit.removeAttribute('aria-busy');
+				submit.textContent = submitLabel;
+			}
+		});
+	}
+
+	function init() {
+		if (typeof document === 'undefined') return;
+		document.querySelectorAll('[data-sd2-help-form]').forEach(initForm);
+	}
+
+	if (typeof document !== 'undefined') {
+		if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+		else init();
+	}
+
+	return { buildHelpPayload: buildHelpPayload, buildSalesPayload: buildSalesPayload, sendHelpRequest: sendSalesInquiry, sendSalesInquiry: sendSalesInquiry, HelpFormError: HelpFormError, init: init };
+}));
+/* END SD2 HELP FORMS */
+
+/* Descendant category rollups are assembled in the page template, so Miva's
+   native facet component has no direct category rows to filter. Keep the same
+   catalog-control experience with real in-page filtering and pagination. */
+(function () {
+	'use strict';
+	var controls = document.querySelector('[data-sd2-rollup-catalog]');
+	var grid = document.querySelector('.sd2-v2-pgrid--native');
+	if (!controls || !grid) { return; }
+	var cards = Array.prototype.slice.call(grid.querySelectorAll('[data-sd2-rollup-product]'));
+	if (!cards.length) { return; }
+	var brand = controls.querySelector('[data-sd2-rollup-brand]');
+	var price = controls.querySelector('[data-sd2-rollup-price]');
+	var sort = controls.querySelector('[data-sd2-rollup-sort]');
+	var size = controls.querySelector('[data-sd2-rollup-page-size]');
+	var count = controls.closest('.sd2-v2-toolbar').querySelector('.sd2-v2-toolbar__count');
+	var original = cards.slice();
+	var currentPage = 1;
+	var brands = {};
+	cards.forEach(function (card) {
+		var value = (card.dataset.sd2Brand || 'Sinister Diesel').trim();
+		card.dataset.sd2Brand = value;
+		brands[value] = true;
+	});
+	Object.keys(brands).sort().forEach(function (value) {
+		var option = document.createElement('option'); option.value = value; option.textContent = value; brand.appendChild(option);
+	});
+	var pagination = document.createElement('nav');
+	pagination.className = 'page-links sd2-v2-pagination sd2-v2-pagination--rollup';
+	pagination.setAttribute('aria-label', 'Category pagination');
+	grid.parentNode.insertBefore(pagination, grid);
+	function number(card, key) { return parseFloat(card.dataset[key] || '0') || 0; }
+	function apply() {
+		var range = price.value ? price.value.split('-').map(Number) : null;
+		var visible = cards.filter(function (card) {
+			var amount = number(card, 'sd2Price');
+			return (!brand.value || card.dataset.sd2Brand === brand.value) && (!range || (amount >= range[0] && amount < range[1]));
+		});
+		if (sort.value === 'price-asc') { visible.sort(function (a,b) { return number(a,'sd2Price') - number(b,'sd2Price'); }); }
+		else if (sort.value === 'price-desc') { visible.sort(function (a,b) { return number(b,'sd2Price') - number(a,'sd2Price'); }); }
+		else if (sort.value === 'name') { visible.sort(function (a,b) { return a.dataset.sd2Name.localeCompare(b.dataset.sd2Name); }); }
+		else { visible.sort(function (a,b) { return original.indexOf(a) - original.indexOf(b); }); }
+		visible.forEach(function (card) { grid.appendChild(card); });
+		cards.forEach(function (card) { card.hidden = true; });
+		var perPage = parseInt(size.value, 10);
+		var pages = perPage === -1 ? 1 : Math.max(1, Math.ceil(visible.length / perPage));
+		currentPage = Math.min(currentPage, pages);
+		var start = perPage === -1 ? 0 : (currentPage - 1) * perPage;
+		var end = perPage === -1 ? visible.length : start + perPage;
+		visible.slice(start, end).forEach(function (card) { card.hidden = false; });
+		count.textContent = visible.length + ' products';
+		pagination.innerHTML = '';
+		if (pages > 1) {
+			var title = document.createElement('span'); title.className = 'page-links-title'; title.textContent = 'Page(s):'; pagination.appendChild(title);
+			for (var page = 1; page <= pages; page += 1) {
+				(function (target) { var button = document.createElement('button'); button.type = 'button'; button.className = target === currentPage ? 'page-links-active' : 'page-links-inactive'; button.textContent = target; button.addEventListener('click', function () { currentPage = target; apply(); controls.scrollIntoView({behavior:'smooth',block:'start'}); }); pagination.appendChild(button); })(page);
+			}
+		}
+	}
+	[brand, price, sort, size].forEach(function (field) { field.addEventListener('change', function () { currentPage = 1; apply(); }); });
+	apply();
+})();
+
 /* Mega menu controller — single delegated instance, moves the mount's markup
    into the header's [data-v2-mega-mount] so it renders inside the nav row
    (required for absolute positioning against the full nav width), then wires
@@ -53,9 +335,11 @@
 	var triggers = Array.prototype.slice.call(root.querySelectorAll('[data-v2-menu-trigger]'));
 	var panels = Array.prototype.slice.call(mega.querySelectorAll('[data-v2-panel]'));
 	var closeTimer = 0;
+	var openTimer = 0;
 	var current = null;
 
 	function activate(id) {
+		window.clearTimeout(openTimer);
 		window.clearTimeout(closeTimer);
 		var matched = false;
 		panels.forEach(function (p) { var on = p.getAttribute('data-v2-panel') === id; p.classList.toggle('is-active', on); matched = matched || on; });
@@ -67,22 +351,32 @@
 		if (matched) { root.classList.add('is-open'); current = id; } else { close(); }
 	}
 	function close() {
+		window.clearTimeout(openTimer);
 		window.clearTimeout(closeTimer);
 		root.classList.remove('is-open'); current = null;
 		panels.forEach(function (p) { p.classList.remove('is-active'); });
 		triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'false'); t.closest('.sd2-v2-hdr-nav__item').classList.remove('is-open'); });
 	}
-	function closeSoon() { window.clearTimeout(closeTimer); closeTimer = window.setTimeout(close, 160); }
+	function activateSoon(id) {
+		window.clearTimeout(openTimer);
+		window.clearTimeout(closeTimer);
+		openTimer = window.setTimeout(function () { activate(id); }, current ? 70 : 130);
+	}
+	function closeSoon() {
+		window.clearTimeout(openTimer);
+		window.clearTimeout(closeTimer);
+		closeTimer = window.setTimeout(close, 190);
+	}
 
 	triggers.forEach(function (t) {
 		var id = t.getAttribute('data-v2-menu-trigger');
-		t.addEventListener('mouseenter', function () { activate(id); });
+		t.addEventListener('mouseenter', function () { activateSoon(id); });
 		t.addEventListener('focus', function () { activate(id); });
 		t.addEventListener('click', function (e) { e.preventDefault(); (current === id) ? close() : activate(id); });
 		t.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (current === id) ? close() : activate(id); } });
 		t.addEventListener('mouseleave', closeSoon);
 	});
-	mega.addEventListener('mouseenter', function () { window.clearTimeout(closeTimer); });
+	mega.addEventListener('mouseenter', function () { window.clearTimeout(openTimer); window.clearTimeout(closeTimer); });
 	mega.addEventListener('mouseleave', closeSoon);
 	document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); } });
 	document.addEventListener('click', function (e) { if (!root.contains(e.target)) { close(); } });
@@ -99,8 +393,20 @@
 	var scrim = root.querySelector('.sd2-v2-search-scrim');
 	var input = root.querySelector('[data-v2-search-input]');
 	var form = root.querySelector('form');
+	var header = document.querySelector('.sd2-v2-hdr');
+	var empty = root.querySelector('[data-v2-search-empty]');
+
+	function positionConsole() {
+		var bottom = header ? Math.max(0, Math.round(header.getBoundingClientRect().bottom)) : 0;
+		console_.style.setProperty('--sd2-search-top', bottom + 'px');
+	}
+	function syncEmptyState() {
+		if (empty && input) { empty.hidden = Boolean((input.value || '').trim()); }
+	}
 
 	function open() {
+		positionConsole();
+		syncEmptyState();
 		console_.classList.add('is-open'); scrim.classList.add('is-open');
 		console_.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
 		window.setTimeout(function () { input.focus(); }, 200);
@@ -113,6 +419,8 @@
 	document.querySelectorAll('[data-v2-search-open]').forEach(function (b) { b.addEventListener('click', open); });
 	root.querySelectorAll('[data-v2-search-close]').forEach(function (b) { b.addEventListener('click', close); });
 	document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); } });
+	window.addEventListener('resize', function () { if (console_.classList.contains('is-open')) { positionConsole(); } }, { passive: true });
+	if (input) { input.addEventListener('input', syncEmptyState); }
 	if (form && input) {
 		form.addEventListener('submit', function () {
 			var term = (input.value || '').trim();
@@ -156,7 +464,7 @@
 
 	function syncLayout(layout) {
 		if (!layout) { return; }
-		var rail = layout.querySelector('.sd2-v2-filter-rail, .sd2-v2-filter-panel');
+		var rail = layout.querySelector(':scope > .sd2-v2-filter-rail, :scope > .sd2-v2-filter-panel');
 		var hasFilters = railHasContent(rail);
 		layout.classList.toggle('sd2-v2-search-page__layout--has-filters', hasFilters);
 		layout.classList.toggle('sd2-v2-search-page__layout--no-filters', !hasFilters);
@@ -167,7 +475,7 @@
 
 	document.querySelectorAll('.sd2-v2-search-page__layout').forEach(function (layout) {
 		syncLayout(layout);
-		var rail = layout.querySelector('.sd2-v2-filter-rail, .sd2-v2-filter-panel');
+		var rail = layout.querySelector(':scope > .sd2-v2-filter-rail, :scope > .sd2-v2-filter-panel');
 		if (!rail || typeof MutationObserver === 'undefined') { return; }
 		var observer = new MutationObserver(function () { syncLayout(layout); });
 		observer.observe(rail, { childList: true, subtree: true });
@@ -184,6 +492,9 @@
 	var root = document.querySelector('[data-v2-garage]');
 	if (!root || root.dataset.v2Ready) { return; }
 	root.dataset.v2Ready = '1';
+	/* Header templates own the markup, but overlays must not remain trapped in
+	   the sticky header's stacking context on mobile. */
+	document.body.appendChild(root);
 
 	var panel = root.querySelector('.sd2-v2-garage-panel');
 	var scrim = root.querySelector('.sd2-v2-garage-scrim');
@@ -194,15 +505,78 @@
 	var cardEmpty = root.querySelector('[data-v2-garage-card-empty]');
 	var cardName = root.querySelector('[data-v2-garage-card-name]');
 	var cardSpec = root.querySelector('[data-v2-garage-card-spec]');
+	var shopButton = root.querySelector('[data-v2-garage-shop]');
+	var shopLabel = root.querySelector('[data-v2-garage-shop-label]');
 
-	var ENGINES = {
-		Ford: ['6.7 Powerstroke', '6.4 Powerstroke', '6.0 Powerstroke'],
-		GM: ['Duramax L5P', 'Duramax LML', 'Duramax LB7'],
-		'Dodge / Ram': ['6.7 Cummins', '5.9 Cummins']
+	var ENGINE_DATA = {
+		Ford: [
+			{ name: '6.7 Powerstroke', from: 2011, to: 2026 },
+			{ name: '6.4 Powerstroke', from: 2008, to: 2010 },
+			{ name: '6.0 Powerstroke', from: 2003, to: 2007 },
+			{ name: '7.3 Powerstroke', from: 1994, to: 2003 }
+		],
+		GM: [
+			{ name: 'Duramax L5P', from: 2017, to: 2026 },
+			{ name: 'Duramax LML', from: 2011, to: 2016 },
+			{ name: 'Duramax LMM', from: 2007, to: 2010 },
+			{ name: 'Duramax LBZ', from: 2006, to: 2007 },
+			{ name: 'Duramax LLY', from: 2004, to: 2005 },
+			{ name: 'Duramax LB7', from: 2001, to: 2004 }
+		],
+		'Dodge / Ram': [
+			{ name: '6.7 Cummins', from: 2007, to: 2026 },
+			{ name: '5.9 Cummins', from: 1994, to: 2007 }
+		]
 	};
-	var YEARS = ['2024','2023','2022','2021','2020','2019','2018','2017','2016','2015'];
 
-	function open() { panel.classList.add('is-open'); scrim.classList.add('is-open'); panel.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+	function findEngine(make, engine) {
+		return (ENGINE_DATA[make] || []).filter(function (item) { return item.name === engine; })[0] || null;
+	}
+	function yearsFor(make, engine) {
+		var data = findEngine(make, engine);
+		var years = [];
+		if (!data) { return years; }
+		for (var year = data.to; year >= data.from; year -= 1) { years.push(String(year)); }
+		return years;
+	}
+	function vehicleLabel(vehicle) {
+		return vehicle ? [vehicle.year, vehicle.make, vehicle.engine].filter(Boolean).join(' ') : '';
+	}
+	function vehicleSearchUrl(vehicle) {
+		var searchForm = document.querySelector('[data-v2-search] form');
+		var action = searchForm && searchForm.action ? searchForm.action : '/search.html';
+		var url = new URL(action, window.location.origin);
+		url.searchParams.set('Search', vehicle.engine);
+		url.searchParams.set('source', 'garage');
+		url.searchParams.set('garage_year', vehicle.year);
+		url.searchParams.set('garage_make', vehicle.make);
+		url.searchParams.set('garage_engine', vehicle.engine);
+		var branchKey = new URL(window.location.href).searchParams.get('BranchKey');
+		if (branchKey) { url.searchParams.set('BranchKey', branchKey); }
+		return url.toString();
+	}
+	function syncShopButton(vehicle) {
+		if (!shopButton) { return; }
+		shopButton.hidden = !vehicle;
+		if (!vehicle) { return; }
+		shopButton.href = vehicleSearchUrl(vehicle);
+		if (shopLabel) { shopLabel.textContent = vehicleLabel(vehicle); }
+	}
+
+	function closeCompetingPanels() {
+		document.querySelectorAll('[data-v2-drawer], .sd2-v2-cart-drawer, .sd2-v2-search-console').forEach(function (item) {
+			item.classList.remove('is-open');
+			if (item.hasAttribute('aria-hidden')) { item.setAttribute('aria-hidden', 'true'); }
+		});
+		document.querySelectorAll('.sd2-v2-scrim, .sd2-v2-cart-scrim, .sd2-v2-search-scrim').forEach(function (item) {
+			item.classList.remove('is-open');
+		});
+	}
+	function open() {
+		closeCompetingPanels();
+		panel.classList.add('is-open'); scrim.classList.add('is-open');
+		panel.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
+	}
 	function close() { panel.classList.remove('is-open'); scrim.classList.remove('is-open'); panel.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
 
 	document.addEventListener('click', function (event) {
@@ -222,12 +596,13 @@
 	}
 
 	makeSel.addEventListener('change', function () {
-		var list = ENGINES[makeSel.value] || [];
+		var list = (ENGINE_DATA[makeSel.value] || []).map(function (item) { return item.name; });
 		fillSelect(engineSel, list, list.length ? 'Select Engine' : 'Select Make First');
 		fillSelect(yearSel, [], 'Select Engine First');
 	});
 	engineSel.addEventListener('change', function () {
-		fillSelect(yearSel, engineSel.value ? YEARS : [], engineSel.value ? 'Select Year' : 'Select Engine First');
+		var years = yearsFor(makeSel.value, engineSel.value);
+		fillSelect(yearSel, years, years.length ? 'Select Year' : 'Select Engine First');
 	});
 
 	function renderActiveVehicle(vehicle) {
@@ -235,12 +610,14 @@
 		if (!vehicle) {
 			cardEmpty.hidden = false; cardName.hidden = true; cardSpec.hidden = true;
 			headerLabel.forEach(function (el) { el.textContent = 'Add Your Truck'; el.classList.add('is-empty'); });
+			syncShopButton(null);
 			return;
 		}
 		cardEmpty.hidden = true;
 		cardName.hidden = false; cardName.textContent = vehicle.make + ' ' + vehicle.engine;
-		cardSpec.hidden = false; cardSpec.textContent = vehicle.year + ' - ' + vehicle.engine;
+		cardSpec.hidden = false; cardSpec.textContent = vehicle.year + ' / fitment search ready';
 		headerLabel.forEach(function (el) { el.textContent = vehicle.year + ' ' + vehicle.make; el.classList.remove('is-empty'); });
+		syncShopButton(vehicle);
 	}
 
 	function loadVehicles() { try { return JSON.parse(window.localStorage.getItem('sd2v2_garage') || '[]'); } catch (e) { return []; } }
@@ -256,9 +633,10 @@
 			var row = document.createElement('div');
 			row.className = 'sd2-v2-garage-saved__item';
 			var label = document.createElement('span'); label.textContent = v.year + ' ' + v.make + ' ' + v.engine;
-			var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Remove';
+			var view = document.createElement('a'); view.textContent = 'View Parts'; view.href = vehicleSearchUrl(v); view.className = 'sd2-v2-garage-saved__view';
+			var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Remove'; btn.className = 'sd2-v2-garage-saved__remove'; btn.setAttribute('aria-label', 'Remove ' + vehicleLabel(v) + ' from saved vehicles');
 			btn.addEventListener('click', function () { list.splice(i, 1); saveVehicles(list); renderSaved(); if (i === 0) { renderActiveVehicle(list[0] || null); } });
-			row.appendChild(label); row.appendChild(btn); container.appendChild(row);
+			row.appendChild(label); row.appendChild(view); row.appendChild(btn); container.appendChild(row);
 		});
 	}
 
@@ -266,12 +644,14 @@
 		e.preventDefault();
 		if (!makeSel.value || !engineSel.value || !yearSel.value) { return; }
 		var vehicle = { make: makeSel.value, engine: engineSel.value, year: yearSel.value };
-		var list = loadVehicles(); list.unshift(vehicle); saveVehicles(list);
-		renderActiveVehicle(vehicle); renderSaved(); close();
+		var list = loadVehicles().filter(function (item) { return vehicleLabel(item) !== vehicleLabel(vehicle); });
+		list.unshift(vehicle); saveVehicles(list);
+		renderActiveVehicle(vehicle); renderSaved(); panel.classList.add('has-active-vehicle');
 	});
 
 	var existing = loadVehicles();
 	renderActiveVehicle(existing[0] || null);
+	panel.classList.toggle('has-active-vehicle', !!existing[0]);
 	renderSaved();
 })();
 
@@ -288,8 +668,135 @@
 	var scrim = root.querySelector('.sd2-v2-cart-scrim');
 	var vehicleBox = root.querySelector('[data-v2-cart-vehicle]');
 	var vehicleText = root.querySelector('[data-v2-cart-vehicle-text]');
+	var vehicleAction = vehicleBox && vehicleBox.querySelector('a');
+	var body = root.querySelector('.sd2-v2-cart-panel__body');
+	var foot = root.querySelector('.sd2-v2-cart-panel__foot');
+	var basketUrl = foot && foot.querySelector('a') ? foot.querySelector('a').href : '/basket-contents.html';
+	var cartRequest = null;
+	var cartLoadedAt = 0;
+
+	function cartEscape(value) {
+		return String(value || '')
+			.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+	}
+
+	function renderLiveBasket(basketData) {
+		if (!basketData || !body) { return; }
+		var count = parseInt(basketData.getAttribute('data-item-count') || '0', 10) || 0;
+		var subtotalText = basketData.getAttribute('data-subtotal') || '$0.00';
+		document.querySelectorAll('[data-hook~="mini-basket-count"]').forEach(function (node) { node.textContent = String(count); });
+		var subtotal = root.querySelector('[data-v2-cart-subtotal]');
+		if (subtotal) { subtotal.textContent = subtotalText; }
+
+		if (!count) {
+			body.innerHTML = '<div class="sd2-v2-cart-empty" data-v2-cart-empty><span class="sd2-v2-cart-empty__mark" aria-hidden="true">0</span><p class="sd2-v2-cart-empty__title">Your Build Starts Here.</p><p class="sd2-v2-cart-empty__copy">Choose your truck, then add fitment-confirmed parts with confidence.</p><a class="sd2-btn sd2-btn--primary sd2-btn--full" href="/">Explore Parts</a></div>';
+			syncCartContents();
+			return;
+		}
+
+		var lines = Array.prototype.slice.call(basketData.querySelectorAll('.x-mini-basket__line')).map(function (line) {
+			var image = line.querySelector('.x-mini-basket__image img');
+			var name = line.querySelector('.x-mini-basket__item-name');
+			var price = line.querySelector('.x-mini-basket__item-price');
+			var qty = line.querySelector('.x-mini-basket__item-quantity .u-text-medium');
+			var remove = line.querySelector('.x-mini-basket__item-total a[href*="Action=RPRD"], .x-mini-basket__item-total a[href*="Action=RGRP"]');
+			var options = Array.prototype.slice.call(line.querySelectorAll('.x-mini-basket__item-attributes')).map(function (option) {
+				return '<p class="sd2-v2-cart-item__option">' + cartEscape((option.textContent || '').trim()) + '</p>';
+			}).join('');
+			var href = name ? name.getAttribute('href') : '#';
+			return '<article class="sd2-v2-cart-item"><a class="sd2-v2-cart-item__media" href="' + cartEscape(href) + '"><img src="' + cartEscape(image ? image.getAttribute('src') : '') + '" alt="' + cartEscape(image ? image.getAttribute('alt') : '') + '" loading="lazy"></a><div class="sd2-v2-cart-item__body"><h3><a href="' + cartEscape(href) + '">' + cartEscape(name ? name.textContent.trim() : '') + '</a></h3><p class="sd2-v2-cart-item__meta">Qty ' + cartEscape(qty ? qty.textContent.trim() : '1') + '</p>' + options + (remove ? '<a class="sd2-v2-link-button" href="' + cartEscape(remove.getAttribute('href')) + '">Remove</a>' : '') + '</div><strong class="sd2-v2-cart-item__price">' + cartEscape(price ? price.textContent.trim() : '') + '</strong></article>';
+		}).join('');
+
+		if (lines) {
+			body.innerHTML = '<div class="sd2-v2-cart-lines" data-v2-cart-items>' + lines + '</div>';
+			root.classList.remove('is-empty');
+			if (foot) { foot.hidden = false; }
+		}
+	}
+
+	function renderLiveCartDocument(doc) {
+		var miniBasket = doc.querySelector('[data-hook="mini-basket"]');
+		if (miniBasket) { renderLiveBasket(miniBasket); return true; }
+
+		/* Runtime branch BASK pages use the redesigned drawer/listing markup and
+		   intentionally omit the legacy mini-basket content section. */
+		var liveLines = doc.querySelector('[data-v2-cart-items]');
+		var liveCount = doc.querySelector('.sd2-v2-cart-panel__head [data-hook~="mini-basket-count"]');
+		var liveSubtotal = doc.querySelector('.sd2-v2-cart-panel [data-v2-cart-subtotal]');
+		var count = parseInt(liveCount ? liveCount.textContent : '0', 10) || 0;
+		if (!count && liveLines) {
+			count = Array.prototype.slice.call(liveLines.querySelectorAll('.sd2-v2-cart-item')).reduce(function (total, item) {
+				var match = (item.textContent || '').match(/Qty\s+(\d+)/i);
+				return total + (match ? parseInt(match[1], 10) : 1);
+			}, 0);
+		}
+		document.querySelectorAll('[data-hook~="mini-basket-count"]').forEach(function (node) { node.textContent = String(count); });
+		var subtotal = root.querySelector('[data-v2-cart-subtotal]');
+		if (subtotal) { subtotal.textContent = liveSubtotal ? liveSubtotal.textContent.trim() : '$0.00'; }
+
+		if (count && liveLines) {
+			body.innerHTML = liveLines.outerHTML;
+			root.classList.remove('is-empty');
+			if (foot) { foot.hidden = false; }
+			return true;
+		}
+		if (!count) {
+			body.innerHTML = '<div class="sd2-v2-cart-empty" data-v2-cart-empty><span class="sd2-v2-cart-empty__mark" aria-hidden="true">0</span><p class="sd2-v2-cart-empty__title">Your Build Starts Here.</p><p class="sd2-v2-cart-empty__copy">Choose your truck, then add fitment-confirmed parts with confidence.</p><a class="sd2-btn sd2-btn--primary sd2-btn--full" href="/">Explore Parts</a></div>';
+			syncCartContents();
+			return true;
+		}
+		return false;
+	}
+
+	function loadLiveCart(force) {
+		if (!force && Date.now() - cartLoadedAt < 15000) { return Promise.resolve(); }
+		if (cartRequest) { return cartRequest; }
+		root.classList.add('is-loading');
+		cartRequest = fetch(basketUrl, { credentials: 'same-origin' })
+			.then(function (response) { if (!response.ok) { throw new Error('Basket request failed'); } return response.text(); })
+			.then(function (html) {
+				var doc = new DOMParser().parseFromString(html, 'text/html');
+				renderLiveCartDocument(doc);
+				cartLoadedAt = Date.now();
+			})
+			.catch(function () { /* Keep the server-rendered drawer if live hydration is unavailable. */ })
+			.finally(function () { cartRequest = null; root.classList.remove('is-loading'); });
+		return cartRequest;
+	}
+
+	function syncCartContents() {
+		var items = body ? body.querySelectorAll('.sd2-v2-cart-item') : [];
+		var empty = !items.length;
+		root.classList.toggle('is-empty', empty);
+		if (empty && body && !body.querySelector('[data-v2-cart-empty]')) {
+			var state = document.createElement('div');
+			state.className = 'sd2-v2-cart-empty';
+			state.setAttribute('data-v2-cart-empty', '');
+			state.innerHTML = '<span class="sd2-v2-cart-empty__mark" aria-hidden="true">0</span><p class="sd2-v2-cart-empty__title">Your build starts here.</p><p class="sd2-v2-cart-empty__copy">Choose your truck, then add fitment-confirmed parts with confidence.</p><a class="sd2-btn sd2-btn--primary sd2-btn--full" href="/">Explore Parts</a>';
+			body.replaceChildren(state);
+		}
+		if (foot) { foot.hidden = empty; }
+		root.querySelectorAll('.sd2-v2-cart-panel__head [data-hook="mini-basket-count"]').forEach(function (count) {
+			if (empty && !(count.textContent || '').trim()) { count.textContent = '0'; }
+		});
+	}
+
+	function cartVehicleSearchUrl(vehicle) {
+		var url = new URL('/search.html', window.location.origin);
+		url.searchParams.set('Search', vehicle.engine);
+		url.searchParams.set('source', 'garage');
+		url.searchParams.set('garage_year', vehicle.year);
+		url.searchParams.set('garage_make', vehicle.make);
+		url.searchParams.set('garage_engine', vehicle.engine);
+		var branchKey = new URL(window.location.href).searchParams.get('BranchKey');
+		if (branchKey) { url.searchParams.set('BranchKey', branchKey); }
+		return url.toString();
+	}
 
 	function open() {
+		syncCartContents();
+		loadLiveCart(true);
 		panel.classList.add('is-open'); scrim.classList.add('is-open');
 		panel.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
 		refreshVehicle();
@@ -302,9 +809,16 @@
 			if (list[0]) {
 				vehicleBox.classList.remove('is-empty');
 				vehicleText.textContent = 'Fits your ' + list[0].year + ' ' + list[0].make + ' ' + list[0].engine;
+				if (vehicleAction) {
+					vehicleAction.textContent = 'View Parts'; vehicleAction.href = cartVehicleSearchUrl(list[0]);
+					vehicleAction.removeAttribute('data-v2-garage-toggle');
+				}
 			} else {
 				vehicleBox.classList.add('is-empty');
 				vehicleText.textContent = 'Add your truck to confirm fitment';
+				if (vehicleAction) {
+					vehicleAction.textContent = 'Add'; vehicleAction.href = '#'; vehicleAction.setAttribute('data-v2-garage-toggle', '');
+				}
 			}
 		} catch (e) { /* storage unavailable; reminder stays in empty state */ }
 	}
@@ -312,6 +826,8 @@
 document.querySelectorAll('[data-v2-cart-open]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); open(); }); });
 	root.querySelectorAll('[data-v2-cart-close]').forEach(function (b) { b.addEventListener('click', close); });
 	document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); } });
+	syncCartContents();
+	loadLiveCart(false);
 })();
 
 /* Customer Dashboard V2. Inactive account enhancements for Garage previews
@@ -330,6 +846,17 @@ document.querySelectorAll('[data-v2-cart-open]').forEach(function (b) { b.addEve
 	function vehicleLabel(vehicle) {
 		return [vehicle.year, vehicle.make, vehicle.model, vehicle.engine].filter(Boolean).join(' ');
 	}
+	function accountVehicleSearchUrl(vehicle) {
+		var url = new URL('/search.html', window.location.origin);
+		url.searchParams.set('Search', vehicle.engine);
+		url.searchParams.set('source', 'garage');
+		url.searchParams.set('garage_year', vehicle.year);
+		url.searchParams.set('garage_make', vehicle.make);
+		url.searchParams.set('garage_engine', vehicle.engine);
+		var branchKey = new URL(window.location.href).searchParams.get('BranchKey');
+		if (branchKey) { url.searchParams.set('BranchKey', branchKey); }
+		return url.toString();
+	}
 	function renderGarage() {
 		var vehicles = loadGarage();
 		document.querySelectorAll('[data-v2-account-garage-copy]').forEach(function (node) {
@@ -338,17 +865,18 @@ document.querySelectorAll('[data-v2-cart-open]').forEach(function (b) { b.addEve
 		document.querySelectorAll('[data-v2-account-garage-list]').forEach(function (list) {
 			if (list.dataset.v2AccountManual) { return; }
 			if (!vehicles.length) {
-				list.innerHTML = '<p>[Placeholder] No saved vehicles yet. Add a truck in Garage to personalize fitment.</p>';
+				list.innerHTML = '<p>No saved vehicles yet. Add a truck in Garage to personalize fitment.</p>';
 				return;
 			}
 			list.innerHTML = '';
 			vehicles.forEach(function (vehicle, index) {
 				var card = document.createElement('article');
 				card.className = 'sd2-v2-account-vehicle-card' + (index === 0 ? ' is-active' : '');
-				card.innerHTML = '<strong></strong><span></span><div><span class="sd2-v2-badge sd2-v2-badge--fitment"></span><button class="sd2-v2-link-button" type="button" data-v2-garage-toggle>Edit</button></div>';
+				card.innerHTML = '<strong></strong><span></span><div><span class="sd2-v2-badge sd2-v2-badge--fitment"></span><a class="sd2-v2-link-button" data-v2-account-view-parts>View Parts</a><button class="sd2-v2-link-button" type="button" data-v2-garage-toggle>Edit</button></div>';
 				card.querySelector('strong').textContent = vehicleLabel(vehicle) || 'Saved Vehicle';
 				card.querySelector('span').textContent = index === 0 ? 'Active vehicle' : 'Saved vehicle';
 				card.querySelector('.sd2-v2-badge').textContent = index === 0 ? 'Active' : 'Saved';
+				card.querySelector('[data-v2-account-view-parts]').href = accountVehicleSearchUrl(vehicle);
 				list.appendChild(card);
 			});
 		});
@@ -423,9 +951,110 @@ document.querySelectorAll('[data-v2-cart-open]').forEach(function (b) { b.addEve
 	var openers = Array.prototype.slice.call(document.querySelectorAll('[data-v2-filter-open]'));
 	var closers = Array.prototype.slice.call(document.querySelectorAll('[data-v2-filter-close]'));
 	var scrim = document.querySelector('.sd2-v2-filter-sheet-scrim');
+	/* Descendant rollups already provide local Brand, Price, Fitment, Sort and
+	   View controls. Never mount a second native facet surface beside them. */
+	if (document.querySelector('[data-sd2-rollup-catalog]')) {
+		sheet.hidden = true;
+		if (scrim) { scrim.hidden = true; }
+		openers.forEach(function (button) { button.hidden = true; });
+		return;
+	}
+	var desktopMode = window.matchMedia('(min-width: 1041px)');
+	var desktopToolbar = document.querySelector('.sd2-v2-toolbar');
+	var lastFilterTrigger = null;
+	var sheetAnchor = document.createComment('sd2-filter-sheet-anchor');
+	var scrimAnchor = document.createComment('sd2-filter-scrim-anchor');
+	sheet.parentNode.insertBefore(sheetAnchor, sheet);
+	if (scrim) { scrim.parentNode.insertBefore(scrimAnchor, scrim); }
+
+	/* Miva's horizontal refinery is shipped as inert template content. Materialize
+	   it once so the same live facet form works in the desktop rail and sheet. */
+	var facetHost = sheet.querySelector('[data-hook="add-refinery"]');
+	var facetTemplate = sheet.querySelector('template[data-hook="horizontal-refinery"]');
+	if (facetHost && facetTemplate && !facetHost.firstElementChild) {
+		facetHost.appendChild(facetTemplate.content.cloneNode(true));
+	}
+	var hasFilterControls = !!sheet.querySelector('.x-refinery-set, .x-category-tree, .c-form-checkbox, .c-form-select__dropdown, input[type="checkbox"], select');
+	if (!hasFilterControls) {
+		sheet.hidden = true;
+		sheet.setAttribute('aria-hidden', 'true');
+		if (scrim) { scrim.hidden = true; }
+		openers.forEach(function (button) { button.hidden = true; });
+		return;
+	}
+
+	var facetTriggers = Array.prototype.slice.call(sheet.querySelectorAll('.x-refinery-set__trigger'));
+	function setToolbarFacetState(trigger, open) {
+		var facet = trigger.closest('.x-refinery-set');
+		var list = facet && facet.querySelector('.x-refinery-set__list');
+		var label = facet && facet.querySelector('.x-refinery-set__label');
+		if (!list) { return; }
+		if (open) {
+			list.style.setProperty('opacity', '1', 'important');
+			list.style.setProperty('visibility', 'visible', 'important');
+			list.style.setProperty('pointer-events', 'auto', 'important');
+			list.style.setProperty('transform', 'none', 'important');
+		} else {
+			list.style.removeProperty('opacity');
+			list.style.removeProperty('visibility');
+			list.style.removeProperty('pointer-events');
+			list.style.removeProperty('transform');
+		}
+		if (label) { label.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+	}
+	facetTriggers.forEach(function (trigger) {
+		trigger.addEventListener('change', function () {
+			if (!desktopMode.matches) { return; }
+			facetTriggers.forEach(function (other) {
+				if (other !== trigger && other.checked) { other.checked = false; }
+				setToolbarFacetState(other, other === trigger && trigger.checked);
+			});
+		});
+	});
+
+	function mountFilterSurface(usePortal) {
+		if (usePortal) {
+			if (desktopToolbar) { desktopToolbar.classList.remove('sd2-v2-toolbar--with-filters'); }
+			if (scrim && scrim.parentNode !== document.body) { document.body.appendChild(scrim); }
+			if (sheet.parentNode !== document.body) { document.body.appendChild(sheet); }
+			return;
+		}
+		if (desktopToolbar) {
+			desktopToolbar.classList.add('sd2-v2-toolbar--with-filters');
+			var toolbarGroup = desktopToolbar.querySelector('.sd2-v2-toolbar__group, .sd2-v2-toolbar__right');
+			desktopToolbar.insertBefore(sheet, toolbarGroup || null);
+			return;
+		}
+		if (scrim && scrimAnchor.parentNode) { scrimAnchor.parentNode.insertBefore(scrim, scrimAnchor.nextSibling); }
+		if (sheetAnchor.parentNode) { sheetAnchor.parentNode.insertBefore(sheet, sheetAnchor.nextSibling); }
+	}
+
+	function syncFilterMode() {
+		if (desktopMode.matches) {
+			mountFilterSurface(false);
+			facetTriggers.forEach(function (trigger) { setToolbarFacetState(trigger, trigger.checked); });
+			sheet.hidden = false;
+			sheet.classList.remove('is-open');
+			sheet.setAttribute('aria-hidden', 'false');
+			sheet.removeAttribute('role');
+			sheet.removeAttribute('aria-modal');
+			if (scrim) { scrim.hidden = true; scrim.classList.remove('is-open'); }
+			document.body.style.overflow = '';
+		} else {
+			mountFilterSurface(true);
+			facetTriggers.forEach(function (trigger) { setToolbarFacetState(trigger, false); });
+			if (!sheet.classList.contains('is-open')) {
+				sheet.hidden = true;
+				sheet.setAttribute('aria-hidden', 'true');
+			}
+		}
+	}
 
 	function openSheet() {
+		lastFilterTrigger = document.activeElement;
 		sheet.hidden = false;
+		sheet.setAttribute('role', 'dialog');
+		sheet.setAttribute('aria-modal', 'true');
 		if (scrim) { scrim.hidden = false; }
 		window.requestAnimationFrame(function () {
 			sheet.classList.add('is-open');
@@ -433,14 +1062,19 @@ document.querySelectorAll('[data-v2-cart-open]').forEach(function (b) { b.addEve
 		});
 		sheet.setAttribute('aria-hidden', 'false');
 		openers.forEach(function (button) { button.setAttribute('aria-expanded', 'true'); });
+		document.body.classList.add('sd2-filter-sheet-open');
 		document.body.style.overflow = 'hidden';
+		var closeButton = sheet.querySelector('[data-v2-filter-close]');
+		if (closeButton) { closeButton.focus(); }
 	}
 	function closeSheet() {
 		sheet.classList.remove('is-open');
 		if (scrim) { scrim.classList.remove('is-open'); }
 		sheet.setAttribute('aria-hidden', 'true');
 		openers.forEach(function (button) { button.setAttribute('aria-expanded', 'false'); });
+		document.body.classList.remove('sd2-filter-sheet-open');
 		document.body.style.overflow = '';
+		if (lastFilterTrigger && typeof lastFilterTrigger.focus === 'function') { lastFilterTrigger.focus(); }
 		window.setTimeout(function () {
 			if (sheet.getAttribute('aria-hidden') === 'true') { sheet.hidden = true; }
 			if (scrim && !scrim.classList.contains('is-open')) { scrim.hidden = true; }
@@ -452,6 +1086,9 @@ document.querySelectorAll('[data-v2-cart-open]').forEach(function (b) { b.addEve
 	document.addEventListener('keydown', function (event) {
 		if (event.key === 'Escape' && sheet.classList.contains('is-open')) { closeSheet(); }
 	});
+	if (desktopMode.addEventListener) { desktopMode.addEventListener('change', syncFilterMode); }
+	else if (desktopMode.addListener) { desktopMode.addListener(syncFilterMode); }
+	syncFilterMode();
 })();
 
 /* Product Detail V2. Page-scoped progressive enhancements for inactive PDP:
@@ -559,6 +1196,47 @@ counters.forEach(run);
 	var vehicleBox = root.querySelector('[data-v2-search-page-vehicle]');
 	var storageKey = 'sd2v2_recent_searches';
 
+	function renderGarageSearchSchema() {
+		var params;
+		try { params = new URLSearchParams(window.location.search); }
+		catch (e) { return; }
+		if (params.get('source') !== 'garage') { return; }
+		var vehicle = [params.get('garage_year'), params.get('garage_make'), params.get('garage_engine')].filter(Boolean).join(' ');
+		if (!vehicle) { return; }
+		root.classList.add('sd2-v19-truck-search');
+		var head = root.querySelector('[data-v2-search-results-header]');
+		if (!head || head.querySelector('[data-v2-truck-search-schema]')) { return; }
+		var schema = document.createElement('section');
+		schema.className = 'sd2-v19-truck-search-schema';
+		schema.setAttribute('data-v2-truck-search-schema', '');
+		schema.setAttribute('aria-label', 'Active truck search');
+		var intro = document.createElement('div');
+		intro.className = 'sd2-v19-truck-search-schema__intro';
+		var eyebrow = document.createElement('span'); eyebrow.textContent = 'Garage match / live Miva catalog';
+		var title = document.createElement('strong'); title.textContent = vehicle;
+		var copy = document.createElement('p'); copy.textContent = 'Showing the broad native catalog for this engine generation, with your selected model year carried as fitment context. Confirm final fitment on the product page before ordering.';
+		intro.appendChild(eyebrow); intro.appendChild(title); intro.appendChild(copy);
+		var flow = document.createElement('ol');
+		[
+			['01', 'Truck profile'],
+			['02', 'Native product index'],
+			['03', 'Fitment confirmation']
+		].forEach(function (step) {
+			var item = document.createElement('li');
+			var number = document.createElement('span'); number.textContent = step[0];
+			var label = document.createElement('b'); label.textContent = step[1];
+			item.appendChild(number); item.appendChild(label); flow.appendChild(item);
+		});
+		var edit = document.createElement('button');
+		edit.type = 'button'; edit.className = 'sd2-v19-truck-search-schema__edit'; edit.setAttribute('data-v2-garage-toggle', ''); edit.textContent = 'Change Truck';
+		schema.appendChild(intro); schema.appendChild(flow); schema.appendChild(edit);
+		var dataRail = head.querySelector('.sd2-v3-hero-data');
+		if (dataRail) { dataRail.insertAdjacentElement('afterend', schema); }
+		else { head.appendChild(schema); }
+		var coverage = head.querySelector('.sd2-v3-hero-data > div:last-child strong');
+		if (coverage) { coverage.textContent = params.get('garage_engine') || vehicle; }
+	}
+
 	function parseSearchFromUrl() {
 		try { return new URLSearchParams(window.location.search).get('Search') || ''; }
 		catch (e) { return ''; }
@@ -617,6 +1295,7 @@ counters.forEach(run);
 	if (input && input.value) { remember(input.value); }
 	renderRecent();
 	refreshVehicle();
+	renderGarageSearchSchema();
 	window.addEventListener('storage', function (e) {
 		if (e.key === 'sd2v2_garage') { refreshVehicle(); }
 		if (e.key === storageKey) { renderRecent(); }

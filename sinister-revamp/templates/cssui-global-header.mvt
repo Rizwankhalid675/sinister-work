@@ -12,11 +12,11 @@
 <mvt:do name="l.result" file="g.Module_Library_DB" value="Category_Load_Code('1209610_merchandise_apparel', l.settings:sd2_mega_apparel)" />
 <mvt:do file="g.Module_Feature_URI_UT" name="l.settings:sd2_mega_apparel:url" value="Store_Category_URL(l.settings:sd2_mega_apparel, NULL)" />
 
-<div class="sd2-v2-hdr-root">
+<div class="sd2-v2-hdr-root sd2-v3-shell" data-sd2-global-shell>
 
 	<div class="sd2-v2-hdr-trust">
 		<div class="sd2-v2-hdr-trust__inner">
-			<span class="sd2-v2-hdr-trust__plate">MADE &amp; TESTED IN THE USA &middot; SINCE 2008</span>
+			<span class="sd2-v2-hdr-trust__plate">MADE &amp; TESTED IN THE USA &middot; SINCE 2009</span>
 			<span class="sd2-v2-hdr-trust__links">
 				<a href="/help-center.html">Help Center</a>
 				<a href="&mvte:urls:ORDH:auto;">Track Order</a>
@@ -26,7 +26,7 @@
 
 	<mvt:item name="readytheme" param="banner( 'header_message' )" />
 
-	<header class="sd2-v2-hdr" data-hook="site-header" data-v2-sticky-header>
+	<header class="sd2-v2-hdr sd2-v3-floating-nav" data-hook="site-header" data-v2-sticky-header>
 		<div class="sd2-v2-hdr__row">
 
 			<button class="sd2-v2-hdr__mobile-toggle" type="button" data-v2-drawer-open aria-label="Open menu" aria-expanded="false">
@@ -254,15 +254,15 @@
 		</div>
 		<div class="sd2-v2-mega__side">
 			<div class="sd2-v2-mega__side-block">
-				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
-				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+				<h3 class="sd2-v2-mega__col-title">Platform Support</h3>
+				<a class="sd2-v2-mega__guide" href="/help-center.html">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
-					<span><span class="sd2-v2-mega__guide-title">6.7 Powerstroke Intercooler Guide</span><span class="sd2-v2-mega__guide-meta">8 min read</span></span>
+					<span><span class="sd2-v2-mega__guide-title">Powerstroke Fitment Help</span><span class="sd2-v2-mega__guide-meta">Open Help Center</span></span>
 				</a>
 			</div>
 			<div class="sd2-v2-mega__side-block">
-				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
-				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2017 F-250 Build Spotlight</a>
+				<h3 class="sd2-v2-mega__col-title">Build Path</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:sd2_mega_powerstroke:url;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Explore Every Powerstroke Category</a>
 			</div>
 		</div>
 	</div>
@@ -314,15 +314,15 @@
 		</div>
 		<div class="sd2-v2-mega__side">
 			<div class="sd2-v2-mega__side-block">
-				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
-				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+				<h3 class="sd2-v2-mega__col-title">Platform Support</h3>
+				<a class="sd2-v2-mega__guide" href="/help-center.html">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="">
-					<span><span class="sd2-v2-mega__guide-title">Duramax EGR Delete: What to Know</span><span class="sd2-v2-mega__guide-meta">6 min read</span></span>
+					<span><span class="sd2-v2-mega__guide-title">Duramax Fitment Help</span><span class="sd2-v2-mega__guide-meta">Open Help Center</span></span>
 				</a>
 			</div>
 			<div class="sd2-v2-mega__side-block">
-				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
-				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2015 Duramax Tow Rig</a>
+				<h3 class="sd2-v2-mega__col-title">Build Path</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:sd2_mega_duramax:url;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Explore Every Duramax Category</a>
 			</div>
 		</div>
 	</div>
@@ -375,15 +375,15 @@
 		</div>
 		<div class="sd2-v2-mega__side">
 			<div class="sd2-v2-mega__side-block">
-				<h3 class="sd2-v2-mega__col-title">Buying Guides</h3>
-				<a class="sd2-v2-mega__guide" href="&mvte:urls:NEWS:auto;">
+				<h3 class="sd2-v2-mega__col-title">Platform Support</h3>
+				<a class="sd2-v2-mega__guide" href="/help-center.html">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="">
-					<span><span class="sd2-v2-mega__guide-title">Cummins Turbo Upgrade Basics</span><span class="sd2-v2-mega__guide-meta">7 min read</span></span>
+					<span><span class="sd2-v2-mega__guide-title">Cummins Fitment Help</span><span class="sd2-v2-mega__guide-meta">Open Help Center</span></span>
 				</a>
 			</div>
 			<div class="sd2-v2-mega__side-block">
-				<h3 class="sd2-v2-mega__col-title">Popular Builds</h3>
-				<a class="sd2-v2-mega__build" href="&mvte:urls:NEWS:auto;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>2019 Ram Cummins Pull Truck</a>
+				<h3 class="sd2-v2-mega__col-title">Build Path</h3>
+				<a class="sd2-v2-mega__build" href="&mvte:sd2_mega_cummins:url;"><svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Explore Every Cummins Category</a>
 			</div>
 		</div>
 	</div>
@@ -591,6 +591,10 @@
 					</div>
 					<div class="sd2-v2-garage-form__actions">
 						<button class="sd2-btn sd2-btn--primary sd2-btn--full" type="submit">Save Vehicle</button>
+						<a class="sd2-v2-garage-shop" href="&mvte:urls:SRCH:auto;" data-v2-garage-shop hidden>
+							<span>View Parts for My Truck</span>
+							<small data-v2-garage-shop-label></small>
+						</a>
 					</div>
 				</form>
 
@@ -619,17 +623,32 @@
 			</div>
 
 			<div class="sd2-v2-cart-panel__body">
-				<div class="sd2-v2-cart-empty" data-v2-cart-empty>
-					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 6Z"/><path d="M9 6V5a3 3 0 0 1 6 0v1"/></svg>
-					<p>Open the basket to review live cart items.</p>
-					<a class="sd2-btn sd2-btn--outline" href="&mvte:urls:BASK:auto;">View Basket</a>
-				</div>
+				<mvt:if expr="NOT l.settings:global_minibasket:empty">
+					<div class="sd2-v2-cart-lines" data-v2-cart-items>
+						<mvt:foreach iterator="item" array="global_minibasket:groups">
+							<mvt:do file="g.Module_Library_DB" name="l.success" value="Product_Load_Code(l.settings:item:code, l.settings:item_product)" />
+							<mvt:do file="g.Module_Feature_URI_UT" name="l.settings:item:uri" value="Store_Product_URL(l.settings:item_product, NULL)" />
+							<article class="sd2-v2-cart-item">
+								<a class="sd2-v2-cart-item__media" href="&mvt:item:uri;"><img src="&mvte:item:imagetypes:main;" alt="&mvte:item:name;" loading="lazy"></a>
+								<div class="sd2-v2-cart-item__body">
+									<h3><a href="&mvt:item:uri;">&mvt:item:name;</a></h3>
+									<p class="sd2-v2-cart-item__meta">SKU &mvte:item:code; <span> / Qty &mvte:item:quantity;</span></p>
+									<mvt:foreach iterator="option" array="item:options"><p class="sd2-v2-cart-item__option">&mvt:option:attr_prompt;: <mvt:if expr="l.settings:option:option_id">&mvt:option:opt_prompt;<mvt:elseif expr="NOT ISNULL l.settings:option:data">&mvt:option:data;<mvt:elseif expr="NOT ISNULL l.settings:option:data_long">&mvt:option:data_long;</mvt:if></p></mvt:foreach>
+									<a class="sd2-v2-link-button" href="&mvte:urls:_self:auto_sep;Basket_Line=&mvte:item:line_id;&amp;Action=RPRD">Remove</a>
+								</div>
+								<strong class="sd2-v2-cart-item__price">&mvt:item:formatted_subtotal;</strong>
+							</article>
+						</mvt:foreach>
+					</div>
+				<mvt:else>
+					<div class="sd2-v2-cart-empty" data-v2-cart-empty><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 6Z"/><path d="M9 6V5a3 3 0 0 1 6 0v1"/></svg><p>Your cart is ready for parts.</p><a class="sd2-btn sd2-btn--outline" href="&mvte:urls:SFNT:auto;">Continue Shopping</a></div>
+				</mvt:if>
 			</div>
 
 			<div class="sd2-v2-cart-panel__foot">
 				<div class="sd2-v2-cart-panel__subtotal">
 					<span>Subtotal</span>
-					<span data-v2-cart-subtotal>&mdash;</span>
+					<span data-v2-cart-subtotal><mvt:if expr="l.settings:global_minibasket:empty">&mdash;<mvt:else>&mvt:global_minibasket:formatted_total;</mvt:if></span>
 				</div>
 				<a class="sd2-btn sd2-btn--primary sd2-btn--full" href="&mvte:urls:BASK:auto;">View Cart &amp; Checkout</a>
 			</div>

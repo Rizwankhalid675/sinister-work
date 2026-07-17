@@ -8,7 +8,7 @@
 	<div class="sd2-wrap">
 		<div class="sd2-v2-perfstrip__grid">
 			<div class="sd2-v2-perfstrip__item">
-				<span class="sd2-v2-perfstrip__value" data-v2-count-to="2008">2008</span>
+				<span class="sd2-v2-perfstrip__value" data-v2-count-to="2009">2009</span>
 				<span class="sd2-v2-perfstrip__label">SINCE</span>
 			</div>
 			<div class="sd2-v2-perfstrip__item">

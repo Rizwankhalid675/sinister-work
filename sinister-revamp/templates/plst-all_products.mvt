@@ -6,10 +6,11 @@ body#js-PLST .x-product-list {
 	gap: 24px;
 	margin: 0 auto;
 	padding: 28px 0 48px;
-	width: min(100% - 48px, 1680px);
+	width: min(calc(100% - 48px), 1680px);
 	max-width: 1680px;
 	align-items: stretch !important;
 }
+body#js-PLST { overflow-x: clip; }
 body#js-PLST .x-product-list__item {
 	width: auto !important;
 	max-width: none !important;
@@ -80,7 +81,7 @@ body#js-PLST .x-product-list__price-red {
 	color: #1833B8;
 }
 body#js-PLST .t-pagination {
-	width: min(100% - 48px, 1680px);
+	width: min(calc(100% - 48px), 1680px);
 	max-width: 1680px;
 	margin: 0 auto 64px;
 }
@@ -105,6 +106,34 @@ body#js-PLST .t-pagination .c-form-select__dropdown {
 }
 </style>
 
+<section class="sd2-v2-pgrid-wrap">
+	<mvt:if expr="l.settings:all_products:total_prod_count GT 1">
+	<div class="sd2-v2-toolbar">
+		<p class="sd2-v2-toolbar__count">&mvte:all_products:total_prod_count; products</p>
+		<div class="sd2-v2-toolbar__group">
+			<div class="sorting sd2-v2-toolbar__control"><form method="get" action="&mvte:urls:_self:auto_noparams;">
+				<mvt:item name="urls" param="hidden_params:_self:auto" /><input type="hidden" name="Per_Page" value="&mvte:global:Per_Page;">
+				<mvt:foreach iterator="facet" array="facets:applied_facets"><mvt:foreach iterator="facet_value" array="facet:input_values"><input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value;"></mvt:foreach></mvt:foreach>
+				<label class="sd2-v2-toolbar__label" for="PLST_Sort_By">Sort By:</label>
+				<select class="sd2-v2-toolbar__select" id="PLST_Sort_By" name="Sort_By" onchange="MMProdList_UpdateQuery( this ); return true;">
+					<option value="disp_order"<mvt:if expr="ISNULL g.Sort_By OR g.Sort_By EQ 'disp_order'"> selected</mvt:if>>Default</option>
+					<option value="bestsellers"<mvt:if expr="g.Sort_By EQ 'bestsellers'"> selected</mvt:if>>Best Selling</option>
+					<option value="price_asc"<mvt:if expr="g.Sort_By EQ 'price_asc'"> selected</mvt:if>>Lowest Price</option>
+					<option value="price_desc"<mvt:if expr="g.Sort_By EQ 'price_desc'"> selected</mvt:if>>Highest Price</option>
+					<option value="newest"<mvt:if expr="g.Sort_By EQ 'newest'"> selected</mvt:if>>Newest Items</option>
+				</select>
+			</form></div>
+			<div class="per-page sd2-v2-toolbar__control"><form method="get" action="&mvte:urls:_self:auto_noparams;">
+				<mvt:item name="urls" param="hidden_params:_self:auto" /><input type="hidden" name="Sort_By" value="&mvte:global:Sort_By;">
+				<mvt:foreach iterator="facet" array="facets:applied_facets"><mvt:foreach iterator="facet_value" array="facet:input_values"><input type="hidden" name="&mvte:facet:code;" value="&mvte:facet_value;"></mvt:foreach></mvt:foreach>
+				<label class="sd2-v2-toolbar__label" for="PLST_Per_Page">View:</label>
+				<select class="sd2-v2-toolbar__select" id="PLST_Per_Page" name="Per_Page" onchange="MMProdList_UpdateQuery( this ); return true;">
+					<option value="10"<mvt:if expr="g.Per_Page EQ 10"> selected</mvt:if>>10</option><option value="20"<mvt:if expr="ISNULL g.Per_Page OR g.Per_Page EQ 20"> selected</mvt:if>>20</option><option value="40"<mvt:if expr="g.Per_Page EQ 40"> selected</mvt:if>>40</option><option value="-1"<mvt:if expr="g.Per_Page EQ -1"> selected</mvt:if>>All</option>
+				</select>
+			</form></div>
+		</div>
+	</div>
+	</mvt:if>
 <section class="o-layout u-grids-2 u-grids-5--l x-product-list">
 	<mvt:foreach iterator="product" array="all_products:products">
 		<div class="o-layout__item u-text-center x-product-list__item">
@@ -167,3 +196,4 @@ body#js-PLST .t-pagination .c-form-select__dropdown {
 	</nav>
 	<!-- end .x-pagination -->
 </mvt:if>
+</section>

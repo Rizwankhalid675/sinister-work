@@ -12,47 +12,47 @@
 <footer class="sd2-v2-footer">
 
 	<!-- BUILD LOG — content strategy pillar -->
-	<div class="sd2-v2-footer__log">
+	<div class="sd2-v2-footer__log sd2-reveal" data-reveal="fade-up">
 		<div class="sd2-v2-footer__log-inner">
 			<div class="sd2-v2-footer__log-head">
 				<div>
-					<p class="sd2-v2-footer__log-eyebrow">From The Shop</p>
-					<h2 class="sd2-v2-footer__log-title">Latest Build Log</h2>
+					<p class="sd2-v2-footer__log-eyebrow">Choose Your Platform</p>
+					<h2 class="sd2-v2-footer__log-title">Start with your truck.</h2>
 				</div>
-				<a class="sd2-v2-footer__log-all" href="&mvte:urls:NEWS:auto;">View All Guides</a>
+				<button class="sd2-v2-footer__log-all" type="button" data-v2-garage-toggle>Open My Garage</button>
 			</div>
-			<div class="sd2-v2-footer__log-grid">
-				<a class="sd2-v2-footer__log-card" href="&mvte:urls:NEWS:auto;">
+			<div class="sd2-v2-footer__log-grid sd2-stagger">
+				<a class="sd2-v2-footer__log-card sd2-tilt" href="/954746_ford_powerstroke">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
-					<span class="sd2-v2-footer__log-card-tag">Buying Guide</span>
-					<div class="sd2-v2-footer__log-card-title">6.7 Powerstroke Intercooler Buying Guide</div>
+					<span class="sd2-v2-footer__log-card-tag">Ford Diesel</span>
+					<div class="sd2-v2-footer__log-card-title">Shop Powerstroke</div>
 				</a>
-				<a class="sd2-v2-footer__log-card" href="&mvte:urls:NEWS:auto;">
+				<a class="sd2-v2-footer__log-card sd2-tilt" href="/954952_gm_duramax">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%203.png" alt="">
-					<span class="sd2-v2-footer__log-card-tag">Build Spotlight</span>
-					<div class="sd2-v2-footer__log-card-title">2015 Duramax Tow Rig, Built Right</div>
+					<span class="sd2-v2-footer__log-card-tag">GM Diesel</span>
+					<div class="sd2-v2-footer__log-card-title">Shop Duramax</div>
 				</a>
-				<a class="sd2-v2-footer__log-card" href="&mvte:urls:NEWS:auto;">
+				<a class="sd2-v2-footer__log-card sd2-tilt" href="/954540_dodge_cummins">
 					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="">
-					<span class="sd2-v2-footer__log-card-tag">Install Guide</span>
-					<div class="sd2-v2-footer__log-card-title">Cummins Turbo Upgrade: Install Notes</div>
-				</a>
-				<a class="sd2-v2-footer__log-card" href="&mvte:urls:NEWS:auto;">
-					<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
-					<span class="sd2-v2-footer__log-card-tag">Dyno Results</span>
-					<div class="sd2-v2-footer__log-card-title">Verified Gains: Powerstroke Intake Kit</div>
+					<span class="sd2-v2-footer__log-card-tag">Dodge / Ram Diesel</span>
+					<div class="sd2-v2-footer__log-card-title">Shop Cummins</div>
 				</a>
 			</div>
 		</div>
 	</div>
 
-	<div class="sd2-v2-footer__main">
+	<section class="sd2-v3-footer-cta" aria-labelledby="sd2-v3-footer-cta-title">
+		<div><p class="sd2-kicker">Performance You Control</p><h2 id="sd2-v3-footer-cta-title">Ready to build around your truck?</h2></div>
+		<button class="sd2-btn sd2-btn--primary" type="button" data-v2-garage-toggle>Build Around My Truck</button>
+	</section>
+
+	<div class="sd2-v2-footer__main sd2-reveal" data-reveal="fade-up">
 		<div>
 			<div class="sd2-v2-footer__brand">Sinister<span>Diesel</span></div>
 			<p class="sd2-v2-footer__desc">High-performance diesel parts for Ford Power Stroke, Chevy Duramax, and Dodge Cummins.</p>
 			<span class="sd2-v2-footer__plate">
 				<svg class="sd2-icon sd2-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-				MADE &amp; TESTED IN THE USA &middot; SINCE 2008
+				MADE &amp; TESTED IN THE USA &middot; SINCE 2009
 			</span>
 		</div>
 

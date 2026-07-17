@@ -695,9 +695,9 @@ var elementsUI = {
 		/**
 		 * Call in additional functions as developed for theme.
 		 */
-		$.loadScript(theme_path + 'ui/js/theme.js?v=1.06', function () {
+		$.loadScript(theme_path + 'ui/js/theme.js?v=1.08', function () {
 			window.addEventListener('load',
-				$.debounced(function () {
+				(typeof $.debounced === 'function' ? $.debounced : function (fn) { return fn; })(function () {
 					themeFunctionality.init();
 
 					if (themeFunctionality[pageID]) {

@@ -3,6 +3,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex,follow">
 	<base href="&mvt:global:basehref;">
 	<mvt:if expr="NOT ISNULL l.settings:page:title">
 		<title>&mvt:page:title;</title>
@@ -12,23 +13,32 @@
 	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
 	<mvt:item name="head" param="head_tag" />
 </head>
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass; sd2-wishlist-login-page">
 	<mvt:item name="hdft" param="global_header" />
 
 	<mvt:item name="hdft" param="header" />
 
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block t-account-landing-section u-bg-white">
-				<div class="o-layout__item t-expanded-block__item t-account-landing-section__header u-width-12">
-					<mvt:item name="readytheme" param="contentsection( 'messages' )" />
-					<div class="o-layout o-layout--wide o-layout--justify-around u-text-center">
-						<div class="o-layout__item u-width-12 u-width-6--l u-width-5--w t-customer-profile">
-							<div class="t-account-landing-section__header">
-								<span class="sd2-v2-heading-delta t-account-landing-section__heading">Current Customer?</span>
-								<p class="u-font-small">Please sign in to view your wish lists.</p>
-							</div>
-							<form class="u-inline-block u-text-left" method="post" action="&mvte:urls:WISH:secure;" autocomplete="off">
+	<main class="sd2-v2-auth sd2-wishlist-auth" data-v2-auth>
+		<mvt:item name="readytheme" param="contentsection( 'messages' )" />
+		<div class="sd2-v2-auth__grid">
+			<aside class="sd2-v3-auth-story sd2-wishlist-auth__story" aria-label="Wish list benefits" data-sd2-story>
+				<p class="sd2-eyebrow">Saved for your build</p>
+				<h1>Parts worth remembering.</h1>
+				<p>Save fitment-ready parts, compare the next upgrades, and return to your build without starting over.</p>
+				<div class="sd2-v3-auth-story__data">
+					<div><span>01</span><strong>Save live parts</strong></div>
+					<div><span>02</span><strong>Plan your build</strong></div>
+					<div><span>03</span><strong>Access anywhere</strong></div>
+				</div>
+			</aside>
+
+			<section class="sd2-v2-auth__panel">
+				<header class="sd2-v2-account-hero">
+					<p class="sd2-kicker">Returning customer</p>
+					<h1>Open Your List</h1>
+					<p>Sign in to view saved parts and continue planning your truck.</p>
+				</header>
+				<form method="post" action="&mvte:urls:WISH:secure;" autocomplete="off">
 								<fieldset>
 									<legend>&mvt:page:name;</legend>
 									<mvt:if expr="ISNULL g.Action">
@@ -51,71 +61,49 @@
 											<input type="hidden" name="Product_Attributes[ &mvt:attribute_index; ]:template_code" value="&mvte:attribute:template_code;" />
 										</mvt:if>
 									</mvt:foreach>
-									<ul class="sd2-v2-form-list">
-										<li class="sd2-v2-form-list__item">
-											<label class="sd2-v2-form-label u-font-small u-text-bold u-text-uppercase is-required &mvt:global:invalid_credentials;" for="l-Customer_LoginEmail">Email Address</label>
-											<input id="l-Customer_LoginEmail" class="sd2-v2-form-input" type="email" name="Customer_LoginEmail" value="&mvte:global:Customer_LoginEmail;" autocomplete="email" required>
-										</li>
-										<li class="sd2-v2-form-list__item">
-											<label class="sd2-v2-form-label u-font-small u-text-bold u-text-uppercase is-required &mvt:global:invalid_credentials;" for="l-Customer_Password">Password:</label>
+											<label class="sd2-label is-required &mvt:global:invalid_credentials;" for="l-Customer_LoginEmail">Email Address</label>
+											<input id="l-Customer_LoginEmail" class="sd2-field" type="email" name="Customer_LoginEmail" value="&mvte:global:Customer_LoginEmail;" autocomplete="email" required>
+											<label class="sd2-label is-required &mvt:global:invalid_credentials;" for="l-Customer_Password">Password</label>
 											<mvt:if expr="g.Customer_Temporary_Password">
 												<input type="hidden" name="Customer_Temporary_Password" value="&mvte:global:Customer_Temporary_Password;">
-												<input id="l-Customer_Password" class="sd2-v2-form-input" type="password" name="Customer_Password" value="&mvte:global:Customer_Temporary_Password;" required>
+												<input id="l-Customer_Password" class="sd2-field" type="password" name="Customer_Password" value="&mvte:global:Customer_Temporary_Password;" required>
 											<mvt:else>
-												<input id="l-Customer_Password" class="sd2-v2-form-input" type="password" name="Customer_Password" autocomplete="current-password" required>
+												<input id="l-Customer_Password" class="sd2-field" type="password" name="Customer_Password" autocomplete="current-password" required>
 											</mvt:if>
-										</li>
-										<li class="sd2-v2-form-list__item u-text-right">
-											<mvt:item name="buttons" param="Login" />
-										</li>
-									</ul>
+											<button class="sd2-btn sd2-btn--primary sd2-btn--full" type="submit">Sign In &amp; View Lists</button>
 								</fieldset>
-							</form>
-							<p class="u-font-small"><a data-mini-modal data-mini-modal-type="inline" data-mini-modal-content="data-forgot-password" href="&mvte:urls:FPWD:secure;" title="Forgot Password">Forgot your password?</a></p>
-							<br>
-						</div>
-						<div class="o-layout__item u-width-12 u-width-6--l u-width-5--w">
-							<div class="t-account-landing-section__header">
-								<span class="sd2-v2-heading-delta t-account-landing-section__heading">No Account? No Problem&hellip;</span>
-								<p class="u-font-small">Create an account and add products to your wish list.</p>
-							</div>
-							<form class="u-inline-block u-text-left" method="post" action="&mvte:urls:CACT:secure;" autocomplete="off">
+				</form>
+				<p class="sd2-body-sm"><a data-mini-modal data-mini-modal-type="inline" data-mini-modal-content="data-forgot-password" href="&mvte:urls:FPWD:secure;" title="Forgot Password">Forgot your password?</a></p>
+			</section>
+
+			<section class="sd2-v2-auth__panel">
+				<header class="sd2-v2-account-hero">
+					<p class="sd2-kicker">New customer</p>
+					<h1>Start A Build List</h1>
+					<p>Create an account to save parts, organize future upgrades, and access the list on any device.</p>
+				</header>
+				<form method="post" action="&mvte:urls:CACT:secure;" autocomplete="off">
 								<fieldset>
 									<legend>Create Account</legend>
 									<mvt:if expr="'MAWL' CIN g.Action OR 'MPWL' CIN g.Action">
 										<input type="hidden" name="current_location" value="&mvte:urls:BASK:secure_sep;">
 									<mvt:else>
-										<input type="hidden" name="current_location" value="&mvte:urls:PROD:secure_sep;Product_Code=&mvte:global:Product_Code;&">
+										<input type="hidden" name="current_location" value="&mvte:urls:PROD:secure_sep;Product_Code=&mvte:global:Product_Code;">
 									</mvt:if>
-									<ul class="sd2-v2-form-list">
-										<li class="sd2-v2-form-list__item">
-											<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_fname">First Name</label>
-											<input id="l-register_fname" class="sd2-v2-form-input sd2-v2-form-input--large" type="text" name="register_fname" value="" autocomplete="name given-name" required>
-										</li>
-										<li class="sd2-v2-form-list__item">
-											<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_lname">Last Name</label>
-											<input id="l-register_lname" class="sd2-v2-form-input sd2-v2-form-input--large" type="text" name="register_lname" autocomplete="name family-name" required>
-										</li>
-										<li class="sd2-v2-form-list__item">
-											<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_email">Email Address</label>
-											<input id="l-register_email" class="sd2-v2-form-input sd2-v2-form-input--large" type="email" name="register_email" value="&mvte:global:register_email;" autocomplete="email" required>
-										</li>
-										<li class="sd2-v2-form-list__item">
-											<label class="sd2-v2-form-label u-font-tiny u-text-bold u-text-uppercase is-required" for="l-register_password">Password</label>
-											<input id="l-register_password" class="sd2-v2-form-input sd2-v2-form-input--large" type="password" name="register_password" autocomplete="new-password" required>
-										</li>
-										<li class="sd2-v2-form-list__item u-text-right">
-											<input class="sd2-v2-button sd2-v2-button--full sd2-v2-button--hollow sd2-v2-button--huge u-bg-white u-color-gray-50 u-font-small u-text-bold u-text-uppercase" type="submit" value="Create My Account">
-										</li>
-									</ul>
+											<label class="sd2-label is-required" for="l-register_fname">First Name</label>
+											<input id="l-register_fname" class="sd2-field" type="text" name="register_fname" value="" autocomplete="name given-name" required>
+											<label class="sd2-label is-required" for="l-register_lname">Last Name</label>
+											<input id="l-register_lname" class="sd2-field" type="text" name="register_lname" autocomplete="name family-name" required>
+											<label class="sd2-label is-required" for="l-register_email">Email Address</label>
+											<input id="l-register_email" class="sd2-field" type="email" name="register_email" value="&mvte:global:register_email;" autocomplete="email" required>
+											<label class="sd2-label is-required" for="l-register_password">Password</label>
+											<input id="l-register_password" class="sd2-field" type="password" name="register_password" autocomplete="new-password" minlength="8" required>
+											<button class="sd2-btn sd2-btn--outline sd2-btn--full" type="submit">Create Account &amp; Save Parts</button>
 								</fieldset>
-							</form>
-							<br>
-						</div>
-					</div>
+				</form>
 			</section>
 		</div>
-	</section>
+	</main>
 	
 	<section class="o-layout">
 		<div class="o-layout__item">

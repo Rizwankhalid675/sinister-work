@@ -49,8 +49,8 @@
 				</mvt:foreach>
 			</ul>
 	
-			<footer class="x-mini-basket__footer">
-				<a class="c-button c-button--full c-button--huge u-bg-secondary u-color-white u-font-small u-text-medium u-text-uppercase" href="&mvte:urls:BASK:auto;">View Cart &amp; Checkout</a>
+			<footer class="x-mini-basket__footer sd2-reveal" data-sd2-motion="cta">
+				<a class="c-button c-button--full c-button--huge u-bg-secondary u-color-white u-font-small u-text-medium u-text-uppercase sd2-magnetic" href="&mvte:urls:BASK:auto;">View Cart &amp; Checkout</a>
 			</footer>
 		<mvt:else>
 			<footer class="x-mini-basket__footer">

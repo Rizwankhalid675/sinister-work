@@ -10,13 +10,20 @@
 		<p class="sd2-kicker">Cart</p>
 		<h1>Review Your Order</h1>
 		<p>Review fitment, shipping, and totals before checkout.</p>
+		<div class="sd2-v3-hero-data" aria-label="Cart status">
+			<div><span>Items</span><strong>&mvte:global_minibasket:basket_count;</strong></div>
+			<div><span>Checkout</span><strong>Secure</strong></div>
+			<div><span>Support</span><strong>US-based team</strong></div>
+		</div>
 	</header>
 
-	<section class="sd2-v2-cart-page__layout">
+	<section class="sd2-v2-cart-page__layout" data-sd2-story>
 		<div class="sd2-v2-cart-page__main">
 			<div class="sd2-v2-cart-items" aria-label="Basket items">
 				<mvt:comment>Verified legacy pattern: basket line items render inline inside basket:groups with iterator group.</mvt:comment>
+				<mvt:assign name="l.settings:sd2_basket_subtotal" value="0" />
 				<mvt:foreach iterator="group" array="basket:groups">
+					<mvt:assign name="l.settings:sd2_basket_subtotal" value="l.settings:sd2_basket_subtotal + l.settings:group:subtotal_comprehensive" />
 					<article class="sd2-v2-cart-item">
 						<mvt:if expr="(l.settings:group:product:code NE g.MW_Sinister_insurance_Options:sinister_product_code) AND (l.settings:group:product:code NE 'sinister_shipping_insurance') AND (('Extend-' CIN l.settings:group:sku) EQ 0)">
 							<a class="sd2-v2-cart-item__media" href="&mvte:group:link;"><img src="&mvte:group:imagetypes:main;" alt="&mvte:group:name;" loading="lazy"></a>
@@ -63,6 +70,7 @@
 					</section>
 				</mvt:if>
 			</div>
+			<mvt:do file="g.Module_Store_Module_Currency" name="l.settings:sd2_formatted_basket_subtotal" value="CurrencyModule_AddFormatting(g.Store:currncy_mod, l.settings:sd2_basket_subtotal)" />
 
 			<section class="sd2-v2-coupon" aria-labelledby="sd2-v2-cart-coupon-title">
 				<h2 id="sd2-v2-cart-coupon-title">Promo Code</h2>
@@ -88,12 +96,19 @@
 					</div>
 				</form>
 			</section>
+
+			<section class="sd2-v3-cart-assurance" aria-label="Order support">
+				<div><span>01</span><strong>Verify fitment</strong><p>Save your truck in Garage before placing the order.</p></div>
+				<div><span>02</span><strong>Delivery at checkout</strong><p>Shipping options and costs are calculated from your address.</p></div>
+				<div><span>03</span><strong>Need help?</strong><p><a href="/help-center.html">Contact the Sinister Diesel support team.</a></p></div>
+			</section>
 		</div>
 
+		<mvt:if expr="miva_array_elements(l.settings:basket:groups) GT 0">
 		<aside class="sd2-v2-order-summary" aria-labelledby="sd2-v2-cart-summary-title">
 			<h2 id="sd2-v2-cart-summary-title">Order Summary</h2>
 			<dl>
-				<div><dt>Subtotal</dt><dd>&mvt:basket:formatted_subtotal;</dd></div>
+				<div><dt>Subtotal</dt><dd>&mvt:sd2_formatted_basket_subtotal;</dd></div>
 				<mvt:comment>Real basket:charges iterator — covers shipping, tax, and any other applied charges; legacy renders each charge generically rather than fixed "Shipping"/"Tax" rows.</mvt:comment>
 				<mvt:foreach iterator="charge" array="basket:charges">
 					<div><dt>&mvt:charge:descrip;</dt><dd>&mvt:charge:formatted_disp_amt;</dd></div>
@@ -103,5 +118,6 @@
 			<a class="sd2-btn sd2-btn--primary sd2-btn--wide" href="&mvte:urls:OCST:auto;">Checkout</a>
 			<div class="sd2-v2-trust-icons"><span>Secure Checkout</span><span>Fitment Support</span><span>US-Based Team</span></div>
 		</aside>
+		</mvt:if>
 	</section>
 </main>

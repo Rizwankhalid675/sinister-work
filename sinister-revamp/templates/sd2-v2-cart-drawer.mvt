@@ -12,7 +12,7 @@
 
 <div class="sd2-v2-cart-drawer" data-v2-cart>
 	<div class="sd2-v2-cart-scrim" data-v2-cart-close></div>
-	<aside class="sd2-v2-cart-panel" aria-hidden="true" role="dialog" aria-label="Cart">
+	<aside class="sd2-v2-cart-panel sd2-motion-panel" aria-hidden="true" role="dialog" aria-label="Cart">
 		<div class="sd2-v2-cart-panel__head">
 			<strong>Your Cart (<span data-hook="mini-basket-count">&mvte:global_minibasket:basket_count;</span>)</strong>
 			<button class="sd2-v2-cart-panel__close" type="button" data-v2-cart-close aria-label="Close cart">
@@ -44,7 +44,7 @@
 				<mvt:comment>Verified legacy pattern: basket line items render inline inside basket:groups with iterator group (same as bask-basket.mvt).</mvt:comment>
 				<div class="sd2-v2-cart-items" data-v2-cart-items>
 					<mvt:foreach iterator="group" array="basket:groups">
-						<article class="sd2-v2-cart-item">
+						<article class="sd2-v2-cart-item sd2-reveal" data-reveal="fade-up">
 							<div class="sd2-v2-cart-item__media">
 								<img src="&mvte:group:imagetypes:main;" alt="&mvte:group:name;" loading="lazy">
 							</div>
@@ -66,12 +66,12 @@
 			<div class="sd2-v2-cart-reco">
 				<h3 class="sd2-v2-cart-reco__title">You Might Also Need</h3>
 				<div class="sd2-v2-cart-reco__row">
-					<div class="sd2-v2-cart-reco__card">
+					<div class="sd2-v2-cart-reco__card sd2-reveal sd2-tilt" data-reveal="fade-up">
 						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="">
 						<div class="sd2-v2-cart-reco__card-name">Intercooler Pipe Kit</div>
 						<div class="sd2-v2-cart-reco__card-price">$249.00</div>
 					</div>
-					<div class="sd2-v2-cart-reco__card">
+					<div class="sd2-v2-cart-reco__card sd2-reveal sd2-tilt" data-reveal="fade-up">
 						<img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%202.png" alt="">
 						<div class="sd2-v2-cart-reco__card-name">EGR Cooler Kit</div>
 						<div class="sd2-v2-cart-reco__card-price">$389.00</div>
@@ -88,7 +88,7 @@
 			<mvt:if expr="miva_array_elements(l.settings:basket:groups) EQ 0">
 				<a class="sd2-btn sd2-btn--primary sd2-btn--full is-disabled" aria-disabled="true" tabindex="-1" href="&mvte:urls:BASKV2:auto;">View Cart &amp; Checkout</a>
 			<mvt:else>
-				<a class="sd2-btn sd2-btn--primary sd2-btn--full" href="&mvte:urls:BASKV2:auto;">View Cart &amp; Checkout</a>
+				<a class="sd2-btn sd2-btn--primary sd2-btn--full sd2-magnetic" href="&mvte:urls:BASKV2:auto;">View Cart &amp; Checkout</a>
 			</mvt:if>
 		</div>
 	</aside>

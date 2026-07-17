@@ -1,6 +1,26 @@
 <mvt:if expr="g.Signature_Delivery">
 	<mvt:item name="customfields" param="Write_Basket( 'signature_delivery', g.Signature_Delivery)" />
 </mvt:if>
+<mvt:if expr="g.Special_Order_Required">
+	<mvt:item name="customfields" param="Write_Basket('special_order_required', g.Special_Order_Required)" />
+</mvt:if>
+<mvt:if expr="g.Special_Order_Acknowledged">
+	<mvt:item name="customfields" param="Write_Basket('special_order_acknowledged', g.Special_Order_Acknowledged)" />
+</mvt:if>
+<mvt:item name="customfields" param="Read_Basket('special_order_required', l.settings:sd2_special_order_required)" />
+<mvt:item name="customfields" param="Read_Basket('special_order_acknowledged', l.settings:sd2_special_order_acknowledged)" />
+<mvt:assign name="l.settings:sd2_special_order_current" value="0" />
+<mvt:foreach iterator="group" array="basket:groups">
+	<mvt:item name="customfields" param="Read_Product_Code(l.settings:group:code, 'availability', l.settings:sd2_availability)" />
+	<mvt:assign name="l.settings:sd2_special_order_text" value="tolower(l.settings:sd2_availability)" />
+	<mvt:foreach iterator="option" array="group:options">
+		<mvt:assign name="l.settings:sd2_special_order_text" value="l.settings:sd2_special_order_text $ ' ' $ tolower(l.settings:option:attr_prompt) $ ' ' $ tolower(l.settings:option:opt_prompt) $ ' ' $ tolower(l.settings:option:data) $ ' ' $ tolower(l.settings:option:data_long)" />
+	</mvt:foreach>
+	<mvt:if expr="('backorder' CIN l.settings:sd2_special_order_text) OR ('special order' CIN l.settings:sd2_special_order_text) OR ('special-order' CIN l.settings:sd2_special_order_text) OR ('made to order' CIN l.settings:sd2_special_order_text) OR ('preorder' CIN l.settings:sd2_special_order_text) OR ('pre-order' CIN l.settings:sd2_special_order_text) OR ('no estimated ship date' CIN l.settings:sd2_special_order_text)">
+		<mvt:assign name="l.settings:sd2_special_order_current" value="1" />
+	</mvt:if>
+</mvt:foreach>
+<mvt:if expr="l.settings:sd2_special_order_current"><mvt:assign name="l.settings:sd2_special_order_required" value="'Yes'" /><mvt:else><mvt:assign name="l.settings:sd2_special_order_required" value="'No'" /></mvt:if>
 <!DOCTYPE html>
 <html>
 <mvt:item name="html_profile" />
@@ -8,6 +28,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex,follow">
 	<base href="&mvt:global:basehref;">
 	<mvt:if expr="NOT ISNULL l.settings:page:title">
 		<title>&mvt:page:title;</title>
@@ -85,10 +106,20 @@
 			<header class="sd2-v2-checkout-hero">
 				<p class="sd2-eyebrow">Checkout</p>
 				<h1>&mvt:page:name;</h1>
-				<div data-v2-checkout-steps>
-					<mvt:item name="readytheme" param="contentsection( 'checkout_steps' )" />
+				<p>Complete payment, then review every detail before the order is placed.</p>
+				<div class="sd2-v3-hero-data" aria-label="Checkout status">
+					<div><span>Current step</span><strong>Payment</strong></div>
+					<div><span>Connection</span><strong>Secure</strong></div>
+					<div><span>Order total</span><strong>&mvt:basket:formatted_total;</strong></div>
 				</div>
 			</header>
+
+			<nav class="sd2-v3-checkout-rail" aria-label="Checkout progress">
+				<span class="is-complete"><i>01</i> Information</span>
+				<span class="is-complete"><i>02</i> Shipping</span>
+				<span class="is-current"><i>03</i> Payment</span>
+				<span><i>04</i> Review</span>
+			</nav>
 
 			<mvt:item name="readytheme" param="contentsection( 'messages' )" />
 
@@ -109,7 +140,12 @@
 									<span data-hook="payment-method-display">&mvt:payment:desc;</span>
 								</header>
 								<mvt:if expr="NOT ISNULL l.settings:payment:message">
-									<p class="sd2-v2-validation">&mvt:payment:message;</p>
+									<section class="sd2-order-state sd2-order-state--error" role="alert">
+										<p class="sd2-kicker">Payment needs attention</p>
+										<h3>Your order has not been placed yet.</h3>
+										<p class="sd2-v2-validation">&mvt:payment:message;</p>
+										<p>Review the payment details below or choose another method. You will receive an order number only after payment succeeds.</p>
+									</section>
 								</mvt:if>
 
 								<mvt:if expr="l.settings:paymentsettings:mivapay:enabled AND ( l.settings:mivapay:paymentcardtype:id OR l.settings:mivapay:paymentcard:id )">
@@ -273,6 +309,19 @@
 											</div>
 										</section>
 									</div>
+								</mvt:if>
+
+								<mvt:if expr="l.settings:sd2_special_order_required EQ 'Yes'">
+									<section class="sd2-order-state sd2-order-state--special" aria-labelledby="sd2-payment-special-title">
+										<p class="sd2-kicker">Special order</p>
+										<h3 id="sd2-payment-special-title">Lead-time acknowledgement</h3>
+										<p>This order contains an item whose production or restock timing may vary. It may ship separately, and lead-time updates will be sent by email.</p>
+										<input type="hidden" name="Special_Order_Required" value="Yes">
+										<label class="sd2-order-state__check">
+											<input type="checkbox" name="Special_Order_Acknowledged" value="Yes" required <mvt:if expr="l.settings:sd2_special_order_acknowledged EQ 'Yes'">checked</mvt:if>>
+											<span>I understand and want to place this order.</span>
+										</label>
+									</section>
 								</mvt:if>
 
 								<div class="sd2-v2-order-summary__total sd2-v2-mobile-checkout__totals">

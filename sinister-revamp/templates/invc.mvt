@@ -1,3 +1,15 @@
+<mvt:assign name="l.settings:sd2_special_order" value="0" />
+<mvt:foreach iterator="group" array="order:groups">
+	<mvt:item name="customfields" param="Read_Product_Code(l.settings:group:code, 'availability', l.settings:sd2_availability)" />
+	<mvt:assign name="l.settings:sd2_special_order_text" value="tolower(l.settings:sd2_availability)" />
+	<mvt:foreach iterator="option" array="group:options">
+		<mvt:assign name="l.settings:sd2_special_order_text" value="l.settings:sd2_special_order_text $ ' ' $ tolower(l.settings:option:attr_prompt) $ ' ' $ tolower(l.settings:option:opt_prompt) $ ' ' $ tolower(l.settings:option:data) $ ' ' $ tolower(l.settings:option:data_long)" />
+	</mvt:foreach>
+	<mvt:if expr="('backorder' CIN l.settings:sd2_special_order_text) OR ('special order' CIN l.settings:sd2_special_order_text) OR ('special-order' CIN l.settings:sd2_special_order_text) OR ('made to order' CIN l.settings:sd2_special_order_text) OR ('preorder' CIN l.settings:sd2_special_order_text) OR ('pre-order' CIN l.settings:sd2_special_order_text) OR ('no estimated ship date' CIN l.settings:sd2_special_order_text)">
+		<mvt:assign name="l.settings:sd2_special_order" value="1" />
+	</mvt:if>
+</mvt:foreach>
+
 <mvt:if expr="s.remote_addr CIN l.settings:store:mnt_ips">
 
 
@@ -11,6 +23,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex,follow">
 	<base href="&mvt:global:basehref;">
 	<mvt:if expr="NOT ISNULL l.settings:page:title">
 		<title>&mvt:page:title;</title>
@@ -56,23 +69,35 @@ font-weight: bold;
 </style>
 
 </head>
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass; sd2-v4-invoice-page">
 
 	<div class="u-printable">
 		<mvt:item name="hdft" param="global_header" />
+		<mvt:item name="hdft" param="header" />
 	
 		<section class="o-layout">
 			<div class="o-layout__item u-width-12">
 				<section class="t-expanded-block t-account-landing-section u-bg-white">
 					<div class="o-layout__item t-expanded-block__item t-account-landing-section__content u-width-12">
+						<header class="sd2-v4-confirmation-hero">
+							<p class="sd2-kicker">Order Confirmed</p>
+							<h1>Thank you. Your build is in motion.</h1>
+							<p><strong>Order #&mvte:order:id;</strong> is confirmed. A receipt is on its way; keep this page for your order details and next steps.</p>
+						</header>
 						<section class="o-layout">
 							<div class="o-layout__item">
-								<mvt:item name="hdft" param="header" />
 								<mvt:item name="readytheme" param="contentsection( 'messages' )" />
 							</div>
 						</section>
 
-						<p>Please note that we use multiple shipping warehouses. When ordering multiple items, you may recieved more than one tracking number</p>
+						<p class="sd2-v4-shipping-note">Orders may ship from multiple warehouses, so a multi-item order can receive more than one tracking number.</p>
+						<mvt:if expr="l.settings:sd2_special_order">
+							<section class="sd2-order-state sd2-order-state--special">
+								<p class="sd2-kicker">Special-order item confirmed</p>
+								<h2>Your place in line is reserved.</h2>
+								<p>Production or restock timing may vary, and this item may ship separately. We will email lead-time and tracking updates as soon as they are available.</p>
+							</section>
+						</mvt:if>
 
 						<section class="o-layout o-layout--wide">
 							<aside class="o-layout__item u-width-12" style="margin-bottom:30px;">
@@ -111,6 +136,7 @@ font-weight: bold;
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex,follow">
 	<base href="&mvt:global:basehref;">
 	<mvt:if expr="NOT ISNULL l.settings:page:title">
 		<title>&mvt:page:title;</title>
@@ -121,23 +147,35 @@ font-weight: bold;
 	<mvt:item name="head" param="head_tag" />
 	<mvt:item name="extend" param="order|l.all_settings:order:id" />
 </head>
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass; sd2-v4-invoice-page">
 
 	<div class="u-printable">
 		<mvt:item name="hdft" param="global_header" />
+		<mvt:item name="hdft" param="header" />
 	
 		<section class="o-layout">
 			<div class="o-layout__item u-width-12">
 				<section class="t-expanded-block t-account-landing-section u-bg-white">
 					<div class="o-layout__item t-expanded-block__item t-account-landing-section__content u-width-12">
+						<header class="sd2-v4-confirmation-hero">
+							<p class="sd2-kicker">Order Confirmed</p>
+							<h1>Thank you. Your build is in motion.</h1>
+							<p><strong>Order #&mvte:order:id;</strong> is confirmed. A receipt is on its way; keep this page for your order details and next steps.</p>
+						</header>
 						<section class="o-layout">
 							<div class="o-layout__item">
-								<mvt:item name="hdft" param="header" />
 								<mvt:item name="readytheme" param="contentsection( 'messages' )" />
 							</div>
 						</section>
 
-						<p>Please note that we use multiple shipping warehouses. When ordering multiple items, you may recieved more than one tracking number</p>
+						<p class="sd2-v4-shipping-note">Orders may ship from multiple warehouses, so a multi-item order can receive more than one tracking number.</p>
+						<mvt:if expr="l.settings:sd2_special_order">
+							<section class="sd2-order-state sd2-order-state--special">
+								<p class="sd2-kicker">Special-order item confirmed</p>
+								<h2>Your place in line is reserved.</h2>
+								<p>Production or restock timing may vary, and this item may ship separately. We will email lead-time and tracking updates as soon as they are available.</p>
+							</section>
+						</mvt:if>
 
 						<section class="o-layout o-layout--wide">
 							<div class="o-layout__item u-width-12 u-width-8--l">

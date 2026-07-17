@@ -1,7 +1,7 @@
 {
     "code": "account_create_dev",
     "type": "L",
-    "branchless_filepath": "scripts/00000001/accont_create.js",
+    "branchless_filepath": "scripts/00000001/account_create_dev.js",
     "is_global": false,
     "active": true,
     "attributes": [

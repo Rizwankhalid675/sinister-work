@@ -7,90 +7,55 @@
 	<mvt:if expr="NOT ISNULL l.settings:page:title">
 		<title>&mvt:page:title;</title>
 	<mvt:else>
-		<title>&mvt:store:name;: &mvt:page:name;</title>
+		<title>Explore Sinister Diesel</title>
 	</mvt:if>
 	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
 	<mvt:item name="head" param="head_tag" />
 </head>
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass; sd2-v2-state-page sd2-v2-link-hub-page">
 	<mvt:item name="hdft" param="global_header" />
-<mvt:comment>  The below "section" is optional, it is used to structure most pages but is not required. You can format this area
- in any way that you want.
 
-Here is a link to the framework's guidelines should you want to adhere to their style guidelines:
+	<main class="sd2-v2-link-hub">
+		<header class="sd2-v2-link-hub__hero">
+			<span class="sd2-kicker">Choose your path</span>
+			<h1>Build around your truck.</h1>
+			<p>Jump directly to the diesel platform, gear, or updates you came for.</p>
+		</header>
 
-https://docs.miva.com/readytheme-colossus/index.html
-</mvt:comment>
+		<nav class="sd2-v2-link-hub__grid" aria-label="Explore Sinister Diesel">
+			<a href="https://sinisterdiesel.com/954746_ford_powerstroke">
+				<span>01 / Ford diesel</span>
+				<strong>Powerstroke Parts</strong>
+				<small>Explore fitment-ready Ford performance parts.</small>
+			</a>
+			<a href="https://sinisterdiesel.com/954952_gm_duramax">
+				<span>02 / GM diesel</span>
+				<strong>Duramax Parts</strong>
+				<small>Shop cooling, airflow, fuel, and engine systems.</small>
+			</a>
+			<a href="https://sinisterdiesel.com/954540_dodge_cummins">
+				<span>03 / Ram diesel</span>
+				<strong>Cummins Parts</strong>
+				<small>Find heavy-duty parts for your Cummins build.</small>
+			</a>
+			<a href="https://sinisterdiesel.com/merchandise-apparel-5534">
+				<span>04 / Sinister gear</span>
+				<strong>Merch &amp; Apparel</strong>
+				<small>Wear the brand beyond the garage.</small>
+			</a>
+			<a href="https://sinisterdiesel.com/email-sign-up-page.html">
+				<span>05 / Stay connected</span>
+				<strong>Email Updates</strong>
+				<small>Get product news, install guidance, and offers.</small>
+			</a>
+			<a href="&mvte:urls:SFNT:auto;">
+				<span>06 / Start over</span>
+				<strong>Storefront</strong>
+				<small>Return to the full Sinister Diesel experience.</small>
+			</a>
+		</nav>
+	</main>
 
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block u-bg-white">
-				<div class="o-layout__item t-expanded-block__item">
-
-<html>
-<head>
-<style>
-
-.button {
-  background-color: #2d70b7;
-  border-radius: 12px;
-  border: none;
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: block;
-  font-size: 16px;
-  margin: auto;
-  cursor: pointer;
-  width: 300px;
-  margin-bottom: 20px;
-}
-
-.button {
-  transition-duration: 0.4s;
-}
-
-.button:hover {
-  background-color: #59b9f2;
-  color: white;
-}
-
-h2 { 
-  display: block;
-  font-size: 1.5em;
-  text-align: center;
-  font-family: Tahoma, Geneva, sans-serif;
-  letter-spacing: -1.0px;
-  word-spacing: -1.5px;
-  font-weight: normal;
-  padding-top: 35px;
-  padding-bottom: 30px;
-
-
-}
-</style>
-</head>
-<body>
-
-<h2>Select the topic below to go directly to the specific page you’re looking for</h2>
-
-<a href="https://sinisterdiesel.com/email-sign-up-page.html" class="button">Subscribe to Email Updates</a>
-<a href="https://sinisterdiesel.com/954746_ford_powerstroke" class="button">Powerstroke Parts</a>
-<a href="https://sinisterdiesel.com/954952_gm_duramax" class="button">Duramax Parts</a>
-<a href="https://sinisterdiesel.com/954540_dodge_cummins" class="button">Cummins Parts</a>
-<a href="https://sinisterdiesel.com/merchandise-apparel-5534" class="button">Merch & Apparel</a>
-<a href="http://www.sinisterdiesel.com" class="button">Main Website Homepage</a>
-
-</body>
-</html>
-
-				</div>
-			</section>
-		</div>
-	</section>
-	<br>
-	
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

@@ -18,13 +18,12 @@
 
 	<main class="sd2-v2-search-page" data-v2-static-page>
 		<div class="sd2-wrap">
-			<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
+			<header class="sd2-v2-search-page__head">
+				<nav class="sd2-v2-breadcrumbs" aria-label="Breadcrumb">
 				<a href="&mvte:urls:SFNT:auto;">Home</a>
 				<span aria-hidden="true">/</span>
 				<span>&mvte:page:name;</span>
-			</nav>
-
-			<header class="sd2-v2-search-page__head">
+				</nav>
 				<p class="sd2-eyebrow">Sinister Diesel</p>
 				<h1 class="sd2-heading-lg">&mvte:page:name;</h1>
 			</header>

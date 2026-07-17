@@ -2,6 +2,7 @@
     "code": "footer_js_dev",
     "linked_js_resources": [
         "settings",
+        "sd2-v2-components",
         "dom",
         "contact",
         "core_scripts_no_integrety",
@@ -10,7 +11,7 @@
         "gd-filmstrip-gallery_dev",
         "phone_validation_dev",
         "account_create_dev",
-        "sd2-v2-components"
+        "sd2-motion"
     ],
     "linked_css_resources": []
 }

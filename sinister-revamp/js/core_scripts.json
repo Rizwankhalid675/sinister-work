@@ -7,7 +7,7 @@
     "attributes": [
         {
             "name": "integrity",
-            "value": "sha256-SyI3BMUt2Qy2IP87jRBeXPwPfZnH8NDKfL5r9LlI0zA= sha384-8zH66t/yBQY5C6NHAWy6Et/2buVaj/g0yIUd3cI7+CSWBgCOHIA4LqiNtWDf8mln sha512-nnpu02W4xxIWtvczJJugrB+AtVc3v7LGVnfHCVQnIXInM2pfG8GREXd433uhg8SeAEP8PWLU8PxeJyOKCFCQzw=="
+            "value": "sha256-Rlp9RULpW2F3KYf8dcHXCMaoRcAIinW3CFikoSuXVqQ= sha384-sf3o+zjphzwV7ObMINTqBkvS5MzEnPsbFjDyfertf8j8BwIH3ylceJEU+g/K5W0j sha512-AGZJMdj5cOjYl7y3FJ/5Xw49puTc0xPf38H6wAPDye9vthdFwKNs/uefQZhRJsuZ6JCg+jwZD4029wQ/MKoqGg=="
         },
         {
             "name": "crossorigin",

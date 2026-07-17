@@ -10,7 +10,7 @@ var themeFunctionality = {
 		 */
 		const fastenHeaderActive = document.querySelector('[data-hook="fasten-header"]');
 
-		if (typeof fastenHeaderActive !== 'undefined') {
+		if (fastenHeaderActive) {
 			$.loadScript(theme_path + 'extensions/fasten-header/fasten-header.js');
 		}
 
@@ -24,15 +24,21 @@ var themeFunctionality = {
 		/**
 		 * Load and initialize the Mini-Basket extension
 		 */
-		$.loadScript(theme_path + 'extensions/mini-basket/mini-basket.js', function () {
-			miniBasket.init();
-		});
+		const legacyMiniBasket = document.querySelector('[data-hook="mini-basket"]');
+		if (legacyMiniBasket) {
+			$.loadScript(theme_path + 'extensions/mini-basket/mini-basket.js', function () {
+				miniBasket.init();
+			});
+		}
 
 			/**
 			 * If clicking outside of the mini-basket, close the mini-basket.
 			 */
 			(function () {
 				let miniBasket = document.querySelector('[data-hook="mini-basket"]');
+				if (!miniBasket) {
+					return;
+				}
 
 				/**
 				 * Polyfill for browsers that do not support Element.matches() [IE 11]
@@ -87,7 +93,9 @@ var themeFunctionality = {
 		/**
 		 * Load and initialize the Omega Navigation extension
 		 */
-		$.loadScript(theme_path + 'extensions/navigation/omega/omega-navigation.js');
+		if (document.querySelector('[data-hook="omega-navigation"]')) {
+			$.loadScript(theme_path + 'extensions/navigation/omega/omega-navigation.js');
+		}
 
 
 		/**
@@ -796,7 +804,9 @@ MJB 2022/10/13 modified to trigger on 'mousedown' instead of 'click" which was t
 		/**
 		 * Enable the shipping estimate functionality.
 		 */
-		mivaJS.estimateShipping('basket');
+		if (document.querySelector('[data-hook="basket"]')) {
+			mivaJS.estimateShipping('basket');
+		}
 	},
 	jsORDL: function() {
 	},

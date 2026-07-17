@@ -1,330 +1,37 @@
 <mvt:item name="html_profile" />
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<base href="&mvt:global:basehref;">
-	<mvt:if expr="NOT ISNULL l.settings:page:title">
-		<title>&mvt:page:title;</title>
-	<mvt:else>
-		<title>&mvt:store:name;: &mvt:page:name;</title>
-	</mvt:if>
-	<mvt:if expr="g.useDevResources EQ 1">
-		<mvt:item name="head" param="css_list_dev" />
-	<mvt:else>
-		<mvt:item name="head" param="css_list" />
-	</mvt:if>
+	<base href="&mvte:global:basehref;">
+	<title>Install Instructions | Sinister Diesel</title>
+	<meta name="description" content="Search current Sinister Diesel installation instructions by truck platform, product title or part number.">
+	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
 	<mvt:item name="head" param="head_tag" />
 </head>
-
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+<body class="single-column sd2-instructions-page">
 	<mvt:item name="hdft" param="global_header" />
-
-	<section class="o-layout">
-		<div class="o-layout__item u-width-12">
-			<section class="t-expanded-block u-bg-white">
-				<div class="o-layout__item t-expanded-block__item">
-					<br>
-
-					<div class="o-layout o-layout--column-reverse o-layout--row-reverse--l">
-						<div class="o-layout__item u-width-12 u-width-9--l u-width-10--w">
-
-							<section class="o-layout">
-								<div class="o-layout__item">
-									<h1 class="sd2-v2-heading-delta u-color-primary">&mvte:page:name;</h1>
-									<hr class="sd2-v2-keyline">
-								</div>
-							</section>
-
-							<mvt:item name="hdft" param="header" />
-
-							<section class="o-layout">
-								<div class="o-layout__item">
-
-									<section class="sd-install-instructions">
-
-										<div class="sd-controls" role="region" aria-label="Install instruction controls">
-											<div class="sd-search">
-												<label class="sd-search-label" for="sdInstallSearch">Search</label>
-												<input id="sdInstallSearch" class="sd-search-input" type="search" placeholder="Search title or part #..." autocomplete="off" />
-											</div>
-										</div>
-
-										<div id="sdInstallAccordions"></div>
-
-									</section>
-
-									<style>
-										.sd-install-instructions { padding: 8px 0 4px; }
-
-										.sd-install-instructions .sd-controls{
-											display:flex; align-items:center; justify-content:flex-end;
-											gap:12px; flex-wrap:wrap; margin: 0 0 18px 0;
-										}
-										.sd-install-instructions .sd-search{
-											display:flex; align-items:center; gap:8px; margin-left:auto;
-											width:100%; max-width:420px;
-										}
-										.sd-install-instructions .sd-search-label{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
-										.sd-install-instructions .sd-search-input{
-											width:100%;
-											padding:10px 12px; border-radius:12px;
-											border:1px solid rgba(0,0,0,.20);
-											background:#fff; font-size:14px; line-height:1.2;
-										}
-
-										/* Accordion */
-										.sd-acc{
-											border:1px solid rgba(0,0,0,.10);
-											border-radius:14px;
-											overflow:hidden;
-											background:#fff;
-											margin: 0 0 14px 0;
-										}
-										.sd-acc__btn{
-											width:100%;
-											display:flex; align-items:center; justify-content:space-between;
-											gap:12px;
-											padding:14px 16px;
-
-											background:#e6e6e6;
-											border:0;
-											cursor:pointer;
-
-											font-weight:900;
-											font-size:16px;
-											text-transform: capitalize;
-
-											color:#000 !important;
-										}
-										.sd-acc__btn *{ color:#000 !important; }
-										.sd-acc__btn:hover{ filter: brightness(0.97); }
-
-										.sd-acc__meta{
-											font-weight:800;
-											font-size:12px;
-											color: rgba(0,0,0,.70) !important;
-											white-space:nowrap;
-										}
-										.sd-acc__chev{
-											transition: transform .2s ease;
-											color:#000 !important;
-										}
-										.sd-acc.is-open .sd-acc__chev{ transform: rotate(180deg); }
-
-										.sd-acc__body{ display:none; padding: 14px 16px 18px 16px; }
-										.sd-acc.is-open .sd-acc__body{ display:block; }
-
-										.sd-acc__loadingRow{
-											display:flex;
-											align-items:center;
-											gap:10px;
-											padding:12px 0;
-										}
-										.sd-spinner{
-											width:16px;
-											height:16px;
-											border-radius:999px;
-											border:2px solid rgba(0,0,0,.18);
-											border-top-color: rgba(11,99,209,1);
-											animation: sdSpin .85s linear infinite;
-											flex: 0 0 auto;
-										}
-										@keyframes sdSpin { to { transform: rotate(360deg); } }
-										.sd-loadingText{
-											font-size:13px;
-											color: rgba(0,0,0,.70);
-											font-weight:700;
-										}
-
-										.sd-acc__empty{ margin:0; font-size:13px; color:rgba(0,0,0,.65); }
-
-										.sd-more{
-											display:flex;
-											justify-content:center;
-											margin-top:14px;
-										}
-										.sd-more-btn{
-											display:inline-flex;
-											align-items:center;
-											justify-content:center;
-											padding:12px 16px;
-											border-radius:12px;
-											font-weight:900;
-											border:1px solid rgba(0,0,0,.18);
-											background:#e6e6e6;
-											color:#000 !important;
-											cursor:pointer;
-											min-width: 200px;
-										}
-										.sd-more-btn[disabled]{ opacity:.55; cursor:not-allowed; }
-
-										/* Grid/cards */
-										.sd-card-grid{
-											display:grid;
-											grid-template-columns: repeat(4, minmax(0, 1fr));
-											gap:16px;
-										}
-										@media (max-width: 1200px){ .sd-card-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-										@media (max-width: 900px){ .sd-card-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-										@media (max-width: 560px){ .sd-card-grid{ grid-template-columns: 1fr; } }
-
-										.sd-card{
-											border:1px solid rgba(0,0,0,.12);
-											border-radius:14px;
-											overflow:hidden;
-											background:#fff;
-											display:flex; flex-direction:column;
-											box-shadow: 0 6px 18px rgba(0,0,0,.06);
-											height:100%;
-										}
-
-										.sd-card-title{ display:block !important; margin:0 !important; padding:14px !important; }
-										.sd-card-title-pill{
-											display:flex; align-items:flex-start;
-											background:#f2f2f2; border-radius:14px;
-											padding:10px 12px;
-											height:80px; min-height:80px; max-height:80px;
-											overflow:hidden; box-sizing:border-box;
-										}
-										.sd-card-titleText{
-											display:-webkit-box !important;
-											-webkit-box-orient:vertical !important;
-											-webkit-line-clamp:3 !important;
-											font-size:16px; line-height:20px; font-weight:800;
-											overflow:hidden !important; white-space:normal !important;
-										}
-
-										/* Media area + ✅ REAL LINE under it */
-										.sd-media{
-											position:relative;
-											padding: 0 14px 18px 14px; /* extra bottom for line */
-											margin-bottom: 10px;       /* breathing room above button */
-										}
-										/* THIS is the line (not a gradient, not subtle) */
-										.sd-media::after{
-											content:'';
-											position:absolute;
-											left:14px;
-											right:14px;
-											bottom: 2px;
-											height: 0;
-											border-top: 2px solid rgba(0,0,0,.28); /* <- LINE */
-										}
-
-										.sd-media-box{
-											position:relative;
-											width:100%;
-											aspect-ratio: 16 / 9;
-											border-radius:12px;
-											overflow:hidden;
-											background:#f2f2f2;
-										}
-										.sd-media-img{
-											position:absolute; inset:0;
-											width:100%; height:100%;
-											object-fit:contain;
-											display:block;
-											background:#fff;
-										}
-										.sd-media-box iframe{
-											position:absolute; inset:0;
-											width:100%; height:100%;
-											border:0;
-										}
-
-										/* Grey overlay (video only) to make play/text pop */
-										.sd-media-box.has-video{ cursor:pointer; }
-										.sd-media-box.has-video::before{
-											content:'';
-											position:absolute;
-											inset:0;
-											background: rgba(0,0,0,.22);
-											pointer-events:none;
-											z-index: 1;
-										}
-
-										/* Play overlay: red */
-										.sd-play{
-											position:absolute;
-											left:50%; top:50%;
-											transform: translate(-50%, -50%);
-											width:74px; height:52px;
-											background: rgba(220, 0, 0, .90);
-											border-radius: 14px;
-											display:flex;
-											align-items:center;
-											justify-content:center;
-											pointer-events:none;
-											z-index: 2;
-											box-shadow: 0 10px 24px rgba(0,0,0,.28);
-										}
-										.sd-play svg{ width:22px; height:22px; }
-
-										/* Click to Watch: ✅ WHITE with BLACK drop shadow */
-										.sd-watch-text{
-											position:absolute;
-											left:50%;
-											top: calc(50% + 18px);     /* close to play button */
-											transform: translateX(-50%);
-
-											font-size: 18px;
-											font-weight: 1000;
-											letter-spacing: .2px;
-
-											color: #fff !important;
-											text-shadow:
-												0 2px 0 rgba(0,0,0,.85),
-												0 10px 18px rgba(0,0,0,.55);
-
-											pointer-events:none;
-											white-space: nowrap;
-											z-index: 2;
-										}
-
-										/* PDF button (smaller + centered) */
-										a.sd-btn{
-											display:inline-flex;
-											justify-content:center;
-											align-items:center;
-
-											padding: 8px 12px;
-											font-size: 13px;
-											border-radius: 10px;
-											font-weight: 900;
-
-											border: 1px solid rgba(0,0,0,.18);
-											background:#e6e6e6;
-											color:#000 !important;
-											text-decoration:none;
-
-											margin: 0 auto 10px auto;
-											align-self:center;
-										}
-										a.sd-btn:hover{ filter: brightness(0.95); }
-
-										.sd-card-meta{
-											display:flex;
-											align-items:center;
-											justify-content:space-between;
-											gap:10px;
-											padding: 0 14px 14px 14px;
-											text-transform: capitalize;
-										}
-										.sd-meta-brand{ font-size: 12px; color: rgba(0,0,0,.60); }
-										.sd-meta-code{
-											font-size: 15px;
-											font-weight: 900;
-											color: rgba(0,0,0,.90);
-											text-align:right;
-											letter-spacing: .2px;
-										}
-
-										/* Hide old divider element if it still exists from earlier versions */
-										.sd-fade-divider{ display:none !important; }
-									</style>
-
-	<script>
+	<mvt:item name="hdft" param="header" />
+	<main class="sd2-cp sd2-instructions">
+		<section class="sd2-cp__hero" aria-labelledby="sd2-instructions-title">
+			<div class="sd2-cp__hero-media" aria-hidden="true"><img src="https://sinisterdiesel.com/mm5/graphics/00000001/8/Generated%20image%201.png" alt="" fetchpriority="high"></div>
+			<div class="sd2-cp__shell sd2-cp__hero-grid">
+				<div><p class="sd2-cp__eyebrow">Install lab / Product documents</p><h1 id="sd2-instructions-title">Find the exact<br>instructions.</h1><p class="sd2-cp__lede">Search by product name or part number, then open the current PDF or video assigned to that product in Miva.</p><div class="sd2-cp__actions"><a class="sd2-cp__button sd2-cp__button--primary" href="#instruction-library">Search instructions</a><a class="sd2-cp__button" href="install-hub.html">Open Install Hub</a></div></div>
+				<aside class="sd2-cp__hero-console"><span class="sd2-cp__console-kicker">Document path</span><strong>Part code.<br>Platform. File.</strong><div class="sd2-cp__console-data"><span>Live Miva catalog</span><span>Current PDFs</span><span>Video support</span></div></aside>
+			</div>
+		</section>
+		<div class="sd2-cp__signal"><div><span>01</span><strong>Choose a platform</strong></div><div><span>02</span><strong>Search the product code</strong></div><div><span>03</span><strong>Review before work</strong></div></div>
+		<section class="sd2-cp__section" id="instruction-library" aria-labelledby="sd2-library-title">
+			<div class="sd2-cp__shell">
+				<div class="sd2-cp__section-head"><div><p class="sd2-cp__label">Live instruction library</p><h2 id="sd2-library-title">Match the document to the part.</h2></div><p>Use the code printed on the part, packaging or order. Instructions can differ by engine generation and product revision.</p></div>
+				<section class="sd-install-instructions">
+					<div class="sd-controls" role="search" aria-label="Search install instructions"><label class="sd-search-label" for="sdInstallSearch">Search title or part number</label><input id="sdInstallSearch" class="sd-search-input" type="search" placeholder="Search title or part number…" autocomplete="off"></div>
+					<div id="sdInstallAccordions" aria-live="polite"></div>
+				</section>
+			</div>
+		</section>
+		<section class="sd2-cp__section sd2-cp__section--dark"><div class="sd2-cp__shell"><div class="sd2-cp__section-head"><div><p class="sd2-cp__label">Before installation</p><h2>Confirm fitment before turning a wrench.</h2></div><p>If the product code or truck configuration does not match the document, stop and contact Parts Tech Support before beginning work.</p></div><div class="sd2-cp__actions"><a class="sd2-cp__button sd2-cp__button--primary" href="help-sinister-diesel-parts-tech-support.html">Parts Tech Support</a><a class="sd2-cp__button" href="install-part-overviews.html">Part Overviews</a></div></div></section>
+	</main>
+<script>
 (function(){
 	const BRAND_CATEGORIES = [
 		{ brand: 'universal', category_code: 'install-universal', label: 'Universal' },
@@ -342,7 +49,7 @@
 		'data:image/svg+xml;charset=utf-8,' +
 		encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="100%" height="100%" fill="#f2f2f2"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#999" font-family="Arial" font-size="36">Sinister Diesel</text></svg>');
 
-	/* ✅ 12 per page */
+	/* Twelve instruction cards per reveal. */
 	const DISPLAY_LIMIT = 12;
 	const REVEAL_STEP = 12;
 	const PDP_CONCURRENCY = 10;
@@ -367,7 +74,7 @@
 				lastQuery: '__init__',
 				queue: [],         // prioritized product queue
 				qIndex: 0,
-				shownCount: 0      // ✅ pagination: how many matches are currently shown in DOM
+				shownCount: 0      // Number of matches currently shown in the DOM.
 			});
 		}
 		return brandState.get(brand);
@@ -599,12 +306,12 @@
 			'<button class="sd-acc__btn" type="button" aria-expanded="false">' +
 				'<span>' + label + '</span>' +
 				'<span class="sd-acc__meta" data-meta>Click to open</span>' +
-				'<span class="sd-acc__chev" aria-hidden="true">▾</span>' +
+				'<span class="sd-acc__chev" aria-hidden="true">&#9662;</span>' +
 			'</button>' +
 			'<div class="sd-acc__body">' +
 				'<div class="sd-acc__loadingRow" style="display:none;" data-loading>' +
 					'<span class="sd-spinner" aria-hidden="true"></span>' +
-					'<span class="sd-loadingText">Loading instructions…</span>' +
+					'<span class="sd-loadingText">Loading instructions&hellip;</span>' +
 				'</div>' +
 				'<div class="sd-card-grid" data-grid style="display:none;"></div>' +
 				'<p class="sd-acc__empty" style="display:none;" data-empty>No results.</p>' +
@@ -899,7 +606,7 @@
 				const st = getState(b.brand);
 
 				moreBtn.disabled = true;
-				moreBtn.textContent = 'Loading…';
+				moreBtn.textContent = 'Loading...';
 
 				// Ensure we have enough built matches to show next page
 				const desired = st.shownCount + REVEAL_STEP;
@@ -961,27 +668,7 @@
 	})();
 })();
 </script>
-
-
-
-								</div>
-							</section>
-
-							<mvt:item name="hdft" param="footer" />
-						</div>
-
-						<aside class="o-layout__item u-width-12 u-width-3--l u-width-2--w">
-							<mvt:item name="readytheme" param="navigationset( 'static_navigation' )" />
-						</aside>
-					</div>
-
-					<br>
-				</div>
-			</section>
-		</div>
-	</section>
-
-	<br>
+	<mvt:item name="hdft" param="footer" />
 	<mvt:item name="hdft" param="global_footer" />
 </body>
 </html>

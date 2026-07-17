@@ -97,3 +97,37 @@ is being built out (subscription being cancelled). Flip back to 'true' to restor
 - **1 full page family** (Help Center + 6 sub-pages) fully link-audited.
 - **4 confirmed defects fixed** in the global footer; **1 third-party integration status confirmed inactive** (SearchSpring).
 - **0 broken links / 0 missing templates** found in everything audited this session.
+
+---
+
+## 9. Motion system — 3D / premium interaction layer (this session)
+
+A lightweight, dependency-free motion system was added on top of the existing V2 design system to make the whole V2 surface feel more minimal, modern, and premium — no Framer Motion or other JS animation library was pulled in, since these are static Miva `.mvt` templates (no React/build pipeline), so an equivalent-behavior vanilla engine was built instead.
+
+**Core engine — `js/sd2-motion.js`:**
+- Dependency-free IIFE, registered once in `footer_js` / `footer_js_dev` resource groups so it loads sitewide.
+- **Scroll-reveal:** `IntersectionObserver`-based; add `sd2-reveal` (+ optional `sd2-reveal--left` / `--right` / `--scale` variants, `data-reveal-delay` for stagger) to fade/rise elements into view once, on scroll.
+- **3D tilt:** `sd2-tilt` class gives cards/panels a subtle pointer-tracked perspective tilt + highlight on hover (desktop only; no-ops on touch).
+- **Parallax:** `sd2-parallax` for slow background/image drift on scroll (hero imagery, banners).
+- **Fully respects `prefers-reduced-motion: reduce`** — engine reads the media query once at init (`REDUCE` flag) and skips attaching tilt/parallax listeners entirely when set; reveal targets are shown immediately with no transform.
+
+**Core CSS — `css/sd2-global.css` (new "Motion Primitives" section):**
+- `.sd2-reveal` / `.is-visible` — opacity + `translate3d` transition using a premium `cubic-bezier(0.16, 1, 0.3, 1)` ease, 900ms.
+- `.sd2-tilt` — perspective transform via CSS custom properties set by the JS engine.
+- `.sd2-stagger` — auto-delays child reveals for grid/list entrances.
+- **Every component family that received motion also got a matching `@media (prefers-reduced-motion: reduce)` override** that forces `transition: none` / `transform: none` — confirmed present for: base cards/buttons/fields, header, mega menu, search console, garage panel, cart drawer, category tiles, filter sheet, product tabs, checkout progress bar, and the core reveal/tilt/parallax primitives themselves. No motion is unconditionally forced on users who've opted out at the OS level.
+
+**Pages/components treated this session:**
+- Global header + footer (nav reveal, footer card stagger)
+- Homepage (hero, platform tiles, featured products, trust grid)
+- Special-offers + category/listing pages (offer cards, category tiles)
+- Product display page (media gallery, buy box, spec/related sections)
+- Cart drawer, mini-basket, checkout flow (line items, progress bar)
+- **Help Center hub** — all 4 help cards (`Warranty Inquiry`, `Missing/Damaged Parts`, `Shipping Claim`, `Returns/Exchanges` — actual card copy per `templates/help-center.mvt`) now use `sd2-reveal sd2-tilt` with `data-reveal="fade-up"` for consistent premium entrance + hover depth.
+
+**Verification performed:**
+- Grepped every touched template to confirm `sd2-reveal`/`sd2-tilt` classes are actually present (not just intended) — help-center.mvt confirmed all 4 cards carry the classes after a follow-up pass caught a partial edit.
+- Grepped `css/sd2-global.css` and `js/sd2-motion.js` for `prefers-reduced-motion` — confirmed guards exist in both the engine (skips tilt/parallax entirely) and CSS (per-component `transition: none` overrides), so the effect is fully inert for users with the OS-level reduced-motion preference.
+- No new external dependencies added; no build step introduced. Engine is vanilla ES5-safe JS to match the existing legacy-compatible `footer_js` pattern.
+
+**Still outstanding (not done this session):** no live browser/device performance profiling was possible (no browser tool access in this environment) — mobile perf and visual QA of the motion system still needs a human pass on the staging URL, same caveat as section 7 above.

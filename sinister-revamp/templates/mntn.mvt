@@ -12,16 +12,18 @@
 	<mvt:if expr="g.useDevResources EQ 1"><mvt:item name="head" param="css_list_dev" /><mvt:else><mvt:item name="head" param="css_list" /></mvt:if>
 	<mvt:item name="head" param="head_tag" />
 </head>
-<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass;">
+<body id="js-&mvte:page:code;" class="o-site-wrapper t-page-&mvt:global:pageClass; sd2-v2-state-page sd2-v2-maintenance-page">
 	<mvt:item name="hdft" param="global_header" />
 
 	<mvt:item name="hdft" param="header" />
 
-	<section class="o-layout o-layout--justify-center">
+	<main class="sd2-v2-state-shell">
+	<section class="o-layout o-layout--justify-center sd2-v2-state-card sd2-v2-state-card--center">
 		<div class="o-layout__item u-width-12 u-width-6--m">
 			<mvt:item name="messages" />
 		</div>
 	</section>
+	</main>
 	
 	<mvt:item name="hdft" param="footer" />
 

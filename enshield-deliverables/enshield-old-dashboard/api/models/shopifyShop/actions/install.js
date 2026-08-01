@@ -12,8 +12,6 @@ export const onSuccess = async ({ params, record, logger, api, connections }) =>
 
   await api.enqueue(api.setupShippingInsuranceProduct, { shopId: record.id });
 };
-//    await api.enqueue(api.setupShippingInsuranceProduct, { shopId: record.id });
-
 
 /** @type { ActionOptions } */
 export const options = { actionType: "create" };

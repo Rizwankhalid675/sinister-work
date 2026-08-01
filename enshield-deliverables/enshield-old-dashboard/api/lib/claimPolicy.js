@@ -15,6 +15,7 @@ const EDITABLE_FIELDS = new Set([
   "claimValueMinor",
   "claimCurrency",
   "transitionNote",
+  "reviewerAssigneeId",
 ]);
 const STATUS_ONLY_FIELDS = new Set(["status", "transitionNote"]);
 

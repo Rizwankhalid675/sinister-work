@@ -3,6 +3,7 @@ import {
   save,
 } from "gadget-server";
 import { writeAudit } from "../../../lib/audit.js";
+import { generateToken, TOKEN_TTL_MS, expiryFromNow } from "../../../lib/authPassword.js";
 import { persistClaimMutation } from "../../../lib/claimMutation.js";
 import {
   permissionForClaimChange,
@@ -70,6 +71,9 @@ export const run = async ({ params, record, logger, api, session }) => {
   if (actorEmail) {
     record.createdByEmail = actorEmail;
   }
+  if (!record.trackingToken) {
+    record.trackingToken = generateToken(20);
+  }
 
   // Never allow a claim to be born in any state other than Draft/Submitted.
   // (Merchants may submit directly; agents create as Draft.)
@@ -107,6 +111,24 @@ export const run = async ({ params, record, logger, api, session }) => {
         },
       }),
   });
+
+  // Issue the customer's access token for this claim. Best-effort: a failure
+  // here must not roll back claim creation (the claim itself already
+  // committed above); staff can always reissue a token later.
+  try {
+    await api.internal.customerAccessToken.create({
+      claim: { _link: String(record.id) },
+      shop: { _link: String(identity.shopId) },
+      token: generateToken(32),
+      expiresAt: expiryFromNow(TOKEN_TTL_MS.emailConfirmation),
+      createdReason: "claim_created",
+    });
+  } catch (error) {
+    logger?.warn?.(
+      { error: error?.message, claimId: record.id },
+      "failed to issue customerAccessToken at claim creation (non-fatal)"
+    );
+  }
 };
 
 export const options = {

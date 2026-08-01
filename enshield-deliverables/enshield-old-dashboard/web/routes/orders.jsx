@@ -60,9 +60,22 @@ function OrdersInner() {
       {!data.loading && !data.error && data.rows.length ? (
         <div className="esd-table-wrap"><table className="esd-table">
           <thead><tr><th>Client</th><th>Order</th><th>Value</th><th>Protection</th><th>Financial</th><th>Fulfillment</th><th>Created</th></tr></thead>
-          <tbody>{data.rows.map((order) => <tr key={order.id}>
+          <tbody>{data.rows.map((order) => <tr
+            key={order.id}
+            className="esd-row-clickable"
+            tabIndex={0}
+            role="link"
+            aria-label={`View order ${order.name || order.id}`}
+            onClick={() => { window.location.assign(`/orders/${encodeURIComponent(order.id)}`); }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                window.location.assign(`/orders/${encodeURIComponent(order.id)}`);
+              }
+            }}
+          >
             <td data-label="Client">{order.shop?.name || order.shop?.domain || "—"}</td>
-            <td data-label="Order">{order.name || order.id}</td>
+            <td data-label="Order"><a href={`/orders/${encodeURIComponent(order.id)}`} onClick={(event) => event.stopPropagation()}>{order.name || order.id}</a></td>
             <td data-label="Value">{money(order.value, order.currency)}</td>
             <td data-label="Protection"><span className={`esd-badge ${order.protected ? "esd-badge-active" : ""}`}>{order.protected ? "Protected" : "Not protected"}</span></td>
             <td data-label="Financial">{order.financialStatus || "—"}</td>

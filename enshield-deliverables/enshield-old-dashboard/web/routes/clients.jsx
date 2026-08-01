@@ -69,8 +69,21 @@ function ClientsInner() {
     <PageStatus loading={data.loading} error={data.error} empty={!data.rows.length} noun="clients" onRetry={data.retry} />
     {!data.loading && !data.error && data.rows.length ? <div className="esd-table-wrap"><table className="esd-table">
       <thead><tr><th>Store</th><th>Platform</th><th>Store ID</th><th>Plan</th><th>Status</th><th>Claims</th><th>Value in transit</th><th>Created</th></tr></thead>
-      <tbody>{data.rows.map((client) => <tr key={client.id}>
-        <td data-label="Store"><strong>{client.storeName || "—"}</strong></td>
+      <tbody>{data.rows.map((client) => <tr
+        key={client.id}
+        className="esd-row-clickable"
+        tabIndex={0}
+        role="link"
+        aria-label={`View client ${client.storeName || client.id}`}
+        onClick={() => { window.location.assign(`/clients/${encodeURIComponent(client.id)}`); }}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            window.location.assign(`/clients/${encodeURIComponent(client.id)}`);
+          }
+        }}
+      >
+        <td data-label="Store"><a href={`/clients/${encodeURIComponent(client.id)}`} onClick={(event) => event.stopPropagation()}><strong>{client.storeName || "—"}</strong></a></td>
         <td data-label="Platform"><span className={`esd-source-mark is-${String(client.platform || "unknown").toLowerCase()}`}><span>{String(client.platform || "?").slice(0, 1)}</span>{client.platform || "Unknown"}</span></td>
         <td data-label="Store ID"><span className="esd-mono">{client.storeId || "—"}</span></td>
         <td data-label="Plan">{client.plan || "—"}</td>

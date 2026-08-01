@@ -19,13 +19,17 @@ import { api } from "../api";
 import { IndexPage } from "../routes/index";
 import { DashboardPage } from "../routes/dashboard";
 import { ClientsPage } from "../routes/clients";
+import { ClientDetailPage } from "../routes/clientDetail";
 import { OrdersPage } from "../routes/orders";
+import { OrderDetailPage } from "../routes/orderDetail";
 import { ClaimsPage } from "../routes/claims";
+import { ClaimFormsPage } from "../routes/claimForms";
 import { ErrorsPage } from "../routes/errors";
 import { ReportsPage } from "../routes/reports";
 import { InternalSettingsPage } from "../routes/internalSettings";
 import { InternalAuthCallbackPage, InternalLoginPage } from "../routes/internalLogin";
 import { ChangePasswordPage } from "../routes/changePassword";
+import { ClaimTrackingPage } from "../routes/claimTracking";
 import { UsersPage } from "../routes/users";
 import { FinancePage } from "../routes/finance";
 import { AuditLogPage } from "../routes/auditLog";
@@ -56,12 +60,16 @@ function App() {
         <Route path="internal-login" element={<InternalLoginPage />} />
         <Route path="internal-auth/callback" element={<InternalAuthCallbackPage />} />
         <Route path="storefront-settings" element={<IndexPage />} />
+        <Route path="claims/track" element={<ClaimTrackingPage />} />
         <Route element={<InternalAppShell />}>
           <Route index element={<DashboardPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="clients" element={<ClientsPage />} />
+          <Route path="clients/:id" element={<ClientDetailPage />} />
           <Route path="orders" element={<OrdersPage />} />
+          <Route path="orders/:id" element={<OrderDetailPage />} />
           <Route path="claims" element={<ClaimsPage />} />
+          <Route path="claim-forms" element={<ClaimFormsPage />} />
           <Route path="errors" element={<ErrorsPage />} />
           <Route path="reports" element={<ReportsPage />} />
           <Route path="settings" element={<InternalSettingsPage />} />

@@ -1,3 +1,77 @@
+.esd-tracking-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f7f9;
+  padding: 24px;
+}
+.esd-tracking-card {
+  max-width: 520px;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #dfe7ec;
+  box-shadow: 0 8px 24px rgba(20, 30, 40, .06);
+  padding: 32px;
+}
+.esd-tracking-card h1 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  letter-spacing: -.02em;
+}
+.esd-tracking-summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  margin: 0 0 20px;
+}
+.esd-tracking-summary dt {
+  color: #627086;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.esd-tracking-summary dd {
+  margin: 0;
+  font-size: 13.5px;
+  color: #23364d;
+}
+.esd-tracking-steps {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.esd-tracking-step {
+  font-size: 12.5px;
+  color: #9aa7b5;
+  padding-left: 18px;
+  position: relative;
+}
+.esd-tracking-step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d7dee4;
+}
+.esd-tracking-step-done {
+  color: #20c5b5;
+  font-weight: 600;
+}
+.esd-tracking-step-done::before {
+  background: #20c5b5;
+}
+.esd-tracking-footer {
+  color: #627086;
+  font-size: 12px;
+  margin: 0;
+}
 .esd-skip-link {
   position: fixed;
   left: 12px;

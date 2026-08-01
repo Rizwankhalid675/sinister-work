@@ -142,17 +142,26 @@ async function loginToDevelopment() {
 }
 
 async function postBatch(page, resource, records, authorization) {
-  return page.evaluate(async ({ resource, records, authorization }) => {
-    const response = await fetch("/api/import-legacy-production", {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json", Accept: "application/json", ...(authorization ? { Authorization: authorization } : {}) },
-      body: JSON.stringify({ resource, records }),
-    });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || `Development import failed with ${response.status}`);
-    return payload;
-  }, { resource, records, authorization });
+  let lastError;
+  for (let attempt = 1; attempt <= 4; attempt += 1) {
+    try {
+      return await page.evaluate(async ({ resource, records, authorization }) => {
+        const response = await fetch("/api/import-legacy-production", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json", Accept: "application/json", ...(authorization ? { Authorization: authorization } : {}) },
+          body: JSON.stringify({ resource, records }),
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(payload.error || `Development import failed with ${response.status}`);
+        return payload;
+      }, { resource, records, authorization });
+    } catch (error) {
+      lastError = error;
+      if (attempt < 4) await new Promise((resolve) => setTimeout(resolve, attempt * 1000));
+    }
+  }
+  throw lastError;
 }
 
 async function importResource(page, resource, records, authorization) {

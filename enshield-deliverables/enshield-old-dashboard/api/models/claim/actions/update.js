@@ -13,6 +13,7 @@ import {
   requireIdentity,
   requirePermission,
 } from "../../../lib/permissions.js";
+import { sendClaimStatusChangedEmail } from "../../../lib/claimNotifications.js";
 
 /**
  * Update a claim. If the status changes, the transition is validated against
@@ -43,6 +44,12 @@ export const run = async ({ params, record, logger, api, session }) => {
   const modelInput = Object.fromEntries(
     Object.entries(input).filter(([key]) => key !== "transitionNote")
   );
+  const assigneeChanged = "reviewerAssigneeId" in modelInput;
+  let assigneeId = null;
+  if (assigneeChanged) {
+    assigneeId = modelInput.reviewerAssigneeId;
+    delete modelInput.reviewerAssigneeId;
+  }
   if ("claimValueMinor" in modelInput || "claimCurrency" in modelInput) {
     const money = validateMinorCurrencyPair(
       modelInput.claimValueMinor ?? record.claimValueMinor,
@@ -53,6 +60,16 @@ export const run = async ({ params, record, logger, api, session }) => {
     modelInput.claimCurrency = money.currency;
   }
   applyParams({ claim: modelInput }, record);
+
+  if (assigneeChanged) {
+    if (assigneeId) {
+      record.reviewerAssignee = { _link: String(assigneeId) };
+    } else {
+      record.reviewerAssignee = null;
+    }
+    record.reviewerAssignedAt = new Date();
+    record.reviewerAssignedByEmail = identity.user?.email || null;
+  }
 
   const recordShopId = relationId(record, "shop");
   if (
@@ -101,9 +118,44 @@ export const run = async ({ params, record, logger, api, session }) => {
           status: record.status,
           claimValueMinor: record.claimValueMinor,
           claimCurrency: record.claimCurrency,
+          ...(assigneeChanged
+            ? { reviewerAssigneeId: assigneeId || null }
+            : {}),
         },
       }),
   });
+
+  // Best-effort customer notification. Runs strictly AFTER the transaction
+  // has committed above, and must never fail/roll back the claim mutation.
+  if (statusChanged) {
+    try {
+      const clientId = relationId(record, "client");
+      const client = clientId
+        ? await api.internal.client.findOne(clientId, {
+            select: { id: true, email: true, name: true },
+          })
+        : null;
+      if (client?.email) {
+        await sendClaimStatusChangedEmail({
+          api,
+          logger,
+          shopId: identity.shopId,
+          toEmail: client.email,
+          clientName: client.name,
+          claimId: record.id,
+          trackingToken: record.trackingToken || null,
+          fromStatus,
+          toStatus,
+          note: input.transitionNote || null,
+        });
+      }
+    } catch (error) {
+      logger?.warn?.(
+        { error: error?.message, claimId: record.id },
+        "failed to send claim status-change notification (non-fatal)"
+      );
+    }
+  }
 };
 
 export const options = {

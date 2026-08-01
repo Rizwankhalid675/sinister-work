@@ -1,4 +1,4 @@
-import { useDeferredValue, useState } from "react";
+import { useDeferredValue, useEffect, useState } from "react";
 import { Gate, useRole } from "../lib/useRole";
 import { PERMISSIONS } from "../lib/rbac";
 import { usePagedResource } from "../lib/usePagedResource";
@@ -48,6 +48,7 @@ function ClaimsInner() {
   const data = usePagedResource("/api/claims", { search: useDeferredValue(search).trim(), status });
   const [busyId, setBusyId] = useState(null);
   const [rowError, setRowError] = useState({});
+  const [openNotesId, setOpenNotesId] = useState(null);
 
   const transition = async (claim, toStatus) => {
     setRowError((prev) => ({ ...prev, [claim.id]: "" }));
@@ -96,10 +97,107 @@ function ClaimsInner() {
                 </button>
               ))}
             </div> : <span className="esd-visually-hidden">No actions available</span>}
+            {can(PERMISSIONS.EDIT_CLAIMS) ? <button
+              type="button"
+              className="esd-btn esd-btn-sm esd-btn-link"
+              onClick={() => setOpenNotesId((current) => (current === claim.id ? null : claim.id))}
+            >
+              {openNotesId === claim.id ? "Hide notes" : "Notes"}
+            </button> : null}
             {rowError[claim.id] ? <p className="esd-field-error" role="alert">{rowError[claim.id]}</p> : null}
           </td>
         </tr>;
       })}</tbody></table></div> : null}
+    {openNotesId ? <ClaimNotesPanel claimId={openNotesId} onClose={() => setOpenNotesId(null)} /> : null}
     <PageNavigation hasPrevious={data.hasPreviousPage} hasNext={data.hasNextPage} onPrevious={data.previous} onNext={data.next} />
   </section>;
+}
+
+function ClaimNotesPanel({ claimId, onClose }) {
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [body, setBody] = useState("");
+  const [visibility, setVisibility] = useState("internal");
+  const [submitting, setSubmitting] = useState(false);
+
+  const load = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch(`/api/claims/${claimId}/notes`, { credentials: "include" });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.error || "Failed to load notes");
+      setNotes(result.notes || []);
+    } catch (reason) {
+      setError(reason.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [claimId]);
+
+  const submit = async (event) => {
+    event.preventDefault();
+    if (!body.trim()) return;
+    setSubmitting(true);
+    setError("");
+    try {
+      const response = await fetch(`/api/claims/${claimId}/notes`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body: body.trim(), visibility }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.error || "Failed to add note");
+      setBody("");
+      await load();
+    } catch (reason) {
+      setError(reason.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return <div className="esd-notes-panel" role="region" aria-label="Claim notes">
+    <div className="esd-notes-panel-header">
+      <strong>Claim notes</strong>
+      <button type="button" className="esd-btn esd-btn-sm" onClick={onClose}>Close</button>
+    </div>
+    {error ? <p className="esd-field-error" role="alert">{error}</p> : null}
+    {loading ? <p>Loading notes…</p> : (
+      notes.length ? <ul className="esd-notes-list">
+        {notes.map((note) => (
+          <li key={note.id}>
+            <span className={`esd-badge esd-badge-${note.visibility}`}>{note.visibility}</span>
+            <span className="esd-note-body">{note.body}</span>
+            <span className="esd-note-meta">{note.authorEmail || "—"} · {note.createdAt ? new Date(note.createdAt).toLocaleString() : ""}</span>
+          </li>
+        ))}
+      </ul> : <p>No notes yet.</p>
+    )}
+    <form onSubmit={submit} className="esd-notes-form">
+      <textarea
+        aria-label="New note"
+        value={body}
+        onChange={(event) => setBody(event.target.value)}
+        rows={3}
+        placeholder="Add a note…"
+      />
+      <div className="esd-notes-form-row">
+        <select aria-label="Note visibility" value={visibility} onChange={(event) => setVisibility(event.target.value)}>
+          <option value="internal">Internal (staff only)</option>
+          <option value="customer">Customer-visible</option>
+        </select>
+        <button type="submit" className="esd-btn esd-btn-sm esd-btn-primary" disabled={submitting || !body.trim()}>
+          {submitting ? "Saving…" : "Add note"}
+        </button>
+      </div>
+    </form>
+  </div>;
 }

@@ -37,11 +37,12 @@ test("dashboard displays backend percentage values without multiplying them agai
   assert.match(dashboardSource, /fmtPercentValue\(metrics\?\.refundsReturns\?\.refundRate\)/);
 });
 
-test("dashboard distinguishes development Shopify from unavailable production reporting", () => {
+test("dashboard identifies the synchronized production Nova source", () => {
   assert.match(metricsRouteSource, /dataSources:/);
+  assert.match(metricsRouteSource, /productionNova:/);
   assert.match(metricsRouteSource, /miva:[\s\S]*status:\s*mivaOrderCount\s*>\s*0\s*\?\s*"live"\s*:\s*"unavailable"/);
   assert.match(dashboardSource, /Development Shopify connected/);
-  assert.match(dashboardSource, /Production reporting API is not connected/);
+  assert.match(dashboardSource, /Production Nova API synchronized/);
   assert.match(dashboardSource, /Miva data is live/);
   assert.match(dashboardSource, /Miva data is not connected/);
 });

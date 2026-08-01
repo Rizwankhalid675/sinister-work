@@ -103,9 +103,13 @@ function DeltaBadge({ value }) {
 function SourceStatus({ dataSources }) {
   const mivaUnavailable = dataSources?.miva?.status === "unavailable";
   const mivaLive = dataSources?.miva?.status === "live";
+  const productionNovaSynchronized = dataSources?.productionNova?.status === "synchronized";
   return (
     <div className="esd-source-status" role="status" aria-label="Connected data sources">
       <span className="esd-source-chip is-live"><span aria-hidden="true" />Development Shopify connected</span>
+      {productionNovaSynchronized && (
+        <span className="esd-source-chip is-live"><span aria-hidden="true" />Production Nova API synchronized</span>
+      )}
       {mivaLive && (
         <span className="esd-source-chip is-live"><span aria-hidden="true" />Miva data is live</span>
       )}
@@ -113,9 +117,9 @@ function SourceStatus({ dataSources }) {
         <span className="esd-source-chip is-muted"><span aria-hidden="true" />Miva data is not connected</span>
       )}
       <span className="esd-source-note">
-        {mivaLive
-          ? "Totals include synchronized Development Shopify and Miva records."
-          : "Production reporting API is not connected."}
+        {productionNovaSynchronized
+          ? "Totals include a PII-minimized Production Nova snapshot and Development Shopify records."
+          : "Production reporting API snapshot is not available."}
       </span>
     </div>
   );

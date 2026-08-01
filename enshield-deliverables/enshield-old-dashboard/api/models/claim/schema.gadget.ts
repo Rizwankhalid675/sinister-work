@@ -9,6 +9,10 @@ export const schema: GadgetModel = {
   comment:
     "A shipping-protection claim. Belongs to a client, a shop (tenancy), and optionally a shopifyOrder. Status transitions are enforced by the model's actions (state machine) and recorded as claimEvent rows.",
   fields: {
+    claimCurrency: {
+      type: "string",
+      storageKey: "claim-claimCurrency",
+    },
     claimValue: {
       type: "number",
       decimals: 2,
@@ -18,10 +22,6 @@ export const schema: GadgetModel = {
       type: "number",
       decimals: 0,
       storageKey: "claim-claimValueMinor",
-    },
-    claimCurrency: {
-      type: "string",
-      storageKey: "claim-claimCurrency",
     },
     client: {
       type: "belongsTo",
@@ -42,10 +42,19 @@ export const schema: GadgetModel = {
       children: { model: "claimEvent", belongsToField: "claim" },
       storageKey: "claim-events",
     },
+    internalNotes: {
+      type: "hasMany",
+      children: { model: "claimNote", belongsToField: "claim" },
+      storageKey: "claim-internalNotes",
+    },
     order: {
       type: "belongsTo",
       parent: { model: "shopifyOrder" },
       storageKey: "claim-order",
+    },
+    orderCurrency: {
+      type: "string",
+      storageKey: "claim-orderCurrency",
     },
     orderValue: {
       type: "number",
@@ -56,10 +65,6 @@ export const schema: GadgetModel = {
       type: "number",
       decimals: 0,
       storageKey: "claim-orderValueMinor",
-    },
-    orderCurrency: {
-      type: "string",
-      storageKey: "claim-orderCurrency",
     },
     reason: {
       type: "enum",
@@ -75,6 +80,20 @@ export const schema: GadgetModel = {
       ],
       validations: { required: true },
       storageKey: "claim-reason",
+    },
+    reviewerAssignedAt: {
+      type: "dateTime",
+      includeTime: true,
+      storageKey: "claim-reviewerAssignedAt",
+    },
+    reviewerAssignedByEmail: {
+      type: "string",
+      storageKey: "claim-reviewerAssignedByEmail",
+    },
+    reviewerAssignee: {
+      type: "belongsTo",
+      parent: { model: "appUser" },
+      storageKey: "claim-reviewerAssignee",
     },
     shop: {
       type: "belongsTo",
@@ -106,6 +125,10 @@ export const schema: GadgetModel = {
       ],
       validations: { required: true },
       storageKey: "claim-status",
+    },
+    trackingToken: {
+      type: "string",
+      storageKey: "claim-trackingToken",
     },
     updatedByEmail: {
       type: "string",

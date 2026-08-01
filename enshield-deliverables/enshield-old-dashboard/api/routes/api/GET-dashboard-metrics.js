@@ -121,6 +121,7 @@ const route = async ({ request, reply, api, logger, session }) => {
     }
     const shopifyManagedOrderCount = orders.length;
     let mivaOrderCount = 0;
+    let productionNovaOrderCount = 0;
     if (access.includesLegacy) {
       let legacyRecords = await api.legacyOrder.findMany({
         first: 250,
@@ -132,6 +133,7 @@ const route = async ({ request, reply, api, logger, session }) => {
         legacyOrders.push(...legacyRecords);
       }
       const projectedLegacyOrders = legacyOrders.map(projectLegacyOrder);
+      productionNovaOrderCount = projectedLegacyOrders.length;
       mivaOrderCount = projectedLegacyOrders.filter((order) => order.source === "miva").length;
       orders.push(...projectedLegacyOrders);
     }
@@ -249,6 +251,10 @@ const route = async ({ request, reply, api, logger, session }) => {
         shopify: {
           status: "live",
           orderCount: shopifyManagedOrderCount,
+        },
+        productionNova: {
+          status: productionNovaOrderCount > 0 ? "synchronized" : "unavailable",
+          orderCount: productionNovaOrderCount,
         },
         miva: { status: mivaOrderCount > 0 ? "live" : "unavailable", orderCount: mivaOrderCount },
       },

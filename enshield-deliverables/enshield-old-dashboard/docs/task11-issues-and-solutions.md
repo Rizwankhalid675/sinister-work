@@ -34,11 +34,11 @@ Date: 2026-07-23
 
 ### Dependency advisories remain
 
-**Impact:** The audit still reports 35 high, 17 moderate, and 2 low advisory occurrences.
+**Impact:** An initial pass under-counted this: a proper `yarn audit` (the repo uses `yarn.lock`, not `package-lock.json`, so `npm audit` silently under-reports) found 168 advisories — 6 critical, 84 high, 53 moderate, 15 low. All 6 criticals (`form-data`, `liquidjs`, `simple-git`) trace to the `@shopify/cli-kit` dev-tooling chain rather than runtime dependencies of the deployed app, but they still pose risk to developer machines running the Shopify CLI.
 
 **Solution completed:** Direct React Router and Vite packages were upgraded to patched ranges.
 
-**Team action:** Refresh the Gadget-generated client/server packages and codegen in an authorized development environment, rerun the full suite, and review the remaining Shopify/Gadget transitive advisories. Do not force incompatible Fastify major-version overrides.
+**Team action:** Refresh the Gadget-generated client/server packages and codegen in an authorized development environment, rerun the full suite, and review/remediate or formally risk-accept the remaining Shopify/Gadget transitive advisories (especially the 6 criticals). Do not force incompatible Fastify major-version overrides.
 
 ### CSV does not match the new export contract
 
@@ -49,8 +49,8 @@ Date: 2026-07-23
 ## What we still need before go-live
 
 - Authorized Gadget development sync/code generation and schema validation.
-- A configured lint lane; lint is currently blocked/not run.
-- A configured static typecheck lane; typechecking is currently blocked/not run.
+- Lint is configured and passes locally (0 errors); keep it required in CI going forward.
+- A configured static typecheck lane; `tsc --noEmit` currently does nothing because no `tsconfig.json` exists in the repo, so typechecking has never actually run — this is still blocked/not run.
 - Staging internal identity-provider callback and role/tenant tests.
 - Shopify app-proxy configuration and signed storefront test.
 - Staging Shopify/Gadget data reconciliation with a fixed cutoff.

@@ -18,7 +18,7 @@ function getConfig() {
 }
 
 /** Low-level send. Throws on failure. No-ops with a warning if not configured (dev safety net). */
-async function sendMail({ to, subject, html, text }) {
+export async function sendMail({ to, subject, html, text }) {
   const { apiKey, fromAddress, fromName } = getConfig();
 
   if (!apiKey || !fromAddress) {
